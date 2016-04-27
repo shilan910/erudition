@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- hibernate 所使用的数据库方言 -->
+		<property name="dialect">org.hibernate.dialect.MySQLMyISAMDialect</property>
+
+		<!-- 为了进行测试，我们需要打印sql语句 -->
+		<property name="show_sql">true</property>
+
+		<!-- 是否对sql语句格式化 -->
+		<property name="format_sql">true</property>
+
+		<!-- 设置数据隔离级别 -->
+		<property name="connection.isolation">2</property>
+
+		<property name="connection.characterEncoding">utf8</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/db_xst_new</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+
+
+	</session-factory>
+</hibernate-configuration>
