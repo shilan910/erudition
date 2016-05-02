@@ -1,174 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Erudition</title>
+
+    <link rel="stylesheet" href="${assetsPath}/css/app.min.css"/>
+    <%--<link rel="stylesheet" href="/erudition/assets/css/app.min.css"/>--%>
+
+<%--<link rel="stylesheet" href="${assetsPath}/css/index.css"/>--%>
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/iCheck/1.0.1/skins/square/blue.css"/>
+    <!--<link rel="stylesheet" href="./css/square/blue.css"/>-->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/iCheck/1.0.2/skins/flat/blue.css"/>-->
+
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="${assetsPath}/js/jquery-accordion-menu.js"></script>
+    <script src="${assetsPath}/js/icheck.js"></script>
 </head>
-<link rel="stylesheet" href="./css/app.min.css"/>
-<link rel="stylesheet" href="./css/index.css"/>
-
-<link rel="stylesheet" href="//cdn.bootcss.com/iCheck/1.0.1/skins/square/blue.css"/>
-<!--<link rel="stylesheet" href="./css/square/blue.css"/>-->
-<!--<link rel="stylesheet" href="//cdn.bootcss.com/iCheck/1.0.2/skins/flat/blue.css"/>-->
-
-<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="js/jquery-accordion-menu.js"></script>
-<script src="js/icheck.js"></script>
-
-<style type="text/css">
-    *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
-    body{background:#f0f0f0;}
-    /*.content{width:260px;margin:100px auto;}*/
-    .filterinput{
-        background-color:rgba(249, 244, 244, 0);
-        border-radius:15px;
-        width:90%;
-        height:30px;
-        border:thin solid #FFF;
-        text-indent:0.5em;
-        font-weight:bold;
-        color:#FFF;
-    }
-    #demo-list a{
-        overflow:hidden;
-        text-overflow:ellipsis;
-        -o-text-overflow:ellipsis;
-        white-space:nowrap;
-        width:100%;
-    }
-</style>
-
-<script type="text/javascript">
-    jQuery(document).ready(function () {
-        jQuery("#jquery-accordion-menu").jqueryAccordionMenu();   //启用插件   jQuery等同于$
-
-    });
-
-    $(function(){
-        //顶部导航切换
-        $("#demo-list li").click(function(){
-            $("#demo-list li.active").removeClass("active")
-            $(this).addClass("active");
-        })
-    })
-</script>
 
 <body>
 
-<header>
-    <div class="container-fluid">
-
-        <div class="row">
-            <div class="col-md-4 logo">
-                Erudition
-            </div>
-            <div class="col-md-4 search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="搜索内容...">
-                              <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">搜索</button>
-                              </span>
-                </div><!-- /input-group -->
-            </div>
-            <div class="col-md-4 button-group">
-                <span class="login"><a href="javascript:void(0)" onclick="openLogin()">登录</a></span>
-                <span class="registe"><a href="javascript:void(0)" onclick="openRegister()">注册</a></span>
-            </div>
-
-
-            <div id="modal">
-                <!--弹出式登录框-->
-                <div class="modal-dialog" id="login">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" onclick="closeLogin()">x</button>
-                            <h1 class="text-center text-primary">登录</h1>
-                        </div>
-                        <div class="modal-body center-block">
-                            <form action="" class="form center-block">
-                                <div class="input-group">
-                                    <!--<label for="examInputEmail1">邮箱:</label>-->
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                    <input type="text" class="form-control input-lg" id="examInputEmail1" name="username"
-                                           placeholder="请输入您的用户名"/>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                    <input type="password" class="form-control input-lg" id="examInputPassword1" name="password"
-                                           placeholder="请输入您的密码"/>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="登录" id="login-in">
-                                    <span><a href="javascript:void(0)" style="text-align: left">找回密码</a></span>
-                                    <span><a href="javascript:void(0)" class="pull-right re-register">注册</a></span>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                        </div>
-                    </div>
-                </div>
-                <!--注册框-->
-                <div class="modal-dialog" id="register">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" onclick="closeRegister()">x</button>
-                            <h1 class="text-center text-primary">注册</h1>
-                        </div>
-                        <div class="modal-body center-block">
-                            <form action="" class="form center-block">
-                                <div class="input-group">
-                                    <!--<label for="examInputEmail1">邮箱:</label>-->
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                    <input type="email" class="form-control input-lg" id="username"
-                                           placeholder="请输入您的用户名"/>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                    <input type="password" class="form-control input-lg" id="password1"
-                                           placeholder="请输入您的密码"/>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                    <input type="password" class="form-control input-lg" id="password2"
-                                           placeholder="确认密码"/>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                                    <input type="password" class="form-control input-lg" id="password2"
-                                           placeholder="邮箱"/>
-                                </div>
-
-                                <div class="form-group">
-                                    <button class="btn btn-primary btn-lg btn-block">注册</button>
-                                    <span><a href="javascript:void(0)" style="text-align: left">找回密码</a></span>
-                                    <span><a href="javascript:void(0)" class="pull-right re-login">登录</a></span>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-
-                        </div>
-                    </div>
-                </div>
-                <!--遮罩层-->
-                <div class="modal-dialog-mask"></div>
-            </div>
-
-
-        </div>
-    </div>
-
-</header>
+<jsp:include page="${assetsPath}/common/header.jsp" />
 
 <div class="main flex-row">
     <div class="flex-2">
         <div class="nav">
             <div id="jquery-accordion-menu" class="jquery-accordion-menu white">
                 <div id="user-image">
-                    <a href=""><img src="images/user.jpg" alt="" class="img-circle"/></a>
+                    <a href=""><img src="${assetsPath}/images/user.jpg" alt="" class="img-circle"/></a>
                     <div class="user-name">当前用户</div>
                 </div>
 
@@ -226,7 +90,7 @@
                 </div>
                 <div class="flex-3 search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="搜索内容...">
+                        <input type="text" class="form-control" placeholder="该目录下搜索...">
                               <span class="input-group-btn">
                                 <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
                               </span>
@@ -350,12 +214,47 @@
         </div>
     </div>
 
-    <!--<div class="clearfix"></div>-->
 </div>
 
 
 
+<style type="text/css">
+    *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
+    body{background:#f0f0f0;}
+    /*.content{width:260px;margin:100px auto;}*/
+    .filterinput{
+        background-color:rgba(249, 244, 244, 0);
+        border-radius:15px;
+        width:90%;
+        height:30px;
+        border:thin solid #FFF;
+        text-indent:0.5em;
+        font-weight:bold;
+        color:#FFF;
+    }
+    #demo-list a{
+        overflow:hidden;
+        text-overflow:ellipsis;
+        -o-text-overflow:ellipsis;
+        white-space:nowrap;
+        width:100%;
+    }
+</style>
 
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery("#jquery-accordion-menu").jqueryAccordionMenu();   //启用插件   jQuery等同于$
+
+    });
+
+    $(function(){
+        //顶部导航切换
+        $("#demo-list li").click(function(){
+            $("#demo-list li.active").removeClass("active")
+            $(this).addClass("active");
+        })
+    })
+</script>
 
 
 <!--//动态创建搜索表单-->
