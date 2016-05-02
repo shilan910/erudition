@@ -25,7 +25,7 @@ pageEncoding="UTF-8"%>
 
 <body>
 
-<jsp:include page="${assetsPath}/common/header.jsp" />
+<jsp:include page="../common/header.jsp" />
 
 <div class="main flex-row">
     <div class="flex-2">
