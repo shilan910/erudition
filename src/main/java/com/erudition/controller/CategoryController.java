@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -29,27 +30,29 @@ public class CategoryController {
     CategoryDao categoryDao;
 
 
+    @ResponseBody
     @RequestMapping(value = "/firstcates" , method = RequestMethod.GET)
-    public String getFirstCategory(Model model){
+    public Model getFirstCategory(Model model){
         List<CategoryEntity> firstCategories = new ArrayList<CategoryEntity>();
         firstCategories = categoryDao.getFirstCategory();
-        model.addAttribute("firstCates",firstCategories);
-        return "index";
+        model.addAttribute("firstCates", firstCategories);
+        return model;
     }
 
+    @ResponseBody
     @RequestMapping(value = "/getSecondCategory/{id}" , method = RequestMethod.GET)
-    public String getSecondCategory(HttpSession httpSession,@PathVariable ("id") int firstId){
-        List<CategoryEntity> secondCategories = new ArrayList<CategoryEntity>();
-        secondCategories = categoryDao.getSecondCategoryByFirst(firstId);
-        httpSession.setAttribute("category2",secondCategories);
-        return "index";
+    public Model getSecondCategory(@PathVariable ("id") int firstId,Model model){
+        List<CategoryEntity> secondCategories = categoryDao.getSecondCategoryByFirst(firstId);
+        model.addAttribute("secondCates", secondCategories);
+        return model;
     }
 
+    @ResponseBody
     @RequestMapping(value = "/getThirdCategory/{fid}/{sid}" , method = RequestMethod.GET)
-    public String getThirdCategory(HttpSession httpSession,@PathVariable ("fid") int firstId,@PathVariable ("sid") int secondId){
+    public Model getThirdCategory(Model model,@PathVariable ("fid") int firstId,@PathVariable ("sid") int secondId){
         List<CategoryEntity> secondCategories = new ArrayList<CategoryEntity>();
         secondCategories = categoryDao.getThirdCategoryByFS(firstId, secondId);
-        httpSession.setAttribute("category3",secondCategories);
-        return "index";
+        model.addAttribute("category3",secondCategories);
+        return model;
     }
 }
