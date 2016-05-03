@@ -1,9 +1,5 @@
 package com.erudition.page;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> zqh/master
 import com.erudition.dao.BaseDao;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
