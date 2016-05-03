@@ -40,7 +40,28 @@ pageEncoding="UTF-8"%>
                 <ul id="demo-list">
 
                     <li><a href="#"><i class="fa fa-home"></i>主页 </a></li>
-                    <li class="active"><a href="#"><i class="fa fa-glass"></i>共享目录 </a></li>
+                    <li class="active"><a href="${rootPath}/category/firstcates"><i class="fa fa-glass"></i>共享目录 </a>
+                        <ul class="submenu">
+                            <c:if test="${firstCates!=null}">
+                                <ul class="submenu">
+                                    <c:forEach items="${firstCates}" var="firstCate">
+                                        <li><a href="${rootPath}/category/getSecondCategory/${firstCate.id}">${firstCate.categoryName}</a>
+                                            <c:if test="${secondCates!=null}">
+                                                <ul class="submenu">
+                                                    <c:forEach items="${secondCates}" var="secondCate">
+                                                        <li><a href="${rootPath}/category/getThirdCategory/${firstCate.id}/${secondCate.id}">
+                                                            ${secondCate.categoryName}</a></li>
+
+                                                    </c:forEach>
+                                                </ul>
+                                            </c:if>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </c:if>
+                        </ul>
+
+                    </li>
                     <li><a href="#"><i class="fa fa-file-image-o"></i>个人收藏 </a><span class="jquery-accordion-menu-label">
                 12 </span></li>
                     <li><a href="#"><i class="fa fa-cog"></i>服务 </a>
