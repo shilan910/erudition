@@ -6,7 +6,7 @@ pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Erudition${assetsPath}</title>
+    <title>Erudition</title>
 
     <link rel="stylesheet" href="${assetsPath}/css/app.min.css"/>
     <%--<link rel="stylesheet" href="/erudition/assets/css/app.min.css"/>--%>
