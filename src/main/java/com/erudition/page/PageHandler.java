@@ -69,7 +69,6 @@ public class PageHandler<T> {
         long nowPageTotalCount = list1.size()/pageSize + 1;
         page.setTotalPageCount(nowPageTotalCount);
         //zqh:结束
-
         page.setList(list);
         return page;
     }
