@@ -63,16 +63,13 @@ public class PageHandler<T> {
         if (page == null)
             return null;
         List<T> list = pageDao.getPageList(pageSize, pageNow, query);
-<<<<<<< HEAD
+
 
         //zqh:以下为更新Page总数，解决总数不是当前页面总数的BUG
         List<T> list1 = pageDao.getPageList(3000000,1,query);
         long nowPageTotalCount = list1.size()/pageSize + 1;
         page.setTotalPageCount(nowPageTotalCount);
         //zqh:结束
-
-=======
->>>>>>> zqh/master
         page.setList(list);
         return page;
     }
