@@ -27,9 +27,7 @@ public class CategoryController {
     @Qualifier("categoryDao")
     CategoryDao categoryDao;
 
-    @Autowired
-    @Qualifier("resourcesDao")
-    ResourcesDao resourcesDao;
+
 
     @RequestMapping(value = "/getSecondCategory/{id}" , method = RequestMethod.GET)
     public String getSecondCategory(HttpSession httpSession,@PathVariable ("id") int firstId){
@@ -46,14 +44,4 @@ public class CategoryController {
         httpSession.setAttribute("category3",secondCategories);
         return "index";
     }
-
-    @RequestMapping(value = "/getResourcesByPage/{tid}/{pageNum}" , method = RequestMethod.GET)
-    public String getResourcesByPage(HttpSession httpSession,@PathVariable ("tid") String ThirdId,@PathVariable ("pageNum") int pageNum){
-
-        Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,20,ThirdId);
-        httpSession.setAttribute("resources",resources);
-        return "index";
-    }
-
-
 }
