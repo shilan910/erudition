@@ -64,7 +64,6 @@ public class PageHandler<T> {
             return null;
         List<T> list = pageDao.getPageList(pageSize, pageNow, query);
 
-
         //zqh:以下为更新Page总数，解决总数不是当前页面总数的BUG
         List<T> list1 = pageDao.getPageList(3000000,1,query);
         long nowPageTotalCount = list1.size()/pageSize + 1;
