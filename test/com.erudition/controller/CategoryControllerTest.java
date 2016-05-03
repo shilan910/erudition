@@ -54,4 +54,12 @@ public class CategoryControllerTest {
                 .andDo(print());
     }
 
+    @Test
+    public void testgetFirstCategory() throws Exception {
+        mockMvc
+                .perform(get("/category/firstcates"))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
 }

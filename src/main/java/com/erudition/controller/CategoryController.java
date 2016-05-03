@@ -31,18 +31,28 @@ public class CategoryController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/getSecondCategory/{id}" , method = RequestMethod.GET)
-    public Model getSecondCategory(@PathVariable ("id") int firstId,Model model){
-        List<CategoryEntity> secondCategories = categoryDao.getSecondCategoryByFirst(firstId);
-        model.addAttribute("secondCates",secondCategories);
+    @RequestMapping(value = "/firstcates" , method = RequestMethod.GET)
+    public Model getFirstCategory(Model model){
+        List<CategoryEntity> firstCategories = new ArrayList<CategoryEntity>();
+        firstCategories = categoryDao.getFirstCategory();
+        model.addAttribute("firstCates", firstCategories);
         return model;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/getSecondCategory/{id}" , method = RequestMethod.GET)
+    public Model getSecondCategory(@PathVariable ("id") int firstId,Model model){
+        List<CategoryEntity> secondCategories = categoryDao.getSecondCategoryByFirst(firstId);
+        model.addAttribute("secondCates", secondCategories);
+        return model;
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/getThirdCategory/{fid}/{sid}" , method = RequestMethod.GET)
-    public String getThirdCategory(HttpSession httpSession,@PathVariable ("fid") int firstId,@PathVariable ("sid") int secondId){
+    public Model getThirdCategory(Model model,@PathVariable ("fid") int firstId,@PathVariable ("sid") int secondId){
         List<CategoryEntity> secondCategories = new ArrayList<CategoryEntity>();
         secondCategories = categoryDao.getThirdCategoryByFS(firstId, secondId);
-        httpSession.setAttribute("category3",secondCategories);
-        return "index";
+        model.addAttribute("category3",secondCategories);
+        return model;
     }
 }
