@@ -21,12 +21,37 @@ pageEncoding="UTF-8"%>
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="${assetsPath}/js/jquery-accordion-menu.js"></script>
     <script src="${assetsPath}/js/icheck.js"></script>
+    <style type="text/css">
+        *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
+        body{background:#f0f0f0;}
+        /*.content{width:260px;margin:100px auto;}*/
+        .filterinput{
+            background-color:rgba(249, 244, 244, 0);
+            border-radius:15px;
+            width:90%;
+            height:30px;
+            border:thin solid #FFF;
+            text-indent:0.5em;
+            font-weight:bold;
+            color:#FFF;
+        }
+        #demo-list a{
+            overflow:hidden;
+            text-overflow:ellipsis;
+            -o-text-overflow:ellipsis;
+            white-space:nowrap;
+            width:100%;
+        }
+    </style>
 </head>
 
 <body>
+<%--遮罩层--%>
+<div class="mask"></div>
 
 <jsp:include page="common/header.jsp" />
 <c:set var="secondCates"/>
+
 <div class="main flex-row">
     <div class="flex-2">
         <div class="nav">
@@ -241,31 +266,59 @@ pageEncoding="UTF-8"%>
     <!--<div class="clearfix"></div>-->
 </div>
 
+<!--文件弹窗-->
+<div class="file-out">
+    <div class="pre-btn"></div>
+    <!--<div class="clearfix"></div>-->
+    <div class="file-body">
+        <div class="content">
+            <div class="file">
+                <div class="file-thumbnails">
+                    <div class="file-name">SQLdb_ilearn_3</div>
+                    <div class="file-class">文件类型SQL</div>
+                </div>
+                <div class="file-size">
+                    <button class="download">下载文件(4MB)</button>
+                </div>
+            </div>
+        </div>
+        <!--<div class="clearfix"></div>-->
+        <div class="attribute">
+            <div class="a-info">
+                <div class="a-first">
+                    <div class="file-from">所属文件夹:数据库</div>
+                    <div class="a-close">×</div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="file-name">SQLdb_ilearn_3</div>
+                <div class="collected">收藏量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>
+                <div class="a-third">
+                    <div class="file-uptime"><i class="fa fa-clock-o"></i>2013-12-12</div>
+                    <div class="file-people"><i class="fa fa-user"></i>上传人-MR.Z</div>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="a-operate">
+                <ul>
+                    <li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;下载</a></li>
+                    <li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>
+                </ul>
+            </div>
+            <div class="line"></div>
+            <div class="a-related">
+                <ul>
+                    <li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>
+                    <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="next-btn"></div>
+    <!--<div class="clearfix"></div>-->
+</div>
 
 
-<style type="text/css">
-    *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
-    body{background:#f0f0f0;}
-    /*.content{width:260px;margin:100px auto;}*/
-    .filterinput{
-        background-color:rgba(249, 244, 244, 0);
-        border-radius:15px;
-        width:90%;
-        height:30px;
-        border:thin solid #FFF;
-        text-indent:0.5em;
-        font-weight:bold;
-        color:#FFF;
-    }
-    #demo-list a{
-        overflow:hidden;
-        text-overflow:ellipsis;
-        -o-text-overflow:ellipsis;
-        white-space:nowrap;
-        width:100%;
-    }
-</style>
-
+<%--左侧导航基础模板--%>
 <script type="text/javascript">
     jQuery(document).ready(function () {
         jQuery("#jquery-accordion-menu").jqueryAccordionMenu();   //启用插件   jQuery等同于$
@@ -282,7 +335,7 @@ pageEncoding="UTF-8"%>
 </script>
 
 
-<!--//动态创建搜索表单-->
+<!--动态创建搜索表单-->
 <script type="text/javascript">
     (function($) {
 
@@ -321,7 +374,6 @@ pageEncoding="UTF-8"%>
 </script>
 
 <!--icheck    radio不能正常使用-->
-
 <script>
     $(document).ready(function(){
         $('input').iCheck({
@@ -333,5 +385,28 @@ pageEncoding="UTF-8"%>
 </script>
 
 
+
+<!--文件弹窗点击事件，静态DOM-->
+<script>
+    $(function(){
+        $(".body-floor .file-name span").click(function(event){  //不是一种友好的方式，动态添加
+            event.stopPropagation();
+            $(".mask").fadeIn();
+            $(".file-out").fadeIn();
+        })
+
+        $(".a-close").on("click",function(event){
+            event.stopPropagation();
+            $(".file-out").fadeOut();
+            $(".mask").fadeOut();
+        })
+
+        $(".mask").on("click",function(event){
+            event.stopPropagation();
+            $(".file-out").fadeOut();
+            $(".mask").fadeOut();
+        })
+    })
+</script>
 </body>
 </html>
