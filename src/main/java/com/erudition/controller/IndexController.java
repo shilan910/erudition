@@ -29,7 +29,12 @@ public class IndexController {
     public String index(HttpSession httpSession) {
         List<CategoryEntity> categoryEntities = new ArrayList<CategoryEntity>();
         categoryEntities = categoryDao.getFirstCategory();
-        httpSession.setAttribute("category1",categoryEntities);
+        httpSession.setAttribute("firstCates",categoryEntities);
+
+        for(CategoryEntity cate : categoryEntities){
+            System.out.println(cate.getCategoryName()+"   "+cate.getId());
+        }
+
         System.out.println("IndexController");
         return "index";
     }

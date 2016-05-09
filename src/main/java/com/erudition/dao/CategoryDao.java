@@ -17,7 +17,7 @@ public class CategoryDao extends BaseDao {
     }
 
     public List<CategoryEntity> getFirstCategory(){
-        String hql = "from CategoryEntity as cate where cate.id =0";
+        String hql = "from CategoryEntity as cate where cate.category1Id =0";
         Query query = query(hql);
         return query.list();
     }

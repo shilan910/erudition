@@ -26,7 +26,7 @@ pageEncoding="UTF-8"%>
 <body>
 
 <jsp:include page="common/header.jsp" />
-
+<c:set var="secondCates"/>
 <div class="main flex-row">
     <div class="flex-2">
         <div class="nav">
@@ -40,28 +40,26 @@ pageEncoding="UTF-8"%>
                 <ul id="demo-list">
 
                     <li><a href="#"><i class="fa fa-home"></i>主页 </a></li>
-                    <li class="active"><a href="${rootPath}/category/firstcates"><i class="fa fa-glass"></i>共享目录 </a>
-                        <ul class="submenu">
-                            <c:if test="${firstCates!=null}">
-                                <ul class="submenu">
-                                    <c:forEach items="${firstCates}" var="firstCate">
-                                        <li><a href="${rootPath}/category/getSecondCategory/${firstCate.id}">${firstCate.categoryName}</a>
-                                            <c:if test="${secondCates!=null}">
-                                                <ul class="submenu">
-                                                    <c:forEach items="${secondCates}" var="secondCate">
-                                                        <li><a href="${rootPath}/category/getThirdCategory/${firstCate.id}/${secondCate.id}">
-                                                            ${secondCate.categoryName}</a></li>
 
-                                                    </c:forEach>
-                                                </ul>
-                                            </c:if>
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-                            </c:if>
+                    <li class="active" ><a href=""><i class="fa fa-glass"></i>共享目录 </a>
+                        <ul class="submenu" id="first-cates">
+                            <%--<c:if test="${firstCates!=null}">--%>
+                                <c:forEach items="${firstCates}" var="firstCate">
+                                    <li value="${firstCate.id}"><a href="">${firstCate.categoryName}</a>
+                                        <ul class="submenu" id="second-cates">
+                                            <c:forEach items="${secondCates}" var="secondCate">
+                                                <li><a href="${rootPath}/category/getThirdCategory/${firstCate.id}/${secondCate.id}">${secondCate.categoryName}</a></li>
+
+                                            </c:forEach>
+                                        </ul>
+                                    </li>
+                                </c:forEach>
+                            <%--</c:if>--%>
                         </ul>
 
                     </li>
+
+
                     <li><a href="#"><i class="fa fa-file-image-o"></i>个人收藏 </a><span class="jquery-accordion-menu-label">
                 12 </span></li>
                     <li><a href="#"><i class="fa fa-cog"></i>服务 </a>
@@ -318,6 +316,7 @@ pageEncoding="UTF-8"%>
 </script>
 
 <!--icheck    radio不能正常使用-->
+
 <script>
     $(document).ready(function(){
         $('input').iCheck({
@@ -327,5 +326,36 @@ pageEncoding="UTF-8"%>
         });
     });
 </script>
+
+<script>
+
+    var first_cates=$("#first-cates li");
+
+    first_cates.click(function(){
+
+        loadCategory(first_cates.var());
+
+        });
+
+
+    function loadCategory(id){
+//            var url = "http://" + host + uri + id + ".json";
+        var url = "http://localhost:8080/erudition/category/getSecondCategory/"+id;
+        $.getJSON(url , function(data){
+//            selector.empty();
+            $.each(data,function(i, category){
+//                var option = "<option value='" + category.id + "'>" + category.name + "</option>";
+                secondCates.append("id",category.id);
+                secondCates.append("categoryName",category.categoryName);
+            });
+
+        });
+    }
+
+//    function clearCategory(selector) {
+//        selector.empty();
+//    }
+</script>
+
 </body>
 </html>
