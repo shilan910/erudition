@@ -27,13 +27,7 @@ public class IndexController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(HttpSession httpSession) {
-        List<CategoryEntity> categoryEntities = new ArrayList<CategoryEntity>();
-        categoryEntities = categoryDao.getFirstCategory();
-        httpSession.setAttribute("firstCates",categoryEntities);
-
-        for(CategoryEntity cate : categoryEntities){
-            System.out.println(cate.getCategoryName()+"   "+cate.getId());
-        }
+        httpSession.setAttribute("categories",categoryDao.getCategorys());
 
         System.out.println("IndexController");
         return "index";

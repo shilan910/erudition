@@ -41,27 +41,32 @@ pageEncoding="UTF-8"%>
 
                     <li><a href="#"><i class="fa fa-home"></i>主页 </a></li>
 
-                    <li class="active" ><a href=""><i class="fa fa-glass"></i>共享目录 </a>
+                    <li class="active" ><a href="#"><i class="fa fa-glass"></i>共享目录 </a>
                         <ul class="submenu" id="first-cates">
-                            <%--<c:if test="${firstCates!=null}">--%>
-                                <c:forEach items="${firstCates}" var="firstCate">
-                                    <li value="${firstCate.id}"><a href="">${firstCate.categoryName}</a>
-                                        <ul class="submenu" id="second-cates">
-                                            <c:forEach items="${secondCates}" var="secondCate">
-                                                <li><a href="${rootPath}/category/getThirdCategory/${firstCate.id}/${secondCate.id}">${secondCate.categoryName}</a></li>
+                            <c:forEach items="${categories}" var="firstCate">
+                                <li><a href="#">${firstCate.name}</a>
 
-                                            </c:forEach>
-                                        </ul>
-                                    </li>
-                                </c:forEach>
-                            <%--</c:if>--%>
+                                    <ul class="submenu">
+                                        <c:forEach items="${firstCate.children}" var="secondCate">
+                                            <li><a href="#">${secondCate.name}</a>
+
+                                                <ul class="submenu">
+                                                    <c:forEach items="${secondCate.children}" var="thirdCate">
+                                                        <li><a href="#">${thirdCate.name}</a></li>
+                                                    </c:forEach>
+                                                </ul>
+
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+
+                                </li>
+                            </c:forEach>
                         </ul>
 
                     </li>
 
 
-                    <li><a href="#"><i class="fa fa-file-image-o"></i>个人收藏 </a><span class="jquery-accordion-menu-label">
-                12 </span></li>
                     <li><a href="#"><i class="fa fa-cog"></i>服务 </a>
                         <ul class="submenu">
                             <li><a href="#">Web Design </a></li>
@@ -327,35 +332,6 @@ pageEncoding="UTF-8"%>
     });
 </script>
 
-<script>
-
-    var first_cates=$("#first-cates li");
-
-    first_cates.click(function(){
-
-        loadCategory(first_cates.var());
-
-        });
-
-
-    function loadCategory(id){
-//            var url = "http://" + host + uri + id + ".json";
-        var url = "http://localhost:8080/erudition/category/getSecondCategory/"+id;
-        $.getJSON(url , function(data){
-//            selector.empty();
-            $.each(data,function(i, category){
-//                var option = "<option value='" + category.id + "'>" + category.name + "</option>";
-                secondCates.append("id",category.id);
-                secondCates.append("categoryName",category.categoryName);
-            });
-
-        });
-    }
-
-//    function clearCategory(selector) {
-//        selector.empty();
-//    }
-</script>
 
 </body>
 </html>
