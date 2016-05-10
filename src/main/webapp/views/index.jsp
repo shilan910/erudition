@@ -77,7 +77,7 @@ pageEncoding="UTF-8"%>
 
                                                 <ul class="submenu">
                                                     <c:forEach items="${secondCate.children}" var="thirdCate">
-                                                        <li><a href="#">${thirdCate.name}</a></li>
+                                                        <li value="${thirdCate.id}"><a href="#">${thirdCate.name}</a></li>
                                                     </c:forEach>
                                                 </ul>
 
@@ -170,95 +170,9 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="line"></div>
 
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
+                <div id="file-list">
 
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
                 </div>
-                <div class="line"></div>
-
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
-
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
-
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
             </div>
         </div>
     </div>
@@ -316,6 +230,54 @@ pageEncoding="UTF-8"%>
     <div class="next-btn"></div>
     <!--<div class="clearfix"></div>-->
 </div>
+
+
+
+<%--根据三级目录显示文件--%>
+<script>
+    $(function(){
+
+        $("#demo-list li").click(function(){
+                    var third_cate_id = $(this).attr("value");
+                    if(third_cate_id != null){
+                        console.log(third_cate_id);
+                        var file_list = $("#file-list");
+                        //var obj = "";
+                        var url = "http://localhost:8080/erudition/resources/"+third_cate_id+"/1";
+                        $.getJSON(url , function(data){
+                            //file_list.empty();
+                            //console.log(data);
+                            $.each(data.list,function(i, file){
+                                 var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
+                                        "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
+                                        "<div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>"+
+                                        "<div class='file-name flex-4'><span><a href='#'>"+file.title+"</a></span></div></div>"+
+                                        "<div class='flex-3 file-size'><span>1.27MB</span></div>"+
+                                        "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"+
+                                        ""+file.createTime+"</div></div><div class='line'></div>";
+                                console.log(file.title);
+                                file_list.append(obj);
+                            });
+                          //  file_list.html(obj);
+                        });
+                    }
+
+
+
+                }
+
+        )
+
+
+
+
+    })
+
+
+</script>
+
+
+
 
 
 <%--左侧导航基础模板--%>

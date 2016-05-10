@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by tsj on 16-4-28.
+ * Created by sl on 16-5-10.
  */
 @Entity
 @Table(name = "eru_files", schema = "", catalog = "db_erudition")
@@ -17,11 +17,11 @@ public class FilesEntity {
     private Integer categoryId;
     private String description;
     private String relations;
-    private String kwywords;
+    private String keywords;
     private String type;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, insertable = true, updatable = true)
     public int getId() {
         return id;
     }
@@ -31,7 +31,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "title")
+    @Column(name = "title", nullable = true, insertable = true, updatable = true, length = 255)
     public String getTitle() {
         return title;
     }
@@ -41,7 +41,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "create_time")
+    @Column(name = "create_time", nullable = true, insertable = true, updatable = true)
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -51,7 +51,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "creater")
+    @Column(name = "creater", nullable = true, insertable = true, updatable = true, length = 255)
     public String getCreater() {
         return creater;
     }
@@ -61,7 +61,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "url")
+    @Column(name = "url", nullable = true, insertable = true, updatable = true, length = 255)
     public String getUrl() {
         return url;
     }
@@ -71,7 +71,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "category_id")
+    @Column(name = "category_id", nullable = true, insertable = true, updatable = true)
     public Integer getCategoryId() {
         return categoryId;
     }
@@ -81,7 +81,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "description")
+    @Column(name = "description", nullable = true, insertable = true, updatable = true, length = 255)
     public String getDescription() {
         return description;
     }
@@ -91,7 +91,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "relations")
+    @Column(name = "relations", nullable = true, insertable = true, updatable = true, length = 255)
     public String getRelations() {
         return relations;
     }
@@ -101,17 +101,17 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "kwywords")
-    public String getKwywords() {
-        return kwywords;
+    @Column(name = "keywords", nullable = true, insertable = true, updatable = true, length = 255)
+    public String getKeywords() {
+        return keywords;
     }
 
-    public void setKwywords(String kwywords) {
-        this.kwywords = kwywords;
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
     }
 
     @Basic
-    @Column(name = "type")
+    @Column(name = "type", nullable = true, insertable = true, updatable = true, length = 255)
     public String getType() {
         return type;
     }
@@ -135,7 +135,7 @@ public class FilesEntity {
         if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (relations != null ? !relations.equals(that.relations) : that.relations != null) return false;
-        if (kwywords != null ? !kwywords.equals(that.kwywords) : that.kwywords != null) return false;
+        if (keywords != null ? !keywords.equals(that.keywords) : that.keywords != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
 
         return true;
@@ -151,7 +151,7 @@ public class FilesEntity {
         result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (relations != null ? relations.hashCode() : 0);
-        result = 31 * result + (kwywords != null ? kwywords.hashCode() : 0);
+        result = 31 * result + (keywords != null ? keywords.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }

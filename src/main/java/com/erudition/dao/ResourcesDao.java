@@ -24,7 +24,7 @@ public class ResourcesDao extends BaseDao{
     }
 
     public Page<FilesEntity> getResourcesByPage(int pageNum,int pageSize,String thirdId){
-        String hql = "from FilesEntity as files where files.categoryId=3 and files.type =?";
+        String hql = "from FilesEntity as files where files.categoryId=?";
         Query query = query(hql);
         query.setString(0,thirdId);
         return pageHandler.getPage(pageNum, pageSize,

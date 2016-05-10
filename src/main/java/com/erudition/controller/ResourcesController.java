@@ -6,9 +6,11 @@ import com.erudition.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -24,15 +26,16 @@ public class ResourcesController {
     @Qualifier("resourcesDao")
     ResourcesDao resourcesDao;
 
-    @RequestMapping(value = "/getResourcesByPage/{tid}/{pageNum}" , method = RequestMethod.GET)
-    public String getResourcesByPage(HttpSession httpSession,@PathVariable("tid") String ThirdId,@PathVariable ("pageNum") int pageNum){
+    @ResponseBody
+    @RequestMapping(value = "/{tid}/{pageNum}" , method = RequestMethod.GET)
+    public Page<FilesEntity> getResourcesByPage(Model model,@PathVariable("tid") String ThirdId,@PathVariable ("pageNum") int pageNum){
 
         Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,20,ThirdId);
-        httpSession.setAttribute("resources",resources);
-        return "index";
+        model.addAttribute("resources",resources);
+        return resources;
     }
 
-    @RequestMapping(value = "/getRelations{fileid}" , method = RequestMethod.GET)
+    @RequestMapping(value = "/getRelations/{fileid}" , method = RequestMethod.GET)
     public String getRelations(HttpSession httpSession,@PathVariable("fileid") int fileId){
 
         List<FilesEntity> relationfiles = new ArrayList<FilesEntity>();
