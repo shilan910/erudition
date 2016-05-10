@@ -9,13 +9,7 @@ pageEncoding="UTF-8"%>
     <title>Erudition</title>
 
     <link rel="stylesheet" href="${assetsPath}/css/app.min.css"/>
-    <%--<link rel="stylesheet" href="/erudition/assets/css/app.min.css"/>--%>
-
-<%--<link rel="stylesheet" href="${assetsPath}/css/index.css"/>--%>
-
     <link rel="stylesheet" href="//cdn.bootcss.com/iCheck/1.0.1/skins/square/blue.css"/>
-    <!--<link rel="stylesheet" href="./css/square/blue.css"/>-->
-    <!--<link rel="stylesheet" href="//cdn.bootcss.com/iCheck/1.0.2/skins/flat/blue.css"/>-->
 
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -146,9 +140,7 @@ pageEncoding="UTF-8"%>
                     </div>
                 </div>
             </div>
-            <!--<div class="line"></div>-->
             <div class="file-body" id="file-list">
-                <!--<input type="checkbox"/>-->
 
                 <div class="first-floor flex-row">
                     <div class="flex-3">
@@ -170,14 +162,11 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="line"></div>
 
-                <%--<div id="file-list">--%>
 
-                <%--</div>--%>
             </div>
         </div>
     </div>
 
-    <!--<div class="clearfix"></div>-->
 </div>
 
 <!--文件弹窗-->
@@ -246,11 +235,9 @@ pageEncoding="UTF-8"%>
                     if(third_cate_id != null){
                         console.log(third_cate_id);
                         var file_list = $("#file-list");
-                        //var obj = "";
                         var url = "http://localhost:8080/erudition/resources/"+third_cate_id+"/1";
                         $.getJSON(url , function(data){
-                            //file_list.empty();
-                            //console.log(data);
+                            file_list.empty();
                             $.each(data.list,function(i, file){
                                  var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
                                         "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
@@ -259,15 +246,11 @@ pageEncoding="UTF-8"%>
                                         "<div class='flex-3 file-size'><span>1.27MB</span></div>"+
                                         "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"+
                                         ""+file.createTime+"</div></div><div class='line'></div>";
-                                <%--var js="<script>"+--%>
-                                <%--"$('.body-floor .file-name span').on('click',function(event){alert('dkf');})</script>";--%>
 
 
                                 console.log(file.title);
                                 file_list.append(obj);
-//                                file_list.append(js);
                             });
-                          //  file_list.html(obj);
                         });
                     }
 
