@@ -147,7 +147,7 @@ pageEncoding="UTF-8"%>
                 </div>
             </div>
             <!--<div class="line"></div>-->
-            <div class="file-body">
+            <div class="file-body" id="file-list">
                 <!--<input type="checkbox"/>-->
 
                 <div class="first-floor flex-row">
@@ -170,9 +170,9 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="line"></div>
 
-                <div id="file-list">
+                <%--<div id="file-list">--%>
 
-                </div>
+                <%--</div>--%>
             </div>
         </div>
     </div>
@@ -181,6 +181,7 @@ pageEncoding="UTF-8"%>
 </div>
 
 <!--文件弹窗-->
+
 <div class="file-out">
     <div class="pre-btn"></div>
     <!--<div class="clearfix"></div>-->
@@ -222,6 +223,9 @@ pageEncoding="UTF-8"%>
             <div class="a-related">
                 <ul>
                     <li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>
+                    <c:forEach items="${relationalresources}" var="re">
+                        <li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;${re.title}</a></li>
+                    </c:forEach>
                     <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>
                 </ul>
             </div>
@@ -255,14 +259,17 @@ pageEncoding="UTF-8"%>
                                         "<div class='flex-3 file-size'><span>1.27MB</span></div>"+
                                         "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"+
                                         ""+file.createTime+"</div></div><div class='line'></div>";
+                                <%--var js="<script>"+--%>
+                                <%--"$('.body-floor .file-name span').on('click',function(event){alert('dkf');})</script>";--%>
+
+
                                 console.log(file.title);
                                 file_list.append(obj);
+//                                file_list.append(js);
                             });
                           //  file_list.html(obj);
                         });
                     }
-
-
 
                 }
 
@@ -338,6 +345,7 @@ pageEncoding="UTF-8"%>
 <!--icheck    radio不能正常使用-->
 <script>
     $(document).ready(function(){
+
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
@@ -347,14 +355,23 @@ pageEncoding="UTF-8"%>
 </script>
 
 
-
 <!--文件弹窗点击事件，静态DOM-->
 <script>
     $(function(){
-        $(".body-floor .file-name span").click(function(event){  //不是一种友好的方式，动态添加
+        $(document).on("click",".body-floor .file-name span",function(event){
             event.stopPropagation();
-            $(".mask").fadeIn();
-            $(".file-out").fadeIn();
+            $.ajax({
+                url:'${rootPath}/resources/getRelations/1',
+                type:'post',
+                data:'merName='+'${val}',
+                async : false, //默认为true 异步
+                success:function(data){
+                    $(".mask").fadeIn();
+                    $(".file-out").fadeIn();
+                },error:function(){
+                    alert("error");
+                }
+            });
         })
 
         $(".a-close").on("click",function(event){
