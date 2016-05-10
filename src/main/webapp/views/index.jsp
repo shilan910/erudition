@@ -174,7 +174,7 @@ pageEncoding="UTF-8"%>
                     <div class="flex-3 flex-row">
                         <div class="flex-1 checkbox"><input type="checkbox"/></div>
                         <div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
+                        <div class="file-name flex-4"><span><a href="${rootPath}/resources/getRelations/1">一号分类</a></span></div>
                     </div>
                     <div class="flex-3 file-size">
                         <span>1.27MB</span>
@@ -267,6 +267,7 @@ pageEncoding="UTF-8"%>
 </div>
 
 <!--文件弹窗-->
+
 <div class="file-out">
     <div class="pre-btn"></div>
     <!--<div class="clearfix"></div>-->
@@ -308,6 +309,9 @@ pageEncoding="UTF-8"%>
             <div class="a-related">
                 <ul>
                     <li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>
+                    <c:forEach items="${relationalresources}" var="re">
+                        <li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;${re.title}</a></li>
+                    </c:forEach>
                     <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>
                 </ul>
             </div>
@@ -316,6 +320,7 @@ pageEncoding="UTF-8"%>
     <div class="next-btn"></div>
     <!--<div class="clearfix"></div>-->
 </div>
+
 
 
 <%--左侧导航基础模板--%>

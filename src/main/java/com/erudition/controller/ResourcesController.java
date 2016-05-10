@@ -32,7 +32,7 @@ public class ResourcesController {
         return "index";
     }
 
-    @RequestMapping(value = "/getRelations{fileid}" , method = RequestMethod.GET)
+    @RequestMapping(value = "/getRelations/{fileid}" , method = RequestMethod.GET)
     public String getRelations(HttpSession httpSession,@PathVariable("fileid") int fileId){
 
         List<FilesEntity> relationfiles = new ArrayList<FilesEntity>();
@@ -42,12 +42,14 @@ public class ResourcesController {
         if(!relations.isEmpty()){
             String [] relationsarr = relations.split(",");
             for(String re:relationsarr){
-                relationfiles.add(resourcesDao.getById(Integer.parseInt(re)));
+                if(!re.isEmpty()){
+                    System.out.println(re);
+                    relationfiles.add(resourcesDao.getById(Integer.parseInt(re)));
+                }
             }
         }
 
         httpSession.setAttribute("relationalresources",relationfiles);
         return "index";
     }
-
 }
