@@ -33,27 +33,27 @@ public class UserController {
 
         message="nihao";
 
-//        if(username.isEmpty()){
-//            message = "请输入用户名";
-//        }else{
-//            UserEntity user = userDao.getByName(username);            //暴露出来的接口
-//            if(password.isEmpty()){                //前台直接进行交互，，name="password",,,,
-//                message = "请输入密码";
-//            }else if(!user.getPassword().equals(password)){
-//                message = "密码错误";
-//            }else {
-//                status = 1;
-//                message = "用户登陆成功";
-//                session.setAttribute("loginUser",user);
-//                System.out.println("message1 : "+message);
-//                request.getSession().setAttribute("username",username);      //session中设置值
-//                //session.setAttribute("userid",user.getId());
-//                // redirectAttributes.addAttribute("loginMsg",message);
-//
-//                System.out.println("message : "+message);
-//                return "redirect:/index";
-//            }
-//        }
+        if(username.isEmpty()){
+            message = "请输入用户名";
+        }else{
+            UserEntity user = userDao.getByName(username);            //暴露出来的接口
+            if(password.isEmpty()){                //前台直接进行交互，，name="password",,,,
+                message = "请输入密码";
+            }else if(!user.getPassword().equals(password)){
+                message = "密码错误";
+            }else {
+                status = 1;
+                message = "用户登陆成功";
+                session.setAttribute("loginUser",user);
+                System.out.println("message1 : "+message);
+                request.getSession().setAttribute("username",username);      //session中设置值
+                //session.setAttribute("userid",user.getId());
+                // redirectAttributes.addAttribute("loginMsg",message);
+
+                System.out.println("message : "+message);
+                return "redirect:/index";
+            }
+        }
         System.out.println("message : "+message);
 
         session.setAttribute("val","nihao");
