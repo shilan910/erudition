@@ -300,7 +300,7 @@ pageEncoding="UTF-8"%>
             <div class="line"></div>
             <div class="a-operate">
                 <ul>
-                    <li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;下载</a></li>
+                    <li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;${val}</a></li>
                     <li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>
                 </ul>
             </div>
@@ -391,9 +391,27 @@ pageEncoding="UTF-8"%>
     $(function(){
         $(".body-floor .file-name span").click(function(event){  //不是一种友好的方式，动态添加
             event.stopPropagation();
-            $(".mask").fadeIn();
-            $(".file-out").fadeIn();
+            $.ajax({
+                url:'${rootPath}/resources/getRelations/1',
+                type:'post',
+                data:'merName='+'${val}',
+                async : false, //默认为true 异步
+                success:function(data){
+                    //alert("success");
+                    $(".mask").fadeIn();
+                    $(".file-out").fadeIn();
+                    <%--alert('${val}');--%>
+                },error:function(){
+                    alert("error");
+                }
+            });
         })
+
+//        $(".body-floor .file-name span").click(function(event){  //不是一种友好的方式，动态添加
+//            event.stopPropagation();
+//            $(".mask").fadeIn();
+//            $(".file-out").fadeIn();
+//        })
 
         $(".a-close").on("click",function(event){
             event.stopPropagation();

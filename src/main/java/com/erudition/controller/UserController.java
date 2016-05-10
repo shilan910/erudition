@@ -53,6 +53,7 @@ public class UserController {
             }
         }
         System.out.println("message : "+message);
+
         return "redirect:/login";
     }
 

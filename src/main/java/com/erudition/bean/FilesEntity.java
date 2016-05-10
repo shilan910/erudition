@@ -17,7 +17,7 @@ public class FilesEntity {
     private Integer categoryId;
     private String description;
     private String relations;
-    private String kwywords;
+    private String keywords;
     private String type;
 
     @Id
@@ -101,13 +101,13 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "kwywords")
-    public String getKwywords() {
-        return kwywords;
+    @Column(name = "keywords")
+    public String getKeywords() {
+        return keywords;
     }
 
-    public void setKwywords(String kwywords) {
-        this.kwywords = kwywords;
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
     }
 
     @Basic
@@ -135,7 +135,7 @@ public class FilesEntity {
         if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (relations != null ? !relations.equals(that.relations) : that.relations != null) return false;
-        if (kwywords != null ? !kwywords.equals(that.kwywords) : that.kwywords != null) return false;
+        if (keywords != null ? !keywords.equals(that.keywords) : that.keywords != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
 
         return true;
@@ -151,7 +151,7 @@ public class FilesEntity {
         result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (relations != null ? relations.hashCode() : 0);
-        result = 31 * result + (kwywords != null ? kwywords.hashCode() : 0);
+        result = 31 * result + (keywords != null ? keywords.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }

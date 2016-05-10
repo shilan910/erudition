@@ -32,7 +32,7 @@ public class ResourcesController {
         return "index";
     }
 
-    @RequestMapping(value = "/getRelations{fileid}" , method = RequestMethod.GET)
+    @RequestMapping(value = "/getRelations/{fileid}" , method = RequestMethod.POST)
     public String getRelations(HttpSession httpSession,@PathVariable("fileid") int fileId){
 
         List<FilesEntity> relationfiles = new ArrayList<FilesEntity>();
