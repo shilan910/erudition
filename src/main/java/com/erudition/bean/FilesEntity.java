@@ -102,12 +102,12 @@ public class FilesEntity {
 
     @Basic
     @Column(name = "keywords")
-    public String getKwywords() {
+    public String getKeywords() {
         return keywords;
     }
 
-    public void setKwywords(String kwywords) {
-        this.keywords = kwywords;
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
     }
 
     @Basic

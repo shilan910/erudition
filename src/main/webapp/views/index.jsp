@@ -174,7 +174,7 @@ pageEncoding="UTF-8"%>
                     <div class="flex-3 flex-row">
                         <div class="flex-1 checkbox"><input type="checkbox"/></div>
                         <div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>
-                        <div class="file-name flex-4"><span><a href="${rootPath}/resources/getRelations/1">一号分类</a></span></div>
+                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
                     </div>
                     <div class="flex-3 file-size">
                         <span>1.27MB</span>
@@ -396,9 +396,27 @@ pageEncoding="UTF-8"%>
     $(function(){
         $(".body-floor .file-name span").click(function(event){  //不是一种友好的方式，动态添加
             event.stopPropagation();
-            $(".mask").fadeIn();
-            $(".file-out").fadeIn();
+            $.ajax({
+                url:'${rootPath}/resources/getRelations/1',
+                type:'post',
+                data:'merName='+'${val}',
+                async : false, //默认为true 异步
+                success:function(data){
+                    alert("success");
+                    $(".mask").fadeIn();
+                    $(".file-out").fadeIn();
+                    <%--alert('${val}');--%>
+                },error:function(){
+                    alert("error");
+                }
+            });
         })
+
+//        $(".body-floor .file-name span").click(function(event){  //不是一种友好的方式，动态添加
+//            event.stopPropagation();
+//            $(".mask").fadeIn();
+//            $(".file-out").fadeIn();
+//        })
 
         $(".a-close").on("click",function(event){
             event.stopPropagation();
