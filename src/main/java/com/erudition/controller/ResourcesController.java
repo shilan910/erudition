@@ -39,11 +39,12 @@ public class ResourcesController {
 
         FilesEntity file  = resourcesDao.getById(fileId);
         String relations = file.getRelations();
+        System.out.println("relations"+relations);
         if(!relations.isEmpty()){
             String [] relationsarr = relations.split(",");
             for(String re:relationsarr){
                 if(!re.isEmpty()){
-                    System.out.println(re);
+                    System.out.println("re"+re);
                     relationfiles.add(resourcesDao.getById(Integer.parseInt(re)));
                 }
             }

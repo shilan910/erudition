@@ -174,7 +174,7 @@ pageEncoding="UTF-8"%>
                     <div class="flex-3 flex-row">
                         <div class="flex-1 checkbox"><input type="checkbox"/></div>
                         <div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>
-                        <div class="file-name flex-4"><span><a href="${rootPath}/resources/getRelations/1">一号分类</a></span></div>
+                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
                     </div>
                     <div class="flex-3 file-size">
                         <span>1.27MB</span>
@@ -301,7 +301,7 @@ pageEncoding="UTF-8"%>
             <div class="line"></div>
             <div class="a-operate">
                 <ul>
-                    <li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;${val}</a></li>
+                    <li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;下载</a></li>
                     <li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>
                 </ul>
             </div>
@@ -402,7 +402,7 @@ pageEncoding="UTF-8"%>
                 data:'merName='+'${val}',
                 async : false, //默认为true 异步
                 success:function(data){
-                    //alert("success");
+                    alert("success");
                     $(".mask").fadeIn();
                     $(".file-out").fadeIn();
                     <%--alert('${val}');--%>
