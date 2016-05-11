@@ -21,44 +21,73 @@ public class UserController {
     @Qualifier("userDao")
     private UserDao userDao;
 
-    @RequestMapping(value = "/login" , method = RequestMethod.GET)       //这个不知道是干嘛的??
-    public String login(){
-        return "index";
+    @RequestMapping(value = "/changetoregist", method = RequestMethod.GET)
+    public String changeToRegist() {
+        return "regist";
     }
-    @RequestMapping(value = "/login" , method = RequestMethod.POST)           //调用post方法
-    public String login(HttpServletRequest request,String username , String password , HttpSession session){
+
+    @RequestMapping(value = "/changetologin", method = RequestMethod.GET)
+    public String changeToLogin() {
+        return "login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)           //调用post方法
+    public String login(HttpServletRequest request, String username,
+                        String password, String codenum,HttpSession session) {
         int status = 0;
-        System.out.println("1111111111111111111111"+username+"  "+password);
-        String message=new String();
+        System.out.println("1111111111111111111111" + username + "  " + password);
+        String message = new String();
 
-        message="nihao";
-
-        if(username.isEmpty()){
+        if (username.isEmpty()) {
             message = "请输入用户名";
-        }else{
+        } else {
             UserEntity user = userDao.getByName(username);            //暴露出来的接口
-            if(password.isEmpty()){                //前台直接进行交互，，name="password",,,,
+            if (password.isEmpty()) {                //前台直接进行交互，，name="password",,,,
                 message = "请输入密码";
-            }else if(!user.getPassword().equals(password)){
+            } else if (!user.getPassword().equals(password)) {
                 message = "密码错误";
-            }else {
+            }
+            else if(!codenum.equalsIgnoreCase(session.getAttribute("code").toString())){
+                message = "验证码错误";
+            }
+            else {
                 status = 1;
                 message = "用户登陆成功";
-                session.setAttribute("loginUser",user);
-                System.out.println("message1 : "+message);
-                request.getSession().setAttribute("username",username);      //session中设置值
+                session.setAttribute("loginUser", user);
+                System.out.println("message1 : " + message);
+                request.getSession().setAttribute("username", username);      //session中设置值
                 //session.setAttribute("userid",user.getId());
                 // redirectAttributes.addAttribute("loginMsg",message);
 
-                System.out.println("message : "+message);
-                return "redirect:/index";
+                System.out.println("message : " + message);
+                return "index";
             }
         }
-        System.out.println("message : "+message);
+        System.out.println("message : " + message);
+        session.setAttribute("val", "nihao");
+        return "redirect:/login";
+    }
 
-        session.setAttribute("val","nihao");
-//        return "redirect:/login";
-        return "index";
+
+    @RequestMapping(value = "/regist", method = RequestMethod.POST)
+    public String regist(HttpSession httpSession, String username, String password, String password2) {
+        String message = new String();
+
+        if (username.isEmpty()) {
+            message = "请输入用户名";
+        } else if (password.isEmpty()) {
+            message = "请输入密码";
+        } else {
+            if (!password.equals(password2)) {
+                message = "请保持密码和确认密码一致！";
+            } else {
+                userDao.save(username, password);
+                message = "注册成功！";
+                return "index";
+            }
+        }
+        System.out.println("message:" + message);
+        return "redirect:/regist";
     }
 
 }
