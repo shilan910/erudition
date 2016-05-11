@@ -22,7 +22,7 @@
         <div class="login-header">
         </div>
         <div class="form-all">
-            <form action="${rootPath}/user/login" method="post">      <%--默认为get方法--%>
+            <form action="${rootPath}/user/regist" method="post">      <%--默认为get方法--%>
                 <div class="user-group">
                     <div class="user-input">
                         <span>用户名:</span>
@@ -40,12 +40,20 @@
                     </div>
                 </div>
 
+                <div class="password-group">
+                    <div class="password-input">
+                        <span>确认密码:</span>
+                        <input type="password" placeholder="请输入密码" name="password2"/><i class="fa fa-lock fa-2x"></i>
+                        <div class="tip">请输入6-16位密码，区分大小写，不能使用空格</div>
+                    </div>
+                </div>
+
                 <div class="codes-group">
                     <div class="codes-input">
                         <span>验证码</span>
                         <div class="clearfix"></div>
                         <input type="text" name="codenum" placeholder="验证码"/>
-                        <img src="code.html" alt="" onclick="changeImg()">
+                        <img src="code.html" alt="">
                         <%--<img src="http://img.mukewang.com/545308540001678401500040.jpg" alt="">--%>
                         <div class="clearfix"></div>
                     </div>
@@ -58,13 +66,13 @@
                             <span>记住密码</span>
                         </div>
                         <div class="forget">
-                            <a href="${rootPath}/user/changetoregist">注册</a>
+                            <a href="${rootPath}/user/changetologin">登录</a>
                         </div>
                         <div class="clearfix"></div>
                     </div>
 
                 </div>
-                <button class="btn btn-primary center-block" type="submit">登录</button>
+                <button class="btn btn-primary center-block" type="submit">注册</button>
             </form>
         </div>
         <div class="login-footer"></div>
@@ -95,27 +103,6 @@
     $("input[type='text']").blur(function(){
         toColor($(this),grey2,false);
     })
-
-
-
-
-    function changeImg() {
-        var imgSrc = $("#imgObj");
-        var src = imgSrc.attr("src");
-        imgSrc.attr("src", chgUrl(src));
-    }
-    //时间戳
-    //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
-    function chgUrl(url) {
-        var timestamp = (new Date()).valueOf();
-        url = url.substring(0, 17);
-        if ((url.indexOf("&") >= 0)) {
-            url = url + "×tamp=" + timestamp;
-        } else {
-            url = url + "?timestamp=" + timestamp;
-        }
-        return url;
-    }
 </script>
 </body>
 </html>
