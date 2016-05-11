@@ -37,7 +37,7 @@ public class IndexController {
     CategoryDao categoryDao;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(HttpSession httpSession, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public String index(HttpSession httpSession){
         httpSession.setAttribute("categories", categoryDao.getCategorys());
 
         System.out.println("IndexController");

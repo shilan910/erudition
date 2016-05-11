@@ -19,12 +19,12 @@ import java.util.Random;
 @Controller
 public class CodeController {
 
-    private int width = 90;//定义图片的width
-    private int height = 20;//定义图片的height
+    private int width = 140;//定义图片的width
+    private int height = 40;//定义图片的height
     private int codeCount = 4;//定义图片上显示验证码的个数
-    private int xx = 15;
-    private int fontHeight = 18;
-    private int codeY = 16;
+    private int xx = 28;
+    private int fontHeight = 36;
+    private int codeY = 32;
     char[] codeSequence = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
             'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
             'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
