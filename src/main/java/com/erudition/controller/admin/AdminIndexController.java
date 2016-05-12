@@ -1,5 +1,6 @@
 package com.erudition.controller.admin;
 
+import com.erudition.bean.UserEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,10 @@ public class AdminIndexController {
 
         String username = (String)httpSession.getAttribute("username");
         if(username==null) return "login";
+        else{
+            UserEntity user = (UserEntity)httpSession.getAttribute("loginUser");
+            if(user.getAuthority().equals("0"))return "redirect:/index";
+        }
         return "admin/index";
     }
 }

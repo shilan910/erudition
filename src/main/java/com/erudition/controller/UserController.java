@@ -65,7 +65,8 @@ public class UserController {
                 // redirectAttributes.addAttribute("loginMsg",message);
 
                 System.out.println("message : " + usernmaemessage);
-                return "index";
+                if(user.getAuthority().equals("1"))return "redirect:/admin/index";
+                return "redirect:/index";
             }
         }
         session.setAttribute("usernmaemessage",usernmaemessage);

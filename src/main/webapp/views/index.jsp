@@ -58,9 +58,9 @@ pageEncoding="UTF-8"%>
                 <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
                 <ul id="demo-list">
 
-                    <li><a href="#"><i class="fa fa-home"></i>主页 </a></li>
+                    <%--<li><a href="#"><i class="fa fa-home"></i>主页 </a></li>--%>
 
-                    <li class="active" ><a href="#"><i class="fa fa-glass"></i>共享目录 </a>
+                    <li class="active" ><a href="#"><i class="fa fa-home"></i>共享目录 </a>
                         <ul class="submenu" id="first-cates">
                             <c:forEach items="${categories}" var="firstCate">
                                 <li><a href="#">${firstCate.name}</a>
@@ -86,33 +86,59 @@ pageEncoding="UTF-8"%>
                     </li>
 
 
-                    <li><a href="#"><i class="fa fa-cog"></i>服务 </a>
-                        <ul class="submenu">
-                            <li><a href="#">Web Design </a></li>
-                            <li><a href="#">Hosting </a></li>
-                            <li><a href="#">Design </a>
-                                <ul class="submenu">
-                                    <li><a href="#">Graphics </a></li>
-                                    <li><a href="#">Vectors </a></li>
-                                    <li><a href="#">Photoshop </a></li>
-                                    <li><a href="#">Fonts </a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Consulting </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-home"></i>系统管理 </a></li>
-                    <li><a href="#"><i class="fa fa-suitcase"></i>Portfolio </a>
-                        <ul class="submenu">
-                            <li><a href="#">Web Design </a></li>
-                            <li><a href="#">Graphics </a><span class="jquery-accordion-menu-label">10 </span>
-                            </li>
-                            <li><a href="#">Photoshop </a></li>
-                            <li><a href="#">Programming </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-user"></i>About </a></li>
-                    <li><a href="#"><i class="fa fa-envelope"></i>Contact </a></li>
+                        <li class="active" ><a href="#"><i class="fa fa-glass"></i>常用目录 </a>
+                            <ul class="submenu" >
+                                <c:forEach items="${categories}" var="firstCate">
+                                    <li><a href="#">${firstCate.name}</a>
+
+                                        <ul class="submenu">
+                                            <c:forEach items="${firstCate.children}" var="secondCate">
+                                                <li><a href="#">${secondCate.name}</a>
+
+                                                    <ul class="submenu">
+                                                        <c:forEach items="${secondCate.children}" var="thirdCate">
+                                                            <li value="${thirdCate.id}"><a href="#">${thirdCate.name}</a></li>
+                                                        </c:forEach>
+                                                    </ul>
+
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+
+                                    </li>
+                                </c:forEach>
+                            </ul>
+
+                        </li>
+
+
+                    <%--<li><a href="#"><i class="fa fa-cog"></i>服务 </a>--%>
+                        <%--<ul class="submenu">--%>
+                            <%--<li><a href="#">Web Design </a></li>--%>
+                            <%--<li><a href="#">Hosting </a></li>--%>
+                            <%--<li><a href="#">Design </a>--%>
+                                <%--<ul class="submenu">--%>
+                                    <%--<li><a href="#">Graphics </a></li>--%>
+                                    <%--<li><a href="#">Vectors </a></li>--%>
+                                    <%--<li><a href="#">Photoshop </a></li>--%>
+                                    <%--<li><a href="#">Fonts </a></li>--%>
+                                <%--</ul>--%>
+                            <%--</li>--%>
+                            <%--<li><a href="#">Consulting </a></li>--%>
+                        <%--</ul>--%>
+                    <%--</li>--%>
+                    <%--<li><a href="#"><i class="fa fa-home"></i>系统管理 </a></li>--%>
+                    <%--<li><a href="#"><i class="fa fa-suitcase"></i>Portfolio </a>--%>
+                        <%--<ul class="submenu">--%>
+                            <%--<li><a href="#">Web Design </a></li>--%>
+                            <%--<li><a href="#">Graphics </a><span class="jquery-accordion-menu-label">10 </span>--%>
+                            <%--</li>--%>
+                            <%--<li><a href="#">Photoshop </a></li>--%>
+                            <%--<li><a href="#">Programming </a></li>--%>
+                        <%--</ul>--%>
+                    <%--</li>--%>
+                    <%--<li><a href="#"><i class="fa fa-user"></i>About </a></li>--%>
+                    <%--<li><a href="#"><i class="fa fa-envelope"></i>Contact </a></li>--%>
 
                 </ul>
                 <div class="jquery-accordion-menu-footer">
