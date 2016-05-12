@@ -43,7 +43,7 @@ pageEncoding="UTF-8"%>
 <%--遮罩层--%>
 <div class="mask"></div>
 
-<jsp:include page="common/header.jsp" />
+<jsp:include page="../common/header.jsp" />
 <c:set var="secondCates"/>
 
 <div class="main flex-row">
@@ -58,66 +58,19 @@ pageEncoding="UTF-8"%>
                 <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
                 <ul id="demo-list">
 
-                    <li><a href="#"><i class="fa fa-home"></i>主页 </a></li>
+                    <li class="active" ><a href="#"><i class="fa fa-home"></i>文件管理</a></li>
 
-                    <li class="active" ><a href="#"><i class="fa fa-glass"></i>共享目录 </a>
-                        <ul class="submenu" id="first-cates">
-                            <c:forEach items="${categories}" var="firstCate">
-                                <li><a href="#">${firstCate.name}</a>
-
-                                    <ul class="submenu">
-                                        <c:forEach items="${firstCate.children}" var="secondCate">
-                                            <li><a href="#">${secondCate.name}</a>
-
-                                                <ul class="submenu">
-                                                    <c:forEach items="${secondCate.children}" var="thirdCate">
-                                                        <li value="${thirdCate.id}"><a href="#">${thirdCate.name}</a></li>
-                                                    </c:forEach>
-                                                </ul>
-
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
-
-                                </li>
-                            </c:forEach>
-                        </ul>
-
-                    </li>
+                    <li><a href="#"><i class="fa fa-glass"></i>文件上传</a></li>
 
 
-                    <li><a href="#"><i class="fa fa-cog"></i>服务 </a>
-                        <ul class="submenu">
-                            <li><a href="#">Web Design </a></li>
-                            <li><a href="#">Hosting </a></li>
-                            <li><a href="#">Design </a>
-                                <ul class="submenu">
-                                    <li><a href="#">Graphics </a></li>
-                                    <li><a href="#">Vectors </a></li>
-                                    <li><a href="#">Photoshop </a></li>
-                                    <li><a href="#">Fonts </a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Consulting </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-home"></i>系统管理 </a></li>
-                    <li><a href="#"><i class="fa fa-suitcase"></i>Portfolio </a>
-                        <ul class="submenu">
-                            <li><a href="#">Web Design </a></li>
-                            <li><a href="#">Graphics </a><span class="jquery-accordion-menu-label">10 </span>
-                            </li>
-                            <li><a href="#">Photoshop </a></li>
-                            <li><a href="#">Programming </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-user"></i>About </a></li>
-                    <li><a href="#"><i class="fa fa-envelope"></i>Contact </a></li>
+                    <li><a href="#"><i class="fa fa-suitcase"></i>规则设置</a></li>
+
+                    <%--zqh : 此处前端需要修改--%>
 
                 </ul>
-                <div class="jquery-accordion-menu-footer">
-                    Footer
-                </div>
+                <%--<div class="jquery-accordion-menu-footer">--%>
+                    <%--Footer--%>
+                <%--</div>--%>
             </div>
         </div>
 
@@ -140,21 +93,7 @@ pageEncoding="UTF-8"%>
                     </div>
                 </div>
             </div>
-            <div class="file-body" id="file-list">
-                <div class="first-floor flex-row">
-                    <div class="flex-3">
-                        <div>
-                            <input type="checkbox"/>
-                            <span class="filename">名称</span>
-                        </div>
-                    </div>
-                    <div class="flex-3">大小</div>
-                    <div class="flex-3">创建者</div>
-                    <div class="flex-3">更新日期</div>
-                </div>
-                <div class="line"></div>
 
-            </div>
         </div>
     </div>
 
@@ -227,17 +166,8 @@ pageEncoding="UTF-8"%>
                         console.log(third_cate_id);
                         var file_list = $("#file-list");
                         var url = "http://localhost:8080/erudition/resources/"+third_cate_id+"/1";
-
-                        file_list.empty();
-                        var obj0= "<div class='first-floor flex-row'><div class='flex-3'><div>"+
-                                "<input type='checkbox'/><span class='filename'>名称</span></div></div>"+
-                                "<div class='flex-3'>大小</div><div class='flex-3'>创建者</div>"+
-                                "<div class='flex-3'>更新日期</div></div><div class='line'></div>";
-                        file_list.append(obj0);
-
-
                         $.getJSON(url , function(data){
-
+                            file_list.empty();
                             $.each(data.list,function(i, file){
                                  var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
                                         "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
