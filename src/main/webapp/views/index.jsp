@@ -87,7 +87,7 @@ pageEncoding="UTF-8"%>
 
 
                         <li class="active" ><a href="#"><i class="fa fa-glass"></i>常用目录 </a>
-                            <ul class="submenu" id="first-cates">
+                            <ul class="submenu" >
                                 <c:forEach items="${categories}" var="firstCate">
                                     <li><a href="#">${firstCate.name}</a>
 
