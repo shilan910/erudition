@@ -28,7 +28,7 @@
                         <span>用户名:</span>
                         <input type="text"  placeholder="请输入用户名" name="username"/><i class="fa fa-user fa-2x"></i>
 
-                        <div class="tip">请输入6-16位用户名，区分大小写，不能使用空格</div>
+                        <div class="tip">${usernmaemessage}</div>
                     </div>
                 </div>
                 
@@ -36,7 +36,7 @@
                     <div class="password-input">
                         <span>密码:</span>
                         <input type="password" placeholder="请输入密码" name="password"/><i class="fa fa-lock fa-2x"></i>
-                        <div class="tip">请输入6-16位密码，区分大小写，不能使用空格</div>
+                        <div class="tip">${passwordmessage}</div>
                     </div>
                 </div>
 
@@ -45,8 +45,10 @@
                         <span>验证码</span>
                         <div class="clearfix"></div>
                         <input type="text" name="codenum" placeholder="验证码"/>
-                        <img src="code.html" alt="" onclick="changeImg()">
+                        <img id="imgObj" src="code.html" alt="" >
+                        <a href="#" onclick="changeImg()">换一张</a>
                         <%--<img src="http://img.mukewang.com/545308540001678401500040.jpg" alt="">--%>
+                        <div class="tip">${codemessage}</div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -58,7 +60,7 @@
                             <span>记住密码</span>
                         </div>
                         <div class="forget">
-                            <a href="${rootPath}/user/changetoregist">注册</a>
+                            <a href="${rootPath}/views/regist.jsp">注册</a>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -99,6 +101,7 @@
 
 
 
+    //用来更换图片
     function changeImg() {
         var imgSrc = $("#imgObj");
         var src = imgSrc.attr("src");

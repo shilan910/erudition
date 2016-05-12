@@ -42,6 +42,8 @@ public class IndexController {
 
         System.out.println("IndexController");
 
-        return "login";
+        String username = (String)httpSession.getAttribute("username");
+        if(username==null) return "login";
+        return "index";
     }
 }

@@ -27,7 +27,8 @@ public class UserDao extends BaseDao {
         Query query = query(hql);
         query.setString(0,userName);       //这是什么意思？
         List<UserEntity> member = query.list();
-        return member.get(0);
+        if(member.isEmpty())return null;
+        else return member.get(0);
     }
 
     /**

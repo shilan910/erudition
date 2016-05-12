@@ -48,16 +48,16 @@
                     </div>
                 </div>
 
-                <div class="codes-group">
-                    <div class="codes-input">
-                        <span>验证码</span>
-                        <div class="clearfix"></div>
-                        <input type="text" name="codenum" placeholder="验证码"/>
-                        <img src="code.html" alt="">
-                        <%--<img src="http://img.mukewang.com/545308540001678401500040.jpg" alt="">--%>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
+                <%--<div class="codes-group">--%>
+                    <%--<div class="codes-input">--%>
+                        <%--<span>验证码</span>--%>
+                        <%--<div class="clearfix"></div>--%>
+                        <%--<input id="imgObj" type="text" name="codenum" placeholder="验证码"/>--%>
+                        <%--<img src="code.html" alt="">--%>
+                        <%--&lt;%&ndash;<img src="http://img.mukewang.com/545308540001678401500040.jpg" alt="">&ndash;%&gt;--%>
+                        <%--<div class="clearfix"></div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
                 <div class="smbutton-group">
                     <div class="smbutton-input">
@@ -66,7 +66,7 @@
                             <span>记住密码</span>
                         </div>
                         <div class="forget">
-                            <a href="${rootPath}/user/changetologin">登录</a>
+                            <a href="${rootPath}/index">登录</a>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -103,6 +103,26 @@
     $("input[type='text']").blur(function(){
         toColor($(this),grey2,false);
     })
+
+
+    //用来更换图片
+    function changeImg() {
+        var imgSrc = $("#imgObj");
+        var src = imgSrc.attr("src");
+        imgSrc.attr("src", chgUrl(src));
+    }
+    //时间戳
+    //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
+    function chgUrl(url) {
+        var timestamp = (new Date()).valueOf();
+        url = url.substring(0, 17);
+        if ((url.indexOf("&") >= 0)) {
+            url = url + "×tamp=" + timestamp;
+        } else {
+            url = url + "?timestamp=" + timestamp;
+        }
+        return url;
+    }
 </script>
 </body>
 </html>

@@ -36,34 +36,43 @@ public class UserController {
                         String password, String codenum,HttpSession session) {
         int status = 0;
         System.out.println("1111111111111111111111" + username + "  " + password);
-        String message = new String();
+        String usernmaemessage = new String();
+        String passwordmessage = new String();
+        String codemessage = new String();
 
         if (username.isEmpty()) {
-            message = "请输入用户名";
+            usernmaemessage = "请输入用户名";
         } else {
             UserEntity user = userDao.getByName(username);            //暴露出来的接口
-            if (password.isEmpty()) {                //前台直接进行交互，，name="password",,,,
-                message = "请输入密码";
+            if(user==null){
+                usernmaemessage = "不存在的用户！";
+            }
+            else if (password.isEmpty()) {                //前台直接进行交互，，name="password",,,,
+                passwordmessage = "请输入密码";
             } else if (!user.getPassword().equals(password)) {
-                message = "密码错误";
+                passwordmessage = "密码错误";
             }
             else if(!codenum.equalsIgnoreCase(session.getAttribute("code").toString())){
-                message = "验证码错误";
+                codemessage = "验证码错误";
             }
             else {
                 status = 1;
-                message = "用户登陆成功";
+                usernmaemessage = "用户登陆成功";
                 session.setAttribute("loginUser", user);
-                System.out.println("message1 : " + message);
+                System.out.println("message1 : " + usernmaemessage);
                 request.getSession().setAttribute("username", username);      //session中设置值
                 //session.setAttribute("userid",user.getId());
                 // redirectAttributes.addAttribute("loginMsg",message);
 
-                System.out.println("message : " + message);
+                System.out.println("message : " + usernmaemessage);
                 return "index";
             }
         }
-        System.out.println("message : " + message);
+        session.setAttribute("usernmaemessage",usernmaemessage);
+        session.setAttribute("passwordmessage",passwordmessage);
+        session.setAttribute("codemessage",codemessage);
+
+        System.out.println("usernmaemessage : " + usernmaemessage);
         session.setAttribute("val", "nihao");
         return "redirect:/login";
     }
