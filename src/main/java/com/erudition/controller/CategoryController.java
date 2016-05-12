@@ -57,4 +57,16 @@ public class CategoryController {
         System.out.println("Controller : thirdCates");
         return "redirect:/index";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/getChildrenCategory/{cid}" , method = RequestMethod.GET)
+    public List<CategoryEntity> getChildrenCategory(Model model,@PathVariable ("cid") int cid){
+
+        List<CategoryEntity> children = categoryDao.getSecondCategoryByFirst(cid);
+        if (children != null){
+            return children;
+        }else{
+            return categoryDao.getThirdCategoryByFS(cid);
+        }
+    }
 }

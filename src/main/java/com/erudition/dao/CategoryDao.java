@@ -65,4 +65,11 @@ public class CategoryDao extends BaseDao {
         query.setInteger(1,secondId);
         return query.list();
     }
+
+    public List<CategoryEntity> getThirdCategoryByFS(int secondId){
+        String hql = "from CategoryEntity as cate where category2Id=? and category3Id=0";
+        Query query = query(hql);
+        query.setInteger(0,secondId);
+        return query.list();
+    }
 }
