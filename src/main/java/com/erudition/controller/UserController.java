@@ -73,6 +73,9 @@ public class UserController {
         session.setAttribute("codemessage",codemessage);
 
         System.out.println("usernmaemessage : " + usernmaemessage);
+        System.out.println("passwordmessage : " + passwordmessage);
+        System.out.println("codemessage : " + codemessage);
+
         session.setAttribute("val", "nihao");
         return "redirect:/login";
     }
@@ -80,23 +83,39 @@ public class UserController {
 
     @RequestMapping(value = "/regist", method = RequestMethod.POST)
     public String regist(HttpSession httpSession, String username, String password, String password2) {
-        String message = new String();
+        String reusernmaemessage = new String();
+        String repasswordmessage = new String();
+        String recodemessage = new String();
 
         if (username.isEmpty()) {
-            message = "请输入用户名";
+            reusernmaemessage = "请输入用户名";
         } else if (password.isEmpty()) {
-            message = "请输入密码";
+            repasswordmessage = "请输入密码";
         } else {
             if (!password.equals(password2)) {
-                message = "请保持密码和确认密码一致！";
+                recodemessage = "请保持密码和确认密码一致！";
             } else {
                 userDao.save(username, password);
-                message = "注册成功！";
+
                 return "index";
             }
         }
-        System.out.println("message:" + message);
-        return "redirect:/regist";
+        httpSession.setAttribute("reusernmaemessage",reusernmaemessage);
+        httpSession.setAttribute("repasswordmessage",repasswordmessage);
+        httpSession.setAttribute("recodemessage",recodemessage);
+        httpSession.setAttribute("username",username);
+
+        System.out.println("reusernmaemessage:" + reusernmaemessage);
+        System.out.println("repasswordmessage:" + repasswordmessage);
+        System.out.println("recodemessage:" + recodemessage);
+
+        return "regist";
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession httpSession){
+        httpSession.invalidate();
+        return "redirect:/index";
     }
 
 }

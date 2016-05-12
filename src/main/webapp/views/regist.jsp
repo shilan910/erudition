@@ -28,7 +28,7 @@
                         <span>用户名:</span>
                         <input type="text"  placeholder="请输入用户名" name="username"/><i class="fa fa-user fa-2x"></i>
 
-                        <div class="tip">请输入6-16位用户名，区分大小写，不能使用空格</div>
+                        <div class="tip">${reusernmaemessage}</div>
                     </div>
                 </div>
                 
@@ -36,7 +36,7 @@
                     <div class="password-input">
                         <span>密码:</span>
                         <input type="password" placeholder="请输入密码" name="password"/><i class="fa fa-lock fa-2x"></i>
-                        <div class="tip">请输入6-16位密码，区分大小写，不能使用空格</div>
+                        <div class="tip">${repasswordmessage}</div>
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
                     <div class="password-input">
                         <span>确认密码:</span>
                         <input type="password" placeholder="请输入密码" name="password2"/><i class="fa fa-lock fa-2x"></i>
-                        <div class="tip">请输入6-16位密码，区分大小写，不能使用空格</div>
+                        <div class="tip">${recodemessage}</div>
                     </div>
                 </div>
 

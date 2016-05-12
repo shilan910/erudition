@@ -19,6 +19,7 @@ public class UserDao extends BaseDao {
         UserEntity user = new UserEntity();
         user.setUserName(userName);
         user.setPassword(password);
+        user.setAuthority("0");
         save(user);
     }
 
