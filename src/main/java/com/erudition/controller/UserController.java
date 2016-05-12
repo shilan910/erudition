@@ -21,44 +21,101 @@ public class UserController {
     @Qualifier("userDao")
     private UserDao userDao;
 
-    @RequestMapping(value = "/login" , method = RequestMethod.GET)       //这个不知道是干嘛的??
-    public String login(){
-        return "index";
+    @RequestMapping(value = "/changetoregist", method = RequestMethod.GET)
+    public String changeToRegist() {
+        return "regist";
     }
-    @RequestMapping(value = "/login" , method = RequestMethod.POST)           //调用post方法
-    public String login(HttpServletRequest request,String username , String password , HttpSession session){
+
+    @RequestMapping(value = "/changetologin", method = RequestMethod.GET)
+    public String changeToLogin() {
+        return "login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)           //调用post方法
+    public String login(HttpServletRequest request, String username,
+                        String password, String codenum,HttpSession session) {
         int status = 0;
-        System.out.println("1111111111111111111111"+username+"  "+password);
-        String message=new String();
+        System.out.println("1111111111111111111111" + username + "  " + password);
+        String usernmaemessage = new String();
+        String passwordmessage = new String();
+        String codemessage = new String();
 
-        message="nihao";
-
-        if(username.isEmpty()){
-            message = "请输入用户名";
-        }else{
+        if (username.isEmpty()) {
+            usernmaemessage = "请输入用户名";
+        } else {
             UserEntity user = userDao.getByName(username);            //暴露出来的接口
-            if(password.isEmpty()){                //前台直接进行交互，，name="password",,,,
-                message = "请输入密码";
-            }else if(!user.getPassword().equals(password)){
-                message = "密码错误";
-            }else {
+            if(user==null){
+                usernmaemessage = "不存在的用户！";
+            }
+            else if (password.isEmpty()) {                //前台直接进行交互，，name="password",,,,
+                passwordmessage = "请输入密码";
+            } else if (!user.getPassword().equals(password)) {
+                passwordmessage = "密码错误";
+            }
+            else if(!codenum.equalsIgnoreCase(session.getAttribute("code").toString())){
+                codemessage = "验证码错误";
+            }
+            else {
                 status = 1;
-                message = "用户登陆成功";
-                session.setAttribute("loginUser",user);
-                System.out.println("message1 : "+message);
-                request.getSession().setAttribute("username",username);      //session中设置值
+                usernmaemessage = "用户登陆成功";
+                session.setAttribute("loginUser", user);
+                System.out.println("message1 : " + usernmaemessage);
+                request.getSession().setAttribute("username", username);      //session中设置值
                 //session.setAttribute("userid",user.getId());
                 // redirectAttributes.addAttribute("loginMsg",message);
 
-                System.out.println("message : "+message);
-                return "redirect:/index";
+                System.out.println("message : " + usernmaemessage);
+                return "index";
             }
         }
-        System.out.println("message : "+message);
+        session.setAttribute("usernmaemessage",usernmaemessage);
+        session.setAttribute("passwordmessage",passwordmessage);
+        session.setAttribute("codemessage",codemessage);
 
-        session.setAttribute("val","nihao");
-//        return "redirect:/login";
-        return "index";
+        System.out.println("usernmaemessage : " + usernmaemessage);
+        System.out.println("passwordmessage : " + passwordmessage);
+        System.out.println("codemessage : " + codemessage);
+
+        session.setAttribute("val", "nihao");
+        return "redirect:/login";
+    }
+
+
+    @RequestMapping(value = "/regist", method = RequestMethod.POST)
+    public String regist(HttpSession httpSession, String username, String password, String password2) {
+        String reusernmaemessage = new String();
+        String repasswordmessage = new String();
+        String recodemessage = new String();
+
+        if (username.isEmpty()) {
+            reusernmaemessage = "请输入用户名";
+        } else if (password.isEmpty()) {
+            repasswordmessage = "请输入密码";
+        } else {
+            if (!password.equals(password2)) {
+                recodemessage = "请保持密码和确认密码一致！";
+            } else {
+                userDao.save(username, password);
+
+                return "index";
+            }
+        }
+        httpSession.setAttribute("reusernmaemessage",reusernmaemessage);
+        httpSession.setAttribute("repasswordmessage",repasswordmessage);
+        httpSession.setAttribute("recodemessage",recodemessage);
+        httpSession.setAttribute("username",username);
+
+        System.out.println("reusernmaemessage:" + reusernmaemessage);
+        System.out.println("repasswordmessage:" + repasswordmessage);
+        System.out.println("recodemessage:" + recodemessage);
+
+        return "regist";
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession httpSession){
+        httpSession.invalidate();
+        return "redirect:/index";
     }
 
 }

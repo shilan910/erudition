@@ -22,13 +22,13 @@
         <div class="login-header">
         </div>
         <div class="form-all">
-            <form action="${rootPath}/user/login" method="post">      <%--默认为get方法--%>
+            <form action="${rootPath}/user/regist" method="post">      <%--默认为get方法--%>
                 <div class="user-group">
                     <div class="user-input">
                         <span>用户名:</span>
                         <input type="text"  placeholder="请输入用户名" name="username"/><i class="fa fa-user fa-2x"></i>
 
-                        <div class="tip">${usernmaemessage}</div>
+                        <div class="tip">${reusernmaemessage}</div>
                     </div>
                 </div>
                 
@@ -36,22 +36,28 @@
                     <div class="password-input">
                         <span>密码:</span>
                         <input type="password" placeholder="请输入密码" name="password"/><i class="fa fa-lock fa-2x"></i>
-                        <div class="tip">${passwordmessage}</div>
+                        <div class="tip">${repasswordmessage}</div>
                     </div>
                 </div>
 
-                <div class="codes-group">
-                    <div class="codes-input">
-                        <span>验证码</span>
-                        <div class="clearfix"></div>
-                        <input type="text" name="codenum" placeholder="验证码"/>
-                        <img id="imgObj" src="code.html" alt="" >
-                        <a href="#" onclick="changeImg()">换一张</a>
-                        <%--<img src="http://img.mukewang.com/545308540001678401500040.jpg" alt="">--%>
-                        <div class="tip">${codemessage}</div>
-                        <div class="clearfix"></div>
+                <div class="password-group">
+                    <div class="password-input">
+                        <span>确认密码:</span>
+                        <input type="password" placeholder="请输入密码" name="password2"/><i class="fa fa-lock fa-2x"></i>
+                        <div class="tip">${recodemessage}</div>
                     </div>
                 </div>
+
+                <%--<div class="codes-group">--%>
+                    <%--<div class="codes-input">--%>
+                        <%--<span>验证码</span>--%>
+                        <%--<div class="clearfix"></div>--%>
+                        <%--<input id="imgObj" type="text" name="codenum" placeholder="验证码"/>--%>
+                        <%--<img src="code.html" alt="">--%>
+                        <%--&lt;%&ndash;<img src="http://img.mukewang.com/545308540001678401500040.jpg" alt="">&ndash;%&gt;--%>
+                        <%--<div class="clearfix"></div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
                 <div class="smbutton-group">
                     <div class="smbutton-input">
@@ -60,13 +66,13 @@
                             <span>记住密码</span>
                         </div>
                         <div class="forget">
-                            <a href="${rootPath}/views/regist.jsp">注册</a>
+                            <a href="${rootPath}/index">登录</a>
                         </div>
                         <div class="clearfix"></div>
                     </div>
 
                 </div>
-                <button class="btn btn-primary center-block" type="submit">登录</button>
+                <button class="btn btn-primary center-block" type="submit">注册</button>
             </form>
         </div>
         <div class="login-footer"></div>
@@ -97,8 +103,6 @@
     $("input[type='text']").blur(function(){
         toColor($(this),grey2,false);
     })
-
-
 
 
     //用来更换图片

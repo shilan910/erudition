@@ -17,17 +17,19 @@ public class UserDao extends BaseDao {
 
     public void save(String userName , String password ){              //直接保存在数据库中
         UserEntity user = new UserEntity();
-        user.setUsername(userName);
+        user.setUserName(userName);
         user.setPassword(password);
+        user.setAuthority("0");
         save(user);
     }
 
     public UserEntity getByName(String userName){              //返回一个Bean对象>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>得到了一行
-        String hql = "from UserEntity as user where user.username=?";
+        String hql = "from UserEntity as user where user.userName=?";
         Query query = query(hql);
         query.setString(0,userName);       //这是什么意思？
         List<UserEntity> member = query.list();
-        return member.get(0);
+        if(member.isEmpty())return null;
+        else return member.get(0);
     }
 
     /**

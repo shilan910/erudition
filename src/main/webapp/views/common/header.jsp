@@ -18,8 +18,8 @@
         </div><!-- /input-group -->
       </div>
       <div class="col-md-4 button-group">
-        <span class="login"><a href="#" onclick="openLogin()">登录</a></span>
-        <span class="registe"><a href="#" onclick="openRegister()">注册</a></span>
+        <span class="login"><a href="#" onclick="openLogin()">${username}</a></span>
+        <span class="registe"><a href="${rootPath}/user/logout" onclick="openRegister()">退出</a></span>
       </div>
 
 

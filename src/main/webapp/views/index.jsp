@@ -52,7 +52,7 @@ pageEncoding="UTF-8"%>
             <div id="jquery-accordion-menu" class="jquery-accordion-menu white">
                 <div id="user-image">
                     <a href=""><img src="${assetsPath}/images/user.jpg" alt="" class="img-circle"/></a>
-                    <div class="user-name">当前用户</div>
+                    <div class="user-name">${username}</div>
                 </div>
 
                 <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
