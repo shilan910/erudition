@@ -86,7 +86,7 @@ pageEncoding="UTF-8"%>
                     </li>
 
 
-                        <li class="active" ><a href="#"><i class="fa fa-glass"></i>常用目录 </a>
+                        <li class="" ><a href="${rootPath}/filecollect/file"><i class="fa fa-glass"></i>常用目录 </a>
                             <ul class="submenu" >
                                 <c:forEach items="${categories}" var="firstCate">
                                     <li><a href="#">${firstCate.name}</a>
