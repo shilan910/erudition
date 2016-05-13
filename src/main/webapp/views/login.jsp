@@ -45,8 +45,13 @@
                         <span>验证码</span>
                         <div class="clearfix"></div>
                         <input type="text" name="codenum" placeholder="验证码"/>
-                        <img id="imgObj" src="code.html" alt="" >
-                        <a href="#" onclick="changeImg()">换一张</a>
+                        <div class="img">
+                            <img id="imgObj" src="code.html" alt="" >
+                            <div>
+                                <a href="#" onclick="changeImg()">换一张</a>
+                            </div>
+                        </div>
+
                         <%--<img src="http://img.mukewang.com/545308540001678401500040.jpg" alt="">--%>
                         <div class="tip">${codemessage}</div>
                         <div class="clearfix"></div>
@@ -90,11 +95,11 @@
         },400)
     }
     //获得焦点
-    $("input[type='text']").focus(function(){
+    $("input[type='text'],input[type='password']").focus(function(){
         toColor($(this),blue,true);
     })
     //失去焦点
-    $("input[type='text']").blur(function(){
+    $("input[type='text'],input[type='password']").blur(function(){
         toColor($(this),grey2,false);
     })
 
