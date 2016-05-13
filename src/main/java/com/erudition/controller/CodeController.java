@@ -34,6 +34,7 @@ public class CodeController {
             throws IOException {
         //尝试验证码
 
+        System.out.println("getcode!");
         // 定义图像buffer
         BufferedImage buffImg = new BufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB);
@@ -87,7 +88,7 @@ public class CodeController {
         }
         // 将四位数字的验证码保存到Session中。
         HttpSession session = req.getSession();
-        System.out.print(randomCode);
+        System.out.println("randomcode:"+randomCode);
         session.setAttribute("code", randomCode.toString());
 
         // 禁止图像缓存。

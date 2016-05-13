@@ -30,7 +30,7 @@ public class ResourcesController {
     @RequestMapping(value = "/{tid}/{pageNum}" , method = RequestMethod.GET)
     public Page<FilesEntity> getResourcesByPage(Model model,@PathVariable("tid") String ThirdId,@PathVariable ("pageNum") int pageNum){
 
-        Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,20,ThirdId);
+        Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,7,ThirdId);
         model.addAttribute("resources",resources);
         return resources;
     }
