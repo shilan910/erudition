@@ -58,7 +58,7 @@ pageEncoding="UTF-8"%>
                 <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
                 <ul id="demo-list">
 
-                    <li class="active" ><a href="#"><i class="fa fa-home"></i>文件管理</a></li>
+                    <li class="active" ><a href="${rootPath}/admin/filecollect/file"><i class="fa fa-home"></i>文件管理</a></li>
 
                     <li><a href="#"><i class="fa fa-glass"></i>文件上传</a></li>
 
