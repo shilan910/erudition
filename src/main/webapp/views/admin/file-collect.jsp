@@ -105,13 +105,9 @@
         <br/>
         <div  class="alldom">
             <ul id="divall">
-                <li><input type="text" class="changename" value="我的文件夹一"/></li>
-                <li><input type="text" class="changename" value="我的文件夹二"/></li>
-                <li><input type="text" class="changename" value="我的文件夹三"/></li>
-                <li><input type="text" class="changename" value="我的文件夹四"/></li>
-                <li><input type="text" class="changename" value="我的文件夹五"/></li>
-                <li><input type="text" class="changename" value="我的文件夹六"/></li>
-                <li><input type="text" class="changename" value="我的文件夹七"/></li>
+                <c:forEach var="cate" items="${adminCates}">
+                    <li ondblclick="openFile(${cate.id})"><input type="text" class="changename" value="${cate.categoryName}"/></li>
+                </c:forEach>
             </ul>
         </div>
 
@@ -134,6 +130,14 @@
 </div>
 
 
+
+
+<script>
+    function openFile(cateId){
+        window.location.href = "/erudition/admin/filecollect/categoey/"+cateId;
+    }
+
+</script>
 
 
 
