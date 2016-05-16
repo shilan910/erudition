@@ -35,7 +35,7 @@ public class UserController {
     public String login(HttpServletRequest request, String username,
                         String password, String codenum,HttpSession session) {
         int status = 0;
-        System.out.println("1111111111111111111111" + username + "  " + password);
+        System.out.println("userController:\nusername:" + username + " password: " + password);
         String usernmaemessage = new String();
         String passwordmessage = new String();
         String codemessage = new String();

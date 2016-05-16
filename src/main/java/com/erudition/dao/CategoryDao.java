@@ -72,4 +72,36 @@ public class CategoryDao extends BaseDao {
         query.setInteger(0,secondId);
         return query.list();
     }
+
+
+    /**
+     * 添加目录
+     * @param parentCateId 父节点的id
+     * @param newCateName 新创建目录的名称
+     */
+    public void addCategory(int parentCateId , String newCateName){
+
+        CategoryEntity newCategory = new CategoryEntity();
+
+        if(parentCateId == 0){ //新创建的目录为一级目录
+            newCategory.setCategory1Id(0);
+            newCategory.setCategoryName(newCateName);
+        }else {
+
+            CategoryEntity parentCate = getById(parentCateId);
+            if(parentCate.getCategory1Id() == 0){ //新创建的目录为二级目录
+                newCategory.setCategory1Id(parentCateId);
+                newCategory.setCategory2Id(0);
+                newCategory.setCategoryName(newCateName);
+            }else{
+                newCategory.setCategory1Id(parentCate.getCategory1Id());
+                newCategory.setCategory2Id(parentCateId);
+                newCategory.setCategory3Id(0);
+                newCategory.setCategoryName(newCateName);
+            }
+        }
+
+    }
+
+
 }
