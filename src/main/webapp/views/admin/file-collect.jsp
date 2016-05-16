@@ -112,7 +112,7 @@
             <ul id="divall">
                 <c:if test="${cateLayer!=3}">
                 <c:forEach var="cate" items="${adminCates}">
-                    <li ondblclick="openFile(${cate.id})">
+                    <li ondblclick="openFile(${cate.id})" data-id=${cate.id}>
                         <form action="${rootPath}/admin/filecollect/changename" method="post">
                             <input type="text" name="newname" class="changename" value="${cate.categoryName}"/>
                             <input type="hidden" name="cateid" value="${cate.id}"/>

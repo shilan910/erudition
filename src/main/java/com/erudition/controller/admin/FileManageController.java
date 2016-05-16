@@ -40,7 +40,7 @@ public class FileManageController {
     }
 
 
-    @RequestMapping(value = "/categoey/{cateId}" , method = RequestMethod.GET)
+    @RequestMapping(value = "/category/{cateId}" , method = RequestMethod.GET)
     public String getCategory(@PathVariable("cateId") int cateId , Model model){
 
         CategoryEntity category = categoryDao.getById(cateId);
@@ -65,12 +65,20 @@ public class FileManageController {
 
         categoryDao.addCategory(parentCateId,newCateName);
 
-        return "redirect:/categoey/{parentCateId}";
+        return "redirect:/category/{parentCateId}";
     }
 
     @RequestMapping(value = "/changename" , method = RequestMethod.POST)
     public String changeName(String newname,int cateid,int cateLayer){
         categoryDao.updateCateName(newname, cateid);
-        return "redirect:/admin/filecollect/categoey/"+cateLayer;
+        return "redirect:/admin/filecollect/category/"+cateLayer;
+    }
+
+    @RequestMapping(value = "/delete" , method = RequestMethod.POST)
+    public String DeletName(int dfdf){
+//        categoryDao.updateCateName(newname, cateid);
+//        categoryDao.delete();
+        System.out.println(dfdf);   
+        return "redirect:/admin/filecollect/category/";
     }
 }
