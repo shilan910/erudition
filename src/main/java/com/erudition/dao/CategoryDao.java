@@ -100,7 +100,13 @@ public class CategoryDao extends BaseDao {
                 newCategory.setCategoryName(newCateName);
             }
         }
+        save(newCategory);
+    }
 
+    public void updateCateName(String newname,int cateid){
+        String hql = "update CategoryEntity as cate set cate.categoryName='"+newname+"' where id='"+cateid+"'";
+        Query query = query(hql);
+        query.executeUpdate();
     }
 
 
