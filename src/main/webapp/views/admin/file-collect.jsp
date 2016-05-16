@@ -76,7 +76,7 @@
                 <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
                 <ul id="demo-list">
 
-                    <li class="active" ><a href="${rootPath}/admin/filecollect/file"><i class="fa fa-home"></i>文件管理</a></li>
+                    <li class="active" ><a href="${rootPath}/admin/filecollect"><i class="fa fa-home"></i>文件管理</a></li>
 
                     <li><a href="#"><i class="fa fa-glass"></i>文件上传</a></li>
 
@@ -112,7 +112,13 @@
             <ul id="divall">
                 <c:if test="${cateLayer!=3}">
                 <c:forEach var="cate" items="${adminCates}">
-                    <li ondblclick="openFile(${cate.id})"><input type="text" class="changename" value="${cate.categoryName}"/></li>
+                    <li ondblclick="openFile(${cate.id})">
+                        <form action="${rootPath}/admin/filecollect/changename" method="post">
+                            <input type="text" name="newname" class="changename" value="${cate.categoryName}"/>
+                            <input type="hidden" name="cateid" value="${cate.id}"/>
+                            <input type="hidden" name="cateLayer" value="${cateLayer}"/>
+                        </form>
+                    </li>
                 </c:forEach>
                 </c:if>
                 <c:if test="${cateLayer==3}">
