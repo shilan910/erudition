@@ -20,11 +20,12 @@ public class ResourcesDao extends BaseDao{
         return get(FilesEntity.class,id);
     }
 
-    public Page<FilesEntity> getResourcesByPage(int pageNum,int pageSize,String thirdId){
+    public Page<FilesEntity> getResourcesByPage(int pageNum,int pageSize,int thirdId){
         String hql = "from FilesEntity as files where files.categoryId=?";
         Query query = query(hql);
-        query.setString(0,thirdId);
+        query.setInteger(0,thirdId);
         return pageHandler.getPage(pageNum, pageSize,
                 FilesEntity.class, query);
     }
+
 }

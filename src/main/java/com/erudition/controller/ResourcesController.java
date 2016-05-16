@@ -29,9 +29,9 @@ public class ResourcesController {
 
     @ResponseBody
     @RequestMapping(value = "/{tid}/{pageNum}" , method = RequestMethod.GET)
-    public Page<FilesEntity> getResourcesByPage(Model model,@PathVariable("tid") String ThirdId,@PathVariable ("pageNum") int pageNum){
+    public Page<FilesEntity> getResourcesByPage(Model model,@PathVariable("tid") int ThirdId,@PathVariable ("pageNum") int pageNum){
 
-        Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,20,ThirdId);
+        Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,7,ThirdId);
         model.addAttribute("resources",resources);
         return resources;
     }
@@ -62,5 +62,6 @@ public class ResourcesController {
 
         file.setRelationfiles(relationfiles);
         return file;
+
     }
 }
