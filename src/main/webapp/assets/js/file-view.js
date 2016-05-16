@@ -41,6 +41,11 @@ $(document).ready(function(){
         $(this).addClass('bgclocrc').siblings().removeClass('bgclocrc');
         $(this).attr("id",'remove').siblings().attr('id','');
         $( " input[type=text] ").attr("id",'namecc').siblings().attr('id',' ');
+
+        //var curId=$("#remove").attr("data-id");
+        //$.post("/erudition/admin/filecollect/delete",{dfdf:curId});
+
+
         btns.onclick = function(){//js 调用
             alert('确定删除文件夹？');
             setTimeout(
@@ -127,19 +132,23 @@ $(document).ready(function(){
 
     });
     //修改文件名
-    //$(document).on("focus",namehide,function(event){         //>>>>>>>>>>>>>>>>>>>>>>可优化为Jquery对象？
-    //    $(this).css('border','1px solid #3498DB');
-    //    $(this).val('');
-    //})
-    //$(document).on("blur",namehide,function(event){
-    //    alert('确定修改文件名？')
-    //    $(this).css('border','none');
-    //    if( $(this).val() == ""){
-    //        $(this).val('新建文件夹');
-    //    }else{
-    //        // $(this).parent().find('span').text() = $(this).value;
-    //    }
-    //});
+    $(document).on("focus",namehide,function(event){         //>>>>>>>>>>>>>>>>>>>>>>可优化为Jquery对象？
+        $(this).css('border','1px solid #3498DB');
+        $(this).val('');
+    })
+    $(document).on("blur",namehide,function(event){
+
+        $(this).css('border','none');
+        //if( $(this).val() == ""){
+        //    $(this).val('新建文件夹');
+        //}else{
+        //    // $(this).parent().find('span').text() = $(this).value;
+        //}
+    });
+
+    //var popWin= function () {
+    //
+    //}
 
 
 });
