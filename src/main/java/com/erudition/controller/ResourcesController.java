@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class ResourcesController {
 
     @ResponseBody
     @RequestMapping(value = "/{tid}/{pageNum}" , method = RequestMethod.GET)
-    public Page<FilesEntity> getResourcesByPage(Model model,@PathVariable("tid") String ThirdId,@PathVariable ("pageNum") int pageNum){
+    public Page<FilesEntity> getResourcesByPage(Model model,@PathVariable("tid") int ThirdId,@PathVariable ("pageNum") int pageNum){
 
         Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,7,ThirdId);
         model.addAttribute("resources",resources);
@@ -36,7 +35,7 @@ public class ResourcesController {
     }
 
     @RequestMapping(value = "/getRelations/{fileid}" , method = RequestMethod.POST)
-    public String getRelations(HttpSession httpSession,@PathVariable("fileid") int fileId){
+    public String getRelations(Model model,@PathVariable("fileid") int fileId){
 
         List<FilesEntity> relationfiles = new ArrayList<FilesEntity>();
 
@@ -53,7 +52,7 @@ public class ResourcesController {
             }
         }
 
-        httpSession.setAttribute("relationalresources",relationfiles);
+        model.addAttribute("relationalresources", relationfiles);
         return "index";
     }
 }
