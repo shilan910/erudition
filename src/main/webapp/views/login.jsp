@@ -51,7 +51,7 @@
                                 <a href="#" onclick="changeImg()">换一张</a>
                             </div>
                         </div>
-
+                        <div class="clearfix"></div>
                         <%--<img src="http://img.mukewang.com/545308540001678401500040.jpg" alt="">--%>
                         <div class="tip">${codemessage}</div>
                         <div class="clearfix"></div>

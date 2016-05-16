@@ -97,6 +97,11 @@
 
 
     <div class="contents flex-8 file-collect">
+        <div class="catalog">
+            <a href="#">根目录</a>
+            <span>/</span>
+            <a href="#">一级目录</a>
+        </div>
         <div class="button-group" style="">
             <button class="carrynews">创建新文件夹</button>
             <button class="removeall">清空文件夹</button>
