@@ -58,8 +58,6 @@ pageEncoding="UTF-8"%>
                 <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
                 <ul id="demo-list">
 
-                    <%--<li><a href="#"><i class="fa fa-home"></i>主页 </a></li>--%>
-
                     <li class="active" ><a href="#"><i class="fa fa-home"></i>共享目录 </a>
                         <ul class="submenu" id="first-cates">
                             <c:forEach items="${categories}" var="firstCate">
@@ -110,35 +108,6 @@ pageEncoding="UTF-8"%>
                             </ul>
 
                         </li>
-
-
-                    <%--<li><a href="#"><i class="fa fa-cog"></i>服务 </a>--%>
-                        <%--<ul class="submenu">--%>
-                            <%--<li><a href="#">Web Design </a></li>--%>
-                            <%--<li><a href="#">Hosting </a></li>--%>
-                            <%--<li><a href="#">Design </a>--%>
-                                <%--<ul class="submenu">--%>
-                                    <%--<li><a href="#">Graphics </a></li>--%>
-                                    <%--<li><a href="#">Vectors </a></li>--%>
-                                    <%--<li><a href="#">Photoshop </a></li>--%>
-                                    <%--<li><a href="#">Fonts </a></li>--%>
-                                <%--</ul>--%>
-                            <%--</li>--%>
-                            <%--<li><a href="#">Consulting </a></li>--%>
-                        <%--</ul>--%>
-                    <%--</li>--%>
-                    <%--<li><a href="#"><i class="fa fa-home"></i>系统管理 </a></li>--%>
-                    <%--<li><a href="#"><i class="fa fa-suitcase"></i>Portfolio </a>--%>
-                        <%--<ul class="submenu">--%>
-                            <%--<li><a href="#">Web Design </a></li>--%>
-                            <%--<li><a href="#">Graphics </a><span class="jquery-accordion-menu-label">10 </span>--%>
-                            <%--</li>--%>
-                            <%--<li><a href="#">Photoshop </a></li>--%>
-                            <%--<li><a href="#">Programming </a></li>--%>
-                        <%--</ul>--%>
-                    <%--</li>--%>
-                    <%--<li><a href="#"><i class="fa fa-user"></i>About </a></li>--%>
-                    <%--<li><a href="#"><i class="fa fa-envelope"></i>Contact </a></li>--%>
 
                 </ul>
                 <div class="jquery-accordion-menu-footer">
@@ -191,51 +160,51 @@ pageEncoding="UTF-8"%>
 <div class="file-out">
     <div class="pre-btn"></div>
     <!--<div class="clearfix"></div>-->
-    <div class="file-body">
-        <div class="content">
-            <div class="file">
-                <div class="file-thumbnails">
-                    <div class="file-name">SQLdb_ilearn_3</div>
-                    <div class="file-class">文件类型SQL</div>
-                </div>
-                <div class="file-size">
-                    <button class="download">下载文件(4MB)</button>
-                </div>
-            </div>
-        </div>
-        <!--<div class="clearfix"></div>-->
-        <div class="attribute">
-            <div class="a-info">
-                <div class="a-first">
-                    <div class="file-from">所属文件夹:数据库</div>
-                    <div class="a-close">×</div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="file-name">SQLdb_ilearn_3</div>
-                <div class="collected">收藏量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>
-                <div class="a-third">
-                    <div class="file-uptime"><i class="fa fa-clock-o"></i>2013-12-12</div>
-                    <div class="file-people"><i class="fa fa-user"></i>上传人-MR.Z</div>
-                </div>
-            </div>
-            <div class="line"></div>
-            <div class="a-operate">
-                <ul>
-                    <li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;下载</a></li>
-                    <li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>
-                </ul>
-            </div>
-            <div class="line"></div>
-            <div class="a-related">
-                <ul>
-                    <li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>
-                    <c:forEach items="${relationalresources}" var="re">
-                        <li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;${re.title}</a></li>
-                    </c:forEach>
-                    <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>
-                </ul>
-            </div>
-        </div>
+    <div class="file-body" id="file-info">
+        <%--<div class="content">--%>
+            <%--<div class="file">--%>
+                <%--<div class="file-thumbnails">--%>
+                    <%--<div class="file-name">SQLdb_ilearn_3</div>--%>
+                    <%--<div class="file-class">文件类型SQL</div>--%>
+                <%--</div>--%>
+                <%--<div class="file-size">--%>
+                    <%--<button class="download">下载文件(4MB)</button>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+
+        <%--<div class="attribute">--%>
+            <%--<div class="a-info">--%>
+                <%--<div class="a-first">--%>
+                    <%--<div class="file-from">所属文件夹:数据库</div>--%>
+                    <%--<div class="a-close">×</div>--%>
+                    <%--<div class="clearfix"></div>--%>
+                <%--</div>--%>
+                <%--<div class="file-name">SQLdb_ilearn_3</div>--%>
+                <%--<div class="collected">收藏量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>--%>
+                <%--<div class="a-third">--%>
+                    <%--<div class="file-uptime"><i class="fa fa-clock-o"></i>2013-12-12</div>--%>
+                    <%--<div class="file-people"><i class="fa fa-user"></i>上传人-MR.Z</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+            <%--<div class="line"></div>--%>
+            <%--<div class="a-operate">--%>
+                <%--<ul>--%>
+                    <%--<li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;下载</a></li>--%>
+                    <%--<li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>--%>
+                <%--</ul>--%>
+            <%--</div>--%>
+            <%--<div class="line"></div>--%>
+            <%--<div class="a-related">--%>
+                <%--<ul>--%>
+                    <%--<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>--%>
+                    <%--<c:forEach items="${relationalresources}" var="re">--%>
+                        <%--<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;${re.title}</a></li>--%>
+                    <%--</c:forEach>--%>
+                    <%--<li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>--%>
+                <%--</ul>--%>
+            <%--</div>--%>
+        <%--</div>--%>
     </div>
     <div class="next-btn"></div>
     <!--<div class="clearfix"></div>-->
@@ -252,7 +221,7 @@ pageEncoding="UTF-8"%>
                     if(third_cate_id != null){
                         console.log(third_cate_id);
                         var file_list = $("#file-list");
-                        var url = "http://localhost:8080/erudition/resources/"+third_cate_id+"/1";
+                        var url = "/erudition/resources/"+third_cate_id+"/1";
 
                         file_list.empty();
                         var obj0= "<div class='first-floor flex-row'><div class='flex-3'><div>"+
@@ -348,6 +317,7 @@ pageEncoding="UTF-8"%>
     })(jQuery);
 </script>
 
+
 <!--icheck    radio不能正常使用-->
 <script>
     $(document).ready(function(){
@@ -367,18 +337,56 @@ pageEncoding="UTF-8"%>
         $(document).on("click",".body-floor .file-name span",function(event){
             event.stopPropagation();
             $.ajax({
-                url:'${rootPath}/resources/getRelations/1',
-                type:'post',
+                url:'${rootPath}/resources/file/1',
+                type:'get',
                 data:'merName='+'${val}',
                 async : false, //默认为true 异步
                 success:function(data){
+                    loadFileInfo(data.file , data.relationfiles);
                     $(".mask").fadeIn();
                     $(".file-out").fadeIn();
                 },error:function(){
                     alert("error");
                 }
             });
+
         })
+
+        function loadFileInfo(file,relationfiles){
+            var file_body = $("#file-info");
+            file_body.empty();
+            //alert("loadFileInfo ing!");
+
+            var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
+                    + "<div class='file-name'>"+file.title+"</div><div class='file-class'>"
+                    + file.type+"</div></div><div class='file-size'><button class='download'>下载文件("
+                    + file.size+"MB)</button></div></div></div><div class='attribute'>"
+                    + "<div class='a-info'><div class='a-first'><div class='file-from'>所属文件夹:"
+                    + file.categoryName+"</div><div class='a-close'>×</div><div class='clearfix'></div>"
+                    + "</div><div class='file-name'>"+file.title+"</div><div class='a-third'>"
+                    + "<div class='file-uptime'><i class='fa fa-clock-o'></i>"+file.createTime
+                    + "</div><div class='file-people'><i class='fa fa-user'></i>"+file.creater
+                    + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
+                    + "<li><a href='#'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
+                    + "<li><a href='#'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
+                    + "</ul></div><div class='line'></div><div class='a-related'><ul>"
+                    + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>";
+
+            for(var i=0 ; i < relationfiles.length ; i++){
+                var re = relationfiles[i].title;
+                console.log('re= '+re);
+                obj = obj + '<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;'+
+                            relationfiles[i].title+'</a></li>';
+                console.log(obj);
+            }
+
+            obj = obj + "</ul></div></div>";
+
+            file_body.append(obj);
+
+        }
+
+
 
         $(".a-close").on("click",function(event){
             event.stopPropagation();

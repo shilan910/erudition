@@ -2,6 +2,7 @@ package com.erudition.controller;
 
 import com.erudition.bean.FilesEntity;
 import com.erudition.dao.ResourcesDao;
+import com.erudition.entity.File;
 import com.erudition.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,25 +36,31 @@ public class ResourcesController {
         return resources;
     }
 
-    @RequestMapping(value = "/getRelations/{fileid}" , method = RequestMethod.POST)
-    public String getRelations(HttpSession httpSession,@PathVariable("fileid") int fileId){
+    @ResponseBody
+    @RequestMapping(value = "/file/{fileid}" , method = RequestMethod.GET)
+    public File getRelations(HttpSession httpSession,
+                                          @PathVariable("fileid") int fileId,Model model){
+
+        File file = new File();
 
         List<FilesEntity> relationfiles = new ArrayList<FilesEntity>();
 
-        FilesEntity file  = resourcesDao.getById(fileId);
-        String relations = file.getRelations();
-        System.out.println("relations"+relations);
-        if(!relations.isEmpty()){
+        FilesEntity file0  = resourcesDao.getById(fileId);
+        String relations = file0.getRelations();
+
+        file.setFile(file0);
+
+
+        if(relations != null){
             String [] relationsarr = relations.split(",");
             for(String re:relationsarr){
-                if(!re.isEmpty()){
-                    System.out.println("re"+re);
+                if(re != ""){
                     relationfiles.add(resourcesDao.getById(Integer.parseInt(re)));
                 }
             }
         }
 
-        httpSession.setAttribute("relationalresources",relationfiles);
-        return "index";
+        file.setRelationfiles(relationfiles);
+        return file;
     }
 }

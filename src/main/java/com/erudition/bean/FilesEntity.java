@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by sl on 16-5-10.
+ * Created by sl on 16-5-16.
  */
 @Entity
 @Table(name = "eru_files", schema = "", catalog = "db_erudition")
@@ -19,6 +19,9 @@ public class FilesEntity {
     private String relations;
     private String keywords;
     private String type;
+    private Double size;
+    private String thumb;
+    private String categoryName;
 
     @Id
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
@@ -120,6 +123,36 @@ public class FilesEntity {
         this.type = type;
     }
 
+    @Basic
+    @Column(name = "size", nullable = true, insertable = true, updatable = true, precision = 0)
+    public Double getSize() {
+        return size;
+    }
+
+    public void setSize(Double size) {
+        this.size = size;
+    }
+
+    @Basic
+    @Column(name = "thumb", nullable = true, insertable = true, updatable = true, length = 255)
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
+    @Basic
+    @Column(name = "category_name", nullable = true, insertable = true, updatable = true, length = 255)
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -137,6 +170,9 @@ public class FilesEntity {
         if (relations != null ? !relations.equals(that.relations) : that.relations != null) return false;
         if (keywords != null ? !keywords.equals(that.keywords) : that.keywords != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (size != null ? !size.equals(that.size) : that.size != null) return false;
+        if (thumb != null ? !thumb.equals(that.thumb) : that.thumb != null) return false;
+        if (categoryName != null ? !categoryName.equals(that.categoryName) : that.categoryName != null) return false;
 
         return true;
     }
@@ -153,6 +189,9 @@ public class FilesEntity {
         result = 31 * result + (relations != null ? relations.hashCode() : 0);
         result = 31 * result + (keywords != null ? keywords.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (size != null ? size.hashCode() : 0);
+        result = 31 * result + (thumb != null ? thumb.hashCode() : 0);
+        result = 31 * result + (categoryName != null ? categoryName.hashCode() : 0);
         return result;
     }
 }

@@ -1,14 +1,11 @@
 package com.erudition.dao;
 
-import com.erudition.bean.CategoryEntity;
 import com.erudition.bean.FilesEntity;
 import com.erudition.page.Page;
 import com.erudition.page.PageHandler;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * Created by tsj on 16-5-3.
