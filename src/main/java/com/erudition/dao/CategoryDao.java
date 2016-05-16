@@ -81,9 +81,6 @@ public class CategoryDao extends BaseDao {
      */
     public void addCategory(int parentCateId , String newCateName){
 
-        if(parentCateId != 0){
-
-        }
         CategoryEntity newCategory = new CategoryEntity();
 
         if(parentCateId == 0){ //新创建的目录为一级目录

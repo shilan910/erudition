@@ -1,10 +1,7 @@
 package com.erudition.controller;
 
 import com.erudition.bean.CategoryEntity;
-import com.erudition.bean.FilesEntity;
 import com.erudition.dao.CategoryDao;
-import com.erudition.dao.ResourcesDao;
-import com.erudition.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

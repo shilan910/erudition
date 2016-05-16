@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by sl on 16-5-10.
+ * Created by tsj on 16-5-16.
  */
 @Entity
 @Table(name = "eru_files", schema = "", catalog = "db_erudition")
@@ -21,7 +21,7 @@ public class FilesEntity {
     private String type;
 
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -31,7 +31,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "title", nullable = true, insertable = true, updatable = true, length = 255)
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -41,7 +41,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "create_time", nullable = true, insertable = true, updatable = true)
+    @Column(name = "create_time")
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -51,7 +51,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "creater", nullable = true, insertable = true, updatable = true, length = 255)
+    @Column(name = "creater")
     public String getCreater() {
         return creater;
     }
@@ -61,7 +61,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "url", nullable = true, insertable = true, updatable = true, length = 255)
+    @Column(name = "url")
     public String getUrl() {
         return url;
     }
@@ -71,7 +71,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "category_id", nullable = true, insertable = true, updatable = true)
+    @Column(name = "category_id")
     public Integer getCategoryId() {
         return categoryId;
     }
@@ -81,7 +81,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "description", nullable = true, insertable = true, updatable = true, length = 255)
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -91,7 +91,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "relations", nullable = true, insertable = true, updatable = true, length = 255)
+    @Column(name = "relations")
     public String getRelations() {
         return relations;
     }
@@ -101,7 +101,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "keywords", nullable = true, insertable = true, updatable = true, length = 255)
+    @Column(name = "keywords")
     public String getKeywords() {
         return keywords;
     }
@@ -111,7 +111,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "type", nullable = true, insertable = true, updatable = true, length = 255)
+    @Column(name = "type")
     public String getType() {
         return type;
     }

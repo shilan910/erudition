@@ -105,9 +105,35 @@
         <br/>
         <div  class="alldom">
             <ul id="divall">
+                <c:if test="${cateLayer!=3}">
                 <c:forEach var="cate" items="${adminCates}">
                     <li ondblclick="openFile(${cate.id})"><input type="text" class="changename" value="${cate.categoryName}"/></li>
                 </c:forEach>
+                </c:if>
+                <c:if test="${cateLayer==3}">
+                    <div class='first-floor flex-row'>
+                        <div class='flex-3'>
+                            <div>
+                                <input type='checkbox'/><span class='filename'>名称</span>
+                            </div>
+                        </div>
+                        <div class='flex-3'>大小</div>
+                        <div class='flex-3'>创建者</div>
+                        <div class='flex-3'>更新日期</div>
+                    </div>
+                    <div class='line'></div>
+                    <c:forEach var="files" items="${adminCates.list}">
+                        <div class='body-floor flex-row'><div class='flex-3 flex-row'>
+                            <div class='flex-1 checkbox'><input type='checkbox'/></div>
+                            <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
+                            <div class='file-name flex-4'><span><a href='#'>${files.title}</a></span></div></div>
+                            <div class='flex-3 file-size'><span>1.27MB</span></div>
+                            <div class='flex-3 file-creator'>${files.creater}</div>
+                            <div class='flex-3 file-time'>${files.createTime}</div>
+                        </div>
+                        <div class='line'></div>
+                    </c:forEach>
+                </c:if>
             </ul>
         </div>
 
