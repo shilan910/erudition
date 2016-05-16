@@ -62,4 +62,18 @@ public class CategoryControllerTest {
                 .andDo(print());
     }
 
+    @Test
+    public void testTest(){
+        String ss="2,3,4,5";
+        String[] s = ss.split(",");
+        for(String i : s){
+            if(i != ""){
+                System.out.println("si: "+i);
+
+            }
+        }
+    }
+
+
+
 }
