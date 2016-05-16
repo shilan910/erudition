@@ -171,7 +171,7 @@
 
 <script>
     function openFile(cateId){
-        window.location.href = "/erudition/admin/filecollect/categoey/"+cateId;
+        window.location.href = "/erudition/admin/filecollect/category/"+cateId;
     }
 
 </script>
