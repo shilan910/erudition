@@ -57,15 +57,18 @@ public class FileManageController {
 
         if(category.getCategory1Id() == 0){ //一级目录
             model.addAttribute("adminCates",categoryDao.getSecondCategoryByFirst(cateId));
+            httpSession.setAttribute("cate1name",category.getCategoryName());
             model.addAttribute("cateLayer","1");
             httpSession.setAttribute("cate1",cateId);
         }else if(category.getCategory2Id() == 0){ //二级目录
             model.addAttribute("adminCates",categoryDao.getThirdCategoryByFS(cateId));
+            httpSession.setAttribute("cate2name",category.getCategoryName());
             model.addAttribute("cateLayer","2");
             httpSession.setAttribute("cate2",cateId);
         }else { //三级目录
             model.addAttribute("cateLayer","3");
             model.addAttribute("adminCates",resourcesDao.getResourcesByPage(1,7,cateId));
+            httpSession.setAttribute("cate3name",category.getCategoryName());
             httpSession.setAttribute("cate3",cateId);
         }
 
@@ -107,7 +110,8 @@ public class FileManageController {
             System.out.println(f.getTitle());
         }
         model.addAttribute("searchresult",files);
-        if(user.getAuthority().equals("1")) return "admin/file_result";
+        if(user.getAuthority().equals("1"))
+            return "admin/file_result";
         else return "result";
     }
 

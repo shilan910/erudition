@@ -102,26 +102,26 @@
             <a href="${rootPath}/admin/filecollect">根目录</a>
             <c:if test="${cateLayer==1}">
                 <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+                <a href="${rootPath}/admin/filecollect/category/${cate1}">${cate1name}</a>
             </c:if>
             <c:if test="${cateLayer==2}">
             <span>/</span>
-            <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+            <a href="${rootPath}/admin/filecollect/category/${cate1}">${cate1name}</a>
             <span>/</span>
-            <a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>
+            <a href="${rootPath}/admin/filecollect/category/${cate2}">${cate2name}</a>
             </c:if>
             <c:if test="${cateLayer==3}">
                 <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+                <a href="${rootPath}/admin/filecollect/category/${cate1}">${cate1name}</a>
                 <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>
+                <a href="${rootPath}/admin/filecollect/category/${cate2}">${cate2name}</a>
                 <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate3}">三级目录</a>
+                <a href="${rootPath}/admin/filecollect/category/${cate3}">${cate3name}</a>
             </c:if>
         </div>
         <div class="button-group" style="">
             <button class="carrynews">创建新文件夹</button>
-            <button class="removeall">清空文件夹</button>
+            <%--<button class="removeall">清空文件夹</button>--%>
             <button class="remove" id="removebutton">删除文件夹</button>
         </div>
         <br/>
