@@ -42,12 +42,14 @@ $(document).ready(function(){
         $(this).attr("id",'remove').siblings().attr('id','');
         $( " input[type=text] ").attr("id",'namecc').siblings().attr('id',' ');
 
-        //var curId=$("#remove").attr("data-id");
-        //$.post("/erudition/admin/filecollect/delete",{dfdf:curId});
+
 
 
         btns.onclick = function(){//js 调用
             alert('确定删除文件夹？');
+
+            var curId=$("#remove").attr("data-id");
+            $.post("/erudition/admin/filecollect/delete",{cateid:curId});
             setTimeout(
                 function(){
                     if($bgcolor.hasClass('bgclocrc'))

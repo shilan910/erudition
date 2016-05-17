@@ -65,7 +65,7 @@ public class FileManageController {
 
         categoryDao.addCategory(parentCateId,newCateName);
 
-        return "redirect:/category/{parentCateId}";
+        return "redirect:/admin/filecollect/category/"+parentCateId;
     }
 
     @RequestMapping(value = "/changename" , method = RequestMethod.POST)
@@ -75,10 +75,12 @@ public class FileManageController {
     }
 
     @RequestMapping(value = "/delete" , method = RequestMethod.POST)
-    public String DeletName(int dfdf){
+    public String DeletName(int cateid){
 //        categoryDao.updateCateName(newname, cateid);
-//        categoryDao.delete();
-        System.out.println(dfdf);   
-        return "redirect:/admin/filecollect/category/";
+        CategoryEntity cate = new CategoryEntity();
+        cate.setId(cateid);
+        categoryDao.delete(cate);
+        System.out.println(cateid);
+        return "redirect:/admin/filecollect/category/"+cateid;
     }
 }
