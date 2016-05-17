@@ -18,11 +18,12 @@ $(document).ready(function(){
     $removenews.hide();
     //新建,,通过
     $carry.on('click' , function(){
-        alert('确定新建文件夹？')
-        setTimeout(
-            function(){
-                $parent.append("<li><input type='text' \class='changename'\ value='新建文件夹'/></li>");
-            },500);
+        popwin();
+        //alert('确定新建文件夹？')
+        //setTimeout(
+        //    function(){
+        //        $parent.append("<li><input type='text' \class='changename'\ value='新建文件夹'/></li>");
+        //    },500);
     });
     //清空,,通过
     $removeall.on('click' , function(){
@@ -148,9 +149,54 @@ $(document).ready(function(){
         //}
     });
 
-    //var popWin= function () {
-    //
-    //}
+    /////////////////////////////////////////////!!!!!!
+    //////一定要封装成一个插件！！！！popwin
+    /////////////////////////////////////////////////
+    //调用弹窗方法
+    function popwin(){
+        var html=template('popwin-template');
+        $('body').prepend(html);
+        //开始动画
+        $('.mask').fadeIn(300);
+        $('.popwin').addClass("bounceIn animated");
+    }
+    //隐藏关闭
+    $(document).on("click",".popwin .popclose",function(event){
+        event.stopPropagation();
+
+        $('.popwin').addClass("bounceOut animated");
+        $(".mask").fadeOut(500);
+        $(".popwin").one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+            $(".mask").remove();
+            $(this).remove();
+        });
+    })
+    //取消
+    $(document).on("click",".popwin .cancel",function(event){
+        event.stopPropagation();
+
+        $('.popwin').addClass("bounceOut animated");
+        $(".mask").fadeOut(500);
+        $(".popwin").one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+            $(".mask").remove();
+            $(this).remove();
+        });
+    })
+    //确定
+    $(document).on("click",".popwin .confirm",function(event){
+        event.stopPropagation();
+
+        $('.popwin').addClass("bounceOut animated");
+        $(".mask").fadeOut(500);
+        $(".popwin").one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+            $(".mask").remove();
+            $(this).remove();
+            setTimeout(
+                function(){
+                    $parent.append("<li><input type='text' \class='changename'\ value='新建文件夹'/></li>");
+                },300);
+        });
+    })
 
 
 });

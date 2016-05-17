@@ -81,7 +81,6 @@
 
 
 <script>
-
     var blue="#3498DB";
     var grey2="#bdc3c7";
     var toColor=function(obj,color,status){
