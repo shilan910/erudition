@@ -258,12 +258,18 @@
 
         });
     });
+
+    $(function(){
+        $(".carrynews").fadeIn();
+    })
 </script>
 
 
 <%--这里极度需要重构！！！！！！--%>
 <!--弹出窗模板模板-->
 <script id="popwin-template" type="text/html" charset="utf-8">
+
+
     <div class="mask"></div>
     <div class="popwin">
         <div class="header">
@@ -271,19 +277,34 @@
             <div class="close popclose">×</div>
         </div>
         <div class="body">
+            <form action="${rootPath}/admin/filecollect/newcate" method="post">
             <div class="input">
                 <div class="input-primary">
-                    <form action="">
                         <label>新建文件名:</label>
-                        <input type="text" placeholder="文件名..." />
-                    </form>
+                        <input type="text" name="catename" placeholder="文件名..." />
+                        <c:if test="${cateLayer==0}">
+                            <input type="hidden" name="cate1" value="0"/>
+                            <input type="hidden" name="cate2" value="-1"/>
+                            <input type="hidden" name="cate3" value="-1"/>
+                        </c:if>
+                        <c:if test="${cateLayer==1}">
+                            <input type="hidden" name="cate1" value="${cate1}"/>
+                            <input type="hidden" name="cate2" value="0"/>
+                            <input type="hidden" name="cate3" value="-1"/>
+                        </c:if>
+                        <c:if test="${cateLayer==2}">
+                            <input type="hidden" name="cate1" value="${cate1}"/>
+                            <input type="hidden" name="cate2" value="${cate2}"/>
+                            <input type="hidden" name="cate3" value="0"/>
+                        </c:if>
                 </div>
             </div>
             <div class="button-group">
                 <button class="cancel pull-right">取消</button>
-                <button class="confirm pull-right">确定</button>
+                <input type="submit" class="confirm pull-right" value="确定"/>
                 <div class="clearfix"></div>
             </div>
+            </form>
         </div>
     </div>
 </script>

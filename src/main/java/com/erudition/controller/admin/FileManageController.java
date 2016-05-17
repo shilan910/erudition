@@ -110,4 +110,28 @@ public class FileManageController {
         if(user.getAuthority().equals("1")) return "admin/file_result";
         else return "result";
     }
+
+    @RequestMapping(value = "/newcate" , method = RequestMethod.POST)
+    public String newcate(String catename,int cate1,int cate2,int cate3){
+        CategoryEntity categoryEntity = new CategoryEntity();
+        String path = new String();
+        if(cate1==0){
+            categoryEntity.setCategory1Id(0);
+            path = "redirect:/admin/filecollect";
+        }
+        if(cate2==0){
+            categoryEntity.setCategory1Id(cate1);
+            categoryEntity.setCategory2Id(0);
+            path = "redirect:/admin/filecollect/category/"+cate1;
+        }
+        if(cate3==0){
+            categoryEntity.setCategory1Id(cate1);
+            categoryEntity.setCategory2Id(cate2);
+            categoryEntity.setCategory3Id(0);
+            path = "redirect:/admin/filecollect/category/"+cate2;
+        }
+        categoryEntity.setCategoryName(catename);
+        categoryDao.save(categoryEntity);
+        return path;
+    }
 }
