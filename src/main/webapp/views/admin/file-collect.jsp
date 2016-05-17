@@ -98,9 +98,25 @@
 
     <div class="contents flex-8 file-collect">
         <div class="catalog">
-            <a href="#">根目录</a>
+            <a href="${rootPath}/admin/filecollect">根目录</a>
+            <c:if test="${cateLayer==1}">
+                <span>/</span>
+                <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+            </c:if>
+            <c:if test="${cateLayer==2}">
             <span>/</span>
-            <a href="#">一级目录</a>
+            <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+            <span>/</span>
+            <a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>
+            </c:if>
+            <c:if test="${cateLayer==3}">
+                <span>/</span>
+                <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+                <span>/</span>
+                <a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>
+                <span>/</span>
+                <a href="${rootPath}/admin/filecollect/category/${cate3}">三级目录</a>
+            </c:if>
         </div>
         <div class="button-group" style="">
             <button class="carrynews">创建新文件夹</button>
