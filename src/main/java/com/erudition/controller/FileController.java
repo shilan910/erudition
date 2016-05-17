@@ -37,7 +37,7 @@ public class FileController {
 
     @RequestMapping(value = "/upload" , method = RequestMethod.GET)
     public String  upload(){
-        return "file/upload";
+        return "admin/upload";
     }
 
     @RequestMapping(value = "/upload" , method = RequestMethod.POST)
