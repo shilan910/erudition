@@ -45,6 +45,7 @@ public class FileManageController {
 
 
         model.addAttribute("adminCates",categoryDao.getFirstCategory());
+        model.addAttribute("cateLayer",0);
         return "admin/file-collect";    //此处填jsp页面
     }
 
@@ -83,7 +84,8 @@ public class FileManageController {
     @RequestMapping(value = "/changename" , method = RequestMethod.POST)
     public String changeName(String newname,int cateid,int parentcateid){
         categoryDao.updateCateName(newname, cateid);
-        return "redirect:/admin/filecollect/category/"+parentcateid;
+        if(parentcateid==0)return "redirect:/admin/filecollect";
+        else return "redirect:/admin/filecollect/category/"+parentcateid;
     }
 
     @RequestMapping(value = "/delete" , method = RequestMethod.POST)
