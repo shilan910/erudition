@@ -401,7 +401,7 @@ pageEncoding="UTF-8"%>
                     + "<div class='file-uptime'><i class='fa fa-clock-o'></i>"+file.createTime
                     + "</div><div class='file-people'><i class='fa fa-user'></i>"+file.creater
                     + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
-                    + "<li><a href='#'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
+                    + "<li><a href='/erudition/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
                     + "<li><a href='#'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
                     + "</ul></div><div class='line'></div><div class='a-related'><ul>"
                     + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>";

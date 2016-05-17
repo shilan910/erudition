@@ -105,7 +105,8 @@ public class FileManageController {
             System.out.println(f.getTitle());
         }
         model.addAttribute("searchresult",files);
-        if(user.getAuthority().equals("1")) return "admin/file_result";
+        if(user.getAuthority().equals("1"))
+            return "admin/file_result";
         else return "result";
     }
 }

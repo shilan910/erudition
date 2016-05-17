@@ -96,75 +96,110 @@
     </div>
 
 
-    <div class="contents flex-8 file-collect">
-        <div class="catalog">
-            <a href="${rootPath}/admin/filecollect">根目录</a>
-            <c:if test="${cateLayer==1}">
-                <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
-            </c:if>
-            <c:if test="${cateLayer==2}">
-            <span>/</span>
-            <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
-            <span>/</span>
-            <a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>
-            </c:if>
-            <c:if test="${cateLayer==3}">
-                <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
-                <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>
-                <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate3}">三级目录</a>
-            </c:if>
-        </div>
-        <div class="button-group" style="">
-            <%--<button class="carrynews">创建新文件夹</button>--%>
-            <%--<button class="removeall">清空文件夹</button>--%>
-            <%--<button class="remove" id="removebutton">删除文件夹</button>--%>
-        </div>
-        <br/>
-        <div  class="alldom">
-            <ul id="divall">
-                    <div class='first-floor flex-row'>
-                        <div class='flex-3'>
-                            <div>
-                                <input type='checkbox'/><span class='filename'>名称</span>
-                            </div>
-                        </div>
-                        <div class='flex-3'>大小</div>
-                        <div class='flex-3'>创建者</div>
-                        <div class='flex-3'>更新日期</div>
+    <%--<div class="contents flex-8 file-collect">--%>
+        <%--<div class="catalog">--%>
+            <%--<a href="${rootPath}/admin/filecollect">根目录</a>--%>
+            <%--<c:if test="${cateLayer==1}">--%>
+                <%--<span>/</span>--%>
+                <%--<a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>--%>
+            <%--</c:if>--%>
+            <%--<c:if test="${cateLayer==2}">--%>
+            <%--<span>/</span>--%>
+            <%--<a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>--%>
+            <%--<span>/</span>--%>
+            <%--<a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>--%>
+            <%--</c:if>--%>
+            <%--<c:if test="${cateLayer==3}">--%>
+                <%--<span>/</span>--%>
+                <%--<a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>--%>
+                <%--<span>/</span>--%>
+                <%--<a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>--%>
+                <%--<span>/</span>--%>
+                <%--<a href="${rootPath}/admin/filecollect/category/${cate3}">三级目录</a>--%>
+            <%--</c:if>--%>
+        <%--</div>--%>
+        <%--<br/>--%>
+        <%--<div  class="alldom">--%>
+            <%--<ul id="divall">--%>
+                <%--<div class="file-body" id="file-list">--%>
+                    <%--<div class='first-floor flex-row'>--%>
+                        <%--<div class='flex-3'>--%>
+                            <%--<div>--%>
+                                <%--<input type='checkbox'/><span class='filename'>名称</span>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class='flex-3'>大小</div>--%>
+                        <%--<div class='flex-3'>创建者</div>--%>
+                        <%--<div class='flex-3'>更新日期</div>--%>
+                    <%--</div>--%>
+                    <%--<div class='line'></div>--%>
+                    <%--<c:forEach var="files" items="${searchresult}">--%>
+                        <%--<div class="body-floor flex-row">--%>
+                            <%--<div class="flex-3 flex-row">--%>
+                                <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
+                                <%--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>--%>
+                                <%--<div class="file-name flex-4"><span><a href="#">${files.title}</a></span></div>--%>
+                            <%--</div>--%>
+                            <%--<div class='flex-3 file-size'><span>1.27MB</span></div>--%>
+                            <%--<div class='flex-3 file-creator'>${files.creater}</div>--%>
+                            <%--<div class='flex-3 file-time'>${files.createTime}</div>--%>
+                        <%--</div>--%>
+                        <%--<div class='line'></div>--%>
+                    <%--</c:forEach>--%>
+                <%--</div>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
+
+        <%--<div style=" clear:both;"></div>--%>
+
+        <%--<div class="menu-zdy" id="menu">--%>
+
+            <%--<div class="menu-one">--%>
+                <%--<a href="#nogo" id="changename">修改文件夹名称</a>--%>
+            <%--</div>--%>
+
+            <%--<div class="menu-two">--%>
+                <%--<a href="#nogo" id="removethispc">删除此文件</a>--%>
+            <%--</div>--%>
+
+        <%--</div>--%>
+    <%--</div>--%>
+
+
+
+    <div class="contents flex-8">
+        <div class="header-all">
+            <div class="header flex-row">
+                <div class="flex-7 path">
+                    根目录
+                </div>
+                <div class="flex-3 search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="该目录下搜索...">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                              </span>
                     </div>
-                    <div class='line'></div>
-                    <c:forEach var="files" items="${searchresult}">
-                        <div class='body-floor flex-row'><div class='flex-3 flex-row'>
-                            <div class='flex-1 checkbox'><input type='checkbox'/></div>
-                            <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
-                            <div class='file-name flex-4'><span><a href='#'>${files.title}</a></span></div></div>
-                            <div class='flex-3 file-size'><span>1.27MB</span></div>
-                            <div class='flex-3 file-creator'>${files.creater}</div>
-                            <div class='flex-3 file-time'>${files.createTime}</div>
+                </div>
+            </div>
+            <div class="file-body" id="file-list">
+                <div class="first-floor flex-row">
+                    <div class="flex-3">
+                        <div>
+                            <input type="checkbox"/>
+                            <span class="filename">名称</span>
                         </div>
-                        <div class='line'></div>
-                    </c:forEach>
-            </ul>
-        </div>
+                    </div>
+                    <div class="flex-3">大小</div>
+                    <div class="flex-3">创建者</div>
+                    <div class="flex-3">更新日期</div>
+                </div>
+                <div class="line"></div>
 
-        <div style=" clear:both;"></div>
-
-        <div class="menu-zdy" id="menu">
-
-            <div class="menu-one">
-                <a href="#nogo" id="changename">修改文件夹名称</a>
             </div>
-
-            <div class="menu-two">
-                <a href="#nogo" id="removethispc">删除此文件</a>
-            </div>
-
         </div>
     </div>
+
 
     <!--<div class="clearfix"></div>-->
 </div>
