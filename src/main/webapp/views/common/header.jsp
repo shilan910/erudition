@@ -11,10 +11,12 @@
       </div>
       <div class="col-md-4 search">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="全站搜索...">
+          <form action="${rootPath}/admin/filecollect/search" method="post">
+          <input type="text" name="key" class="form-control" placeholder="全站搜索...">
                               <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">搜索</button>
+                                <input type="submit" class="btn btn-default" type="button" value="搜索"/>
                               </span>
+          </form>
         </div><!-- /input-group -->
       </div>
       <div class="col-md-4 button-group">
