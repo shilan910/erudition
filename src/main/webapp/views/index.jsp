@@ -335,7 +335,8 @@ pageEncoding="UTF-8"%>
 <script>
     $(function(){
         $(document).on("click",".body-floor .file-name span",function(event){
-            var file_id = this.attribute("id");
+            var file_id =  $(this).attr("id");
+            //alert(file_id);
             event.stopPropagation();
             $.ajax({
                 url:'${rootPath}/resources/file/'+file_id,
@@ -352,6 +353,38 @@ pageEncoding="UTF-8"%>
             });
 
         })
+
+
+
+
+
+        $(function(){
+            $(document).on("click",".a-related ul li",function(event){
+                var file_id =  $(this).attr("id");
+                //alert(file_id);
+                event.stopPropagation();
+                $.ajax({
+                    url:'${rootPath}/resources/file/'+file_id,
+                    type:'get',
+                    data:'merName='+'${val}',
+                    async : false, //默认为true 异步
+                    success:function(data){
+                        loadFileInfo(data.file , data.relationfiles);
+                        $(".mask").fadeIn();
+                        $(".file-out").fadeIn();
+                    },error:function(){
+                        alert("error");
+                    }
+                });
+
+            })
+        })
+
+
+
+
+
+
 
         function loadFileInfo(file,relationfiles){
             var file_body = $("#file-info");
@@ -376,8 +409,8 @@ pageEncoding="UTF-8"%>
             for(var i=0 ; i < relationfiles.length ; i++){
                 var re = relationfiles[i].title;
                 console.log('re= '+re);
-                obj = obj + '<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;'+
-                            relationfiles[i].title+'</a></li>';
+                obj = obj + "<li id='"+relationfiles[i].id+"'><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;"+
+                            relationfiles[i].title+"</a></li>";
                 console.log(obj);
             }
 
