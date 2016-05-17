@@ -18,6 +18,7 @@
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="${assetsPath}/js/jquery-accordion-menu.js"></script>
 <script src="${assetsPath}/js/icheck.js"></script>
+<script src="${assetsPath}/js/template.js"></script>
 
 
 <style type="text/css">
@@ -257,6 +258,34 @@
 
         });
     });
+</script>
+
+
+<%--这里极度需要重构！！！！！！--%>
+<!--弹出窗模板模板-->
+<script id="popwin-template" type="text/html" charset="utf-8">
+    <div class="mask"></div>
+    <div class="popwin">
+        <div class="header">
+            <div class="title">信息</div>
+            <div class="close popclose">×</div>
+        </div>
+        <div class="body">
+            <div class="input">
+                <div class="input-primary">
+                    <form action="">
+                        <label>新建文件名:</label>
+                        <input type="text" placeholder="文件名..." />
+                    </form>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="cancel pull-right">取消</button>
+                <button class="confirm pull-right">确定</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
 </script>
 
 <script src="${assetsPath}/js/file-view.js" charset="utf-8"></script>
