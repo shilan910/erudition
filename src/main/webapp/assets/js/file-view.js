@@ -15,7 +15,7 @@ $(document).ready(function(){
         namehide='#divall li input.changename',
         $changename = $('#changename');
 
-    $removenews.hide();
+  //  $removenews.hide();
     //新建,,通过
     $carry.on('click' , function(){
         popwin();
@@ -47,7 +47,7 @@ $(document).ready(function(){
 
 
         btns.onclick = function(){//js 调用
-            alert('确定删除文件夹？');
+            alert('确定删除文件夹吗？');
 
             var curId=$("#remove").attr("data-id");
             $.post("/erudition/admin/filecollect/delete",{cateid:curId});
