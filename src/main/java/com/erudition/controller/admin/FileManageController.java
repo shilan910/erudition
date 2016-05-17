@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -41,19 +42,22 @@ public class FileManageController {
 
 
     @RequestMapping(value = "/category/{cateId}" , method = RequestMethod.GET)
-    public String getCategory(@PathVariable("cateId") int cateId , Model model){
+    public String getCategory(@PathVariable("cateId") int cateId , Model model,HttpSession httpSession){
 
         CategoryEntity category = categoryDao.getById(cateId);
 
         if(category.getCategory1Id() == 0){ //一级目录
             model.addAttribute("adminCates",categoryDao.getSecondCategoryByFirst(cateId));
             model.addAttribute("cateLayer","1");
+            httpSession.setAttribute("cate1",cateId);
         }else if(category.getCategory2Id() == 0){ //二级目录
             model.addAttribute("adminCates",categoryDao.getThirdCategoryByFS(cateId));
             model.addAttribute("cateLayer","2");
+            httpSession.setAttribute("cate2",cateId);
         }else { //三级目录
             model.addAttribute("cateLayer","3");
             model.addAttribute("adminCates",resourcesDao.getResourcesByPage(1,7,cateId));
+            httpSession.setAttribute("cate3",cateId);
         }
 
         return "admin/file-collect";
@@ -65,20 +69,22 @@ public class FileManageController {
 
         categoryDao.addCategory(parentCateId,newCateName);
 
-        return "redirect:/category/{parentCateId}";
+        return "redirect:/admin/filecollect/category/"+parentCateId;
     }
 
     @RequestMapping(value = "/changename" , method = RequestMethod.POST)
-    public String changeName(String newname,int cateid,int cateLayer){
+    public String changeName(String newname,int cateid,int parentcateid){
         categoryDao.updateCateName(newname, cateid);
-        return "redirect:/admin/filecollect/category/"+cateLayer;
+        return "redirect:/admin/filecollect/category/"+parentcateid;
     }
 
     @RequestMapping(value = "/delete" , method = RequestMethod.POST)
-    public String DeletName(int dfdf){
+    public String DeletName(int cateid){
 //        categoryDao.updateCateName(newname, cateid);
-//        categoryDao.delete();
-        System.out.println(dfdf);   
-        return "redirect:/admin/filecollect/category/";
+        CategoryEntity cate = new CategoryEntity();
+        cate.setId(cateid);
+        categoryDao.delete(cate);
+        System.out.println(cateid);
+        return "redirect:/admin/filecollect/category/"+cateid;
     }
 }

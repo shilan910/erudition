@@ -98,9 +98,25 @@
 
     <div class="contents flex-8 file-collect">
         <div class="catalog">
-            <a href="#">根目录</a>
+            <a href="${rootPath}/admin/filecollect">根目录</a>
+            <c:if test="${cateLayer==1}">
+                <span>/</span>
+                <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+            </c:if>
+            <c:if test="${cateLayer==2}">
             <span>/</span>
-            <a href="#">一级目录</a>
+            <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+            <span>/</span>
+            <a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>
+            </c:if>
+            <c:if test="${cateLayer==3}">
+                <span>/</span>
+                <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+                <span>/</span>
+                <a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>
+                <span>/</span>
+                <a href="${rootPath}/admin/filecollect/category/${cate3}">三级目录</a>
+            </c:if>
         </div>
         <div class="button-group" style="">
             <button class="carrynews">创建新文件夹</button>
@@ -116,7 +132,10 @@
                         <form action="${rootPath}/admin/filecollect/changename" method="post">
                             <input type="text" name="newname" class="changename" value="${cate.categoryName}"/>
                             <input type="hidden" name="cateid" value="${cate.id}"/>
-                            <input type="hidden" name="cateLayer" value="${cateLayer}"/>
+                            <c:if test="${cateLayer==1}"><input type="hidden" name="parentcateid" value="${cate1}"/></c:if>
+                            <c:if test="${cateLayer==2}"><input type="hidden" name="parentcateid" value="${cate2}"/></c:if>
+                            <c:if test="${cateLayer==3}"><input type="hidden" name="parentcateid" value="${cate3}"/></c:if>
+
                         </form>
                     </li>
                 </c:forEach>
@@ -171,7 +190,7 @@
 
 <script>
     function openFile(cateId){
-        window.location.href = "/erudition/admin/filecollect/categoey/"+cateId;
+        window.location.href = "/erudition/admin/filecollect/category/"+cateId;
     }
 
 </script>
