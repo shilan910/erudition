@@ -28,4 +28,12 @@ public class ResourcesDao extends BaseDao{
                 FilesEntity.class, query);
     }
 
+    public Page<FilesEntity> getResourcesByKeyword(int pageNum,int pageSize,String key){
+        String hql = "from FilesEntity as files where files.keywords like ?";
+        Query query = query(hql);
+        query.setString(0, "%" + key + "%");
+        return pageHandler.getPage(pageNum, pageSize,
+                FilesEntity.class, query);
+    }
+
 }
