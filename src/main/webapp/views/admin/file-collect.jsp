@@ -102,26 +102,26 @@
             <a href="${rootPath}/admin/filecollect">根目录</a>
             <c:if test="${cateLayer==1}">
                 <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+                <a href="${rootPath}/admin/filecollect/category/${cate1}">${cate1name}</a>
             </c:if>
             <c:if test="${cateLayer==2}">
             <span>/</span>
-            <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+            <a href="${rootPath}/admin/filecollect/category/${cate1}">${cate1name}</a>
             <span>/</span>
-            <a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>
+            <a href="${rootPath}/admin/filecollect/category/${cate2}">${cate2name}</a>
             </c:if>
             <c:if test="${cateLayer==3}">
                 <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate1}">一级目录</a>
+                <a href="${rootPath}/admin/filecollect/category/${cate1}">${cate1name}</a>
                 <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate2}">二级目录</a>
+                <a href="${rootPath}/admin/filecollect/category/${cate2}">${cate2name}</a>
                 <span>/</span>
-                <a href="${rootPath}/admin/filecollect/category/${cate3}">三级目录</a>
+                <a href="${rootPath}/admin/filecollect/category/${cate3}">${cate3name}</a>
             </c:if>
         </div>
         <div class="button-group" style="">
             <button class="carrynews">创建新文件夹</button>
-            <button class="removeall">清空文件夹</button>
+            <%--<button class="removeall">清空文件夹</button>--%>
             <button class="remove" id="removebutton">删除文件夹</button>
         </div>
         <br/>
@@ -133,6 +133,7 @@
                         <form action="${rootPath}/admin/filecollect/changename" method="post">
                             <input type="text" name="newname" class="changename" value="${cate.categoryName}"/>
                             <input type="hidden" name="cateid" value="${cate.id}"/>
+                            <c:if test="${cateLayer==0}"><input type="hidden" name="parentcateid" value="0"/></c:if>
                             <c:if test="${cateLayer==1}"><input type="hidden" name="parentcateid" value="${cate1}"/></c:if>
                             <c:if test="${cateLayer==2}"><input type="hidden" name="parentcateid" value="${cate2}"/></c:if>
                             <c:if test="${cateLayer==3}"><input type="hidden" name="parentcateid" value="${cate3}"/></c:if>
@@ -142,28 +143,38 @@
                 </c:forEach>
                 </c:if>
                 <c:if test="${cateLayer==3}">
-                    <div class='first-floor flex-row'>
-                        <div class='flex-3'>
-                            <div>
-                                <input type='checkbox'/><span class='filename'>名称</span>
+                    <div class="contents flex-8">
+                        <div class="header-all">
+                            <div class="file-body" id="file-list">
+                                <div class="first-floor flex-row">
+                                    <div class="flex-3">
+                                        <div>
+                                            <input type="checkbox"/>
+                                            <span class="filename">名称</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-3">大小</div>
+                                    <div class="flex-3">创建者</div>
+                                    <div class="flex-3">更新日期</div>
+                                </div>
+                                <div class="line"></div>
+
                             </div>
+                            <c:forEach var="files" items="${adminCates.list}">
+                                <div class='body-floor flex-row'><div class='flex-3 flex-row'>
+                                    <div class='flex-1 checkbox'><input type='checkbox'/></div>
+                                    <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
+                                    <div class='file-name flex-4'><span><a href='#'>${files.title}</a></span></div></div>
+                                    <div class='flex-3 file-size'><span>1.27MB</span></div>
+                                    <div class='flex-3 file-creator'>${files.creater}</div>
+                                    <div class='flex-3 file-time'>${files.createTime}</div>
+                                </div>
+                                <div class='line'></div>
+                            </c:forEach>
                         </div>
-                        <div class='flex-3'>大小</div>
-                        <div class='flex-3'>创建者</div>
-                        <div class='flex-3'>更新日期</div>
+
                     </div>
-                    <div class='line'></div>
-                    <c:forEach var="files" items="${adminCates.list}">
-                        <div class='body-floor flex-row'><div class='flex-3 flex-row'>
-                            <div class='flex-1 checkbox'><input type='checkbox'/></div>
-                            <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
-                            <div class='file-name flex-4'><span><a href='#'>${files.title}</a></span></div></div>
-                            <div class='flex-3 file-size'><span>1.27MB</span></div>
-                            <div class='flex-3 file-creator'>${files.creater}</div>
-                            <div class='flex-3 file-time'>${files.createTime}</div>
-                        </div>
-                        <div class='line'></div>
-                    </c:forEach>
+
                 </c:if>
             </ul>
         </div>
@@ -247,12 +258,18 @@
 
         });
     });
+
+    $(function(){
+        $(".carrynews").fadeIn();
+    })
 </script>
 
 
 <%--这里极度需要重构！！！！！！--%>
 <!--弹出窗模板模板-->
 <script id="popwin-template" type="text/html" charset="utf-8">
+
+
     <div class="mask"></div>
     <div class="popwin">
         <div class="header">
@@ -260,19 +277,34 @@
             <div class="close popclose">×</div>
         </div>
         <div class="body">
+            <form action="${rootPath}/admin/filecollect/newcate" method="post">
             <div class="input">
                 <div class="input-primary">
-                    <form action="">
                         <label>新建文件名:</label>
-                        <input type="text" placeholder="文件名..." />
-                    </form>
+                        <input type="text" name="catename" placeholder="文件名..." />
+                        <c:if test="${cateLayer==0}">
+                            <input type="hidden" name="cate1" value="0"/>
+                            <input type="hidden" name="cate2" value="-1"/>
+                            <input type="hidden" name="cate3" value="-1"/>
+                        </c:if>
+                        <c:if test="${cateLayer==1}">
+                            <input type="hidden" name="cate1" value="${cate1}"/>
+                            <input type="hidden" name="cate2" value="0"/>
+                            <input type="hidden" name="cate3" value="-1"/>
+                        </c:if>
+                        <c:if test="${cateLayer==2}">
+                            <input type="hidden" name="cate1" value="${cate1}"/>
+                            <input type="hidden" name="cate2" value="${cate2}"/>
+                            <input type="hidden" name="cate3" value="0"/>
+                        </c:if>
                 </div>
             </div>
             <div class="button-group">
                 <button class="cancel pull-right">取消</button>
-                <button class="confirm pull-right">确定</button>
+                <input type="submit" class="confirm pull-right" value="确定"/>
                 <div class="clearfix"></div>
             </div>
+            </form>
         </div>
     </div>
 </script>

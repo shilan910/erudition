@@ -45,6 +45,7 @@ public class FileManageController {
 
 
         model.addAttribute("adminCates",categoryDao.getFirstCategory());
+        model.addAttribute("cateLayer",0);
         return "admin/file-collect";    //此处填jsp页面
     }
 
@@ -56,15 +57,18 @@ public class FileManageController {
 
         if(category.getCategory1Id() == 0){ //一级目录
             model.addAttribute("adminCates",categoryDao.getSecondCategoryByFirst(cateId));
+            httpSession.setAttribute("cate1name",category.getCategoryName());
             model.addAttribute("cateLayer","1");
             httpSession.setAttribute("cate1",cateId);
         }else if(category.getCategory2Id() == 0){ //二级目录
             model.addAttribute("adminCates",categoryDao.getThirdCategoryByFS(cateId));
+            httpSession.setAttribute("cate2name",category.getCategoryName());
             model.addAttribute("cateLayer","2");
             httpSession.setAttribute("cate2",cateId);
         }else { //三级目录
             model.addAttribute("cateLayer","3");
             model.addAttribute("adminCates",resourcesDao.getResourcesByPage(1,7,cateId));
+            httpSession.setAttribute("cate3name",category.getCategoryName());
             httpSession.setAttribute("cate3",cateId);
         }
 
@@ -83,7 +87,8 @@ public class FileManageController {
     @RequestMapping(value = "/changename" , method = RequestMethod.POST)
     public String changeName(String newname,int cateid,int parentcateid){
         categoryDao.updateCateName(newname, cateid);
-        return "redirect:/admin/filecollect/category/"+parentcateid;
+        if(parentcateid==0)return "redirect:/admin/filecollect";
+        else return "redirect:/admin/filecollect/category/"+parentcateid;
     }
 
     @RequestMapping(value = "/delete" , method = RequestMethod.POST)
@@ -108,5 +113,29 @@ public class FileManageController {
         if(user.getAuthority().equals("1"))
             return "admin/file_result";
         else return "result";
+    }
+
+    @RequestMapping(value = "/newcate" , method = RequestMethod.POST)
+    public String newcate(String catename,int cate1,int cate2,int cate3){
+        CategoryEntity categoryEntity = new CategoryEntity();
+        String path = new String();
+        if(cate1==0){
+            categoryEntity.setCategory1Id(0);
+            path = "redirect:/admin/filecollect";
+        }
+        if(cate2==0){
+            categoryEntity.setCategory1Id(cate1);
+            categoryEntity.setCategory2Id(0);
+            path = "redirect:/admin/filecollect/category/"+cate1;
+        }
+        if(cate3==0){
+            categoryEntity.setCategory1Id(cate1);
+            categoryEntity.setCategory2Id(cate2);
+            categoryEntity.setCategory3Id(0);
+            path = "redirect:/admin/filecollect/category/"+cate2;
+        }
+        categoryEntity.setCategoryName(catename);
+        categoryDao.save(categoryEntity);
+        return path;
     }
 }
