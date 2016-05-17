@@ -234,13 +234,23 @@ pageEncoding="UTF-8"%>
                         $.getJSON(url , function(data){
 
                             $.each(data.list,function(i, file){
+                                //转换时间戳
+                                var date = new Date(file.createTime);
+                                var Y = date.getFullYear() + '-';
+                                var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                                var D = date.getDate() + ' ';
+                                var h = date.getHours() + ':';
+                                var m = date.getMinutes() + ':';
+                                var s = date.getSeconds();
+                                var createDate = Y+M+D+h+m+s;
+
                                  var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
                                         "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
                                         "<div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>"+
                                         "<div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>"+file.title+"</a></span></div></div>"+
                                         "<div class='flex-3 file-size'><span>1.27MB</span></div>"+
-                                        "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"+
-                                        ""+file.createTime+"</div></div><div class='line'></div>";
+                                        "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"
+                                        +createDate+"</div></div><div class='line'></div>";
 
 
                                 console.log(file.title);
@@ -391,15 +401,25 @@ pageEncoding="UTF-8"%>
             file_body.empty();
             //alert("loadFileInfo ing!");
 
+            //转换时间戳
+            var date = new Date(file.createTime);
+            var Y = date.getFullYear() + '-';
+            var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+            var D = date.getDate() + ' ';
+            var h = date.getHours() + ':';
+            var m = date.getMinutes() + ':';
+            var s = date.getSeconds();
+            var createDate = Y+M+D+h+m+s;
+
             var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
                     + "<div class='file-name'>"+file.title+"</div><div class='file-class'>"
                     + file.type+"</div></div><div class='file-size'><button class='download'>下载文件("
                     + file.size+"MB)</button></div></div></div><div class='attribute'>"
-                    + "<div class='a-info'><div class='a-first'><div class='file-from'>所属文件夹:"
+                    + "<div class='a-info'><div class='a-first'><div class='file-from'>所属文件夹:&nbsp;&nbsp;"
                     + file.categoryName+"</div><div class='a-close'>×</div><div class='clearfix'></div>"
                     + "</div><div class='file-name'>"+file.title+"</div><div class='a-third'>"
-                    + "<div class='file-uptime'><i class='fa fa-clock-o'></i>"+file.createTime
-                    + "</div><div class='file-people'><i class='fa fa-user'></i>"+file.creater
+                    + "<div class='file-uptime'><i class='fa fa-clock-o'></i>上传时间:&nbsp;&nbsp;"+createDate
+                    + "</div><div class='file-people'><i class='fa fa-user'></i>上传人:&nbsp;&nbsp;"+file.creater
                     + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
                     + "<li><a href='/erudition/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
                     + "<li><a href='#'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
