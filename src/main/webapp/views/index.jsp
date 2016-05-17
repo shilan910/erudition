@@ -10,11 +10,13 @@ pageEncoding="UTF-8"%>
 
     <link rel="stylesheet" href="${assetsPath}/css/app.min.css"/>
     <link rel="stylesheet" href="//cdn.bootcss.com/iCheck/1.0.1/skins/square/blue.css"/>
+    <link href="//vjs.zencdn.net/5.8/video-js.min.css" rel="stylesheet">
 
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="${assetsPath}/js/jquery-accordion-menu.js"></script>
     <script src="${assetsPath}/js/icheck.js"></script>
+    <script src="${assetsPath}/js/template.js"></script>
     <style type="text/css">
         *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
         body{background:#f0f0f0;}
@@ -156,7 +158,6 @@ pageEncoding="UTF-8"%>
 </div>
 
 <!--文件弹窗-->
-
 <div class="file-out">
     <div class="pre-btn"></div>
     <!--<div class="clearfix"></div>-->
@@ -209,7 +210,145 @@ pageEncoding="UTF-8"%>
     <div class="next-btn"></div>
     <!--<div class="clearfix"></div>-->
 </div>
+<!--文件弹窗点击事件，静态DOM-->
+<script>
+    $(function(){
+        $(document).on("click",".body-floor .file-name span",function(event){
+            var file_id =  $(this).attr("id");
+            //alert(file_id);
+            event.stopPropagation();
+            $.ajax({
+                url:'${rootPath}/resources/file/'+file_id,
+                type:'get',
+                data:'merName='+'${val}',
+                async : false, //默认为true 异步
+                success:function(data){
+                    loadFileInfo(data.file , data.relationfiles);
+                    $(".mask").fadeIn();
+                    $(".file-out").fadeIn();
+                },error:function(){
+                    alert("error");
+                }
+            });
 
+        })
+
+        function loadFileInfo(file,relationfiles){
+            var file_body = $("#file-info");
+            file_body.empty();
+            //alert("loadFileInfo ing!");
+
+            //转换时间戳
+            var date = new Date(file.createTime);
+            var Y = date.getFullYear() + '-';
+            var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+            var D = date.getDate() + ' ';
+            var h = date.getHours() + ':';
+            var m = date.getMinutes() + ':';
+            var s = date.getSeconds();
+            var createDate = Y+M+D+h+m+s;
+
+            var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
+                    + "<div class='file-name'>"+file.title+"</div><div class='file-class'>"
+                    + file.type+"</div></div><div class='file-size'><button class='download'>查看文件("
+                    + file.size+"MB)</button></div></div></div><div class='attribute'>"
+                    + "<div class='a-info'><div class='a-first'><div class='file-from'>所属文件夹:&nbsp;&nbsp;"
+                    + file.categoryName+"</div><div class='a-close'>×</div><div class='clearfix'></div>"
+                    + "</div><div class='file-name'>"+file.title+"</div><div class='a-third'>"
+                    + "<div class='file-uptime'><i class='fa fa-clock-o'></i>上传时间:&nbsp;&nbsp;"+createDate
+                    + "</div><div class='file-people'><i class='fa fa-user'></i>上传人:&nbsp;&nbsp;"+file.creater
+                    + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
+                    + "<li><a href='/erudition/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
+                    + "<li><a href='#'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
+                    + "</ul></div><div class='line'></div><div class='a-related'><ul>"
+                    + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>";
+
+            for(var i=0 ; i < relationfiles.length ; i++){
+                var re = relationfiles[i].title;
+                console.log('re= '+re);
+                obj = obj + "<li id='"+relationfiles[i].id+"'><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;"+
+                        relationfiles[i].title+"</a></li>";
+                console.log(obj);
+            }
+
+            obj = obj + "</ul></div></div>";
+
+            file_body.append(obj);
+
+        }
+
+        $(document).on("click",".file-out .a-close",function(event){
+            event.stopPropagation();
+            $(".file-out").fadeOut();
+            $(".mask").fadeOut();
+        });
+
+        $(".mask").on("click",function(event){
+            event.stopPropagation();
+            $(".file-out").fadeOut();
+            $(".mask").fadeOut();
+        })
+    })
+
+    $(function(){
+        $(document).on("click",".a-related ul li",function(event){
+            var file_id =  $(this).attr("id");
+            //alert(file_id);
+            event.stopPropagation();
+            $.ajax({
+                url:'${rootPath}/resources/file/'+file_id,
+                type:'get',
+                data:'merName='+'${val}',
+                async : false, //默认为true 异步
+                success:function(data){
+                    loadFileInfo(data.file , data.relationfiles);
+                    $(".mask").fadeIn();
+                    $(".file-out").fadeIn();
+                },error:function(){
+                    alert("error");
+                }
+            });
+
+        })
+    })
+</script>
+
+<!--fiel-watch窗口模板-->
+<!--@依赖于文件弹窗-->
+<script id="file-watch-template" type="text/html" charset="utf-8">
+    <div class="file-watch" style="display: block;">
+        <div class="close-circle">×</div>
+        <div class="video">
+            <video id="really-cool-video" class="video-js vjs-default-skin" controls
+                   preload="auto" poster="really-cool-video-poster.jpg"
+                   data-setup='{}'>
+                <source src="http://7xpl2y.com1.z0.glb.clouddn.com/asdf.mp4" type="video/mp4">
+                <source src="really-cool-video.webm" type="video/webm">
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a web browser
+                    that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+        </div>
+    </div>
+</script>
+<!--file-watch二次弹窗-->
+<script>
+    //点开file-watch
+    $(document).on("click",".file-out .file-size",function(event){
+        event.stopPropagation();
+        var html=template('file-watch-template');
+        $("body").prepend(html);
+        $(".file-watch").fadeIn(200);
+    });
+    //关闭file-watch
+    $(document).on("click",".file-watch .close-circle",function(event){
+        event.stopPropagation();
+        $(".file-watch").fadeOut(200,function(){
+            $(this).remove();
+        });
+    });
+</script>
 
 
 <%--根据三级目录显示文件--%>
@@ -267,10 +406,6 @@ pageEncoding="UTF-8"%>
 
 
 </script>
-
-
-
-
 
 <%--左侧导航基础模板--%>
 <script type="text/javascript">
@@ -330,6 +465,21 @@ pageEncoding="UTF-8"%>
 
 <!--icheck    radio不能正常使用-->
 <script>
+
+//    $(document).on("input",iCheck({
+//        checkboxClass: 'icheckbox_square-blue',
+//        radioClass: 'iradio_square-blue',
+//        increaseArea: '20%' // optional
+//    }))
+
+    $("body").delegate(":checkbox","on",function(){            //这个不对啊
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+
     $(document).ready(function(){
 
         $('input').iCheck({
@@ -340,120 +490,21 @@ pageEncoding="UTF-8"%>
     });
 </script>
 
-
-<!--文件弹窗点击事件，静态DOM-->
-<script>
+<!--视频播放-->
+<script src="//vjs.zencdn.net/5.8/video.min.js"></script>
+<script type="text/javascript">
     $(function(){
-        $(document).on("click",".body-floor .file-name span",function(event){
-            var file_id =  $(this).attr("id");
-            //alert(file_id);
-            event.stopPropagation();
-            $.ajax({
-                url:'${rootPath}/resources/file/'+file_id,
-                type:'get',
-                data:'merName='+'${val}',
-                async : false, //默认为true 异步
-                success:function(data){
-                    loadFileInfo(data.file , data.relationfiles);
-                    $(".mask").fadeIn();
-                    $(".file-out").fadeIn();
-                },error:function(){
-                    alert("error");
-                }
+        var player = videojs('really-cool-video', { /* Options */ }, function() {
+            console.log('Good to go!');
+
+            this.play(); // if you don't trust autoplay for some reason
+
+            // How about an event listener?
+            this.on('ended', function() {
+                console.log('awww...over so soon?');
             });
-
-        })
-
-
-
-
-
-        $(function(){
-            $(document).on("click",".a-related ul li",function(event){
-                var file_id =  $(this).attr("id");
-                //alert(file_id);
-                event.stopPropagation();
-                $.ajax({
-                    url:'${rootPath}/resources/file/'+file_id,
-                    type:'get',
-                    data:'merName='+'${val}',
-                    async : false, //默认为true 异步
-                    success:function(data){
-                        loadFileInfo(data.file , data.relationfiles);
-                        $(".mask").fadeIn();
-                        $(".file-out").fadeIn();
-                    },error:function(){
-                        alert("error");
-                    }
-                });
-
-            })
-        })
-
-
-
-
-
-
-
-        function loadFileInfo(file,relationfiles){
-            var file_body = $("#file-info");
-            file_body.empty();
-            //alert("loadFileInfo ing!");
-
-            //转换时间戳
-            var date = new Date(file.createTime);
-            var Y = date.getFullYear() + '-';
-            var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-            var D = date.getDate() + ' ';
-            var h = date.getHours() + ':';
-            var m = date.getMinutes() + ':';
-            var s = date.getSeconds();
-            var createDate = Y+M+D+h+m+s;
-
-            var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
-                    + "<div class='file-name'>"+file.title+"</div><div class='file-class'>"
-                    + file.type+"</div></div><div class='file-size'><button class='download'>下载文件("
-                    + file.size+"MB)</button></div></div></div><div class='attribute'>"
-                    + "<div class='a-info'><div class='a-first'><div class='file-from'>所属文件夹:&nbsp;&nbsp;"
-                    + file.categoryName+"</div><div class='a-close'>×</div><div class='clearfix'></div>"
-                    + "</div><div class='file-name'>"+file.title+"</div><div class='a-third'>"
-                    + "<div class='file-uptime'><i class='fa fa-clock-o'></i>上传时间:&nbsp;&nbsp;"+createDate
-                    + "</div><div class='file-people'><i class='fa fa-user'></i>上传人:&nbsp;&nbsp;"+file.creater
-                    + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
-                    + "<li><a href='/erudition/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
-                    + "<li><a href='#'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
-                    + "</ul></div><div class='line'></div><div class='a-related'><ul>"
-                    + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>";
-
-            for(var i=0 ; i < relationfiles.length ; i++){
-                var re = relationfiles[i].title;
-                console.log('re= '+re);
-                obj = obj + "<li id='"+relationfiles[i].id+"'><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;"+
-                            relationfiles[i].title+"</a></li>";
-                console.log(obj);
-            }
-
-            obj = obj + "</ul></div></div>";
-
-            file_body.append(obj);
-
-        }
-
-
-
-        $(".a-close").on("click",function(event){
-            event.stopPropagation();
-            $(".file-out").fadeOut();
-            $(".mask").fadeOut();
-        })
-
-        $(".mask").on("click",function(event){
-            event.stopPropagation();
-            $(".file-out").fadeOut();
-            $(".mask").fadeOut();
-        })
-    })
+        });
+    });
 </script>
 </body>
 </html>

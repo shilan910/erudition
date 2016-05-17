@@ -10,14 +10,14 @@
         Erudition
       </div>
       <div class="col-md-4 search">
+        <form action="${rootPath}/admin/filecollect/search" method="post" class="form-inline">
         <div class="input-group">
-          <form action="${rootPath}/admin/filecollect/search" method="post">
-          <input type="text" name="key" class="form-control" placeholder="全站搜索...">
-                              <span class="input-group-btn">
-                                <input type="submit" class="btn btn-default" type="button" value="搜索"/>
-                              </span>
-          </form>
+                <input type="text" name="key" class="form-control" placeholder="全站搜索...">
+                <span class="input-group-btn">
+                  <input type="submit" class="btn btn-default" type="button" value="搜索"/>
+                </span>
         </div><!-- /input-group -->
+        </form>
       </div>
       <div class="col-md-4 button-group">
         <span class="login"><a href="#" onclick="openLogin()">${username}</a></span>
