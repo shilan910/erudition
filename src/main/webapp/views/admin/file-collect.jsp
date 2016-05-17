@@ -132,7 +132,10 @@
                         <form action="${rootPath}/admin/filecollect/changename" method="post">
                             <input type="text" name="newname" class="changename" value="${cate.categoryName}"/>
                             <input type="hidden" name="cateid" value="${cate.id}"/>
-                            <input type="hidden" name="cateLayer" value="${cateLayer}"/>
+                            <c:if test="${cateLayer==1}"><input type="hidden" name="parentcateid" value="${cate1}"/></c:if>
+                            <c:if test="${cateLayer==2}"><input type="hidden" name="parentcateid" value="${cate2}"/></c:if>
+                            <c:if test="${cateLayer==3}"><input type="hidden" name="parentcateid" value="${cate3}"/></c:if>
+
                         </form>
                     </li>
                 </c:forEach>

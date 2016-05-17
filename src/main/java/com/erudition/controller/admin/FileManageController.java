@@ -73,9 +73,9 @@ public class FileManageController {
     }
 
     @RequestMapping(value = "/changename" , method = RequestMethod.POST)
-    public String changeName(String newname,int cateid,int cateLayer){
+    public String changeName(String newname,int cateid,int parentcateid){
         categoryDao.updateCateName(newname, cateid);
-        return "redirect:/admin/filecollect/category/"+cateLayer;
+        return "redirect:/admin/filecollect/category/"+parentcateid;
     }
 
     @RequestMapping(value = "/delete" , method = RequestMethod.POST)
