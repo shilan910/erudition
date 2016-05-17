@@ -1,8 +1,11 @@
 package com.erudition.controller.admin;
 
 import com.erudition.bean.CategoryEntity;
+import com.erudition.bean.FilesEntity;
+import com.erudition.bean.UserEntity;
 import com.erudition.dao.CategoryDao;
 import com.erudition.dao.ResourcesDao;
+import com.erudition.dao.UserDao;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 /**
@@ -30,6 +34,10 @@ public class FileManageController {
     @Autowired
     @Qualifier("resourcesDao")
     ResourcesDao resourcesDao;
+
+    @Autowired
+    @Qualifier("userDao")
+    UserDao userDao;
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -79,12 +87,25 @@ public class FileManageController {
     }
 
     @RequestMapping(value = "/delete" , method = RequestMethod.POST)
-    public String DeletName(int cateid){
+    public String DeleteCate(int cateid){
 //        categoryDao.updateCateName(newname, cateid);
         CategoryEntity cate = new CategoryEntity();
         cate.setId(cateid);
         categoryDao.delete(cate);
         System.out.println(cateid);
         return "redirect:/admin/filecollect/category/"+cateid;
+    }
+
+    @RequestMapping(value = "/search" , method = RequestMethod.POST)
+    public String search(HttpSession httpSession,Model model,String key){
+        UserEntity user = (UserEntity)httpSession.getAttribute("loginUser");
+        List<FilesEntity> files = resourcesDao.getResourcesByKeyword(1,7,key).getList();
+        System.out.println(key);
+        for(FilesEntity f:files){
+            System.out.println(f.getTitle());
+        }
+        model.addAttribute("searchresult",files);
+        if(user.getAuthority().equals("1")) return "admin/file_result";
+        else return "result";
     }
 }
