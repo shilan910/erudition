@@ -57,11 +57,14 @@ public class CategoryController {
     @RequestMapping(value = "/getChildrenCategory/{cid}" , method = RequestMethod.GET)
     public List<CategoryEntity> getChildrenCategory(Model model,@PathVariable ("cid") int cid){
 
-        List<CategoryEntity> children = categoryDao.getSecondCategoryByFirst(cid);
-        if (children != null){
-            return children;
+        CategoryEntity category = categoryDao.getById(cid);
+
+        if (category.getCategory1Id()==0){
+            return categoryDao.getSecondCategoryByFirst(cid);
         }else{
             return categoryDao.getThirdCategoryByFS(cid);
         }
     }
+
+
 }

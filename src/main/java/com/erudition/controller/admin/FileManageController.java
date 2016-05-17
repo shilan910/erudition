@@ -41,11 +41,12 @@ public class FileManageController {
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String file(Model model){
+    public String file(Model model , HttpSession session){
 
 
         model.addAttribute("adminCates",categoryDao.getFirstCategory());
         model.addAttribute("cateLayer",0);
+        session.setAttribute("adminSidebarActive",0);
         return "admin/file-collect";    //此处填jsp页面
     }
 

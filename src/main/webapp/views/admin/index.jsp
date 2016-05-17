@@ -46,36 +46,8 @@ pageEncoding="UTF-8"%>
 <jsp:include page="../common/header.jsp" />
 
 <div class="main flex-row">
-    <div class="flex-2">
-        <div class="nav">
-            <div id="jquery-accordion-menu" class="jquery-accordion-menu white">
-                <div id="user-image">
-                    <a href=""><img src="${assetsPath}/images/user.jpg" alt="" class="img-circle"/></a>
-                    <div class="user-name">${username}</div>
-                </div>
 
-                <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
-                <ul id="demo-list">
-
-                    <li class="active" ><a href="${rootPath}/admin/filecollect"><i class="fa fa-home"></i>文件管理</a></li>
-
-                    <li><a href="#"><i class="fa fa-glass"></i>文件上传</a></li>
-
-
-                    <li><a href="#"><i class="fa fa-suitcase"></i>规则设置</a></li>
-
-                    <%--zqh : 此处前端需要修改--%>
-
-                </ul>
-                <%--<div class="jquery-accordion-menu-footer">--%>
-                    <%--Footer--%>
-                <%--</div>--%>
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-    </div>
-
+    <jsp:include page="../common/admin_sidebar.jsp" />
 
     <div class="contents flex-8">
         <div class="header-all">

@@ -46,33 +46,8 @@
 <jsp:include page="../common/header.jsp" />
 
 <div class="main flex-row">
-    <div class="flex-2">
-        <div class="nav">
-            <div id="jquery-accordion-menu" class="jquery-accordion-menu white">
-                <div id="user-image">
-                    <a href=""><img src="${assetsPath}/images/user.jpg" alt="" class="img-circle"/></a>
-                    <div class="user-name">${username}</div>
-                </div>
 
-                <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
-                <ul id="demo-list">
-
-                    <li class="active" ><a href="${rootPath}/admin/filecollect"><i class="fa fa-home"></i>文件管理</a></li>
-
-                    <li><a href="${rootPath}/admin/file/upload"><i class="fa fa-glass"></i>文件上传</a></li>
-
-
-                    <li><a href="#"><i class="fa fa-suitcase"></i>规则设置</a></li>
-
-
-                </ul>
-
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-    </div>
-
+    <jsp:include page="../common/admin_sidebar.jsp" />
 
     <div class="contents flex-8">
         <div class="header-all">
@@ -80,6 +55,47 @@
                 <div class="flex-7 path">
                     添加文件
                 </div>
+
+            </div>
+
+                <%--文件上传表单--%>
+                <div>
+                    <form action="/erudition/admin/file/upload" method="post" enctype="multipart/form-data">
+                        <div class="select">
+                            <div class="">
+                                <span>&nbsp;&nbsp;&nbsp;一级目录&nbsp;&nbsp;&nbsp;</span>
+                                <select class="form-control" id="category-select" name="cate1">
+                                    <option selected value="">请选择</option>
+                                    <c:forEach items="${firstCategorys}" var="category">
+                                        <option value="${category.id}">${category.categoryName}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="">
+                                <span>二级目录</span>
+                                <select class="form-control" id="second-category-select" name="cate2">
+                                    <option selected value="">请选择</option>
+                                </select>
+                            </div>
+                            <div class="">
+                                <span>三级目录</span>
+                                <select class="form-control" id="third-category-select" name="cate3">
+                                    <option selected value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group inputFile">
+                            <label for="inputFile">上传视频</label>
+                            <input type="file" id="inputFile" name="files" value="" multiple />
+                            <p class="help-block">支持MP4格式</p>
+                        </div>
+                        <input type="submit" class="btn btn-success btn-course" value="上传" />
+
+
+                    </form>
+
+
             </div>
 
         </div>
@@ -87,6 +103,63 @@
 
 
 </div>
+
+
+<%--fileUpload:文件上传，至关重要的一句话--%>
+<script>
+    $('#inputFile').fileupload();
+</script>
+
+<%--目录--%>
+<script>
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%' // optional
+    });
+
+    var category_select = $("#category-select"),
+            second_category_select = $("#second-category-select"),
+            third_category_select = $("#third-category-select");
+
+    category_select.change(function(){
+
+            loadCategory(category_select.val(),second_category_select);
+//        } else {
+//            clearCategory(second_category_select);
+//            clearCategory(third_category_select);
+//        }
+    });
+
+    //zqh:new
+
+    second_category_select.change(function(){
+//        if(second_category_select.val() != "") {
+            loadCategory(second_category_select.val(),third_category_select);
+//        } else {
+//            clearCategory(third_category_select);
+//        }
+    });
+
+
+
+    function loadCategory(id , selector){
+        var url = "/erudition/category/getChildrenCategory/"+id;
+        $.getJSON(url , function(data){
+            selector.empty();
+            $.each(data,function(i, category){
+                var option = "<option value='" + category.id + "'>" + category.categoryName + "</option>";
+                selector.append(option);
+            });
+        });
+    }
+
+    function clearCategory(selector) {
+        selector.empty();
+    }
+</script>
+
+
 
 
 

@@ -66,36 +66,8 @@
 
 <div class="main flex-row">
 
-    <div class="flex-2">
-        <div class="nav">
-            <div id="jquery-accordion-menu" class="jquery-accordion-menu white">
-                <div id="user-image">
-                    <a href=""><img src="${assetsPath}/images/user.jpg" alt="" class="img-circle"/></a>
-                    <div class="user-name">${username}</div>
-                </div>
 
-                <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
-                <ul id="demo-list">
-
-                    <li class="active" ><a href="${rootPath}/admin/filecollect"><i class="fa fa-home"></i>文件管理</a></li>
-
-                    <li><a href="#"><i class="fa fa-glass"></i>文件上传</a></li>
-
-
-                    <li><a href="#"><i class="fa fa-suitcase"></i>规则设置</a></li>
-
-                    <%--zqh : 此处前端需要修改--%>
-
-                </ul>
-                <%--<div class="jquery-accordion-menu-footer">--%>
-                <%--Footer--%>
-                <%--</div>--%>
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-    </div>
-
+    <jsp:include page="../common/admin_sidebar.jsp" />
 
     <div class="contents flex-8 file-collect">
         <div class="catalog">
@@ -124,7 +96,6 @@
             <%--<button class="removeall">清空文件夹</button>--%>
             <button class="remove" id="removebutton">删除文件夹</button>
         </div>
-        <br/>
         <div  class="alldom">
             <ul id="divall">
                 <c:if test="${cateLayer!=3}">
@@ -146,6 +117,7 @@
                     <div class="contents flex-8">
                         <div class="header-all">
                             <div class="file-body" id="file-list">
+
                                 <div class="first-floor flex-row">
                                     <div class="flex-3">
                                         <div>
@@ -159,18 +131,29 @@
                                 </div>
                                 <div class="line"></div>
 
+                                <c:forEach var="files" items="${adminCates.list}">
+                                    <div class='body-floor flex-row'>
+                                        <div class='flex-3 flex-row'>
+                                            <div class='flex-1 checkbox'>
+                                                <input type='checkbox'/>
+                                            </div>
+                                            <div class='flex-1 file-image'>
+                                                <i class='fa fa-folder-o fa-3x'></i>
+                                            </div>
+                                            <div class='file-name flex-4'>
+                                                <span><a href='#'>${files.title}</a></span>
+                                            </div>
+                                        </div>
+                                        <div class='flex-3 file-size'>
+                                            <span>1.27MB</span>
+                                        </div>
+                                        <div class='flex-3 file-creator'>${files.creater}</div>
+                                        <div class='flex-3 file-time'>${files.createTime}</div>
+                                    </div>
+                                    <div class='line'></div>
+                                </c:forEach>
+
                             </div>
-                            <c:forEach var="files" items="${adminCates.list}">
-                                <div class='body-floor flex-row'><div class='flex-3 flex-row'>
-                                    <div class='flex-1 checkbox'><input type='checkbox'/></div>
-                                    <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
-                                    <div class='file-name flex-4'><span><a href='#'>${files.title}</a></span></div></div>
-                                    <div class='flex-3 file-size'><span>1.27MB</span></div>
-                                    <div class='flex-3 file-creator'>${files.creater}</div>
-                                    <div class='flex-3 file-time'>${files.createTime}</div>
-                                </div>
-                                <div class='line'></div>
-                            </c:forEach>
                         </div>
 
                     </div>
