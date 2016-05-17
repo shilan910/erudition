@@ -237,7 +237,7 @@ pageEncoding="UTF-8"%>
                                  var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
                                         "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
                                         "<div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>"+
-                                        "<div class='file-name flex-4'><span><a href='#'>"+file.title+"</a></span></div></div>"+
+                                        "<div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>"+file.title+"</a></span></div></div>"+
                                         "<div class='flex-3 file-size'><span>1.27MB</span></div>"+
                                         "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"+
                                         ""+file.createTime+"</div></div><div class='line'></div>";
@@ -335,9 +335,10 @@ pageEncoding="UTF-8"%>
 <script>
     $(function(){
         $(document).on("click",".body-floor .file-name span",function(event){
+            var file_id = this.attribute("id");
             event.stopPropagation();
             $.ajax({
-                url:'${rootPath}/resources/file/1',
+                url:'${rootPath}/resources/file/'+file_id,
                 type:'get',
                 data:'merName='+'${val}',
                 async : false, //默认为true 异步
