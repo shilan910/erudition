@@ -173,50 +173,7 @@ pageEncoding="UTF-8"%>
     <div class="pre-btn"></div>
     <!--<div class="clearfix"></div>-->
     <div class="file-body" id="file-info">
-        <%--<div class="content">--%>
-            <%--<div class="file">--%>
-                <%--<div class="file-thumbnails">--%>
-                    <%--<div class="file-name">SQLdb_ilearn_3</div>--%>
-                    <%--<div class="file-class">文件类型SQL</div>--%>
-                <%--</div>--%>
-                <%--<div class="file-size">--%>
-                    <%--<button class="download">下载文件(4MB)</button>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
 
-        <%--<div class="attribute">--%>
-            <%--<div class="a-info">--%>
-                <%--<div class="a-first">--%>
-                    <%--<div class="file-from">所属文件夹:数据库</div>--%>
-                    <%--<div class="a-close">×</div>--%>
-                    <%--<div class="clearfix"></div>--%>
-                <%--</div>--%>
-                <%--<div class="file-name">SQLdb_ilearn_3</div>--%>
-                <%--<div class="collected">收藏量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>--%>
-                <%--<div class="a-third">--%>
-                    <%--<div class="file-uptime"><i class="fa fa-clock-o"></i>2013-12-12</div>--%>
-                    <%--<div class="file-people"><i class="fa fa-user"></i>上传人-MR.Z</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--<div class="line"></div>--%>
-            <%--<div class="a-operate">--%>
-                <%--<ul>--%>
-                    <%--<li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;下载</a></li>--%>
-                    <%--<li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>--%>
-                <%--</ul>--%>
-            <%--</div>--%>
-            <%--<div class="line"></div>--%>
-            <%--<div class="a-related">--%>
-                <%--<ul>--%>
-                    <%--<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>--%>
-                    <%--<c:forEach items="${relationalresources}" var="re">--%>
-                        <%--<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;${re.title}</a></li>--%>
-                    <%--</c:forEach>--%>
-                    <%--<li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>--%>
-                <%--</ul>--%>
-            <%--</div>--%>
-        <%--</div>--%>
     </div>
     <div class="next-btn"></div>
     <!--<div class="clearfix"></div>-->
@@ -375,7 +332,7 @@ pageEncoding="UTF-8"%>
                     + file.size+"MB)</button></div></div></div><div class='attribute'>"
                     + "<div class='a-info'><div class='a-first'><div class='file-from'>所属文件夹:"
                     + file.categoryName+"</div><div class='a-close'>×</div><div class='clearfix'></div>"
-                    + "</div><div class='file-name'>"+file.title+"</div><div class='a-third'>"
+                    + "</div><div class='file-name'><img alt='' src='/erudition/assets/images/test.jpg'>"+file.title+"</div><div class='a-third'>"
                     + "<div class='file-uptime'><i class='fa fa-clock-o'></i>"+file.createTime
                     + "</div><div class='file-people'><i class='fa fa-user'></i>"+file.creater
                     + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"

@@ -65,7 +65,7 @@
                             <span>记住密码</span>
                         </div>
                         <div class="forget">
-                            <a href="${rootPath}/views/regist.jsp">注册</a>
+                            <a href="${rootPath}/user/changetoregist">注册</a>
                         </div>
                         <div class="clearfix"></div>
                     </div>

@@ -28,7 +28,7 @@ public class UserController {
 
     @RequestMapping(value = "/changetologin", method = RequestMethod.GET)
     public String changeToLogin() {
-        return "login";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)           //调用post方法
@@ -98,7 +98,7 @@ public class UserController {
             } else {
                 userDao.save(username, password);
 
-                return "index";
+                //return "index";
             }
         }
         httpSession.setAttribute("reusernmaemessage",reusernmaemessage);
@@ -110,7 +110,7 @@ public class UserController {
         System.out.println("repasswordmessage:" + repasswordmessage);
         System.out.println("recodemessage:" + recodemessage);
 
-        return "regist";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)

@@ -126,16 +126,16 @@ pageEncoding="UTF-8"%>
         <div class="header-all">
             <div class="header flex-row">
                 <div class="flex-7 path">
-                    根目录
+                    共享目录
                 </div>
-                <div class="flex-3 search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="该目录下搜索...">
-                              <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                              </span>
-                    </div>
-                </div>
+                <%--<div class="flex-3 search">--%>
+                    <%--<div class="input-group">--%>
+                        <%--<input type="text" class="form-control" placeholder="该目录下搜索...">--%>
+                              <%--<span class="input-group-btn">--%>
+                                <%--<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>--%>
+                              <%--</span>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
             </div>
             <div class="file-body" id="file-list">
                 <div class="first-floor flex-row">
@@ -220,62 +220,20 @@ pageEncoding="UTF-8"%>
             $.ajax({
                 url:'${rootPath}/resources/file/'+file_id,
                 type:'get',
-                data:'merName='+'${val}',
+                <%--data:'merName='+'${val}',--%>
                 async : false, //默认为true 异步
                 success:function(data){
                     loadFileInfo(data.file , data.relationfiles);
                     $(".mask").fadeIn();
                     $(".file-out").fadeIn();
                 },error:function(){
-                    alert("error");
+
+                    alert("error"+file_id);
                 }
             });
 
         })
 
-        function loadFileInfo(file,relationfiles){
-            var file_body = $("#file-info");
-            file_body.empty();
-            //alert("loadFileInfo ing!");
-
-            //转换时间戳
-            var date = new Date(file.createTime);
-            var Y = date.getFullYear() + '-';
-            var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-            var D = date.getDate() + ' ';
-            var h = date.getHours() + ':';
-            var m = date.getMinutes() + ':';
-            var s = date.getSeconds();
-            var createDate = Y+M+D+h+m+s;
-
-            var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
-                    + "<div class='file-name'>"+file.title+"</div><div class='file-class'>"
-                    + file.type+"</div></div><div class='file-size'><button class='download'>查看文件("
-                    + file.size+"MB)</button></div></div></div><div class='attribute'>"
-                    + "<div class='a-info'><div class='a-first'><div class='file-from'>所属文件夹:&nbsp;&nbsp;"
-                    + file.categoryName+"</div><div class='a-close'>×</div><div class='clearfix'></div>"
-                    + "</div><div class='file-name'>"+file.title+"</div><div class='a-third'>"
-                    + "<div class='file-uptime'><i class='fa fa-clock-o'></i>上传时间:&nbsp;&nbsp;"+createDate
-                    + "</div><div class='file-people'><i class='fa fa-user'></i>上传人:&nbsp;&nbsp;"+file.creater
-                    + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
-                    + "<li><a href='/erudition/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
-                    + "<li><a href='#'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
-                    + "</ul></div><div class='line'></div><div class='a-related'><ul>"
-                    + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>";
-
-            for(var i=0 ; i < relationfiles.length ; i++){
-                var re = relationfiles[i].title;
-                console.log('re= '+re);
-                obj = obj + "<li id='"+relationfiles[i].id+"'><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;"+
-                        relationfiles[i].title+"</a></li>";
-                console.log(obj);
-            }
-
-            obj = obj + "</ul></div></div>";
-
-            file_body.append(obj);
-
-        }
 
         $(document).on("click",".file-out .a-close",function(event){
             event.stopPropagation();
@@ -311,6 +269,52 @@ pageEncoding="UTF-8"%>
 
         })
     })
+
+
+    function loadFileInfo(file,relationfiles){
+        var file_body = $("#file-info");
+        file_body.empty();
+        //alert("loadFileInfo ing!");
+
+        //转换时间戳
+        var date = new Date(file.createTime);
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        var D = date.getDate() + ' ';
+        var h = date.getHours() + ':';
+        var m = date.getMinutes() + ':';
+        var s = date.getSeconds();
+        var createDate = Y+M+D+h+m+s;
+
+        var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
+                + "<div class='file-name'> <img alt='' class='file-name' src='/erudition/assets/images/test.jpg'/></div><div class='file-class'>"
+                + file.type+"</div></div><div class='file-size'><button class='download'>查看文件("
+                + file.size+"MB)</button></div></div></div><div class='attribute'>"
+                + "<div class='a-info'><div class='a-first'><div class='file-from'>所属文件夹:&nbsp;&nbsp;"
+                + file.categoryName+"</div><div class='a-close'>×</div><div class='clearfix'></div>"
+                + "</div><div class='file-name'>"+file.title+"</div><div class='a-third'>"
+                + "<div class='file-uptime'><i class='fa fa-clock-o'></i>上传时间:&nbsp;&nbsp;"+createDate
+                + "</div><div class='file-people'><i class='fa fa-user'></i>上传人:&nbsp;&nbsp;"+file.creater
+                + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
+                + "<li><a href='/erudition/admin/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
+                + "<li><a href='#'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
+                + "</ul></div><div class='line'></div><div class='a-related'><ul>"
+                + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>";
+
+        for(var i=0 ; i < relationfiles.length ; i++){
+            var re = relationfiles[i].title;
+            console.log('re= '+re);
+            obj = obj + "<li id='"+relationfiles[i].id+"'><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;"+
+                    relationfiles[i].title+"</a></li>";
+            console.log(obj);
+        }
+
+        obj = obj + "</ul></div></div>";
+
+        file_body.append(obj);
+
+    }
+
 </script>
 
 <!--fiel-watch窗口模板-->

@@ -66,7 +66,7 @@
                             <span>记住密码</span>
                         </div>
                         <div class="forget">
-                            <a href="${rootPath}/index">登录</a>
+                            <a href="${rootPath}/user/changetologin">登录</a>
                         </div>
                         <div class="clearfix"></div>
                     </div>
