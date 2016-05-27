@@ -110,10 +110,16 @@ public class FileManageController {
         for(FilesEntity f:files){
             System.out.println(f.getTitle());
         }
-        model.addAttribute("searchresult",files);
-        if(user.getAuthority().equals("1"))
+        httpSession.setAttribute("searchresult",files);
+        if(user.getAuthority().equals("1")){
+            System.out.println("你是管理员！");
             return "admin/file_result";
-        else return "result";
+        }
+        else {
+            System.out.println("你是普通用户！");
+            return "redirect:/file/toresult";
+        }
+
 //        return "admin/file_result";
     }
 

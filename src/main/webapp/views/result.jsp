@@ -127,12 +127,12 @@ pageEncoding="UTF-8"%>
                     根目录
                 </div>
                 <div class="flex-3 search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="该目录下搜索...">
-                              <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                              </span>
-                    </div>
+                    <%--<div class="input-group">--%>
+                        <%--<input type="text" class="form-control" placeholder="该目录下搜索...">--%>
+                              <%--<span class="input-group-btn">--%>
+                                <%--<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>--%>
+                              <%--</span>--%>
+                    <%--</div>--%>
                 </div>
             </div>
             <div class="file-body" id="file-list">
