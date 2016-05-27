@@ -58,6 +58,7 @@ public class FileController {
 
         for (MultipartFile file : files){
             if(!file.isEmpty()){
+                System.out.println(file.getOriginalFilename());
                 resourcesDao.saveFiles(cate1, cate2, cate3, file, (UserEntity) session.getAttribute("loginUser"));
                 System.out.println("uploadController in ......");
             }

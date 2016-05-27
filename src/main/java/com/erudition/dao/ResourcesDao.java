@@ -53,7 +53,8 @@ public class ResourcesDao extends BaseDao{
     public void saveFiles(String cate1 , String cate2 , String cate3 , MultipartFile file , UserEntity user){
         FilesEntity fileEntity = new FilesEntity();
 
-        fileEntity.setCategoryName(file.getName());
+        fileEntity.setTitle(file.getOriginalFilename());
+        System.out.println("123345667"+file.getOriginalFilename());
         fileEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
         fileEntity.setSize(Double.valueOf(file.getSize()));
         fileEntity.setKeywords(cate1+cate2+cate3);
