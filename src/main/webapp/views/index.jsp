@@ -272,7 +272,7 @@ pageEncoding="UTF-8"%>
     })
 
 
-    //begin尝试异步实现添加至常用目录
+    //begin实现异步添加至常用目录
     $(function(){
         $(document).on("click",".a-operate ul li",function(event){
             var file_id =  $(".a-operate span").attr("id");
@@ -298,7 +298,7 @@ pageEncoding="UTF-8"%>
         })
     })
 
-    //end尝试异步实现添加至常用目录
+    //end实现异步添加至常用目录
 
 
     function loadFileInfo(file,relationfiles){
