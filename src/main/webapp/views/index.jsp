@@ -251,7 +251,8 @@ pageEncoding="UTF-8"%>
     $(function(){
         $(document).on("click",".a-related ul li",function(event){
             var file_id =  $(this).attr("id");
-            //alert(file_id);
+           // alert(file_id);
+           // alert(${val});
             event.stopPropagation();
             $.ajax({
                 url:'${rootPath}/resources/file/'+file_id,
@@ -269,6 +270,38 @@ pageEncoding="UTF-8"%>
 
         })
     })
+
+
+    //begin实现异步添加至常用目录
+    $(function(){
+        $(document).on("click",".a-operate ul li",function(event){
+            var file_id =  $(".a-operate span").attr("id");
+           // alert(file_id);
+
+         //   event.stopPropagation();
+            $.ajax({
+                url:'${rootPath}/collection/addtocollection/'+file_id,
+                type:'get',
+//                data:{},
+                async : false, //默认为true 异步
+                success:function(){
+                //    loadFileInfo(data.file , data.relationfiles);
+                    <c:if test="${collectionflag=='0'}">alert("添加成功！");</c:if>
+                    <c:if test="${collectionflag=='1'}">alert("请不要重复添加！");</c:if>
+                    $(".mask").fadeIn();
+                    $(".file-out").fadeIn();
+                },error:function(){
+                    //alert("error");
+                    <c:if test="${collectionflag=='0'}">alert("添加成功！");</c:if>
+                    <c:if test="${collectionflag=='1'}">alert("请不要重复添加！");</c:if>
+                }
+            });
+          //  alert(${val});
+
+        })
+    })
+
+    //end实现异步添加至常用目录
 
 
     function loadFileInfo(file,relationfiles){
@@ -297,7 +330,7 @@ pageEncoding="UTF-8"%>
                 + "</div><div class='file-people'><i class='fa fa-user'></i>上传人:&nbsp;&nbsp;"+file.creater
                 + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
                 + "<li><a href='/erudition/admin/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
-                + "<li><a href='#'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
+                + "<li><a href='#'><span id='"+file.id+"'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
                 + "</ul></div><div class='line'></div><div class='a-related'><ul>"
                 + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>";
 
