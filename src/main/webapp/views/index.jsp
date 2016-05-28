@@ -276,7 +276,7 @@ pageEncoding="UTF-8"%>
     $(function(){
         $(document).on("click",".a-operate ul li",function(event){
             var file_id =  $(".a-operate span").attr("id");
-            alert(file_id);
+           // alert(file_id);
 
          //   event.stopPropagation();
             $.ajax({
@@ -286,11 +286,14 @@ pageEncoding="UTF-8"%>
                 async : false, //默认为true 异步
                 success:function(){
                 //    loadFileInfo(data.file , data.relationfiles);
+                    <c:if test="${collectionflag=='0'}">alert("添加成功！");</c:if>
+                    <c:if test="${collectionflag=='1'}">alert("请不要重复添加！");</c:if>
                     $(".mask").fadeIn();
                     $(".file-out").fadeIn();
                 },error:function(){
                     //alert("error");
-                    alert("添加成功！");
+                    <c:if test="${collectionflag=='0'}">alert("添加成功！");</c:if>
+                    <c:if test="${collectionflag=='1'}">alert("请不要重复添加！");</c:if>
                 }
             });
           //  alert(${val});
