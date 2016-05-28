@@ -29,10 +29,14 @@ public class ResourcesController {
 
     @ResponseBody
     @RequestMapping(value = "/{tid}/{pageNum}" , method = RequestMethod.GET)
-    public Page<FilesEntity> getResourcesByPage(Model model,@PathVariable("tid") int ThirdId,@PathVariable ("pageNum") int pageNum){
+    public Page<FilesEntity> getResourcesByPage(HttpSession session,Model model,@PathVariable("tid") int ThirdId,@PathVariable ("pageNum") int pageNum){
 
         Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,7,ThirdId);
         model.addAttribute("resources",resources);
+        System.out.println("before");
+        session.setAttribute("flagofcollection",0);
+        session.removeAttribute("showcollections");
+        System.out.println("after");
         return resources;
     }
 

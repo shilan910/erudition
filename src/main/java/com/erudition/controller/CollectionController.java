@@ -4,6 +4,7 @@ import com.erudition.bean.CollectionEntity;
 import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CollectionDao;
+import com.erudition.entity.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.AssertFalse;
 import java.util.List;
 
 /**
@@ -31,9 +33,9 @@ public class CollectionController {
         boolean flag=false;
         UserEntity user = (UserEntity)session.getAttribute("loginUser");
         int userid = user.getId();
-        List<CollectionEntity> collections = (List<CollectionEntity>)session.getAttribute("usercollections");
-        for(CollectionEntity collectionEntity:collections){
-            if(collectionEntity.getFileId()==fid&&collectionEntity.getUserId()==userid){
+        List<FilesEntity> collections = (List<FilesEntity>)session.getAttribute("usercollections");
+        for(FilesEntity file:collections){
+            if(file.getId()==fid){
                 flag = true;
             }
         }
@@ -47,5 +49,13 @@ public class CollectionController {
         }
 
        // return "index";
+    }
+
+    @RequestMapping(value = "/showcollections" , method = RequestMethod.GET)
+    public String showCollections(Model model,HttpSession session){
+        model.addAttribute("showcollections",session.getAttribute("usercollections"));
+        session.setAttribute("flagofcollection",1);
+        System.out.println("show collections!");
+        return "index";
     }
 }
