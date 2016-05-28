@@ -154,12 +154,13 @@ $(document).ready(function(){
     /////////////////////////////////////////////////
     //调用弹窗方法
     function popwin(){
+        //调用模板
         var html=template('popwin-template');
         $('body').prepend(html);
         //开始动画
         $('.mask').fadeIn(300);
         $('.popwin').addClass("bounceIn animated");
-    }
+    };
     //隐藏关闭
     $(document).on("click",".popwin .popclose",function(event){
         event.stopPropagation();
