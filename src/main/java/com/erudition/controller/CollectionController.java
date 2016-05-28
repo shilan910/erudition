@@ -28,10 +28,16 @@ public class CollectionController {
 
     @RequestMapping(value = "/addtocollection/{fid}" , method = RequestMethod.GET)
     public void addtoCollection(Model model,HttpSession session,@PathVariable("fid") int fid){
+        boolean flag=false;
         UserEntity user = (UserEntity)session.getAttribute("loginUser");
         int userid = user.getId();
-        List<CollectionEntity> collections = collectionDao.queryByFidUid(fid,userid);
-        if(collections.isEmpty()){
+        List<CollectionEntity> collections = (List<CollectionEntity>)session.getAttribute("usercollections");
+        for(CollectionEntity collectionEntity:collections){
+            if(collectionEntity.getFileId()==fid&&collectionEntity.getUserId()==userid){
+                flag = true;
+            }
+        }
+        if(!flag){
             collectionDao.createARecord(fid,userid);
             System.out.println("插入成功！");
             model.addAttribute("collectionflag","0");

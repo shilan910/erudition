@@ -1,6 +1,8 @@
 package com.erudition.controller;
 
+import com.erudition.bean.CollectionEntity;
 import com.erudition.bean.UserEntity;
+import com.erudition.dao.CollectionDao;
 import com.erudition.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.AssertFalse;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/5/7.
@@ -20,6 +24,10 @@ public class UserController {
     @Autowired
     @Qualifier("userDao")
     private UserDao userDao;
+
+    @Autowired
+    @Qualifier("collectionDao")
+    private CollectionDao collectionDao;
 
     @RequestMapping(value = "/changetoregist", method = RequestMethod.GET)
     public String changeToRegist() {
@@ -61,8 +69,15 @@ public class UserController {
                 session.setAttribute("loginUser", user);
                 System.out.println("message1 : " + usernmaemessage);
                 request.getSession().setAttribute("username", username);      //session中设置值
+
+
+                //登录的时候即将该用户常用目录中的内容加入session中
+                List<CollectionEntity> collections = collectionDao.getByUid(user.getId());
+                session.setAttribute("usercollections",collections);
                 //session.setAttribute("userid",user.getId());
                 // redirectAttributes.addAttribute("loginMsg",message);
+
+
 
                 System.out.println("message : " + usernmaemessage);
                 if(user.getAuthority().equals("1"))return "redirect:/admin/index";
