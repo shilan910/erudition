@@ -1,8 +1,10 @@
 package com.erudition.controller;
 
 import com.erudition.bean.CollectionEntity;
+import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CollectionDao;
+import com.erudition.dao.ResourcesDao;
 import com.erudition.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.AssertFalse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +31,10 @@ public class UserController {
     @Autowired
     @Qualifier("collectionDao")
     private CollectionDao collectionDao;
+
+    @Autowired
+    @Qualifier("resourcesDao")
+    private ResourcesDao resourcesDao;
 
     @RequestMapping(value = "/changetoregist", method = RequestMethod.GET)
     public String changeToRegist() {
@@ -72,8 +79,12 @@ public class UserController {
 
 
                 //登录的时候即将该用户常用目录中的内容加入session中
+                List<FilesEntity>files = new ArrayList<FilesEntity>();
                 List<CollectionEntity> collections = collectionDao.getByUid(user.getId());
-                session.setAttribute("usercollections",collections);
+                for(CollectionEntity collectionEntity:collections){
+                    files.add(resourcesDao.getById(collectionEntity.getFileId()));
+                }
+                session.setAttribute("usercollections",files);
                 //session.setAttribute("userid",user.getId());
                 // redirectAttributes.addAttribute("loginMsg",message);
 
