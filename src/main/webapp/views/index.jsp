@@ -405,10 +405,10 @@ pageEncoding="UTF-8"%>
                                 "<div class='flex-3'>大小</div><div class='flex-3'>创建者</div>"+
                                 "<div class='flex-3'>更新日期</div></div><div class='line'></div>";
                         file_list.append(obj0);
+                        iCheckready();
 
 
                         $.getJSON(url , function(data){
-
                             $.each(data.list,function(i, file){
                                 //转换时间戳
                                 var date = new Date(file.createTime);
@@ -428,9 +428,9 @@ pageEncoding="UTF-8"%>
                                         "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"
                                         +createDate+"</div></div><div class='line'></div>";
 
-
                                 console.log(file.title);
                                 file_list.append(obj);
+                                iCheckready();
                             });
                         });
                     }
@@ -502,29 +502,16 @@ pageEncoding="UTF-8"%>
 
 <!--icheck    radio不能正常使用-->
 <script>
-
-//    $(document).on("input",iCheck({
-//        checkboxClass: 'icheckbox_square-blue',
-//        radioClass: 'iradio_square-blue',
-//        increaseArea: '20%' // optional
-//    }))
-
-    $("body").delegate(":checkbox","on",function(){            //这个不对啊
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
-
     $(document).ready(function(){
-
+        iCheckready();
+    });
+    var iCheckready=function(){
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             increaseArea: '20%' // optional
         });
-    });
+    };
 </script>
 
 <!--视频播放-->
