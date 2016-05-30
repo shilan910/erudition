@@ -461,65 +461,6 @@ pageEncoding="UTF-8"%>
 
 
 
-<%--常用目录异步显示--%>
-<script>
-
-//    $(function(){
-//
-//        $("#collection").click(function(){
-//                   // var third_cate_id = $(this).attr("value");
-//                    //if(third_cate_id != null){
-//                      //  console.log(third_cate_id);
-//                        var file_list = $("#file-list");
-//                        var url = "/erudition/collection/showcollections";
-//
-//                        file_list.empty();
-//                        var obj0= "<div class='first-floor flex-row'><div class='flex-3'><div>"+
-//                                "<input type='checkbox'/><span class='filename'>名称</span></div></div>"+
-//                                "<div class='flex-3'>大小</div><div class='flex-3'>创建者</div>"+
-//                                "<div class='flex-3'>更新日期</div></div><div class='line'></div>";
-//                        file_list.append(obj0);
-//                        alert(obj0);
-//
-//                        $.getJSON(url , function(data){
-//                            alert(data);
-//
-//                            $.each(data.list,function(i, file){
-//                                //转换时间戳
-//                                var date = new Date(file.createTime);
-//                                var Y = date.getFullYear() + '-';
-//                                var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-//                                var D = date.getDate() + ' ';
-//                                var h = date.getHours() + ':';
-//                                var m = date.getMinutes() + ':';
-//                                var s = date.getSeconds();
-//                                var createDate = Y+M+D+h+m+s;
-//                                alert(file.title);
-//
-//                                var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
-//                                        "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
-//                                        "<div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>"+
-//                                        "<div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>"+file.title+"</a></span></div></div>"+
-//                                        "<div class='flex-3 file-size'><span>1.27MB</span></div>"+
-//                                        "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"
-//                                        +createDate+"</div></div><div class='line'></div>";
-//
-//
-//                                console.log(file.title);
-//                                file_list.append(obj);
-//                            });
-//                        });
-//                  //  }
-//
-//                }
-//
-//        )
-//
-//    })
-</script>
-
-
-
 <%--左侧导航基础模板--%>
 <script type="text/javascript">
     jQuery(document).ready(function () {
