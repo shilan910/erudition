@@ -153,7 +153,7 @@ pageEncoding="UTF-8"%>
                         <div class='flex-1 checkbox'><input type='checkbox'/></div>
                         <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
                         <div class='file-name flex-4'><span><a href='#'>${files.title}</a></span></div></div>
-                        <div class='flex-3 file-size'><span>1.27MB</span></div>
+                        <div class='flex-3 file-size'><span>${files.size}</span></div>
                         <div class='flex-3 file-creator'>${files.creater}</div>
                         <div class='flex-3 file-time'>${files.createTime}</div>
                     </div>
@@ -207,7 +207,7 @@ pageEncoding="UTF-8"%>
                                         "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
                                         "<div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>"+
                                         "<div class='file-name flex-4'><span><a href='#'>"+file.title+"</a></span></div></div>"+
-                                        "<div class='flex-3 file-size'><span>1.27MB</span></div>"+
+                                        "<div class='flex-3 file-size'><span>"+file.size+"</span></div>"+
                                         "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"+
                                         ""+file.createTime+"</div></div><div class='line'></div>";
 
@@ -329,7 +329,7 @@ pageEncoding="UTF-8"%>
             var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
                     + "<div class='file-name'>"+file.title+"</div><div class='file-class'>"
                     + file.type+"</div></div><div class='file-size'><button class='download'>下载文件("
-                    + file.size+"MB)</button></div></div></div><div class='attribute'>"
+                    + file.size+")</button></div></div></div><div class='attribute'>"
                     + "<div class='a-info'><div class='a-first'><div class='file-from'>所属文件夹:"
                     + file.categoryName+"</div><div class='a-close'>×</div><div class='clearfix'></div>"
                     + "</div><div class='file-name'><img alt='' src='/erudition/assets/images/test.jpg'>"+file.title+"</div><div class='a-third'>"
