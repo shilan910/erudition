@@ -84,28 +84,28 @@ pageEncoding="UTF-8"%>
                     </li>
 
 
-                        <li class="" ><a href="${rootPath}/filecollect/file"><i class="fa fa-glass"></i>常用目录 </a>
-                            <ul class="submenu" >
-                                <c:forEach items="${categories}" var="firstCate">
-                                    <li><a href="#">${firstCate.name}</a>
+                    <li id="collection" class="" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>
+                            <%--<ul class="submenu" >--%>
+                                <%--<c:forEach items="${categories}" var="firstCate">--%>
+                                    <%--<li><a href="#">${firstCate.name}</a>--%>
 
-                                        <ul class="submenu">
-                                            <c:forEach items="${firstCate.children}" var="secondCate">
-                                                <li><a href="#">${secondCate.name}</a>
+                                        <%--<ul class="submenu">--%>
+                                            <%--<c:forEach items="${firstCate.children}" var="secondCate">--%>
+                                                <%--<li><a href="#">${secondCate.name}</a>--%>
 
-                                                    <ul class="submenu">
-                                                        <c:forEach items="${secondCate.children}" var="thirdCate">
-                                                            <li value="${thirdCate.id}"><a href="#">${thirdCate.name}</a></li>
-                                                        </c:forEach>
-                                                    </ul>
+                                                    <%--<ul class="submenu">--%>
+                                                        <%--<c:forEach items="${secondCate.children}" var="thirdCate">--%>
+                                                            <%--<li value="${thirdCate.id}"><a href="#">${thirdCate.name}</a></li>--%>
+                                                        <%--</c:forEach>--%>
+                                                    <%--</ul>--%>
 
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
+                                                <%--</li>--%>
+                                            <%--</c:forEach>--%>
+                                        <%--</ul>--%>
 
-                                    </li>
-                                </c:forEach>
-                            </ul>
+                                    <%--</li>--%>
+                                <%--</c:forEach>--%>
+                            <%--</ul>--%>
 
                         </li>
 
@@ -159,6 +159,23 @@ pageEncoding="UTF-8"%>
                     </div>
                     <div class='line'></div>
                 </c:forEach>
+                <c:if test="${flagofcollection==1}">
+                <c:forEach items="${showcollections}" var="collections">
+                    <div class='body-floor flex-row'>
+                        <div class='flex-3 flex-row'>
+                            <div class='flex-1 checkbox'>
+                                <input type='checkbox'/>
+                            </div>
+                            <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
+                            <div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>${collections.title}</a></span></div>
+                        </div>
+                        <div class='flex-3 file-size'><span>${collections.size}</span></div>
+                        <div class='flex-3 file-creator'>${collections.creater}</div>
+                        <div class='flex-3 file-time'>${collections.createTime}</div>
+                    </div>
+                    <div class='line'></div>
+                </c:forEach>
+                </c:if>
 
             </div>
 

@@ -109,6 +109,7 @@ public class FileManageController {
             System.out.println(f.getTitle());
         }
         httpSession.setAttribute("searchresult",files);
+        httpSession.setAttribute("flagofcollection",0);
         if(user.getAuthority().equals("1")){
             System.out.println("你是管理员！");
             return "admin/file_result";

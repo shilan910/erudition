@@ -152,7 +152,6 @@ pageEncoding="UTF-8"%>
                 <div class="line"></div>
 
             </div>
-            <c:if test="${flagofcollection==1}">
             <c:forEach items="${showcollections}" var="collections">
             <div class='body-floor flex-row'>
                 <div class='flex-3 flex-row'>
@@ -168,7 +167,6 @@ pageEncoding="UTF-8"%>
             </div>
             <div class='line'></div>
             </c:forEach>
-            </c:if>
         </div>
     </div>
 
