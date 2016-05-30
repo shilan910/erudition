@@ -13,12 +13,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 
 /**
  * Created by tsj on 16-5-3.
  */
 @Repository("resourcesDao")
-public class ResourcesDao extends BaseDao{
+public class ResourcesDao extends BaseDao {
 
 
     @Autowired
@@ -29,19 +30,19 @@ public class ResourcesDao extends BaseDao{
     @Autowired
     private PageHandler pageHandler;
 
-    public FilesEntity getById(int id){
-        return get(FilesEntity.class,id);
+    public FilesEntity getById(int id) {
+        return get(FilesEntity.class, id);
     }
 
-    public Page<FilesEntity> getResourcesByPage(int pageNum,int pageSize,int thirdId){
+    public Page<FilesEntity> getResourcesByPage(int pageNum, int pageSize, int thirdId) {
         String hql = "from FilesEntity as files where files.categoryId=?";
         Query query = query(hql);
-        query.setInteger(0,thirdId);
+        query.setInteger(0, thirdId);
         return pageHandler.getPage(pageNum, pageSize,
                 FilesEntity.class, query);
     }
 
-    public Page<FilesEntity> getResourcesByKeyword(int pageNum,int pageSize,String key){
+    public Page<FilesEntity> getResourcesByKeyword(int pageNum, int pageSize, String key) {
         String hql = "from FilesEntity as files where files.keywords like ?";
         Query query = query(hql);
         query.setString(0, "%" + key + "%");
@@ -50,18 +51,21 @@ public class ResourcesDao extends BaseDao{
     }
 
 
-    public void saveFiles(String cate1 , String cate2 , String cate3 , MultipartFile file , UserEntity user){
+    public void saveFiles(String cate1, String cate2, String cate3, MultipartFile file, UserEntity user) {
         FilesEntity fileEntity = new FilesEntity();
 
         fileEntity.setTitle(file.getOriginalFilename());
-        System.out.println("123345667"+file.getOriginalFilename());
+        System.out.println("123345667" + file.getOriginalFilename());
         fileEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        fileEntity.setSize(Double.valueOf(file.getSize()));
-        fileEntity.setKeywords(cate1+cate2+cate3);
-        fileEntity.setType(getFileTypeByFileName(file.getName()));
+        fileEntity.setSize(exchangeSize(file.getSize()));
         fileEntity.setCreater(user.getUserName());
 
         CategoryEntity category = categoryDao.getById(Integer.valueOf(cate3));
+
+        fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
+                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
+                category.getCategoryName() + file.getOriginalFilename());
+        fileEntity.setType(category.getCategoryName());
 
         fileEntity.setCategoryId(category.getId());
         fileEntity.setCategoryName(category.getCategoryName());
@@ -77,12 +81,36 @@ public class ResourcesDao extends BaseDao{
     }
 
 
-    private String getFileTypeByFileName(String name){
+    private String getFileTypeByFileName(String name) {
 
         int index = name.lastIndexOf('.');
 
-        return name.substring(index+1);
+        return name.substring(index + 1);
 
+    }
+
+    private String exchangeSize(long size){
+        double initsize = size;
+        String nowsize;
+        int layer=1;
+        while(initsize>=1024){
+            initsize/=1024.0;
+            layer++;
+        }
+        DecimalFormat df2 = new DecimalFormat("###.00");
+        String initsize2 = df2.format(initsize);
+        System.out.println(layer);
+        System.out.println(initsize2);
+        switch (layer){
+            case 1:nowsize = initsize2+"B";break;
+            case 2:nowsize = initsize2+"KB";break;
+            case 3:nowsize = initsize2+"MB";break;
+            case 4:nowsize = initsize2+"GB";break;
+            case 5:nowsize = initsize2+"TB";break;
+            case 6:nowsize = initsize2+"PB";break;
+            default:nowsize = initsize2+"B";break;
+        }
+        return nowsize;
     }
 
 }

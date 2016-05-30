@@ -162,7 +162,7 @@ pageEncoding="UTF-8"%>
                     <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
                     <div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>${collections.title}</a></span></div>
                 </div>
-                <div class='flex-3 file-size'><span>1.27MB</span></div>
+                <div class='flex-3 file-size'><span>${collections.size}MB</span></div>
                 <div class='flex-3 file-creator'>${collections.creater}</div>
                 <div class='flex-3 file-time'>${collections.createTime}</div>
             </div>
