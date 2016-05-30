@@ -141,7 +141,7 @@
                         <div class='flex-1 checkbox'><input type='checkbox'/></div>
                         <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
                         <div class='file-name flex-4'><span><a href='#'>${files.title}</a></span></div></div>
-                        <div class='flex-3 file-size'><span>1.27MB</span></div>
+                        <div class='flex-3 file-size'><span>${files.size}</span></div>
                         <div class='flex-3 file-creator'>${files.creater}</div>
                         <div class='flex-3 file-time'>${files.createTime}</div>
                     </div>

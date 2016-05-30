@@ -145,7 +145,7 @@
                                             </div>
                                         </div>
                                         <div class='flex-3 file-size'>
-                                            <span>1.27MB</span>
+                                            <span>${files.size}</span>
                                         </div>
                                         <div class='flex-3 file-creator'>${files.creater}</div>
                                         <div class='flex-3 file-time'>${files.createTime}</div>

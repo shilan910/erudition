@@ -23,6 +23,7 @@
 		<mapping class="com.erudition.bean.FilesEntity"/>
 		<mapping class="com.erudition.bean.FilesEntity"/>
 		<mapping class="com.erudition.bean.CollectionEntity"/>
+		<mapping class="com.erudition.bean.FilesEntity"/>
 
 
 	</session-factory>
