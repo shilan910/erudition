@@ -422,6 +422,8 @@ pageEncoding="UTF-8"%>
                                 "<div class='flex-3'>大小</div><div class='flex-3'>创建者</div>"+
                                 "<div class='flex-3'>更新日期</div></div><div class='line'></div>";
                         file_list.append(obj0);
+                        $(".body-floor").remove();
+                        $(".line").remove();
                         iCheckready();
 
 
