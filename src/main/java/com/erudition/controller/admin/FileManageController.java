@@ -6,7 +6,6 @@ import com.erudition.bean.UserEntity;
 import com.erudition.dao.CategoryDao;
 import com.erudition.dao.ResourcesDao;
 import com.erudition.dao.UserDao;
-import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -111,6 +109,7 @@ public class FileManageController {
             System.out.println(f.getTitle());
         }
         httpSession.setAttribute("searchresult",files);
+        httpSession.setAttribute("flagofcollection",0);
         if(user.getAuthority().equals("1")){
             System.out.println("你是管理员！");
             return "admin/file_result";

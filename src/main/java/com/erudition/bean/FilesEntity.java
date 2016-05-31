@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by sl on 16-5-16.
+ * Created by tsj on 16-5-30.
  */
 @Entity
 @Table(name = "eru_files", schema = "", catalog = "db_erudition")
@@ -19,7 +19,7 @@ public class FilesEntity {
     private String relations;
     private String keywords;
     private String type;
-    private Double size;
+    private String size;
     private String thumb;
     private String categoryName;
 
@@ -124,17 +124,17 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "size", nullable = true, insertable = true, updatable = true, precision = 0)
-    public Double getSize() {
+    @Column(name = "size")
+    public String getSize() {
         return size;
     }
 
-    public void setSize(Double size) {
+    public void setSize(String size) {
         this.size = size;
     }
 
     @Basic
-    @Column(name = "thumb", nullable = true, insertable = true, updatable = true, length = 255)
+    @Column(name = "thumb")
     public String getThumb() {
         return thumb;
     }
@@ -144,7 +144,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "category_name", nullable = true, insertable = true, updatable = true, length = 255)
+    @Column(name = "category_name")
     public String getCategoryName() {
         return categoryName;
     }
