@@ -121,7 +121,14 @@ public class UserController {
             if (!password.equals(password2)) {
                 recodemessage = "请保持密码和确认密码一致！";
             } else {
-                userDao.save(username, password);
+                UserEntity testuser = userDao.getByName(username);
+                if(testuser==null){
+                    userDao.save(username, password);
+                    return "redirect:/index";
+                } else{
+                    reusernmaemessage = "已经存在的用户名！";
+                }
+
 
                 //return "index";
             }
@@ -135,7 +142,7 @@ public class UserController {
         System.out.println("repasswordmessage:" + repasswordmessage);
         System.out.println("recodemessage:" + recodemessage);
 
-        return "redirect:/index";
+        return "redirect:/user/changetoregist";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
