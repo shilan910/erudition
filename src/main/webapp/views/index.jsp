@@ -223,6 +223,11 @@ pageEncoding="UTF-8"%>
         <%--</div>--%>
     </div>
     <div class="next-btn"></div>
+
+
+    <%--<jsp:include page="common/pagination.jsp"/>--%>
+
+
     <!--<div class="clearfix"></div>-->
 </div>
 <!--文件弹窗点击事件，静态DOM-->
