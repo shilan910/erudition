@@ -151,22 +151,96 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="line"></div>
 
-            </div>
-            <c:forEach items="${showcollections}" var="collections">
-            <div class='body-floor flex-row'>
-                <div class='flex-3 flex-row'>
-                    <div class='flex-1 checkbox'>
-                        <input type='checkbox'/>
+                <c:forEach items="${showcollections}" var="collections">
+                    <div class='body-floor flex-row'>
+                        <div class='flex-3 flex-row'>
+                            <div class='flex-1 checkbox'>
+                                <input type='checkbox'/>
+                            </div>
+                            <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
+                            <div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>${collections.title}</a></span></div>
+                        </div>
+                        <div class='flex-3 file-size'><span>${collections.size}</span></div>
+                        <div class='flex-3 file-creator'>${collections.creater}</div>
+                        <div class='flex-3 file-time'>${collections.createTime}</div>
                     </div>
-                    <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
-                    <div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>${collections.title}</a></span></div>
+                    <div class='line'></div>
+                </c:forEach>
+
+                <div class="body-floor flex-row">
+                    <div class="flex-3 flex-row">
+                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
+                        <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->
+                        <div class="flex-1 file-image"><i class="iconfont icon-mp3"></i></div>
+                        <div class="file-name flex-4"><span><a href="#">一号分类内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试</a></span></div>
+                    </div>
+                    <div class="flex-3 file-size">
+                        <span>1.27MB</span>
+                    </div>
+                    <div class="flex-3 file-creator">
+                        MR.Z
+                    </div>
+                    <div class="flex-3 file-time">
+                        2013.12.06
+                    </div>
                 </div>
-                <div class='flex-3 file-size'><span>${collections.size}</span></div>
-                <div class='flex-3 file-creator'>${collections.creater}</div>
-                <div class='flex-3 file-time'>${collections.createTime}</div>
+                <div class="line"></div>
+
+                <div class="body-floor flex-row">
+                    <div class="flex-3 flex-row">
+                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
+                        <div class="flex-1 file-image"><i class="iconfont icon-msnui-ppt-inverse"></i></div>
+                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
+                    </div>
+                    <div class="flex-3 file-size">
+                        <span>1.27MB</span>
+                    </div>
+                    <div class="flex-3 file-creator">
+                        MR.Z
+                    </div>
+                    <div class="flex-3 file-time">
+                        2013.12.06
+                    </div>
+                </div>
+                <div class="line"></div>
+
+                <div class="body-floor flex-row">
+                    <div class="flex-3 flex-row">
+                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
+                        <div class="flex-1 file-image"><i class="iconfont icon-word"></i></div>
+                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
+                    </div>
+                    <div class="flex-3 file-size">
+                        <span>1.27MB</span>
+                    </div>
+                    <div class="flex-3 file-creator">
+                        MR.Z
+                    </div>
+                    <div class="flex-3 file-time">
+                        2013.12.06
+                    </div>
+                </div>
+                <div class="line"></div>
+
+                <div class="body-floor flex-row">
+                    <div class="flex-3 flex-row">
+                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
+                        <div class="flex-1 file-image"><i class="iconfont icon-txt"></i></div>
+                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
+                    </div>
+                    <div class="flex-3 file-size">
+                        <span>1.27MB</span>
+                    </div>
+                    <div class="flex-3 file-creator">
+                        MR.Z
+                    </div>
+                    <div class="flex-3 file-time">
+                        2013.12.06
+                    </div>
+                </div>
+                <div class="line"></div>
+
             </div>
-            <div class='line'></div>
-            </c:forEach>
         </div>
     </div>
 
@@ -420,6 +494,8 @@ pageEncoding="UTF-8"%>
                                 "<div class='flex-3'>大小</div><div class='flex-3'>创建者</div>"+
                                 "<div class='flex-3'>更新日期</div></div><div class='line'></div>";
                         file_list.append(obj0);
+                        $(".body-floor").remove();
+                        $(".line").remove();
                         iCheckready();
 
 
