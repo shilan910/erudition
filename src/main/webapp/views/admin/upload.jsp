@@ -49,7 +49,7 @@
 
     <jsp:include page="../common/admin_sidebar.jsp" />
 
-    <div class="contents flex-8">
+    <div class="contents flex-8 file-upload">
         <div class="header-all">
             <div class="header flex-row">
                 <div class="flex-7 path">
@@ -59,10 +59,10 @@
             </div>
 
                 <%--文件上传表单--%>
-                <div>
+                <div class="form-upload">
                     <form action="/erudition/admin/file/upload" method="post" enctype="multipart/form-data">
                         <div class="select">
-                            <div class="">
+                            <div class="directory">
                                 <span>&nbsp;&nbsp;&nbsp;一级目录&nbsp;&nbsp;&nbsp;</span>
                                 <select class="form-control" id="category-select" name="cate1">
                                     <option selected value="">请选择</option>
@@ -71,13 +71,13 @@
                                     </c:forEach>
                                 </select>
                             </div>
-                            <div class="">
+                            <div class="directory">
                                 <span>二级目录</span>
                                 <select class="form-control" id="second-category-select" name="cate2">
                                     <option selected value="">请选择</option>
                                 </select>
                             </div>
-                            <div class="">
+                            <div class="directory">
                                 <span>三级目录</span>
                                 <select class="form-control" id="third-category-select" name="cate3">
                                     <option selected value="">请选择</option>
@@ -85,15 +85,34 @@
                             </div>
                         </div>
 
-                        <div class="form-group inputFile">
+                        <%--<div class="form-group inputFile">
                             <label for="inputFile">上传视频</label>
                             <input type="file" id="inputFile" name="files" value="" multiple />
                             <p class="help-block">支持MP4格式</p>
                         </div>
-                        <input type="submit" class="btn btn-success btn-course" value="上传" />
+                        <input type="submit" class="btn btn-success btn-course" value="上传" />--%>
+
+                        <label>上传视频：</label>
+                        <div class="form-group inputFile input-file">
+                            <br/>
+                            <a href="javascript:;" class="file-scan">
+                                <input type="file" id="inputFile" name="files" value="浏览" multiple />选择文件
+                            </a>
+                            <label class="showFileName">未选择文件</label>
+                        </div>
+                        <p class="help-block pull-left">支持MP4格式</p>
+                        <input type="submit" class="btn btn-primary btn-course pull-right" value="上传" id="progress" />
+                        <div class="clearfix"></div>
 
 
                     </form>
+
+                    <div class="progress">
+                        <div id="progress-bar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                            <!--<span class="sr-only">20% 完成</span>-->
+                            <span>20% Complete</span>
+                        </div>
+                    </div>
 
 
             </div>
@@ -103,7 +122,40 @@
 
 
 </div>
+<!--文件上传相关-->
+<script>
+    //监听文件浏览
+    $(".file-scan").on("change","input[type='file']",function(){
+        var filePath=$(this).val();
+        if(filePath.indexOf("mp4")!=-1 || filePath.indexOf("doc")!=-1){    //这里只是检测图片字符串位置
+            $(".fileerrorTip").html("").hide();
+            var arr=filePath.split('\\');
+            var fileName=arr[arr.length-1];
+            $(".showFileName").html(fileName);
+        }else{
+            $(".showFileName").html("您上传文件类型有误！");
+//                            $(".fileerrorTip").html("您未上传文件，或者您上传文件类型有误！").show();
+            return false
+        }
+    })
 
+    //进度条动画
+    $("#progress").click(function() {
+        var num = 50;
+        var num_str = num + "%";
+        var interval = setInterval(fun1, 20);
+        function fun1() {
+            $("#progress-bar").width(num_str);
+            num = num + 1;
+            num_str = num + "%";        //计算的速度快于画画
+
+            $("#progress-bar span").text(num_str);
+            if(num==100){
+                clearInterval(interval);
+            }
+        }
+    })
+</script>
 
 <%--fileUpload:文件上传，至关重要的一句话--%>
 <script>
