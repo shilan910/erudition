@@ -62,26 +62,43 @@
                 <div class="form-upload">
                     <form action="/erudition/admin/file/upload" method="post" enctype="multipart/form-data">
                         <div class="select">
-                            <div class="directory">
-                                <span>&nbsp;&nbsp;&nbsp;一级目录&nbsp;&nbsp;&nbsp;</span>
-                                <select class="form-control" id="category-select" name="cate1">
-                                    <option selected value="">请选择</option>
-                                    <c:forEach items="${firstCategorys}" var="category">
-                                        <option value="${category.id}">${category.categoryName}</option>
-                                    </c:forEach>
-                                </select>
+                            <div class="directory flex-row">
+                                <div class="flex-4">
+                                    <span class="select-span">一级目录</span>
+                                </div>
+                                <div class="flex-6">
+                                    <select class="form-control" id="category-select" name="cate1">
+                                        <option selected value="">请选择</option>
+                                        <c:forEach items="${firstCategorys}" var="category">
+                                            <option value="${category.id}">${category.categoryName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="directory">
-                                <span>二级目录</span>
-                                <select class="form-control" id="second-category-select" name="cate2">
-                                    <option selected value="">请选择</option>
-                                </select>
+                            <div class="directory flex-row">
+                                <div class="flex-4">
+                                    <span class="select-span">二级目录</span>
+                                </div>
+                                <div class="flex-6">
+                                    <div id="second-select-all">
+                                        <select class="form-control" id="second-category-select" name="cate2">
+                                            <option selected value="">请选择</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="directory">
-                                <span>三级目录</span>
-                                <select class="form-control" id="third-category-select" name="cate3">
-                                    <option selected value="">请选择</option>
-                                </select>
+                            <div class="directory flex-row">
+                                <div class="flex-4">
+                                    <span class="select-span">三级目录</span>
+                                </div>
+                                <div class="flex-6">
+                                    <div id="third-select-all">
+                                        <select class="form-control" id="third-category-select" name="cate3">
+                                            <option selected value="">请选择</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
@@ -162,52 +179,60 @@
     $('#inputFile').fileupload();
 </script>
 
-<%--目录--%>
+<%--checkbox插件启动--%>
 <script>
     $('input').iCheck({
         checkboxClass: 'icheckbox_square-blue',
         radioClass: 'iradio_square-blue',
         increaseArea: '20%' // optional
     });
+</script>
 
+<%--上传联动--%>
+<script>
     var category_select = $("#category-select"),
-            second_category_select = $("#second-category-select"),
+            second_category_select = $("#second_category_select"),
             third_category_select = $("#third-category-select");
 
     category_select.change(function(){
-
-            loadCategory(category_select.val(),second_category_select);
-//        } else {
-//            clearCategory(second_category_select);
-//            clearCategory(third_category_select);
-//        }
+        loadCategory2(category_select.val());
     });
 
-    //zqh:new
-
-    second_category_select.change(function(){
-//        if(second_category_select.val() != "") {
-            loadCategory(second_category_select.val(),third_category_select);
-//        } else {
-//            clearCategory(third_category_select);
-//        }
+    $(document).on("change","#second-category-select",function(event){
+        loadCategory3($("#second-category-select").val());
     });
-
-
-
-    function loadCategory(id , selector){
+    function loadCategory2(id){    //id根据1号的option改变来驱动，一定会有id传入,,,,,暂时不要去思考selector
         var url = "/erudition/category/getChildrenCategory/"+id;
         $.getJSON(url , function(data){
-            selector.empty();
-            $.each(data,function(i, category){
+            var select="";
+            $.each(data,function(i, category){                 //这里有用的i跟category什么意思？，，，放回的
                 var option = "<option value='" + category.id + "'>" + category.categoryName + "</option>";
-                selector.append(option);
+                select=select+option;
             });
+            select="<select class='form-control' id='second-category-select' name='cate2'>"+select+"</select>"    //无关的组装
+            //将获得的数据插入到#test2的子元素中
+            $("#second-select-all").html(select);
+            $("#second-select-all").children("select").selectOrDie();     //重新启动
+            loadCategory3($("#second-category-select").val());
         });
     }
 
-    function clearCategory(selector) {
-        selector.empty();
+    function loadCategory3(id){    //给个2号的id
+        var url = "/erudition/category/getChildrenCategory/"+id;
+        $.getJSON(url , function(data){
+            var select="";
+            $.each(data,function(i, category){                 //这里有用的i跟category什么意思？，，，放回的
+                var option = "<option value='" + category.id + "'>" + category.categoryName + "</option>";
+                select=select+option;
+            });
+            select="<select class='form-control' id='third-category-select' name='cate3'>"+select+"</select>";    //无关的组装
+
+            console.log("这里是第三个目录"+select);
+
+            //将获得的数据插入到#test2的子元素中
+            $("#third-select-all").html(select);
+            $("#third-select-all").children("select").selectOrDie();     //重新启动
+        });
     }
 </script>
 
@@ -282,5 +307,17 @@
     });
 </script>
 
+<!--美化option-->
+<script>
+    $(function(){
+        $('select').selectOrDie();
+    });
+</script>
+<%--<script>
+    var startSelect=function(){
+        $('select').selectOrDie();
+    }
+</script>--%>
+<script src="${assetsPath}/js/select/selectordie.js"></script>
 </body>
 </html>
