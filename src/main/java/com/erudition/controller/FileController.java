@@ -6,6 +6,8 @@ import com.erudition.dao.CategoryDao;
 import com.erudition.dao.ResourcesDao;
 import com.erudition.util.RelationUtil;
 import org.apache.commons.io.FileUtils;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.jms.Session;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -47,23 +50,24 @@ public class FileController {
         model.addAttribute("firstCategorys", categoryDao.getFirstCategory());
         List<FilesEntity> files = resourcesDao.getAll("FilesEntity");
         session.setAttribute("allfiles",files);
-//        for(FilesEntity file:files){
-//            System.out.println(file.getTitle());
-//        }
         return "admin/upload";
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String upload(String cate1, String cate2, String cate3,
                          @RequestParam MultipartFile[] files, HttpSession session) {
-        System.out.println("uploadController000 in ......");
 
+    //        Configuration config = new Configuration().configure("hibernate.cfg.xml");
+    //        SessionFactory SessionFactory = config.buildSessionFactory();
+    //        org.hibernate.Session session1 = SessionFactory.getCurrentSession();
+        System.out.println("uploadController000 in ......");
 
         for (MultipartFile file : files) {
             if (!file.isEmpty()) {
                 System.out.println(file.getOriginalFilename());
                 //TODO 在这里为新文件设置relations，可能要修改 resourcesDao.saveFiles方法的接口
                 resourcesDao.saveFiles(cate1, cate2, cate3, file, (UserEntity) session.getAttribute("loginUser"));
+//                session1.refresh(file);
                 System.out.println("uploadController in ......");
             }
 

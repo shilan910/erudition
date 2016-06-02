@@ -55,7 +55,7 @@ public class ResourcesDao extends BaseDao {
         FilesEntity fileEntity = new FilesEntity();
 
         fileEntity.setTitle(file.getOriginalFilename());
-        System.out.println("123345667" + file.getOriginalFilename());
+        //System.out.println("123345667" + file.getOriginalFilename());
         fileEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
         fileEntity.setSize(exchangeSize(file.getSize()));
         fileEntity.setCreater(user.getUserName());
@@ -75,6 +75,7 @@ public class ResourcesDao extends BaseDao {
         String url = MultipartFileUtils.saveFile(file, "/usr/local/erudition/video");
         fileEntity.setUrl(url);
         save(fileEntity);
+
         System.out.println("Dao out ......");
 
 

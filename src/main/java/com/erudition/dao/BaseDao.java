@@ -37,6 +37,8 @@ public class BaseDao {
 	 */
 	public void save(Object object){
 		getSession().save(object);
+		getSession().flush();
+		getSession().clear();
 	}
 	
 	/**
