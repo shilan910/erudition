@@ -25,12 +25,11 @@ public class TestNlpir {
 
     @Test
     public void test1(){
-        NLPIR nlpir = new NLPIR();
-        nlpir.Instance.NLPIR_Init(nlpir.getSystemFolder(),nlpir.getCharsetType() ,nlpir.getSystemCharset());
-        String nativeBytes = null;
-
-        nativeBytes = nlpir.Instance.NLPIR_GetFileKeyWords("/home/sl/test/Readme1.txt",10,false);
-        System.out.println("result : " + nativeBytes);
+        WordFrequency wordFrequency = new WordFrequency();
+        String[] words = wordFrequency.wordFre("/home/sl/test/Readme1.txt",15);
+        for(String word : words){
+            System.out.println(word);
+        }
     }
 
 
@@ -78,7 +77,6 @@ public class TestNlpir {
         }
         fw.close();
         bw.close();
-
 
 
     }
