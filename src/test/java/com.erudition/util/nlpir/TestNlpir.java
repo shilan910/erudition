@@ -80,10 +80,6 @@ public class TestNlpir {
         bw.close();
 
 
-        CalFreq calFreq = new CalFreq();
-        calFreq.Statistics("/home/sl/test/wordfreq.txt","/home/sl/test/result.txt");
-
-
 
     }
 }
