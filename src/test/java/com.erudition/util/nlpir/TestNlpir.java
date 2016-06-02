@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration(value = "src/main/webapp")
@@ -21,16 +23,22 @@ import java.io.*;
 public class TestNlpir {
 
 
+    @Test
+    public void test1(){
+        NLPIR nlpir = new NLPIR();
+        nlpir.Instance.NLPIR_Init(nlpir.getSystemFolder(),nlpir.getCharsetType() ,nlpir.getSystemCharset());
+        String nativeBytes = null;
+
+        nativeBytes = nlpir.Instance.NLPIR_GetFileKeyWords("/home/sl/test/Readme1.txt",10,false);
+        System.out.println("result : " + nativeBytes);
+    }
+
 
     @Test
     public void test() throws IOException {
         NLPIR nlpir = new NLPIR();
         nlpir.Instance.NLPIR_Init(nlpir.getSystemFolder(),nlpir.getCharsetType() ,nlpir.getSystemCharset());
         String nativeBytes = null;
-
-
-
-
 
         File file = new File("/home/sl/test/wordfreq.txt");
         file.createNewFile();
@@ -46,35 +54,36 @@ public class TestNlpir {
             if (line == null) {
                 break;
             }
+            Pattern p = Pattern.compile("[。，、~？#￥$()|《》.,\"?!:']");// 增加对应的标点
+            Matcher m = p.matcher(line);
+            String first = m.replaceAll(""); // 把英文标点符号替换成空，即去掉英文标点符号
 
-            nativeBytes = nlpir.Instance.NLPIR_ParagraphProcess(line, 0); //分词
-            //nativeBytes = nlpir.Instance.NLPIR_GetFileKeyWords("/home/sl/test/Readme.txt",5,true);
+            nativeBytes = nlpir.Instance.NLPIR_ParagraphProcess(first, 0); //分词
             String[] words = nativeBytes.split(" ");  //分词结果以空格进行分割
-            System.out.println(words.length); //输出分词词数
-            System.out.println(nativeBytes);  //输出分词结果
 
-            bw.write(nativeBytes);
-            bw.newLine();
-            bw.flush();
+            for(String word : words){
+                //if(!word.contains("\\pP")){
+                    bw.write(word);
+                    bw.newLine();
+                    bw.flush();
+                //}
 
+            }
+           // System.out.println(words.length); //输出分词词数
+//            System.out.println(nativeBytes);  //输出分词结果
 
-
+//            bw.write(nativeBytes);
+//            bw.newLine();
+//            bw.flush();
         }
-
-
         fw.close();
         bw.close();
 
 
+        CalFreq calFreq = new CalFreq();
+        calFreq.Statistics("/home/sl/test/wordfreq.txt","/home/sl/test/result.txt");
 
 
 
-//            String sInput = "什么是机器学习";
-//       // nlpir.Instance.NLPIR_ImportUserDict("/home/jeff/workspace/data/dict", false);  //加载用户自定义词典
-//        nativeBytes = nlpir.Instance.NLPIR_ParagraphProcess(sInput, 0); //分词
-        nativeBytes = nlpir.Instance.NLPIR_GetFileKeyWords("/home/sl/test/wordfreq.txt",5,true);
-        String[] words = nativeBytes.split(" ");  //分词结果以空格进行分割
-        System.out.println(words.length); //输出分词词数
-        System.out.println(nativeBytes);  //输出分词结果
     }
 }
