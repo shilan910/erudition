@@ -157,7 +157,7 @@ pageEncoding="UTF-8"%>
                             <div class='flex-1 checkbox'>
                                 <input type='checkbox'/>
                             </div>
-                            <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
+                            <div class='flex-1 file-image'><i class='iconfont icon-${collections.type}'></i></div>
                             <div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>${collections.title}</a></span></div>
                         </div>
                         <div class='flex-3 file-size'><span>${collections.size}</span></div>
@@ -169,78 +169,78 @@ pageEncoding="UTF-8"%>
 
 
 
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->
-                        <div class="flex-1 file-image"><i class="iconfont icon-mp3"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
+                <%--<div class="body-floor flex-row">--%>
+                    <%--<div class="flex-3 flex-row">--%>
+                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
+                        <%--<!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->--%>
+                        <%--<div class="flex-1 file-image"><i class="iconfont icon-mp3"></i></div>--%>
+                        <%--<div class="file-name flex-4"><span><a href="#">一号分类内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试</a></span></div>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-size">--%>
+                        <%--<span>1.27MB</span>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-creator">--%>
+                        <%--MR.Z--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-time">--%>
+                        <%--2013.12.06--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="line"></div>--%>
 
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <div class="flex-1 file-image"><i class="iconfont icon-msnui-ppt-inverse"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
+                <%--<div class="body-floor flex-row">--%>
+                    <%--<div class="flex-3 flex-row">--%>
+                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
+                        <%--<div class="flex-1 file-image"><i class="iconfont icon-ppt"></i></div>--%>
+                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-size">--%>
+                        <%--<span>1.27MB</span>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-creator">--%>
+                        <%--MR.Z--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-time">--%>
+                        <%--2013.12.06--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="line"></div>--%>
 
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <div class="flex-1 file-image"><i class="iconfont icon-word"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
+                <%--<div class="body-floor flex-row">--%>
+                    <%--<div class="flex-3 flex-row">--%>
+                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
+                        <%--<div class="flex-1 file-image"><i class="iconfont icon-word"></i></div>--%>
+                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-size">--%>
+                        <%--<span>1.27MB</span>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-creator">--%>
+                        <%--MR.Z--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-time">--%>
+                        <%--2013.12.06--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="line"></div>--%>
 
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <div class="flex-1 file-image"><i class="iconfont icon-txt"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
+                <%--<div class="body-floor flex-row">--%>
+                    <%--<div class="flex-3 flex-row">--%>
+                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
+                        <%--<div class="flex-1 file-image"><i class="iconfont icon-txt"></i></div>--%>
+                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-size">--%>
+                        <%--<span>1.27MB</span>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-creator">--%>
+                        <%--MR.Z--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-time">--%>
+                        <%--2013.12.06--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="line"></div>--%>
 
             </div>
         </div>
@@ -538,7 +538,7 @@ pageEncoding="UTF-8"%>
 
                                  var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
                                         "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
-                                        "<div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>"+
+                                        "<div class='flex-1 file-image'><i class='iconfont icon-"+file.type+"'></i></div>"+
                                         "<div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>"+file.title+"</a></span></div></div>"+
                                         "<div class='flex-3 file-size'><span>"+file.size+"</span></div>"+
                                         "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"

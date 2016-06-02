@@ -138,7 +138,7 @@
                                                 <input type='checkbox'/>
                                             </div>
                                             <div class='flex-1 file-image'>
-                                                <i class='fa fa-folder-o fa-3x'></i>
+                                                <i class="iconfont icon-${files.type}"></i>
                                             </div>
                                             <div class='file-name flex-4'>
                                                 <span><a href='#'>${files.title}</a></span>

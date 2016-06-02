@@ -55,6 +55,7 @@ public class ResourcesDao extends BaseDao {
         FilesEntity fileEntity = new FilesEntity();
 
         fileEntity.setTitle(file.getOriginalFilename());
+        System.out.println("file.getOriginalFilename()"+file.getOriginalFilename());
         //System.out.println("123345667" + file.getOriginalFilename());
         fileEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
         fileEntity.setSize(exchangeSize(file.getSize()));
