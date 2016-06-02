@@ -1,10 +1,13 @@
 package com.erudition.controller;
 
+import com.erudition.bean.CategoryEntity;
 import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CategoryDao;
 import com.erudition.dao.ResourcesDao;
+import com.erudition.util.HashUtils;
 import com.erudition.util.RelationUtil;
+import com.erudition.util.nlpir.WordFrequency;
 import org.apache.commons.io.FileUtils;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -68,6 +71,20 @@ public class FileController {
                 //TODO 在这里为新文件设置relations，可能要修改 resourcesDao.saveFiles方法的接口
                 resourcesDao.saveFiles(cate1, cate2, cate3, file, (UserEntity) session.getAttribute("loginUser"));
 //                session1.refresh(file);
+                CategoryEntity category = categoryDao.getById(Integer.valueOf(cate3));
+
+                //目前只针对txt类型文件进行关键字计算
+//                if(category.getCategoryName().equals("txt")){
+//                    long unixTime = System.currentTimeMillis();
+//                    String name = HashUtils.HashPath(file.getOriginalFilename() + unixTime);
+//                    WordFrequency wordFrequency = new WordFrequency();
+//                    String[] words = wordFrequency.wordFre("/usr/local/erudition/video/"+name,15);
+//                    System.out.println("begin得到关键字！！！");
+//                    for(String word:words){
+//                        System.out.println(word);
+//                    }
+//                    System.out.println("end得到关键字！！！");
+//                }
                 System.out.println("uploadController in ......");
             }
 

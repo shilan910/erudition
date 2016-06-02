@@ -139,7 +139,7 @@
                 <c:forEach var="files" items="${searchresult}">
                     <div class='body-floor flex-row'><div class='flex-3 flex-row'>
                         <div class='flex-1 checkbox'><input type='checkbox'/></div>
-                        <div class='flex-1 file-image'><i class='fa fa-folder-o fa-3x'></i></div>
+                        <div class='flex-1 file-image'><i class="iconfont icon-${files.type}"></i></div>
                         <div class='file-name flex-4'><span><a href='#'>${files.title}</a></span></div></div>
                         <div class='flex-3 file-size'><span>${files.size}</span></div>
                         <div class='flex-3 file-creator'>${files.creater}</div>
