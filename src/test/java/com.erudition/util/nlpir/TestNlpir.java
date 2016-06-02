@@ -79,8 +79,5 @@ public class TestNlpir {
         bw.close();
 
 
-
-
-
     }
 }
