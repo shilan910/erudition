@@ -12,12 +12,12 @@ public class NLPIR {
     int charsetType;
 
     public NLPIR(){
-        systemFolder = "/home/sl/tools/ICTCLAS2016";  //ICTCLAS的目录,包括字典文件等
+        systemFolder = "/usr/local/erudition/tools/ICTCLAS2016";  //ICTCLAS的目录,包括字典文件等
         systemCharset = "UTF-8";  //默认字符集
         charsetType = 1;
 
         Instance = (CLibrary) Native.loadLibrary(
-                "/home/sl/tools/ICTCLAS2016/lib/linux64/libNLPIR.so", CLibrary.class);  //ICTCLAS的so文件地址
+                "/usr/local/erudition/tools/ICTCLAS2016/lib/linux64/libNLPIR.so", CLibrary.class);  //ICTCLAS的so文件地址
     }
 
     public static CLibrary getInstance() {
