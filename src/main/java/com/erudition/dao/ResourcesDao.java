@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * Created by tsj on 16-5-3.
@@ -51,7 +52,7 @@ public class ResourcesDao extends BaseDao {
     }
 
 
-    public void saveFiles(String cate1, String cate2, String cate3, MultipartFile file, UserEntity user) {
+    public String saveFiles(String cate1, String cate2, String cate3, MultipartFile file, UserEntity user) {
         FilesEntity fileEntity = new FilesEntity();
 
         fileEntity.setTitle(file.getOriginalFilename());
@@ -77,9 +78,19 @@ public class ResourcesDao extends BaseDao {
         fileEntity.setUrl(url);
         save(fileEntity);
 
+
         System.out.println("Dao out ......");
 
+        String name = url.substring(url.lastIndexOf("/")+1);
+        System.out.println("name:----->"+name);
+        return name;
+    }
 
+    public List<FilesEntity> getByTitle(String title) {
+        String hql = "from FilesEntity as files where files.title=?";
+        Query query = query(hql);
+        query.setString(0, title);
+        return query.list();
     }
 
 
@@ -114,5 +125,6 @@ public class ResourcesDao extends BaseDao {
         }
         return nowsize;
     }
+
 
 }
