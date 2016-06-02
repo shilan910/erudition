@@ -5,13 +5,17 @@ package com.erudition.util.nlpir;
  */
 public class WordFrequency {
 
-    public void wordFre(String filePath , int keyNum , boolean hasWeight){
+    public String[] wordFre(String filePath , int keyNum){
         NLPIR nlpir = new NLPIR();
         nlpir.Instance.NLPIR_Init(nlpir.getSystemFolder(),nlpir.getCharsetType() ,nlpir.getSystemCharset());
         String nativeBytes = null;
 
-        nativeBytes = nlpir.Instance.NLPIR_GetFileKeyWords(filePath,keyNum,hasWeight);
+        nativeBytes = nlpir.Instance.NLPIR_GetFileKeyWords(filePath,keyNum,false);
         System.out.println("result : " + nativeBytes);
+
+        String[] keywords = nativeBytes.split("#");
+        return keywords;
+
     }
 
 
