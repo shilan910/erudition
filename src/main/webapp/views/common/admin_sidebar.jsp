@@ -29,7 +29,7 @@
 
         <li class="${active1}"><a href="${rootPath}/admin/file/upload"><i class="fa fa-glass"></i>文件上传</a></li>
 
-        <li class="${active2}"><a href="#"><i class="fa fa-suitcase"></i>规则设置</a></li>
+        <li class="${active2}"><a href="${rootPath}/admin/file/rules"><i class="fa fa-suitcase"></i>规则设置</a></li>
 
 
       </ul>
