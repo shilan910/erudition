@@ -255,63 +255,63 @@ pageEncoding="UTF-8"%>
 </div>
 
 <!--文件弹窗一次里的具体内容--渲染-->
-<div class="file-out">
+<%--<div class="file-out">
     <div class="pre-btn"></div>
     <!--<div class="clearfix"></div>-->
     <div class="file-body" id="file-info">
-        <%--<div class="content">--%>
-            <%--<div class="file">--%>
-                <%--<div class="file-thumbnails">--%>
-                    <%--<div class="file-name">SQLdb_ilearn_3</div>--%>
-                    <%--<div class="file-class">文件类型SQL</div>--%>
-                <%--</div>--%>
-                <%--<div class="file-size">--%>
-                    <%--<button class="download">下载文件(4MB)</button>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
+        &lt;%&ndash;<div class="content">&ndash;%&gt;
+            &lt;%&ndash;<div class="file">&ndash;%&gt;
+                &lt;%&ndash;<div class="file-thumbnails">&ndash;%&gt;
+                    &lt;%&ndash;<div class="file-name">SQLdb_ilearn_3</div>&ndash;%&gt;
+                    &lt;%&ndash;<div class="file-class">文件类型SQL</div>&ndash;%&gt;
+                &lt;%&ndash;</div>&ndash;%&gt;
+                &lt;%&ndash;<div class="file-size">&ndash;%&gt;
+                    &lt;%&ndash;<button class="download">下载文件(4MB)</button>&ndash;%&gt;
+                &lt;%&ndash;</div>&ndash;%&gt;
+            &lt;%&ndash;</div>&ndash;%&gt;
+        &lt;%&ndash;</div>&ndash;%&gt;
 
-        <%--<div class="attribute">--%>
-            <%--<div class="a-info">--%>
-                <%--<div class="a-first">--%>
-                    <%--<div class="file-from">所属文件夹:数据库</div>--%>
-                    <%--<div class="a-close">×</div>--%>
-                    <%--<div class="clearfix"></div>--%>
-                <%--</div>--%>
-                <%--<div class="file-name">SQLdb_ilearn_3</div>--%>
-                <%--<div class="collected">收藏量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>--%>
-                <%--<div class="a-third">--%>
-                    <%--<div class="file-uptime"><i class="fa fa-clock-o"></i>2013-12-12</div>--%>
-                    <%--<div class="file-people"><i class="fa fa-user"></i>上传人-MR.Z</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--<div class="line"></div>--%>
-            <%--<div class="a-operate">--%>
-                <%--<ul>--%>
-                    <%--<li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;下载</a></li>--%>
-                    <%--<li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>--%>
-                <%--</ul>--%>
-            <%--</div>--%>
-            <%--<div class="line"></div>--%>
-            <%--<div class="a-related">--%>
-                <%--<ul>--%>
-                    <%--<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>--%>
-                    <%--<c:forEach items="${relationalresources}" var="re">--%>
-                        <%--<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;${re.title}</a></li>--%>
-                    <%--</c:forEach>--%>
-                    <%--<li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>--%>
-                <%--</ul>--%>
-            <%--</div>--%>
-        <%--</div>--%>
+        &lt;%&ndash;<div class="attribute">&ndash;%&gt;
+            &lt;%&ndash;<div class="a-info">&ndash;%&gt;
+                &lt;%&ndash;<div class="a-first">&ndash;%&gt;
+                    &lt;%&ndash;<div class="file-from">所属文件夹:数据库</div>&ndash;%&gt;
+                    &lt;%&ndash;<div class="a-close">×</div>&ndash;%&gt;
+                    &lt;%&ndash;<div class="clearfix"></div>&ndash;%&gt;
+                &lt;%&ndash;</div>&ndash;%&gt;
+                &lt;%&ndash;<div class="file-name">SQLdb_ilearn_3</div>&ndash;%&gt;
+                &lt;%&ndash;<div class="collected">收藏量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>&ndash;%&gt;
+                &lt;%&ndash;<div class="a-third">&ndash;%&gt;
+                    &lt;%&ndash;<div class="file-uptime"><i class="fa fa-clock-o"></i>2013-12-12</div>&ndash;%&gt;
+                    &lt;%&ndash;<div class="file-people"><i class="fa fa-user"></i>上传人-MR.Z</div>&ndash;%&gt;
+                &lt;%&ndash;</div>&ndash;%&gt;
+            &lt;%&ndash;</div>&ndash;%&gt;
+            &lt;%&ndash;<div class="line"></div>&ndash;%&gt;
+            &lt;%&ndash;<div class="a-operate">&ndash;%&gt;
+                &lt;%&ndash;<ul>&ndash;%&gt;
+                    &lt;%&ndash;<li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;下载</a></li>&ndash;%&gt;
+                    &lt;%&ndash;<li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>&ndash;%&gt;
+                &lt;%&ndash;</ul>&ndash;%&gt;
+            &lt;%&ndash;</div>&ndash;%&gt;
+            &lt;%&ndash;<div class="line"></div>&ndash;%&gt;
+            &lt;%&ndash;<div class="a-related">&ndash;%&gt;
+                &lt;%&ndash;<ul>&ndash;%&gt;
+                    &lt;%&ndash;<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>&ndash;%&gt;
+                    &lt;%&ndash;<c:forEach items="${relationalresources}" var="re">&ndash;%&gt;
+                        &lt;%&ndash;<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;${re.title}</a></li>&ndash;%&gt;
+                    &lt;%&ndash;</c:forEach>&ndash;%&gt;
+                    &lt;%&ndash;<li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>&ndash;%&gt;
+                &lt;%&ndash;</ul>&ndash;%&gt;
+            &lt;%&ndash;</div>&ndash;%&gt;
+        &lt;%&ndash;</div>&ndash;%&gt;
     </div>
     <div class="next-btn"></div>
 
 
-    <%--<jsp:include page="common/pagination.jsp"/>--%>
+    &lt;%&ndash;<jsp:include page="common/pagination.jsp"/>&ndash;%&gt;
 
 
     <!--<div class="clearfix"></div>-->
-</div>
+</div>--%>
 <!--文件弹窗点击事件，静态DOM-->
 <%--<script>
     $(function(){
