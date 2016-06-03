@@ -540,7 +540,7 @@ pageEncoding="UTF-8"%>
 //                                <div class="flex-1 file-image"><i class="iconfont icon-word"></i></div>
                                  var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
                                         "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
-                                        "<div class='flex-1 file-image'><i class='iconfont icon-"+file.tpye+"'></i></div>"+
+                                        "<div class='flex-1 file-image'><i class='iconfont icon-"+file.type+"'></i></div>"+
                                         "<div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>"+file.title+"</a></span></div></div>"+
                                         "<div class='flex-3 file-size'><span>"+file.size+"</span></div>"+
                                         "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"
