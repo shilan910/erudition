@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.jms.Session;
+//import javax.jms.Session;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.AssertFalse;
 import java.io.File;

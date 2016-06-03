@@ -14,27 +14,30 @@
         self.nextPopwin;
 
         self.currentIndex;
-        self.allIndex=self.getAllIndex();
+        self.allIndex;
 
-        console.log("当前页面全部个数:"+self.allIndex);
         console.log("调用插件");
-        //设置页面中的元素index属性
-        self.setIndex();
-        $(".body-floor .file-name span").click(function(event){
+
+        $(document).on("click",".body-floor .file-name span",function(event){         //这里的前提是有整体对象
             event.stopPropagation();
+            //获取当前页面全部对象个数
+            self.allIndex=self.getAllIndex();
+            console.log("当前页面全部个数:"+self.allIndex);
+            //设置页面中的元素index属性
+            self.setIndex();
             //获取当前点击对象的位置
             self.currentIndex=$(this).parents(self.root_element).attr("index");
             console.log("当前点击为第"+self.currentIndex+"个");
             self.renderDOM();            //因为暗含了顺序，所以可以无所顾忌的使用，哈哈哈哈
             self.carousel();          //绑定轮播事件，但是还没有特殊化,
-        });
+        })
 
     };
     FileOut.prototype={
         //初步渲染弹窗
         getAllIndex:function(){
             var self=this;
-            return $(self.root).children(self.root_element).length;
+            return $(self.root).children(self.root_element).length;           //这里动态的子元素个数
         },
         setIndex:function(){
             var self=this;
