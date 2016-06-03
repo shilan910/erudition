@@ -452,7 +452,7 @@ pageEncoding="UTF-8"%>
 
 </script>--%>
 <!--完整的弹窗-->
-<script src="${assetsPath}/js/file_show.js" charset="gb2312"></script>
+<script src="${assetsPath}/js/file_show.js" charset="utf-8"></script>
 <script>
     $(function () {
         var fileout=new FileOut();

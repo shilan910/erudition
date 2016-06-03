@@ -1,11 +1,14 @@
 /**
+ * Created by sl on 16-6-3.
+ */
+/**
  * Created by Administrator on 2016/6/2.
  */
-//¶ÔÏó¼¶±ğµÄ²å¼ş¿ª·¢----------±ØĞëÔÚÒ³ÃæË¢ĞÂÊ±ÖØĞÂÖ´ĞĞ
+//å¯¹è±¡çº§åˆ«çš„æ’ä»¶å¼€å‘----------å¿…é¡»åœ¨é¡µé¢åˆ·æ–°æ—¶é‡æ–°æ‰§è¡Œ
 ;(function($){
     var FileOut=function(){
         var self=this;
-        //³éÈ¡»ù´¡DOMÖ÷ÒªÎ§ÈÆ×Ö·û´®À´Ê¹ÓÃ
+        //æŠ½å–åŸºç¡€DOMä¸»è¦å›´ç»•å­—ç¬¦ä¸²æ¥ä½¿ç”¨
         self.pre_btn='.file-out .pre-btn';
         self.next_btn='.file-out .next-btn';
         self.root='.file-body';
@@ -16,70 +19,70 @@
         self.currentIndex;
         self.allIndex;
 
-        //Êı¾İ³Ø
+        //æ•°æ®æ± 
         self.fileData;
         self.fileRelations;
 
-        console.log("µ÷ÓÃ²å¼ş");
+        console.log("è°ƒç”¨æ’ä»¶");
 
-        $(document).on("click",".body-floor .file-name span",function(event){         //ÕâÀïµÄÇ°ÌáÊÇÓĞÕûÌå¶ÔÏó    ÕâÄáÂêÃ»·¨½øĞĞreturnÁË
+        $(document).on("click",".body-floor .file-name span",function(event){         //è¿™é‡Œçš„å‰ææ˜¯æœ‰æ•´ä½“å¯¹è±¡    è¿™å°¼ç›æ²¡æ³•è¿›è¡Œreturnäº†
             var me=$(this);
 
             event.stopPropagation();
-            //»ñÈ¡µ±Ç°Ò³ÃæÈ«²¿¶ÔÏó¸öÊı
+            //è·å–å½“å‰é¡µé¢å…¨éƒ¨å¯¹è±¡ä¸ªæ•°
             self.allIndex=self.getAllIndex();
-            console.log("µ±Ç°Ò³ÃæÈ«²¿¸öÊı:"+self.allIndex);
-            //ÉèÖÃÒ³ÃæÖĞµÄÔªËØindexÊôĞÔ
+            console.log("å½“å‰é¡µé¢å…¨éƒ¨ä¸ªæ•°:"+self.allIndex);
+            //è®¾ç½®é¡µé¢ä¸­çš„å…ƒç´ indexå±æ€§
             self.setIndex();
-            //»ñÈ¡µ±Ç°µã»÷¶ÔÏóµÄÎ»ÖÃ
+            //è·å–å½“å‰ç‚¹å‡»å¯¹è±¡çš„ä½ç½®
             self.currentIndex=$(this).parents(self.root_element).attr("index");
-            console.log("µ±Ç°µã»÷ÎªµÚ"+self.currentIndex+"¸ö");
-            //»ñÈ¡Êı¾İ
+            console.log("å½“å‰ç‚¹å‡»ä¸ºç¬¬"+self.currentIndex+"ä¸ª");
+            //è·å–æ•°æ®
             self.getData(self.currentIndex);
-            //äÖÈ¾Êı¾İ
-            self.renderDOM();            //ÒòÎª°µº¬ÁËË³Ğò£¬ËùÒÔ¿ÉÒÔÎŞËù¹Ë¼ÉµÄÊ¹ÓÃ£¬¹ş¹ş¹ş¹ş//¾²Ì¬äÖÈ¾Óë¶¯Ì¬äÖÈ¾µÄÊ±¼äÉÏÓĞÎÊÌâ£¿
-            self.carousel();          //°ó¶¨ÂÖ²¥ÊÂ¼ş£¬µ«ÊÇ»¹Ã»ÓĞÌØÊâ»¯,
+            //æ¸²æŸ“æ•°æ®
+            self.renderDOM();            //å› ä¸ºæš—å«äº†é¡ºåºï¼Œæ‰€ä»¥å¯ä»¥æ— æ‰€é¡¾å¿Œçš„ä½¿ç”¨ï¼Œå“ˆå“ˆå“ˆå“ˆ//é™æ€æ¸²æŸ“ä¸åŠ¨æ€æ¸²æŸ“çš„æ—¶é—´ä¸Šæœ‰é—®é¢˜ï¼Ÿ
+            self.carousel();          //ç»‘å®šè½®æ’­äº‹ä»¶ï¼Œä½†æ˜¯è¿˜æ²¡æœ‰ç‰¹æ®ŠåŒ–,
 
 
-            //²åÈë¶¯Ì¬Êı¾İ
-            //self.renderData($(this));        //½«µ±Ç°µã»÷´«ËÍ
+            //æ’å…¥åŠ¨æ€æ•°æ®
+            //self.renderData($(this));        //å°†å½“å‰ç‚¹å‡»ä¼ é€
         })
 
     };
     FileOut.prototype={
-        //¸ù¾İindex»ñÈ¡ÔªËØid
+        //æ ¹æ®indexè·å–å…ƒç´ id
         getIdByIndex:function(index){
             var self=this;
-            console.log("·¢ËÍµ±Ç°µÄid"+$(self.root_element).eq(index-1).find(".file-name").find("span").eq(0).attr("id"));
+            console.log("å‘é€å½“å‰çš„id"+$(self.root_element).eq(index-1).find(".file-name").find("span").eq(0).attr("id"));
             return $(self.root_element).eq(index-1).find(".file-name").find("span").eq(0).attr("id");
         },
-        //µã»÷Ê±»ñµÃÊı¾İ---¸ù¾İµ±Ç°ÏÂ±ê»ñÈ¡
+        //ç‚¹å‡»æ—¶è·å¾—æ•°æ®---æ ¹æ®å½“å‰ä¸‹æ ‡è·å–
         getData:function(index){
             var self=this;
-            console.log("¿ªÊ¼»ñÈ¡Êı¾İ");
-            //¸ù¾İÏÂ±ê»ñÈ¡id
+            console.log("å¼€å§‹è·å–æ•°æ®");
+            //æ ¹æ®ä¸‹æ ‡è·å–id
             //var file_id = me.attr("id");
             var file_id=self.getIdByIndex(index);
-            console.log("»ñÈ¡µÄidÎª:"+file_id);
+            console.log("è·å–çš„idä¸º:"+file_id);
             var file;
             $.ajax({
-                url:'/erudition/resources/file/'+file_id,                 //${rootPath}Ê§Ğ§
+                url:'/erudition/resources/file/'+file_id,                 //${rootPath}å¤±æ•ˆ
                 type:'get',
-                async : false, //Ä¬ÈÏÎªtrue Òì²½
+                async : false, //é»˜è®¤ä¸ºtrue å¼‚æ­¥
                 success:function(data){
                     self.fileData=data.file;
-                    self.fileRelations=data.relationfiles;        //»ñÈ¡¹ØÁªÎÄ¼ş
-                    console.log("»ñÈ¡µÄ¹ØÁªÎÄ¼şÎª:"+data.relationfiles);
+                    self.fileRelations=data.relationfiles;        //è·å–å…³è”æ–‡ä»¶
+                    console.log("è·å–çš„å…³è”æ–‡ä»¶ä¸º:"+data.relationfiles);
                 },error:function(){
                     alert("error"+file_id);
                     return "error";
                 }
             });
         },
-        //³õ²½äÖÈ¾µ¯´°
+        //åˆæ­¥æ¸²æŸ“å¼¹çª—
         getAllIndex:function(){
             var self=this;
-            return $(self.root).children(self.root_element).length;           //ÕâÀï¶¯Ì¬µÄ×ÓÔªËØ¸öÊı
+            return $(self.root).children(self.root_element).length;           //è¿™é‡ŒåŠ¨æ€çš„å­å…ƒç´ ä¸ªæ•°
         },
         setIndex:function(){
             var self=this;
@@ -92,7 +95,7 @@
             var self=this;
             var file=self.fileData;
             var fileRelations=self.fileRelations;
-            //×ª»»Ê±¼ä´Á
+            //è½¬æ¢æ—¶é—´æˆ³
             var date = new Date(file.createTime);
             var Y = date.getFullYear() + '-';
             var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
@@ -102,19 +105,19 @@
             var s = date.getSeconds();
             var createDate = Y+M+D+h+m+s;
             /*var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
-                + "<div class='file-name'> <img alt='' class='file-name' src='/erudition/assets/images/test.jpg'/></div><div class='file-class'>"
-                + file.type+"</div></div><div class='file-size'><button class='download'>²é¿´ÎÄ¼ş("
-                + file.size+")</button></div></div></div><div class='attribute'>"
-                + "<div class='a-info'><div class='a-first'><div class='file-from'>ËùÊôÎÄ¼ş¼Ğ:&nbsp;&nbsp;"
-                + file.categoryName+"</div><div class='a-close'>¡Á</div><div class='clearfix'></div>"
-                + "</div><div class='file-name'>"+file.title+"</div><div class='a-third'>"
-                + "<div class='file-uptime'><i class='fa fa-clock-o'></i>ÉÏ´«Ê±¼ä:&nbsp;&nbsp;"+"createDate"
-                + "</div><div class='file-people'><i class='fa fa-user'></i>ÉÏ´«ÈË:&nbsp;&nbsp;"+file.creater
-                + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
-                + "<li><a href='/erudition/admin/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;ÏÂÔØ</a></li>"
-                + "<li><a href='#'><span id='"+file.id+"'><i class='fa fa-star'></i>&nbsp;&nbsp;Ìí¼ÓÖÁ³£ÓÃÄ¿Â¼</a></li>"
-                + "</ul></div><div class='line'></div><div class='a-related'><ul>"
-                + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;¹ØÁªÄÚÈİ</a></li>";*/
+             + "<div class='file-name'> <img alt='' class='file-name' src='/erudition/assets/images/test.jpg'/></div><div class='file-class'>"
+             + file.type+"</div></div><div class='file-size'><button class='download'>æŸ¥çœ‹æ–‡ä»¶("
+             + file.size+")</button></div></div></div><div class='attribute'>"
+             + "<div class='a-info'><div class='a-first'><div class='file-from'>æ‰€å±æ–‡ä»¶å¤¹:&nbsp;&nbsp;"
+             + file.categoryName+"</div><div class='a-close'>Ã—</div><div class='clearfix'></div>"
+             + "</div><div class='file-name'>"+file.title+"</div><div class='a-third'>"
+             + "<div class='file-uptime'><i class='fa fa-clock-o'></i>ä¸Šä¼ æ—¶é—´:&nbsp;&nbsp;"+"createDate"
+             + "</div><div class='file-people'><i class='fa fa-user'></i>ä¸Šä¼ äºº:&nbsp;&nbsp;"+file.creater
+             + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
+             + "<li><a href='/erudition/admin/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;ä¸‹è½½</a></li>"
+             + "<li><a href='#'><span id='"+file.id+"'><i class='fa fa-star'></i>&nbsp;&nbsp;æ·»åŠ è‡³å¸¸ç”¨ç›®å½•</a></li>"
+             + "</ul></div><div class='line'></div><div class='a-related'><ul>"
+             + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;å…³è”å†…å®¹</a></li>";*/
             console.log("file.type="+file.type);
             console.log("file.size="+file.size);
 
@@ -130,7 +133,7 @@
                 '                        <div class="file-class">'+file.type+'</div>',
                 '                    </div>',
                 '                    <div class="file-size">',
-                '                        <button class="download">²é¿´ÎÄ¼ş('+file.size+')</button>',
+                '                        <button class="download">æŸ¥çœ‹æ–‡ä»¶('+file.size+')</button>',
                 '                    </div>',
                 '                </div>',
                 '            </div>',
@@ -138,29 +141,29 @@
                 '            <div class="attribute">',
                 '                <div class="a-info">',
                 '                    <div class="a-first">',
-                '                        <div class="file-from">ËùÊôÎÄ¼ş¼Ğ:'+file.categoryName+'</div>',
-                '                        <div class="a-close">¡Á</div>',
+                '                        <div class="file-from">æ‰€å±æ–‡ä»¶å¤¹:'+file.categoryName+'</div>',
+                '                        <div class="a-close">Ã—</div>',
                 '                        <div class="clearfix"></div>',
                 '                    </div>',
                 '                    <div class="file-name">'+file.title+'</div>',
-                '                    <div class="collected">ÊÕ²ØÁ¿&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>',
+                '                    <div class="collected">æ”¶è—é‡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>',
                 '                    <div class="a-third">',
                 '                        <div class="file-uptime"><i class="fa fa-clock-o"></i>'+createDate+'</div>',
-                '                        <div class="file-people"><i class="fa fa-user"></i>ÉÏ´«ÈË-'+file.creater+'</div>',
+                '                        <div class="file-people"><i class="fa fa-user"></i>ä¸Šä¼ äºº-'+file.creater+'</div>',
                 '                    </div>',
                 '                </div>',
                 '                <div class="line"></div>',
                 '                <div class="a-operate">',
                 '                    <ul>',
-                '                        <li><a href="/erudition/admin/file/download/"'+file.id+'><i class="fa fa-download"></i>&nbsp;&nbsp;ÏÂÔØ</a></li>',
-                '                        <li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;ÊÕ²Ø</a></li>',
+                '                        <li><a href="/erudition/admin/file/download/"'+file.id+'><i class="fa fa-download"></i>&nbsp;&nbsp;ä¸‹è½½</a></li>',
+                '                        <li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;æ”¶è—</a></li>',
                 '                    </ul>',
                 '                </div>',
                 '                <div class="line"></div>',
                 '                <div class="a-related">',
                 '                    <ul>',
-                '                        <li><a href="#"><i class="fa fa-link"><span id='+file.id+'></i>&nbsp;&nbsp;&nbsp;¹ØÁªÄÚÈİ</a></li>'].join("");
-            //Á¬½Ó¹ØÁªÄÚÈİ
+                '                        <li><a href="#"><i class="fa fa-link"><span id='+file.id+'></i>&nbsp;&nbsp;&nbsp;å…³è”å†…å®¹</a></li>'].join("");
+            //è¿æ¥å…³è”å†…å®¹
             for(var i=0 ; i < fileRelations.length ; i++){
                 var re = fileRelations[i].title;
                 console.log('re= '+re);
@@ -168,7 +171,7 @@
                     fileRelations[i].title+"</a></li>";
             }
 
-            var strDom2=['                        <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;±êÇ©</a></li>',
+            var strDom2=['                        <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;æ ‡ç­¾</a></li>',
                 '                    </ul>',
                 '                </div>',
                 '            </div>',
@@ -178,13 +181,13 @@
                 '    </div>'].join("");
 
             var strDom=strDom1+strDom2;
-            //²åÈëµ½bodyÖĞ
-            $("body").append(strDom);           //ÕâÀïÔõÃ´¼ÇÂ¼µ±Ç°µÄÕâ¸öµ¯´°ÄØ£¿
-            self.currentPopwin=$(".file-out");       //¼ÇÂ¼µ±Ç°µ¯´°
-            //ÏÔÊ¾²¢¼ÓÈëÕÚÕÖ²ã
+            //æ’å…¥åˆ°bodyä¸­
+            $("body").append(strDom);           //è¿™é‡Œæ€ä¹ˆè®°å½•å½“å‰çš„è¿™ä¸ªå¼¹çª—å‘¢ï¼Ÿ
+            self.currentPopwin=$(".file-out");       //è®°å½•å½“å‰å¼¹çª—
+            //æ˜¾ç¤ºå¹¶åŠ å…¥é®ç½©å±‚
             $(".mask").fadeIn();
             $(".file-out").fadeIn();
-            //ÎªcloseÓëmask°ó¶¨ÊÂ¼ş
+            //ä¸ºcloseä¸maskç»‘å®šäº‹ä»¶
             $(".a-close").on("click",function(event){
                 event.stopPropagation();
                 $(".file-out").fadeOut();
@@ -200,9 +203,9 @@
         },
         carousel:function(){
             var self=this;
-            console.log("ÂÖ²¥Æô¶¯");
-            console.log("µ±Ç°ÏÂ±êÎª"+self.currentIndex);
-            //ÅĞ¶Ï¿É²»¿ÉÒÔnext
+            console.log("è½®æ’­å¯åŠ¨");
+            console.log("å½“å‰ä¸‹æ ‡ä¸º"+self.currentIndex);
+            //åˆ¤æ–­å¯ä¸å¯ä»¥next
             if(self.currentIndex!=self.allIndex){
                 $(self.next_btn).css({
                     "display":"block"
@@ -215,11 +218,11 @@
                     "display":"none"
                 })
             }
-            //ÅĞ¶Ï¿É²»¿ÉÒÔpre
+            //åˆ¤æ–­å¯ä¸å¯ä»¥pre
             if(self.currentIndex!=1){
                 /*$(self.pre_btn).css({
-                    "display":"block"
-                });*/
+                 "display":"block"
+                 });*/
                 $(self.pre_btn).addClass("pre-bg");
                 $(this.pre_btn).click(function(){
                     self.pre();
@@ -230,27 +233,27 @@
         },
         next:function(){
             var self=this;
-            //¸Ä±äÏÂ±ê
+            //æ”¹å˜ä¸‹æ ‡
             self.currentIndex++;
-            //½«Ö®Ç°µÄDOMÄ¨È¥
+            //å°†ä¹‹å‰çš„DOMæŠ¹å»
             self.currentPopwin.fadeOut(200).remove();
-            //Õ¹Ê¾ÏÂÒ»¸öDOM
+            //å±•ç¤ºä¸‹ä¸€ä¸ªDOM
             self.getData(self.currentIndex);
             self.renderDOM();
-            self.carousel();            //ÕâÀïÒ»¶¨ÊÇÏÂÒ»¸öDOM    ÕâÀïºÜÓĞÎÊÌâ
+            self.carousel();            //è¿™é‡Œä¸€å®šæ˜¯ä¸‹ä¸€ä¸ªDOM    è¿™é‡Œå¾ˆæœ‰é—®é¢˜
             self.nextPopwin=$(".file-out");
             self.nextPopwin.fadeIn(200);
         },
         pre:function(){
             var self=this;
-            //¸Ä±äÏÂ±ê
+            //æ”¹å˜ä¸‹æ ‡
             self.currentIndex--;
-            //½«Ö®Ç°µÄDOMÄ¨È¥
+            //å°†ä¹‹å‰çš„DOMæŠ¹å»
             self.currentPopwin.fadeOut(200).remove();
-            //Õ¹Ê¾ÉÏÒ»¸öDOM
+            //å±•ç¤ºä¸Šä¸€ä¸ªDOM
             self.getData(self.currentIndex);
             self.renderDOM();
-            self.carousel();            //ÕâÀïÒ»¶¨ÊÇÉÏÒ»¸öDOM
+            self.carousel();            //è¿™é‡Œä¸€å®šæ˜¯ä¸Šä¸€ä¸ªDOM
             self.nextPopwin=$(".file-out");
             self.nextPopwin.fadeIn(200);
         }
