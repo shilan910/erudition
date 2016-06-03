@@ -12,7 +12,7 @@
       <div class="col-md-4 search">
         <form action="${rootPath}/admin/filecollect/search" method="post" class="form-inline">
         <div class="input-group">
-                <input type="text" name="key" class="form-control" placeholder="全站搜索...">
+                <input type="text" name="key" class="form-control" placeholder="搜索...">
                 <span class="input-group-btn">
                   <input type="submit" class="btn btn-default" type="button" value="搜索"/>
                 </span>

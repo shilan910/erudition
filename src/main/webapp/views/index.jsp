@@ -169,78 +169,78 @@ pageEncoding="UTF-8"%>
 
 
 
-                <%--<div class="body-floor flex-row">--%>
-                    <%--<div class="flex-3 flex-row">--%>
-                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
-                        <%--<!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->--%>
-                        <%--<div class="flex-1 file-image"><i class="iconfont icon-mp3"></i></div>--%>
-                        <%--<div class="file-name flex-4"><span><a href="#">一号分类内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试</a></span></div>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-size">--%>
-                        <%--<span>1.27MB</span>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-creator">--%>
-                        <%--MR.Z--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-time">--%>
-                        <%--2013.12.06--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="line"></div>--%>
+                <div class="body-floor flex-row">
+                    <div class="flex-3 flex-row">
+                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
+                        <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->
+                        <div class="flex-1 file-image"><i class="iconfont icon-mp3"></i></div>
+                        <div class="file-name flex-4"><span><a href="#">一号分类内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试</a></span></div>
+                    </div>
+                    <div class="flex-3 file-size">
+                        <span>1.27MB</span>
+                    </div>
+                    <div class="flex-3 file-creator">
+                        MR.Z
+                    </div>
+                    <div class="flex-3 file-time">
+                        2013.12.06
+                    </div>
+                </div>
+                <div class="line"></div>
 
-                <%--<div class="body-floor flex-row">--%>
-                    <%--<div class="flex-3 flex-row">--%>
-                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
-                        <%--<div class="flex-1 file-image"><i class="iconfont icon-ppt"></i></div>--%>
-                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-size">--%>
-                        <%--<span>1.27MB</span>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-creator">--%>
-                        <%--MR.Z--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-time">--%>
-                        <%--2013.12.06--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="line"></div>--%>
+                <div class="body-floor flex-row">
+                    <div class="flex-3 flex-row">
+                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
+                        <div class="flex-1 file-image"><i class="iconfont icon-ppt"></i></div>
+                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
+                    </div>
+                    <div class="flex-3 file-size">
+                        <span>1.27MB</span>
+                    </div>
+                    <div class="flex-3 file-creator">
+                        MR.Z
+                    </div>
+                    <div class="flex-3 file-time">
+                        2013.12.06
+                    </div>
+                </div>
+                <div class="line"></div>
 
-                <%--<div class="body-floor flex-row">--%>
-                    <%--<div class="flex-3 flex-row">--%>
-                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
-                        <%--<div class="flex-1 file-image"><i class="iconfont icon-word"></i></div>--%>
-                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-size">--%>
-                        <%--<span>1.27MB</span>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-creator">--%>
-                        <%--MR.Z--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-time">--%>
-                        <%--2013.12.06--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="line"></div>--%>
+                <div class="body-floor flex-row">
+                    <div class="flex-3 flex-row">
+                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
+                        <div class="flex-1 file-image"><i class="iconfont icon-word"></i></div>
+                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
+                    </div>
+                    <div class="flex-3 file-size">
+                        <span>1.27MB</span>
+                    </div>
+                    <div class="flex-3 file-creator">
+                        MR.Z
+                    </div>
+                    <div class="flex-3 file-time">
+                        2013.12.06
+                    </div>
+                </div>
+                <div class="line"></div>
 
-                <%--<div class="body-floor flex-row">--%>
-                    <%--<div class="flex-3 flex-row">--%>
-                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
-                        <%--<div class="flex-1 file-image"><i class="iconfont icon-txt"></i></div>--%>
-                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-size">--%>
-                        <%--<span>1.27MB</span>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-creator">--%>
-                        <%--MR.Z--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-time">--%>
-                        <%--2013.12.06--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="line"></div>--%>
+                <div class="body-floor flex-row">
+                    <div class="flex-3 flex-row">
+                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
+                        <div class="flex-1 file-image"><i class="iconfont icon-txt"></i></div>
+                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
+                    </div>
+                    <div class="flex-3 file-size">
+                        <span>1.27MB</span>
+                    </div>
+                    <div class="flex-3 file-creator">
+                        MR.Z
+                    </div>
+                    <div class="flex-3 file-time">
+                        2013.12.06
+                    </div>
+                </div>
+                <div class="line"></div>
 
             </div>
         </div>
@@ -505,7 +505,6 @@ pageEncoding="UTF-8"%>
 <%--根据三级目录显示文件--%>
 <script>
     $(function(){
-
         $("#demo-list li").click(function(){
                     var third_cate_id = $(this).attr("value");
                     if(third_cate_id != null){
@@ -522,27 +521,17 @@ pageEncoding="UTF-8"%>
                         $(".body-floor").remove();
                         $(".line").remove();
                         iCheckready();
-
-
                         $.getJSON(url , function(data){
                             $.each(data.list,function(i, file){
                                 //转换时间戳
-                                var date = new Date(file.createTime);
-                                var Y = date.getFullYear() + '-';
-                                var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-                                var D = date.getDate() + ' ';
-                                var h = date.getHours() + ':';
-                                var m = date.getMinutes() + ':';
-                                var s = date.getSeconds();
-                                var createDate = Y+M+D+h+m+s;
-
-
-//                                <div class="flex-1 file-image"><i class="iconfont icon-word"></i></div>
-                                 var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
+                                var createDate = turnDate(file.createTime);
+                                var size1 = turnSize(file.size);
+                                var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
                                         "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
-                                        "<div class='flex-1 file-image'><i class='iconfont icon-"+file.tpye+"'></i></div>"+
+                                        "<div class='flex-1 file-image'><i class='iconfont icon-"+file.type+"'></i></div>"+
+
                                         "<div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>"+file.title+"</a></span></div></div>"+
-                                        "<div class='flex-3 file-size'><span>"+file.size+"</span></div>"+
+                                        "<div class='flex-3 file-size'><span>"+size1+"</span></div>"+
                                         "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"
                                         +createDate+"</div></div><div class='line'></div>";
 
@@ -558,6 +547,39 @@ pageEncoding="UTF-8"%>
         )
 
     })
+
+
+    function turnDate(createTime){
+        var date = new Date(createTime);
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        var D = date.getDate() + ' ';
+        var h = date.getHours() + ':';
+        var m = date.getMinutes() + ':';
+        var s = date.getSeconds();
+        var createDate = Y+M+D+h+m+s;
+        return createDate;
+    }
+
+
+    function turnSize(size){
+        //var turnedSize;
+        var cnt=0 , unit="";
+        while(size>=1024){
+            size = size / 1024;
+            cnt++;
+        }
+        switch (cnt){
+            case 0:unit="B";break;
+            case 1:unit="KB";break;
+            case 2:unit="MB";break;
+            case 3:unit="GB";break;
+            case 4:unit="TB";break;
+            default : break;
+        }
+        var size1 = parseFloat(size).toFixed(2)+unit;
+        return size1;
+    }
 
 
 </script>

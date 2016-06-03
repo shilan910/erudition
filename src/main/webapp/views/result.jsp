@@ -48,6 +48,7 @@ pageEncoding="UTF-8"%>
 
 <div class="main flex-row">
     <div class="flex-2">
+
         <div class="nav">
             <div id="jquery-accordion-menu" class="jquery-accordion-menu white">
                 <div id="user-image">
