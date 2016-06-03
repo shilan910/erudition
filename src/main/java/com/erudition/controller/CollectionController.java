@@ -50,9 +50,12 @@ public class CollectionController {
 
     @RequestMapping(value = "/showcollections" , method = RequestMethod.GET)
     public String showCollections(Model model,HttpSession session){
-        model.addAttribute("showcollections",session.getAttribute("usercollections"));
+
+        model.addAttribute("showcollections",collectionDao.getByUid((int)session.getAttribute("userid")));
         session.setAttribute("flagofcollection",1);
+        session.setAttribute("cateIsActive",1);
         System.out.println("show collections!");
         return "index";
+
     }
 }

@@ -59,8 +59,11 @@ pageEncoding="UTF-8"%>
 
                 <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
                 <ul id="demo-list">
-
-                    <li class="active" ><a href="#"><i class="fa fa-home"></i>共享目录 </a>
+                    <c:set var="shareCateClass" value=""/>
+                    <c:if test="${cateIsActive==0}">
+                        <c:set var="shareCateClass" value="active"/>
+                    </c:if>
+                    <li class="${shareCateClass}" ><a href="#"><i class="fa fa-home"></i>共享目录 </a>
                         <ul class="submenu" id="first-cates">
                             <c:forEach items="${categories}" var="firstCate">
                                 <li><a href="#">${firstCate.name}</a>
@@ -85,8 +88,11 @@ pageEncoding="UTF-8"%>
 
                     </li>
 
-
-                        <li id="collection" class="" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>
+                    <c:set var="commonCateClass" value=""/>
+                    <c:if test="${cateIsActive==1}">
+                        <c:set var="commonCateClass" value="active"/>
+                    </c:if>
+                    <li id="collection" class="${commonCateClass}" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>
                             <%--<ul class="submenu" >--%>
                                 <%--<c:forEach items="${categories}" var="firstCate">--%>
                                     <%--<li><a href="#">${firstCate.name}</a>--%>
@@ -126,7 +132,7 @@ pageEncoding="UTF-8"%>
         <div class="header-all">
             <div class="header flex-row">
                 <div class="flex-7 path">
-                    共享目录
+                    常用目录
                 </div>
                 <%--<div class="flex-3 search">--%>
                     <%--<div class="input-group">--%>
@@ -169,78 +175,78 @@ pageEncoding="UTF-8"%>
 
 
 
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->
-                        <div class="flex-1 file-image"><i class="iconfont icon-mp3"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
+                <%--<div class="body-floor flex-row">--%>
+                    <%--<div class="flex-3 flex-row">--%>
+                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
+                        <%--<!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->--%>
+                        <%--<div class="flex-1 file-image"><i class="iconfont icon-mp3"></i></div>--%>
+                        <%--<div class="file-name flex-4"><span><a href="#">一号分类内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试</a></span></div>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-size">--%>
+                        <%--<span>1.27MB</span>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-creator">--%>
+                        <%--MR.Z--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-time">--%>
+                        <%--2013.12.06--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="line"></div>--%>
 
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <div class="flex-1 file-image"><i class="iconfont icon-ppt"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
+                <%--<div class="body-floor flex-row">--%>
+                    <%--<div class="flex-3 flex-row">--%>
+                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
+                        <%--<div class="flex-1 file-image"><i class="iconfont icon-ppt"></i></div>--%>
+                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-size">--%>
+                        <%--<span>1.27MB</span>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-creator">--%>
+                        <%--MR.Z--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-time">--%>
+                        <%--2013.12.06--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="line"></div>--%>
 
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <div class="flex-1 file-image"><i class="iconfont icon-word"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
+                <%--<div class="body-floor flex-row">--%>
+                    <%--<div class="flex-3 flex-row">--%>
+                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
+                        <%--<div class="flex-1 file-image"><i class="iconfont icon-word"></i></div>--%>
+                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-size">--%>
+                        <%--<span>1.27MB</span>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-creator">--%>
+                        <%--MR.Z--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-time">--%>
+                        <%--2013.12.06--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="line"></div>--%>
 
-                <div class="body-floor flex-row">
-                    <div class="flex-3 flex-row">
-                        <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                        <div class="flex-1 file-image"><i class="iconfont icon-txt"></i></div>
-                        <div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>
-                    </div>
-                    <div class="flex-3 file-size">
-                        <span>1.27MB</span>
-                    </div>
-                    <div class="flex-3 file-creator">
-                        MR.Z
-                    </div>
-                    <div class="flex-3 file-time">
-                        2013.12.06
-                    </div>
-                </div>
-                <div class="line"></div>
+                <%--<div class="body-floor flex-row">--%>
+                    <%--<div class="flex-3 flex-row">--%>
+                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
+                        <%--<div class="flex-1 file-image"><i class="iconfont icon-txt"></i></div>--%>
+                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-size">--%>
+                        <%--<span>1.27MB</span>--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-creator">--%>
+                        <%--MR.Z--%>
+                    <%--</div>--%>
+                    <%--<div class="flex-3 file-time">--%>
+                        <%--2013.12.06--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="line"></div>--%>
 
             </div>
         </div>
