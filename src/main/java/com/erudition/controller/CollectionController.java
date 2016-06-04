@@ -55,7 +55,7 @@ public class CollectionController {
             model.addAttribute("collectionflag","1");
         }
 
-       // return "index";
+//        return "index";
     }
 
     @RequestMapping(value = "/showcollections" , method = RequestMethod.GET)
