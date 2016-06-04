@@ -3,6 +3,7 @@ package com.erudition.controller;
 import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CollectionDao;
+import com.erudition.entity.MessageStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -28,17 +29,16 @@ public class CollectionController {
 
     @RequestMapping(value = "/addtocollection/{fid}" , method = RequestMethod.GET)
     @ResponseBody
-    public void addtoCollection(Model model,HttpSession session,@PathVariable("fid") int fid){
+    public MessageStatus addtoCollection(Model model,HttpSession session,@PathVariable("fid") int fid){
+
         boolean flag=false;
-        UserEntity user = null;
-        user = (UserEntity)session.getAttribute("loginUser");
-        int userid = user.getId();
-        List<FilesEntity> collections = null;
-//        collections = (List<FilesEntity>)session.getAttribute("usercollections");    //这个session来源有问题
-        collections = collectionDao.getByUid(userid);
+        String message="";
+        int status=0;
+        UserEntity user = (UserEntity)session.getAttribute("loginUser");
+        List<FilesEntity> collections = collectionDao.getByUid(user.getId());
 
         System.out.println("begin check file!!!");
-        for(FilesEntity file:collections){              //这里是空的
+        for(FilesEntity file:collections){
             System.out.println(file.getId());
             if(file.getId()==fid){
                 flag = true;
@@ -47,15 +47,17 @@ public class CollectionController {
         }
         System.out.println("文件最终判断!!!");
         if(!flag){
-            collectionDao.createARecord(fid,userid);
+            collectionDao.createARecord(fid,user.getId());
             System.out.println("插入成功！");
-            model.addAttribute("collectionflag","0");
+            message = "成功添加至常用目录";
+            status = 1;  //成功添加时状态为1
         }else{
             System.out.println("已经存在的记录！");
-            model.addAttribute("collectionflag","1");
+            message = "常用目录已存在该文件";
+            status = 0;  //重复添加添加时状态为0
         }
 
-       // return "index";
+       return new MessageStatus(message,status);
     }
 
     @RequestMapping(value = "/showcollections" , method = RequestMethod.GET)
