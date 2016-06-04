@@ -34,14 +34,15 @@ public class CollectionController {
         user = (UserEntity)session.getAttribute("loginUser");
         int userid = user.getId();
         List<FilesEntity> collections = null;
-        collections = (List<FilesEntity>)session.getAttribute("usercollections");    //这个session来源有问题
-
+//        collections = (List<FilesEntity>)session.getAttribute("usercollections");    //这个session来源有问题
+        collections = collectionDao.getByUid(userid);
 
         System.out.println("begin check file!!!");
         for(FilesEntity file:collections){              //这里是空的
             System.out.println(file.getId());
             if(file.getId()==fid){
                 flag = true;
+                break;
             }
         }
         System.out.println("文件最终判断!!!");
