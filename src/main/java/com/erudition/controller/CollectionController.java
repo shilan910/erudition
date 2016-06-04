@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -26,16 +27,24 @@ public class CollectionController {
     CollectionDao collectionDao;
 
     @RequestMapping(value = "/addtocollection/{fid}" , method = RequestMethod.GET)
+    @ResponseBody
     public void addtoCollection(Model model,HttpSession session,@PathVariable("fid") int fid){
         boolean flag=false;
-        UserEntity user = (UserEntity)session.getAttribute("loginUser");
+        UserEntity user = null;
+        user = (UserEntity)session.getAttribute("loginUser");
         int userid = user.getId();
-        List<FilesEntity> collections = (List<FilesEntity>)session.getAttribute("usercollections");
-        for(FilesEntity file:collections){
+        List<FilesEntity> collections = null;
+        collections = (List<FilesEntity>)session.getAttribute("usercollections");    //这个session来源有问题
+
+
+        System.out.println("begin check file!!!");
+        for(FilesEntity file:collections){              //这里是空的
+            System.out.println(file.getId());
             if(file.getId()==fid){
                 flag = true;
             }
         }
+        System.out.println("文件最终判断!!!");
         if(!flag){
             collectionDao.createARecord(fid,userid);
             System.out.println("插入成功！");

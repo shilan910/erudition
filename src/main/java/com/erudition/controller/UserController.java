@@ -83,7 +83,7 @@ public class UserController {
 //                for(CollectionEntity collectionEntity:collections){
 //                    files.add(resourcesDao.getById(collectionEntity.getFileId()));
 //                }
-               // session.setAttribute("usercollections",files);
+                session.setAttribute("usercollections",files);
                 session.setAttribute("userid",user.getId());
                 // redirectAttributes.addAttribute("loginMsg",message);
 

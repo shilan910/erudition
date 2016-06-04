@@ -1,7 +1,4 @@
 /**
- * Created by sl on 16-6-3.
- */
-/**
  * Created by Administrator on 2016/6/2.
  */
 //对象级别的插件开发----------必须在页面刷新时重新执行
@@ -38,7 +35,7 @@
             self.currentIndex=$(this).parents(self.root_element).attr("index");
             console.log("当前点击为第"+self.currentIndex+"个");
             //获取数据
-            self.getData(self.currentIndex);
+            self.getData(self.currentIndex,"index");
             //渲染数据
             self.renderDOM();            //因为暗含了顺序，所以可以无所顾忌的使用，哈哈哈哈//静态渲染与动态渲染的时间上有问题？
             self.carousel();          //绑定轮播事件，但是还没有特殊化,
@@ -56,13 +53,23 @@
             console.log("发送当前的id"+$(self.root_element).eq(index-1).find(".file-name").find("span").eq(0).attr("id"));
             return $(self.root_element).eq(index-1).find(".file-name").find("span").eq(0).attr("id");
         },
-        //点击时获得数据---根据当前下标获取
-        getData:function(index){
+        /**
+         * 根据配置获取数据(下标或者id)
+         * @param index
+         * @param opt
+         */
+        getData:function(enter,opt){
             var self=this;
             console.log("开始获取数据");
             //根据下标获取id
             //var file_id = me.attr("id");
-            var file_id=self.getIdByIndex(index);
+            var file_id;
+            if(opt==="index"){
+                file_id=self.getIdByIndex(enter);
+            }else if(opt=="id"){
+                file_id=enter;
+            }
+
             console.log("获取的id为:"+file_id);
             var file;
             $.ajax({
@@ -91,7 +98,7 @@
                 $(this).attr("index",num++);
             })
         },
-        renderDOM:function(me){
+        renderDOM:function(){
             var self=this;
             var file=self.fileData;
             var fileRelations=self.fileRelations;
@@ -104,7 +111,10 @@
             var m = date.getMinutes() + ':';
             var s = date.getSeconds();
             var createDate = Y+M+D+h+m+s;
-            /*var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
+            //转换文件大小
+            var fileSize=turnSize(file.size);
+            //旧而无用
+            var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
              + "<div class='file-name'> <img alt='' class='file-name' src='/erudition/assets/images/test.jpg'/></div><div class='file-class'>"
              + file.type+"</div></div><div class='file-size'><button class='download'>查看文件("
              + file.size+")</button></div></div></div><div class='attribute'>"
@@ -117,7 +127,8 @@
              + "<li><a href='/erudition/admin/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
              + "<li><a href='#'><span id='"+file.id+"'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
              + "</ul></div><div class='line'></div><div class='a-related'><ul>"
-             + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>";*/
+             + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>";
+
             console.log("file.type="+file.type);
             console.log("file.size="+file.size);
 
@@ -129,11 +140,11 @@
                 '            <div class="content">',
                 '                <div class="file">',
                 '                    <div class="file-thumbnails">',
-                '                        <div class="file-name">SQLdb_ilearn_3</div>',
+                '                        <div class="file-name">'+file.title+'</div>',
                 '                        <div class="file-class">'+file.type+'</div>',
                 '                    </div>',
                 '                    <div class="file-size">',
-                '                        <button class="download">查看文件('+file.size+')</button>',
+                '                        <button class="download">查看文件</button>',
                 '                    </div>',
                 '                </div>',
                 '            </div>',
@@ -146,7 +157,7 @@
                 '                        <div class="clearfix"></div>',
                 '                    </div>',
                 '                    <div class="file-name">'+file.title+'</div>',
-                '                    <div class="collected">收藏量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>',
+                //'                    <div class="collected">收藏量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>',
                 '                    <div class="a-third">',
                 '                        <div class="file-uptime"><i class="fa fa-clock-o"></i>'+createDate+'</div>',
                 '                        <div class="file-people"><i class="fa fa-user"></i>上传人-'+file.creater+'</div>',
@@ -155,8 +166,8 @@
                 '                <div class="line"></div>',
                 '                <div class="a-operate">',
                 '                    <ul>',
-                '                        <li><a href="/erudition/admin/file/download/"'+file.id+'><i class="fa fa-download"></i>&nbsp;&nbsp;下载</a></li>',
-                '                        <li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>',
+                '                        <li><a href="/erudition/admin/file/download/"'+file.id+'><i class="fa fa-download"></i>&nbsp;&nbsp;下载('+fileSize+')</a></li>',
+                '                        <li><a href="#" class="collect"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>',
                 '                    </ul>',
                 '                </div>',
                 '                <div class="line"></div>',
@@ -167,7 +178,7 @@
             for(var i=0 ; i < fileRelations.length ; i++){
                 var re = fileRelations[i].title;
                 console.log('re= '+re);
-                strDom1 = strDom1 + "<li id='"+fileRelations[i].id+"'><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;"+
+                strDom1 = strDom1 + "<li id='"+fileRelations[i].id+"'class='file-related' ><a href='#'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;"+
                     fileRelations[i].title+"</a></li>";
             }
 
@@ -194,11 +205,55 @@
                 $(".mask").fadeOut();
                 self.currentPopwin.remove();
             })
-
             $(".mask").on("click",function(event){
                 event.stopPropagation();
                 $(".file-out").fadeOut();
                 $(".mask").fadeOut();
+            })
+            //为收藏绑定事件
+            self.CollectToCommon();
+            //为关联绑定事件
+            self.HangRelateEvent();
+        },
+        CollectToCommon:function(){
+            var self=this;
+            $(".a-operate .collect").click(function(event){
+                var file_id =self.getIdByIndex(self.currentIndex);
+                $.ajax({
+                    url:'/erudition/collection/addtocollection/'+file_id,            //axaj失败
+                    type:'get',
+                    async:false, //默认为true 异步
+                    success:function(data){
+                        var collectionflag=data.collectionflag;
+                        console.log("成功时collectionflag:"+collectionflag);
+                        if(collectionflag=="0"){
+                            console.log("添加成功！");
+                        }else if(collectionflag=="1"){
+                            console.log("请不要重复添加！");
+                        }
+                        //$(".mask").fadeIn();
+                        //$(".file-out").fadeIn();
+                    },error:function(){                      //明明插入成功了？？？error
+                        console.log("失败时collectionflag:"+collectionflag);
+                        console.log("添加过程有误！");
+                    }
+                });
+                console.log("添加过程结束");
+            })
+        },
+        HangRelateEvent:function(){
+            var self=this;
+            var file_id;
+            $(".file-related").click(function(){
+                file_id=$(this).attr("id");
+                console.log("点击关联的id为:"+file_id);
+                self.currentPopwin.remove();
+                self.getData(file_id,"id");
+                self.renderDOM();
+                $(self.pre_btn).removeClass("pre-bg");
+                $(self.next_btn).css({      //>>>>>>>>>>>>>>>>>>>>>>>>这里有瑕疵
+                    "display":"none"
+                })
             })
         },
         carousel:function(){
@@ -238,7 +293,7 @@
             //将之前的DOM抹去
             self.currentPopwin.fadeOut(200).remove();
             //展示下一个DOM
-            self.getData(self.currentIndex);
+            self.getData(self.currentIndex,"index");
             self.renderDOM();
             self.carousel();            //这里一定是下一个DOM    这里很有问题
             self.nextPopwin=$(".file-out");
@@ -251,7 +306,7 @@
             //将之前的DOM抹去
             self.currentPopwin.fadeOut(200).remove();
             //展示上一个DOM
-            self.getData(self.currentIndex);
+            self.getData(self.currentIndex,"index");
             self.renderDOM();
             self.carousel();            //这里一定是上一个DOM
             self.nextPopwin=$(".file-out");
