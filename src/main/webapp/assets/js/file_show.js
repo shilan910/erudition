@@ -1,9 +1,23 @@
 /**
  * Created by Administrator on 2016/6/2.
- */
+ *///引入弹窗依赖js
+/*require.config({
+    paths: {
+        "popwin": "popwinAll"             //这种类似于静态导入popwin.js????????
+    }
+});*/
+
+//document.write("<script language='javascript' src='./popwinAll.js'></script>");
+
 //对象级别的插件开发----------必须在页面刷新时重新执行
 ;(function($){
     var FileOut=function(){
+        //引入依赖的js
+        //new_element=document.createElement("script");
+        //new_element.setAttribute("type","text/javascript");
+        //new_element.setAttribute("src","popwinAll.js");// 在这里引入了a.js
+        //document.body.appendChild(new_element);
+
         var self=this;
         //抽取基础DOM主要围绕字符串来使用
         self.pre_btn='.file-out .pre-btn';
@@ -113,21 +127,6 @@
             var createDate = Y+M+D+h+m+s;
             //转换文件大小
             var fileSize=turnSize(file.size);
-            //旧而无用
-            var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
-             + "<div class='file-name'> <img alt='' class='file-name' src='/erudition/assets/images/test.jpg'/></div><div class='file-class'>"
-             + file.type+"</div></div><div class='file-size'><button class='download'>查看文件("
-             + file.size+")</button></div></div></div><div class='attribute'>"
-             + "<div class='a-info'><div class='a-first'><div class='file-from'>所属文件夹:&nbsp;&nbsp;"
-             + file.categoryName+"</div><div class='a-close'>×</div><div class='clearfix'></div>"
-             + "</div><div class='file-name'>"+file.title+"</div><div class='a-third'>"
-             + "<div class='file-uptime'><i class='fa fa-clock-o'></i>上传时间:&nbsp;&nbsp;"+"createDate"
-             + "</div><div class='file-people'><i class='fa fa-user'></i>上传人:&nbsp;&nbsp;"+file.creater
-             + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
-             + "<li><a href='/erudition/admin/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
-             + "<li><a href='#'><span id='"+file.id+"'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
-             + "</ul></div><div class='line'></div><div class='a-related'><ul>"
-             + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>";
 
             console.log("file.type="+file.type);
             console.log("file.size="+file.size);
@@ -140,7 +139,7 @@
                 '            <div class="content">',
                 '                <div class="file">',
                 '                    <div class="file-thumbnails">',
-                '                        <div class="file-name">'+file.title+'</div>',
+                '                        <div class="file-name"><img src="/erudition/assets/images/03.jpg" alt=""/></div>',
                 '                        <div class="file-class">'+file.type+'</div>',
                 '                    </div>',
                 '                    <div class="file-size">',
@@ -224,22 +223,26 @@
                     type:'get',
                     async:false, //默认为true 异步
                     success:function(data){
-                        var collectionflag=data.collectionflag;
-                        console.log("成功时collectionflag:"+collectionflag);
-                        if(collectionflag=="0"){
-                            console.log("添加成功！");
-                        }else if(collectionflag=="1"){
-                            console.log("请不要重复添加！");
+                        if(data.status==1){
+                            console.log(data.message+"   开始调用tips方法");
+                            self.popwin_tips(data.message);               //没有执行？？？
+                        }else if(data.status==0){
+                            console.log(data.message);
+                            self.popwin_tips(data.message);               //没有执行？？？
                         }
-                        //$(".mask").fadeIn();
-                        //$(".file-out").fadeIn();
                     },error:function(){                      //明明插入成功了？？？error
-                        console.log("失败时collectionflag:"+collectionflag);
-                        console.log("添加过程有误！");
+                        console.log("异步传输失败");
                     }
                 });
                 console.log("添加过程结束");
             })
+        },
+        popwin_tips:function(message){
+            var self=this;
+            //开始调用弹窗程序
+            console.log("调用tip");
+            var pop=new Popwin();
+            pop.tips();
         },
         HangRelateEvent:function(){
             var self=this;
