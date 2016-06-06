@@ -118,7 +118,7 @@
             var s = date.getSeconds();
             var createDate = Y+M+D+h+m+s;
             //转换文件大小
-            var fileSize=turnSize(file.size);
+            var fileSize=file.size;
 
             console.log("file.type="+file.type);
             console.log("file.size="+file.size);
@@ -131,7 +131,7 @@
                 '            <div class="content">',
                 '                <div class="file">',
                 '                    <div class="file-thumbnails">',
-                '                        <div class="file-name"><img src="/erudition/assets/images/03.jpg" alt=""/></div>',
+                '                        <div class="file-name"><img src="/erudition/assets/images/courses1.jpg" alt=""/></div>',
                 '                        <div class="file-class">'+file.type+'</div>',
                 '                    </div>',
                 '                    <div class="file-size">',
