@@ -57,12 +57,18 @@
          this.input_init();
 
          },*/
-        tips:function(){
+        tips:function(message,status){
             var self=this;
+            var expression;
+            if(status==1){
+                expression="smile";
+            }else if(status==0){
+                expression="cry";
+            }
             console.log("调用了tips方法");
             var popowin_tips=['<div class="popwin_tips">',
-                '       <div>这里是消息</div>',
-                '</div>'].join("");
+                '               <div class="content"><div class="pull-left"><i class="iconfont icon-'+expression+'"></i></div><div class="pull-left message"><span>'+message+'</span></div><div class="clearfix"></div></div>',
+                '           </div>'].join("");
             var html=popowin_tips;
             console.log("开始插入tips");
             $('body').prepend(html);

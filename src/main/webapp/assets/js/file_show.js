@@ -1,14 +1,6 @@
 /**
  * Created by Administrator on 2016/6/2.
- *///引入弹窗依赖js
-/*require.config({
-    paths: {
-        "popwin": "popwinAll"             //这种类似于静态导入popwin.js????????
-    }
-});*/
-
-//document.write("<script language='javascript' src='./popwinAll.js'></script>");
-
+ */
 //对象级别的插件开发----------必须在页面刷新时重新执行
 ;(function($){
     var FileOut=function(){
@@ -143,7 +135,7 @@
                 '                        <div class="file-class">'+file.type+'</div>',
                 '                    </div>',
                 '                    <div class="file-size">',
-                '                        <button class="download">查看文件</button>',
+                '                        <button class="download file-url">查看文件</button>',
                 '                    </div>',
                 '                </div>',
                 '            </div>',
@@ -181,7 +173,7 @@
                     fileRelations[i].title+"</a></li>";
             }
 
-            var strDom2=['                        <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>',
+            var strDom2=['                        <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签:&nbsp;&nbsp;'+getKeywords(file.keywords)+'</a></li>',
                 '                    </ul>',
                 '                </div>',
                 '            </div>',
@@ -213,6 +205,8 @@
             self.CollectToCommon();
             //为关联绑定事件
             self.HangRelateEvent();
+            //为查看绑定事件
+            self.HangWatchfile();
         },
         CollectToCommon:function(){
             var self=this;
@@ -223,13 +217,7 @@
                     type:'get',
                     async:false, //默认为true 异步
                     success:function(data){
-                        if(data.status==1){
-                            console.log(data.message+"   开始调用tips方法");
-                            self.popwin_tips(data.message);               //没有执行？？？
-                        }else if(data.status==0){
-                            console.log(data.message);
-                            self.popwin_tips(data.message);               //没有执行？？？
-                        }
+                        self.popwin_tips(data.message,data.status);               //没有执行？？？
                     },error:function(){                      //明明插入成功了？？？error
                         console.log("异步传输失败");
                     }
@@ -237,12 +225,12 @@
                 console.log("添加过程结束");
             })
         },
-        popwin_tips:function(message){
+        popwin_tips:function(message,status){
             var self=this;
             //开始调用弹窗程序
             console.log("调用tip");
             var pop=new Popwin();
-            pop.tips();
+            pop.tips(message,status);
         },
         HangRelateEvent:function(){
             var self=this;
@@ -258,6 +246,20 @@
                     "display":"none"
                 })
             })
+        },
+        HangWatchfile:function(){
+            var self=this;
+            $(".file-out .file-url").click(function(){
+                var url=self.fileData.url;
+                var dom='<div class="file-watch" style="display: block;">'+
+                    '        <div class="close-circle">×</div>'+
+                    '        <iframe width="738" height="523" class="preview-iframe" scrolling="no" frameborder="0" src="'+url+'" ></iframe>'+
+                    '    </div>';
+                console.log(self.fileData.url);
+                $('body').append(dom);
+                console.log("添加路径");
+            })
+
         },
         carousel:function(){
             var self=this;
@@ -318,3 +320,9 @@
     };
     window["FileOut"]=FileOut;
 })(jQuery)
+
+function getKeywords(keyword){
+    var temp = keyword.split("#");
+    var newkeyword = temp[1];
+    return newkeyword;
+}
