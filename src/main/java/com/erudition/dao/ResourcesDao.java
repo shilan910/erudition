@@ -52,10 +52,10 @@ public class ResourcesDao extends BaseDao {
     }
 
 
-    public String saveFiles(String cate1, String cate2, String cate3, String keywords , MultipartFile file, UserEntity user) {
+    public String saveFiles(String cate1, String cate2, String cate3, String keywords ,String originalName, MultipartFile file, UserEntity user) {
         FilesEntity fileEntity = new FilesEntity();
 
-        fileEntity.setTitle(file.getOriginalFilename());
+        fileEntity.setTitle(originalName);
         fileEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
         fileEntity.setSize(exchangeSize(file.getSize()));
         fileEntity.setCreater(user.getUserName());
@@ -67,17 +67,16 @@ public class ResourcesDao extends BaseDao {
                 category.getCategoryName() + file.getOriginalFilename() + "#"+keywords);
 
 
-        //
-
-        fileEntity.setType(category.getCategoryName());
+        //设置文件类型
+        String type = originalName.substring(originalName.indexOf('.')+1,originalName.length());
+        fileEntity.setType(type);
 
         fileEntity.setCategoryId(category.getId());
         fileEntity.setCategoryName(category.getCategoryName());
 
         String saveLocalUrl = categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() + "/" +
-                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() + "/" +
-                category.getCategoryName();
-        String url = MultipartFileUtils.saveFile(file, "/usr/local/erudition/"+saveLocalUrl);
+                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() + "/" + category.getCategoryName();
+        String url = MultipartFileUtils.saveFile(file, "/usr/local/erudition/"+saveLocalUrl , type);
         fileEntity.setUrl(url);
 
 
