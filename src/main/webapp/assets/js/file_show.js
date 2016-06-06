@@ -173,7 +173,7 @@
                     fileRelations[i].title+"</a></li>";
             }
 
-            var strDom2=['                        <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>',
+            var strDom2=['                        <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签:&nbsp;&nbsp;'+getKeywords(file.keywords)+'</a></li>',
                 '                    </ul>',
                 '                </div>',
                 '            </div>',
@@ -320,3 +320,9 @@
     };
     window["FileOut"]=FileOut;
 })(jQuery)
+
+function getKeywords(keyword){
+    var temp = keyword.split("#");
+    var newkeyword = temp[1];
+    return newkeyword;
+}
