@@ -135,7 +135,7 @@
                 '                        <div class="file-class">'+file.type+'</div>',
                 '                    </div>',
                 '                    <div class="file-size">',
-                '                        <button class="download">查看文件</button>',
+                '                        <button class="download file-url">查看文件</button>',
                 '                    </div>',
                 '                </div>',
                 '            </div>',
@@ -205,6 +205,8 @@
             self.CollectToCommon();
             //为关联绑定事件
             self.HangRelateEvent();
+            //为查看绑定事件
+            self.HangWatchfile();
         },
         CollectToCommon:function(){
             var self=this;
@@ -244,6 +246,20 @@
                     "display":"none"
                 })
             })
+        },
+        HangWatchfile:function(){
+            var self=this;
+            $(".file-out .file-url").click(function(){
+                var url=self.fileData.url;
+                var dom='<div class="file-watch" style="display: block;">'+
+                    '        <div class="close-circle">×</div>'+
+                    '        <iframe width="738" height="523" class="preview-iframe" scrolling="no" frameborder="0" src="'+url+'" ></iframe>'+
+                    '    </div>';
+                console.log(self.fileData.url);
+                $('body').append(dom);
+                console.log("添加路径");
+            })
+
         },
         carousel:function(){
             var self=this;
