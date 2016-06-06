@@ -19,11 +19,11 @@ public class MultipartFileUtils {
      * @param path 存储的路径
      * @return 文件的绝对路径
      */
-    public static String saveFile(MultipartFile multipartFile,String path){
+    public static String saveFile(MultipartFile multipartFile,String path,String type){
 
         long unixTime = System.currentTimeMillis();
         String name = HashUtils.HashPath(multipartFile.getOriginalFilename()+unixTime);
-        String multipartUrl = path+"/"+name;
+        String multipartUrl = path+"/"+name+"."+type;
 
         System.out.println("filePath : "+multipartUrl);
 
@@ -47,13 +47,13 @@ public class MultipartFileUtils {
 
 
 
-    public static String updateFile(MultipartFile multipartFile, String path){
+    public static String updateFile(MultipartFile multipartFile, String path ,String type){
         removeFile(path);
         int lastIndex = path.lastIndexOf("/");
         path = path.substring(0, lastIndex);
         long unixTime = System.currentTimeMillis();
         path += HashUtils.HashPath(multipartFile.getOriginalFilename()+unixTime);
-        String multipartUrl = saveFile(multipartFile, path);
+        String multipartUrl = saveFile(multipartFile, path , type);
         return multipartUrl;
     }
     /**

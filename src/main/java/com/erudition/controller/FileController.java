@@ -58,8 +58,9 @@ public class FileController {
             if (!file.isEmpty()) {
                 System.out.println(file.getOriginalFilename());
                 UserEntity user = (UserEntity) session.getAttribute("loginUser");
-                String name = resourcesDao.saveFiles(cate1, cate2, cate3, keywords, file, user);
                 String originalName = file.getOriginalFilename();
+
+                String name = resourcesDao.saveFiles(cate1, cate2, cate3, keywords, originalName,file, user);
 
                 //开始设置关联
                 List<FilesEntity> allFilesInDatabase = (List<FilesEntity>) session.getAttribute("allfiles");

@@ -102,14 +102,6 @@
                             </div>
                         </div>
 
-                        <%--<div class="form-group inputFile">
-                            <label for="inputFile">上传视频</label>
-                            <input type="file" id="inputFile" name="files" value="" multiple />
-                            <p class="help-block">支持MP4格式</p>
-                        </div>
-                        <input type="submit" class="btn btn-success btn-course" value="上传" />--%>
-
-                        <%--<label>上传文件：</label>--%>
                         <div class="form-group inputFile input-file">
                             <br/>
                             <a href="javascript:;" class="file-scan">
@@ -117,8 +109,13 @@
                             </a>
                             <label class="showFileName">未选择文件</label>
                         </div>
-                        <%--<p class="help-block pull-left">支持MP4格式</p>--%>
-                        <input type="text" name="keywords" value="请输入文件关键字,空格隔开，如:会议摘要 全体大会"/>
+
+                        <%--小郑，请修改下面两行的具体样式--%>
+                        <label >请输入文件关键字,空格隔开，如:会议摘要 全体大会(可选)</label>
+                        <input type="text" name="keywords"/>
+
+
+
                         <input type="submit" class="btn btn-primary btn-course pull-right" value="上传" id="progress" />
                         <div class="clearfix"></div>
 
