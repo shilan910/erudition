@@ -5,12 +5,8 @@ import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CategoryDao;
 import com.erudition.dao.ResourcesDao;
-import com.erudition.util.HashUtils;
-import com.erudition.util.RelationUtil;
 import com.erudition.util.nlpir.WordFrequency;
 import org.apache.commons.io.FileUtils;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
@@ -22,9 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-//import javax.jms.Session;
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.AssertFalse;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -90,6 +84,12 @@ public class FileController {
         return new ResponseEntity(FileUtils.readFileToByteArray(fileReal), headers, HttpStatus.CREATED);
     }
 
+    @RequestMapping(value = "/rules", method = RequestMethod.GET)
+    public String rules(HttpSession session){
+        session.setAttribute("adminSidebarActive", 2);
+        return "admin/rule";
+    }
+
     /**
      * @param name setRelation方法中的name参数
      * @return 关键字组成的String数组
@@ -105,6 +105,12 @@ public class FileController {
         System.out.println("end得到关键字！！！");
         return words;
     }
+
+    /**
+     *
+     * @param originalName 文件真实名字
+     * @param relations 与新文件有关联关系的全部文件的id组成的数组
+     */
 
     private void setNewFileRelation(String originalName, List<Integer> relations) {
         List<FilesEntity> newfiles = resourcesDao.getByTitle(originalName);
