@@ -1,14 +1,6 @@
 /**
  * Created by Administrator on 2016/6/2.
- *///引入弹窗依赖js
-/*require.config({
-    paths: {
-        "popwin": "popwinAll"             //这种类似于静态导入popwin.js????????
-    }
-});*/
-
-//document.write("<script language='javascript' src='./popwinAll.js'></script>");
-
+ */
 //对象级别的插件开发----------必须在页面刷新时重新执行
 ;(function($){
     var FileOut=function(){
@@ -223,13 +215,7 @@
                     type:'get',
                     async:false, //默认为true 异步
                     success:function(data){
-                        if(data.status==1){
-                            console.log(data.message+"   开始调用tips方法");
-                            self.popwin_tips(data.message);               //没有执行？？？
-                        }else if(data.status==0){
-                            console.log(data.message);
-                            self.popwin_tips(data.message);               //没有执行？？？
-                        }
+                        self.popwin_tips(data.message,data.status);               //没有执行？？？
                     },error:function(){                      //明明插入成功了？？？error
                         console.log("异步传输失败");
                     }
@@ -237,12 +223,12 @@
                 console.log("添加过程结束");
             })
         },
-        popwin_tips:function(message){
+        popwin_tips:function(message,status){
             var self=this;
             //开始调用弹窗程序
             console.log("调用tip");
             var pop=new Popwin();
-            pop.tips();
+            pop.tips(message,status);
         },
         HangRelateEvent:function(){
             var self=this;
