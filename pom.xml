@@ -243,6 +243,19 @@
             <version>2.2.1</version>
         </dependency>
 
+        <!-- thumbnailator -->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.8</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.sejda</groupId>
+            <artifactId>sejda-icepdf</artifactId>
+            <version>1.0.0-BETA</version>
+        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>

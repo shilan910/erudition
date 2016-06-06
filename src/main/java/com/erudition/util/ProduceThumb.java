@@ -1,6 +1,16 @@
 package com.erudition.util;
 
+import net.coobird.thumbnailator.Thumbnails;
+
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -10,8 +20,9 @@ public class ProduceThumb {
 
     public static void main(String args[]) throws IOException {
 
-        if(new ProduceThumb().processImg("testtest.flv")){
-            System.out.println("get!!!");
+        String path = new ProduceThumb().processPictureThumb("/home/sl/test", "EEE.png", "/home/sl/thumb");
+        if(path != null){
+            System.out.println("get!!!\n"+path);
         }
 
     }
@@ -22,15 +33,13 @@ public class ProduceThumb {
      * @param filerealname 待生成的视频文件含后缀名
      * @return 返回是否转换成功
      */
-    public static boolean processImg(String filerealname) {
+    public static String processVideoThumb(String filePath , String filerealname , String picPath) {
 
         List commend = new java.util.ArrayList();
         commend.add("/opt/ffmpeg/bin/ffmpeg");
         commend.add("-i");
-//        commend.add(videoRealPath + filerealname + ".flv");
-        commend.add("src/main/webapp/assets/file/video/" + filerealname);
-
-
+        //视频文件路径
+        commend.add(filePath+"/"+filerealname);
         commend.add("-y");
         commend.add("-f");
         commend.add("image2");
@@ -39,17 +48,74 @@ public class ProduceThumb {
         commend.add("-t");
         commend.add("0.001");
         commend.add("-s");
-        commend.add("320x240");
-        commend.add("src/main/webapp/assets/file/thumb/" + filerealname + ".jpg");
+        commend.add("250x252");
+        //生成的视频缩略图存放路径
+        String thumbPath = picPath +"/"+ filerealname + ".jpg";
+        commend.add(thumbPath);
         try {
             ProcessBuilder builder = new ProcessBuilder();
             builder.command(commend);
             builder.start();
-            return true;
+            return thumbPath;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return "";
         }
     }
+
+
+
+    public static String processPictureThumb(String filePath , String filerealname , String picPath) throws IOException {
+
+        String thumbPath = picPath +"/"+ filerealname + ".jpg";
+        Thumbnails.of(filePath+"/"+filerealname)
+                .size(250,252)
+                .toFile(thumbPath);
+        return thumbPath;
+    }
+
+
+
+    public static final String FILETYPE_JPG = "jpg";
+
+    public static final String SUFF_IMAGE = "." + FILETYPE_JPG;
+
+
+
+            /**
+             05
+             * 将指定pdf文件的首页转换为指定路径的缩略图
+             06
+             *@param filepath 原文件路径，例如d:/test.pdf
+            07
+             *@param imagepath 图片生成路径，例如 d:/test-1.jpg
+            08
+             *@param zoom     缩略图显示倍数，1表示不缩放，0.3则缩小到30%
+            09
+             */
+
+//    public static void tranfer(String filepath, String imagepath, float zoom) throws PDFException, PDFSecurityException, IOException {
+//
+//        Document document = null;
+//
+//        float rotation = 0f;
+//        document = new Document();
+//        document.setFile(filepath);
+//        BufferedImage img = (BufferedImage) document.getPageImage(0,
+//                GraphicsRenderingHints.SCREEN, Page.BOUNDARY_CROPBOX, rotation, zoom);
+//
+//        Iterator iter = ImageIO.getImageWritersBySuffix(FILETYPE_JPG);
+//
+//        ImageWriter writer = (ImageWriter) iter.next();
+//
+//        File outFile = new File(imagepath);
+//
+//        FileOutputStream out = new FileOutputStream(outFile);
+//
+//        ImageOutputStream outImage = ImageIO.createImageOutputStream(out);
+//
+//        writer.setOutput(outImage);
+//        writer.write(new IIOImage(img, null, null));
+//    }
 
 }
