@@ -5,12 +5,8 @@ import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CategoryDao;
 import com.erudition.dao.ResourcesDao;
-import com.erudition.util.HashUtils;
-import com.erudition.util.RelationUtil;
 import com.erudition.util.nlpir.WordFrequency;
 import org.apache.commons.io.FileUtils;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
@@ -19,15 +15,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-//import javax.jms.Session;
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.AssertFalse;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,22 +50,20 @@ public class FileController {
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String upload(String cate1, String cate2, String cate3,
+    public String upload(String cate1, String cate2, String cate3, String keywords ,
                          @RequestParam MultipartFile[] files, HttpSession session) {
-        System.out.println("uploadController000 in ......");
 
         for (MultipartFile file : files) {
+
             if (!file.isEmpty()) {
                 System.out.println(file.getOriginalFilename());
-                CategoryEntity category = categoryDao.getById(Integer.valueOf(cate3));
-                String name = resourcesDao.saveFiles(cate1, cate2, cate3, file, (UserEntity) session.getAttribute("loginUser"));
+                UserEntity user = (UserEntity) session.getAttribute("loginUser");
+                String name = resourcesDao.saveFiles(cate1, cate2, cate3, keywords, file, user);
                 String originalName = file.getOriginalFilename();
-
 
                 //开始设置关联
                 List<FilesEntity> allFilesInDatabase = (List<FilesEntity>) session.getAttribute("allfiles");
                 setRelation(originalName, allFilesInDatabase, name);
-                System.out.println("uploadController in ......");
             }
 
         }
@@ -84,6 +73,7 @@ public class FileController {
 
 
     @RequestMapping(value = "/download/{fid}", method = RequestMethod.GET)
+    @ResponseBody
     public ResponseEntity download(@PathVariable("fid") int fid) throws IOException {
         FilesEntity file = resourcesDao.getById(fid);
         String dfileName = new String(file.getTitle().getBytes("gb2312"), "iso8859-1");
@@ -92,6 +82,12 @@ public class FileController {
         headers.setContentDispositionFormData("attachment", dfileName);
         File fileReal = new File(file.getUrl());
         return new ResponseEntity(FileUtils.readFileToByteArray(fileReal), headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/rules", method = RequestMethod.GET)
+    public String rules(HttpSession session){
+        session.setAttribute("adminSidebarActive", 2);
+        return "admin/rule";
     }
 
     /**
@@ -109,6 +105,12 @@ public class FileController {
         System.out.println("end得到关键字！！！");
         return words;
     }
+
+    /**
+     *
+     * @param originalName 文件真实名字
+     * @param relations 与新文件有关联关系的全部文件的id组成的数组
+     */
 
     private void setNewFileRelation(String originalName, List<Integer> relations) {
         List<FilesEntity> newfiles = resourcesDao.getByTitle(originalName);

@@ -157,7 +157,7 @@
                 '                <div class="line"></div>',
                 '                <div class="a-operate">',
                 '                    <ul>',
-                '                        <li><a href="/erudition/admin/file/download/"'+file.id+'><i class="fa fa-download"></i>&nbsp;&nbsp;下载('+fileSize+')</a></li>',
+                '                        <li><a href="/erudition/admin/file/download/'+file.id+'"><i class="fa fa-download"></i>&nbsp;&nbsp;下载('+fileSize+')</a></li>',
                 '                        <li><a href="#" class="collect"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>',
                 '                    </ul>',
                 '                </div>',
