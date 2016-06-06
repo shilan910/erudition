@@ -181,8 +181,7 @@
                     fileRelations[i].title+"</a></li>";
             }
 
-            var strDom2=['                        <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>',
-                '<li><i class="fa fa-tag"></i>'+file.key+'</li>',
+            var strDom2=['                        <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签:&nbsp;&nbsp;'+getKeywords(file.keywords)+'</a></li>',
                 '                    </ul>',
                 '                </div>',
                 '            </div>',
