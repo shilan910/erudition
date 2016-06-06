@@ -165,7 +165,7 @@ public class DocConverter {
         }
         try {
             doc2pdf();
-            pdf2swf();
+           // pdf2swf();
         } catch (Exception e) {
             e.printStackTrace();
             return false;
