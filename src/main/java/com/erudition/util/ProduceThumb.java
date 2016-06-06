@@ -20,7 +20,7 @@ public class ProduceThumb {
 
     public static void main(String args[]) throws IOException {
 
-        String path = new ProduceThumb().processPictureThumb("/home/sl/test", "EEE.png", "/home/sl/thumb");
+        String path = new ProduceThumb().processVideoThumb("/home/sl/test/数据/学习资源推荐系统演示视频.wmv");
         if(path != null){
             System.out.println("get!!!\n"+path);
         }
@@ -30,16 +30,19 @@ public class ProduceThumb {
 
     /**
      * 生成视频缩略图
-     * @param filerealname 待生成的视频文件含后缀名
      * @return 返回是否转换成功
      */
-    public static String processVideoThumb(String filePath , String filerealname , String picPath) {
+    public static String processVideoThumb(String filePath) {
+
+        String fileName = filePath.substring(filePath.lastIndexOf('/')+1,filePath.length());
+
+        String thumbPath = filePath.substring(0,filePath.lastIndexOf('/')) +"/thumb/"+ fileName + ".jpg";
 
         List commend = new java.util.ArrayList();
         commend.add("/opt/ffmpeg/bin/ffmpeg");
         commend.add("-i");
         //视频文件路径
-        commend.add(filePath+"/"+filerealname);
+        commend.add(filePath);
         commend.add("-y");
         commend.add("-f");
         commend.add("image2");
@@ -50,7 +53,7 @@ public class ProduceThumb {
         commend.add("-s");
         commend.add("250x252");
         //生成的视频缩略图存放路径
-        String thumbPath = picPath +"/"+ filerealname + ".jpg";
+//        String thumbPath = picPath +"/"+ filerealname + ".jpg";
         commend.add(thumbPath);
         try {
             ProcessBuilder builder = new ProcessBuilder();
@@ -65,14 +68,19 @@ public class ProduceThumb {
 
 
 
-    public static String processPictureThumb(String filePath , String filerealname , String picPath) throws IOException {
+    public static String processPictureThumb(String filePath) throws IOException {
 
-        String thumbPath = picPath +"/"+ filerealname + ".jpg";
-        Thumbnails.of(filePath+"/"+filerealname)
+        String fileName = filePath.substring(filePath.lastIndexOf('/')+1,filePath.length());
+
+        String thumbPath = filePath.substring(0,filePath.lastIndexOf('/')) +"/thumb/"+ fileName + ".jpg";
+        Thumbnails.of(filePath)
                 .size(250,252)
                 .toFile(thumbPath);
         return thumbPath;
     }
+
+
+
 
 
 

@@ -164,7 +164,7 @@ pageEncoding="UTF-8"%>
                                 <input type='checkbox'/>
                             </div>
                             <div class='flex-1 file-image'><i class='iconfont icon-${collections.type}'></i></div>
-                            <div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>${collections.title}</a></span></div>
+                            <div class='file-name flex-4'><span id='${collections.id}'><a href='#'>${collections.title}</a></span></div>
                         </div>
                         <div class='flex-3 file-size'><span>${collections.size}</span></div>
                         <div class='flex-3 file-creator'>${collections.creater}</div>
