@@ -1,11 +1,25 @@
 /**
  * Created by Administrator on 2016/6/2.
- */
-//¶ÔÏó¼¶±ğµÄ²å¼ş¿ª·¢----------±ØĞëÔÚÒ³ÃæË¢ĞÂÊ±ÖØĞÂÖ´ĞĞ
+ *///å¼•å…¥å¼¹çª—ä¾èµ–js
+/*require.config({
+    paths: {
+        "popwin": "popwinAll"             //è¿™ç§ç±»ä¼¼äºé™æ€å¯¼å…¥popwin.js????????
+    }
+});*/
+
+//document.write("<script language='javascript' src='./popwinAll.js'></script>");
+
+//å¯¹è±¡çº§åˆ«çš„æ’ä»¶å¼€å‘----------å¿…é¡»åœ¨é¡µé¢åˆ·æ–°æ—¶é‡æ–°æ‰§è¡Œ
 ;(function($){
     var FileOut=function(){
+        //å¼•å…¥ä¾èµ–çš„js
+        //new_element=document.createElement("script");
+        //new_element.setAttribute("type","text/javascript");
+        //new_element.setAttribute("src","popwinAll.js");// åœ¨è¿™é‡Œå¼•å…¥äº†a.js
+        //document.body.appendChild(new_element);
+
         var self=this;
-        //³éÈ¡»ù´¡DOMÖ÷ÒªÎ§ÈÆ×Ö·û´®À´Ê¹ÓÃ
+        //æŠ½å–åŸºç¡€DOMä¸»è¦å›´ç»•å­—ç¬¦ä¸²æ¥ä½¿ç”¨
         self.pre_btn='.file-out .pre-btn';
         self.next_btn='.file-out .next-btn';
         self.root='.file-body';
@@ -14,27 +28,82 @@
         self.nextPopwin;
 
         self.currentIndex;
-        self.allIndex=self.getAllIndex();
+        self.allIndex;
 
-        console.log("µ±Ç°Ò³ÃæÈ«²¿¸öÊı:"+self.allIndex);
-        console.log("µ÷ÓÃ²å¼ş");
-        //ÉèÖÃÒ³ÃæÖĞµÄÔªËØindexÊôĞÔ
-        self.setIndex();
-        $(".body-floor .file-name span").click(function(event){
+        //æ•°æ®æ± 
+        self.fileData;
+        self.fileRelations;
+
+        console.log("è°ƒç”¨æ’ä»¶");
+
+        $(document).on("click",".body-floor .file-name span",function(event){         //è¿™é‡Œçš„å‰ææ˜¯æœ‰æ•´ä½“å¯¹è±¡    è¿™å°¼ç›æ²¡æ³•è¿›è¡Œreturnäº†
+            var me=$(this);
+
             event.stopPropagation();
-            //»ñÈ¡µ±Ç°µã»÷¶ÔÏóµÄÎ»ÖÃ
+            //è·å–å½“å‰é¡µé¢å…¨éƒ¨å¯¹è±¡ä¸ªæ•°
+            self.allIndex=self.getAllIndex();
+            console.log("å½“å‰é¡µé¢å…¨éƒ¨ä¸ªæ•°:"+self.allIndex);
+            //è®¾ç½®é¡µé¢ä¸­çš„å…ƒç´ indexå±æ€§
+            self.setIndex();
+            //è·å–å½“å‰ç‚¹å‡»å¯¹è±¡çš„ä½ç½®
             self.currentIndex=$(this).parents(self.root_element).attr("index");
-            console.log("µ±Ç°µã»÷ÎªµÚ"+self.currentIndex+"¸ö");
-            self.renderDOM();            //ÒòÎª°µº¬ÁËË³Ğò£¬ËùÒÔ¿ÉÒÔÎŞËù¹Ë¼ÉµÄÊ¹ÓÃ£¬¹ş¹ş¹ş¹ş
-            self.carousel();          //°ó¶¨ÂÖ²¥ÊÂ¼ş£¬µ«ÊÇ»¹Ã»ÓĞÌØÊâ»¯,
-        });
+            console.log("å½“å‰ç‚¹å‡»ä¸ºç¬¬"+self.currentIndex+"ä¸ª");
+            //è·å–æ•°æ®
+            self.getData(self.currentIndex,"index");
+            //æ¸²æŸ“æ•°æ®
+            self.renderDOM();            //å› ä¸ºæš—å«äº†é¡ºåºï¼Œæ‰€ä»¥å¯ä»¥æ— æ‰€é¡¾å¿Œçš„ä½¿ç”¨ï¼Œå“ˆå“ˆå“ˆå“ˆ//é™æ€æ¸²æŸ“ä¸åŠ¨æ€æ¸²æŸ“çš„æ—¶é—´ä¸Šæœ‰é—®é¢˜ï¼Ÿ
+            self.carousel();          //ç»‘å®šè½®æ’­äº‹ä»¶ï¼Œä½†æ˜¯è¿˜æ²¡æœ‰ç‰¹æ®ŠåŒ–,
+
+
+            //æ’å…¥åŠ¨æ€æ•°æ®
+            //self.renderData($(this));        //å°†å½“å‰ç‚¹å‡»ä¼ é€
+        })
 
     };
     FileOut.prototype={
-        //³õ²½äÖÈ¾µ¯´°
+        //æ ¹æ®indexè·å–å…ƒç´ id
+        getIdByIndex:function(index){
+            var self=this;
+            console.log("å‘é€å½“å‰çš„id"+$(self.root_element).eq(index-1).find(".file-name").find("span").eq(0).attr("id"));
+            return $(self.root_element).eq(index-1).find(".file-name").find("span").eq(0).attr("id");
+        },
+        /**
+         * æ ¹æ®é…ç½®è·å–æ•°æ®(ä¸‹æ ‡æˆ–è€…id)
+         * @param index
+         * @param opt
+         */
+        getData:function(enter,opt){
+            var self=this;
+            console.log("å¼€å§‹è·å–æ•°æ®");
+            //æ ¹æ®ä¸‹æ ‡è·å–id
+            //var file_id = me.attr("id");
+            var file_id;
+            if(opt==="index"){
+                file_id=self.getIdByIndex(enter);
+            }else if(opt=="id"){
+                file_id=enter;
+            }
+
+            console.log("è·å–çš„idä¸º:"+file_id);
+            var file;
+            $.ajax({
+                url:'/erudition/resources/file/'+file_id,                 //${rootPath}å¤±æ•ˆ
+                type:'get',
+                async : false, //é»˜è®¤ä¸ºtrue å¼‚æ­¥
+                success:function(data){
+                    self.fileData=data.file;
+                    self.fileRelations=data.relationfiles;        //è·å–å…³è”æ–‡ä»¶
+                    console.log("è·å–çš„å…³è”æ–‡ä»¶ä¸º:"+data.relationfiles);
+                },error:function(){
+                    alert("error"+file_id);
+                    return "error";
+                }
+            });
+        },
+        //åˆæ­¥æ¸²æŸ“å¼¹çª—
         getAllIndex:function(){
             var self=this;
-            return $(self.root).children(self.root_element).length;
+            return $(self.root).children(self.root_element).length;           //è¿™é‡ŒåŠ¨æ€çš„å­å…ƒç´ ä¸ªæ•°
         },
         setIndex:function(){
             var self=this;
@@ -45,18 +114,36 @@
         },
         renderDOM:function(){
             var self=this;
-            var strDom=['<div class="file-out" style="display: none;" >',
+            var file=self.fileData;
+            var fileRelations=self.fileRelations;
+            //è½¬æ¢æ—¶é—´æˆ³
+            var date = new Date(file.createTime);
+            var Y = date.getFullYear() + '-';
+            var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+            var D = date.getDate() + ' ';
+            var h = date.getHours() + ':';
+            var m = date.getMinutes() + ':';
+            var s = date.getSeconds();
+            var createDate = Y+M+D+h+m+s;
+            //è½¬æ¢æ–‡ä»¶å¤§å°
+            var fileSize=turnSize(file.size);
+
+            console.log("file.type="+file.type);
+            console.log("file.size="+file.size);
+
+
+            var strDom1=['<div class="file-out" style="display: none;" >',
                 '        <div class="pre-btn pre-bg"></div>',
                 '        <!--<div class="clearfix"></div>-->',
                 '        <div class="file-body">',
                 '            <div class="content">',
                 '                <div class="file">',
                 '                    <div class="file-thumbnails">',
-                '                        <div class="file-name">SQLdb_ilearn_3</div>',
-                '                        <div class="file-class">ÎÄ¼şÀàĞÍSQL</div>',
+                '                        <div class="file-name"><img src="/erudition/assets/images/03.jpg" alt=""/></div>',
+                '                        <div class="file-class">'+file.type+'</div>',
                 '                    </div>',
                 '                    <div class="file-size">',
-                '                        <button class="download">²é¿´ÎÄ¼ş(4MB)</button>',
+                '                        <button class="download">æŸ¥çœ‹æ–‡ä»¶</button>',
                 '                    </div>',
                 '                </div>',
                 '            </div>',
@@ -64,29 +151,37 @@
                 '            <div class="attribute">',
                 '                <div class="a-info">',
                 '                    <div class="a-first">',
-                '                        <div class="file-from">ËùÊôÎÄ¼ş¼Ğ:Êı¾İ¿â</div>',
-                '                        <div class="a-close">¡Á</div>',
+                '                        <div class="file-from">æ‰€å±æ–‡ä»¶å¤¹:'+file.categoryName+'</div>',
+                '                        <div class="a-close">Ã—</div>',
                 '                        <div class="clearfix"></div>',
                 '                    </div>',
-                '                    <div class="file-name">SQLdb_ilearn_3</div>',
-                '                    <div class="collected">ÊÕ²ØÁ¿&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>',
+                '                    <div class="file-name">'+file.title+'</div>',
+                //'                    <div class="collected">æ”¶è—é‡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>',
                 '                    <div class="a-third">',
-                '                        <div class="file-uptime"><i class="fa fa-clock-o"></i>2013-12-12</div>',
-                '                        <div class="file-people"><i class="fa fa-user"></i>ÉÏ´«ÈË-MR.Z</div>',
+                '                        <div class="file-uptime"><i class="fa fa-clock-o"></i>'+createDate+'</div>',
+                '                        <div class="file-people"><i class="fa fa-user"></i>ä¸Šä¼ äºº-'+file.creater+'</div>',
                 '                    </div>',
                 '                </div>',
                 '                <div class="line"></div>',
                 '                <div class="a-operate">',
                 '                    <ul>',
-                '                        <li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;ÏÂÔØ</a></li>',
-                '                        <li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;ÊÕ²Ø</a></li>',
+                '                        <li><a href="/erudition/admin/file/download/"'+file.id+'><i class="fa fa-download"></i>&nbsp;&nbsp;ä¸‹è½½('+fileSize+')</a></li>',
+                '                        <li><a href="#" class="collect"><i class="fa fa-star"></i>&nbsp;&nbsp;æ”¶è—</a></li>',
                 '                    </ul>',
                 '                </div>',
                 '                <div class="line"></div>',
                 '                <div class="a-related">',
                 '                    <ul>',
-                '                        <li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;¹ØÁªÄÚÈİ</a></li>',
-                '                        <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;±êÇ©</a></li>',
+                '                        <li><a href="#"><i class="fa fa-link"><span id='+file.id+'></i>&nbsp;&nbsp;&nbsp;å…³è”å†…å®¹</a></li>'].join("");
+            //è¿æ¥å…³è”å†…å®¹
+            for(var i=0 ; i < fileRelations.length ; i++){
+                var re = fileRelations[i].title;
+                console.log('re= '+re);
+                strDom1 = strDom1 + "<li id='"+fileRelations[i].id+"'class='file-related' ><a href='#'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;"+
+                    fileRelations[i].title+"</a></li>";
+            }
+
+            var strDom2=['                        <li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;æ ‡ç­¾</a></li>',
                 '                    </ul>',
                 '                </div>',
                 '            </div>',
@@ -94,31 +189,81 @@
                 '        <div class="next-btn"></div>',
                 '        <!--<div class="clearfix"></div>-->',
                 '    </div>'].join("");
-            //²åÈëµ½bodyÖĞ
-            $("body").append(strDom);           //ÕâÀïÔõÃ´¼ÇÂ¼µ±Ç°µÄÕâ¸öµ¯´°ÄØ£¿
-            self.currentPopwin=$(".file-out");       //¼ÇÂ¼µ±Ç°µ¯´°
-            //ÏÔÊ¾²¢¼ÓÈëÕÚÕÖ²ã
+
+            var strDom=strDom1+strDom2;
+            //æ’å…¥åˆ°bodyä¸­
+            $("body").append(strDom);           //è¿™é‡Œæ€ä¹ˆè®°å½•å½“å‰çš„è¿™ä¸ªå¼¹çª—å‘¢ï¼Ÿ
+            self.currentPopwin=$(".file-out");       //è®°å½•å½“å‰å¼¹çª—
+            //æ˜¾ç¤ºå¹¶åŠ å…¥é®ç½©å±‚
             $(".mask").fadeIn();
             $(".file-out").fadeIn();
-            //ÎªcloseÓëmask°ó¶¨ÊÂ¼ş
+            //ä¸ºcloseä¸maskç»‘å®šäº‹ä»¶
             $(".a-close").on("click",function(event){
                 event.stopPropagation();
                 $(".file-out").fadeOut();
                 $(".mask").fadeOut();
                 self.currentPopwin.remove();
             })
-
             $(".mask").on("click",function(event){
                 event.stopPropagation();
                 $(".file-out").fadeOut();
                 $(".mask").fadeOut();
             })
+            //ä¸ºæ”¶è—ç»‘å®šäº‹ä»¶
+            self.CollectToCommon();
+            //ä¸ºå…³è”ç»‘å®šäº‹ä»¶
+            self.HangRelateEvent();
+        },
+        CollectToCommon:function(){
+            var self=this;
+            $(".a-operate .collect").click(function(event){
+                var file_id =self.getIdByIndex(self.currentIndex);
+                $.ajax({
+                    url:'/erudition/collection/addtocollection/'+file_id,            //axajå¤±è´¥
+                    type:'get',
+                    async:false, //é»˜è®¤ä¸ºtrue å¼‚æ­¥
+                    success:function(data){
+                        if(data.status==1){
+                            console.log(data.message+"   å¼€å§‹è°ƒç”¨tipsæ–¹æ³•");
+                            self.popwin_tips(data.message);               //æ²¡æœ‰æ‰§è¡Œï¼Ÿï¼Ÿï¼Ÿ
+                        }else if(data.status==0){
+                            console.log(data.message);
+                            self.popwin_tips(data.message);               //æ²¡æœ‰æ‰§è¡Œï¼Ÿï¼Ÿï¼Ÿ
+                        }
+                    },error:function(){                      //æ˜æ˜æ’å…¥æˆåŠŸäº†ï¼Ÿï¼Ÿï¼Ÿerror
+                        console.log("å¼‚æ­¥ä¼ è¾“å¤±è´¥");
+                    }
+                });
+                console.log("æ·»åŠ è¿‡ç¨‹ç»“æŸ");
+            })
+        },
+        popwin_tips:function(message){
+            var self=this;
+            //å¼€å§‹è°ƒç”¨å¼¹çª—ç¨‹åº
+            console.log("è°ƒç”¨tip");
+            var pop=new Popwin();
+            pop.tips();
+        },
+        HangRelateEvent:function(){
+            var self=this;
+            var file_id;
+            $(".file-related").click(function(){
+                file_id=$(this).attr("id");
+                console.log("ç‚¹å‡»å…³è”çš„idä¸º:"+file_id);
+                self.currentPopwin.remove();
+                self.getData(file_id,"id");
+                self.renderDOM();
+                $(self.pre_btn).removeClass("pre-bg");
+                $(self.next_btn).css({      //>>>>>>>>>>>>>>>>>>>>>>>>è¿™é‡Œæœ‰ç‘•ç–µ
+                    "display":"none"
+                })
+            })
         },
         carousel:function(){
             var self=this;
-            console.log("ÂÖ²¥Æô¶¯");
-            console.log("µ±Ç°ÏÂ±êÎª"+self.currentIndex);
-            //ÅĞ¶Ï¿É²»¿ÉÒÔnext
+            console.log("è½®æ’­å¯åŠ¨");
+            console.log("å½“å‰ä¸‹æ ‡ä¸º"+self.currentIndex);
+            //åˆ¤æ–­å¯ä¸å¯ä»¥next
             if(self.currentIndex!=self.allIndex){
                 $(self.next_btn).css({
                     "display":"block"
@@ -131,11 +276,11 @@
                     "display":"none"
                 })
             }
-            //ÅĞ¶Ï¿É²»¿ÉÒÔpre
+            //åˆ¤æ–­å¯ä¸å¯ä»¥pre
             if(self.currentIndex!=1){
                 /*$(self.pre_btn).css({
-                    "display":"block"
-                });*/
+                 "display":"block"
+                 });*/
                 $(self.pre_btn).addClass("pre-bg");
                 $(this.pre_btn).click(function(){
                     self.pre();
@@ -146,25 +291,27 @@
         },
         next:function(){
             var self=this;
-            //¸Ä±äÏÂ±ê
+            //æ”¹å˜ä¸‹æ ‡
             self.currentIndex++;
-            //½«Ö®Ç°µÄDOMÄ¨È¥
+            //å°†ä¹‹å‰çš„DOMæŠ¹å»
             self.currentPopwin.fadeOut(200).remove();
-            //Õ¹Ê¾ÏÂÒ»¸öDOM
+            //å±•ç¤ºä¸‹ä¸€ä¸ªDOM
+            self.getData(self.currentIndex,"index");
             self.renderDOM();
-            self.carousel();            //ÕâÀïÒ»¶¨ÊÇÏÂÒ»¸öDOM    ÕâÀïºÜÓĞÎÊÌâ
+            self.carousel();            //è¿™é‡Œä¸€å®šæ˜¯ä¸‹ä¸€ä¸ªDOM    è¿™é‡Œå¾ˆæœ‰é—®é¢˜
             self.nextPopwin=$(".file-out");
             self.nextPopwin.fadeIn(200);
         },
         pre:function(){
             var self=this;
-            //¸Ä±äÏÂ±ê
+            //æ”¹å˜ä¸‹æ ‡
             self.currentIndex--;
-            //½«Ö®Ç°µÄDOMÄ¨È¥
+            //å°†ä¹‹å‰çš„DOMæŠ¹å»
             self.currentPopwin.fadeOut(200).remove();
-            //Õ¹Ê¾ÉÏÒ»¸öDOM
+            //å±•ç¤ºä¸Šä¸€ä¸ªDOM
+            self.getData(self.currentIndex,"index");
             self.renderDOM();
-            self.carousel();            //ÕâÀïÒ»¶¨ÊÇÉÏÒ»¸öDOM
+            self.carousel();            //è¿™é‡Œä¸€å®šæ˜¯ä¸Šä¸€ä¸ªDOM
             self.nextPopwin=$(".file-out");
             self.nextPopwin.fadeIn(200);
         }

@@ -78,13 +78,13 @@ public class UserController {
 
 
                 //登录的时候即将该用户常用目录中的内容加入session中
-                List<FilesEntity>files = new ArrayList<FilesEntity>();
-                List<CollectionEntity> collections = collectionDao.getByUid(user.getId());
-                for(CollectionEntity collectionEntity:collections){
-                    files.add(resourcesDao.getById(collectionEntity.getFileId()));
-                }
-                session.setAttribute("usercollections",files);
-                //session.setAttribute("userid",user.getId());
+//                List<FilesEntity>files = new ArrayList<FilesEntity>();
+////                List<CollectionEntity> collections = collectionDao.getByUid(user.getId());
+////                for(CollectionEntity collectionEntity:collections){
+////                    files.add(resourcesDao.getById(collectionEntity.getFileId()));
+////                }
+//                session.setAttribute("usercollections",files);
+                session.setAttribute("userid",user.getId());
                 // redirectAttributes.addAttribute("loginMsg",message);
 
 

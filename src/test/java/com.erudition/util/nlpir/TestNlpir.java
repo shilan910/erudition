@@ -3,6 +3,7 @@ package com.erudition.util.nlpir;
 /**
  * Created by sl on 16-6-1.
  */
+import com.erudition.util.TextRead;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -26,12 +27,18 @@ public class TestNlpir {
     @Test
     public void test1(){
         WordFrequency wordFrequency = new WordFrequency();
-        String[] words = wordFrequency.wordFre("/home/sl/test/Readme1.txt",15);
+        String[] words = wordFrequency.wordFre("/home/sl/test/123.doc",10);
         for(String word : words){
             System.out.println(word);
         }
     }
 
+
+    @Test
+    public void testTextRead(){
+        TextRead textRead = new TextRead();
+        textRead.getTextFromWord("/home/sl/test/123.doc");
+    }
 
     @Test
     public void test() throws IOException {

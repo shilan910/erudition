@@ -59,8 +59,11 @@ pageEncoding="UTF-8"%>
 
                 <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
                 <ul id="demo-list">
-
-                    <li class="active" ><a href="#"><i class="fa fa-home"></i>共享目录 </a>
+                    <c:set var="shareCateClass" value=""/>
+                    <c:if test="${cateIsActive==0}">
+                        <c:set var="shareCateClass" value="active"/>
+                    </c:if>
+                    <li class="${shareCateClass}" ><a href="#"><i class="fa fa-home"></i>共享目录 </a>
                         <ul class="submenu" id="first-cates">
                             <c:forEach items="${categories}" var="firstCate">
                                 <li><a href="#">${firstCate.name}</a>
@@ -85,8 +88,11 @@ pageEncoding="UTF-8"%>
 
                     </li>
 
-
-                        <li id="collection" class="" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>
+                    <c:set var="commonCateClass" value=""/>
+                    <c:if test="${cateIsActive==1}">
+                        <c:set var="commonCateClass" value="active"/>
+                    </c:if>
+                    <li id="collection" class="${commonCateClass}" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>
                             <%--<ul class="submenu" >--%>
                                 <%--<c:forEach items="${categories}" var="firstCate">--%>
                                     <%--<li><a href="#">${firstCate.name}</a>--%>
@@ -126,7 +132,7 @@ pageEncoding="UTF-8"%>
         <div class="header-all">
             <div class="header flex-row">
                 <div class="flex-7 path">
-                    共享目录
+                    常用目录
                 </div>
                 <%--<div class="flex-3 search">--%>
                     <%--<div class="input-group">--%>
@@ -248,207 +254,10 @@ pageEncoding="UTF-8"%>
 
 </div>
 
-<%--
-<!--文件弹窗一次里的具体内容--渲染-->
-<div class="file-out">
-    <div class="pre-btn"></div>
-    <!--<div class="clearfix"></div>-->
-    <div class="file-body" id="file-info">
-        &lt;%&ndash;<div class="content">&ndash;%&gt;
-            &lt;%&ndash;<div class="file">&ndash;%&gt;
-                &lt;%&ndash;<div class="file-thumbnails">&ndash;%&gt;
-                    &lt;%&ndash;<div class="file-name">SQLdb_ilearn_3</div>&ndash;%&gt;
-                    &lt;%&ndash;<div class="file-class">文件类型SQL</div>&ndash;%&gt;
-                &lt;%&ndash;</div>&ndash;%&gt;
-                &lt;%&ndash;<div class="file-size">&ndash;%&gt;
-                    &lt;%&ndash;<button class="download">下载文件(4MB)</button>&ndash;%&gt;
-                &lt;%&ndash;</div>&ndash;%&gt;
-            &lt;%&ndash;</div>&ndash;%&gt;
-        &lt;%&ndash;</div>&ndash;%&gt;
-
-        &lt;%&ndash;<div class="attribute">&ndash;%&gt;
-            &lt;%&ndash;<div class="a-info">&ndash;%&gt;
-                &lt;%&ndash;<div class="a-first">&ndash;%&gt;
-                    &lt;%&ndash;<div class="file-from">所属文件夹:数据库</div>&ndash;%&gt;
-                    &lt;%&ndash;<div class="a-close">×</div>&ndash;%&gt;
-                    &lt;%&ndash;<div class="clearfix"></div>&ndash;%&gt;
-                &lt;%&ndash;</div>&ndash;%&gt;
-                &lt;%&ndash;<div class="file-name">SQLdb_ilearn_3</div>&ndash;%&gt;
-                &lt;%&ndash;<div class="collected">收藏量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>&ndash;%&gt;
-                &lt;%&ndash;<div class="a-third">&ndash;%&gt;
-                    &lt;%&ndash;<div class="file-uptime"><i class="fa fa-clock-o"></i>2013-12-12</div>&ndash;%&gt;
-                    &lt;%&ndash;<div class="file-people"><i class="fa fa-user"></i>上传人-MR.Z</div>&ndash;%&gt;
-                &lt;%&ndash;</div>&ndash;%&gt;
-            &lt;%&ndash;</div>&ndash;%&gt;
-            &lt;%&ndash;<div class="line"></div>&ndash;%&gt;
-            &lt;%&ndash;<div class="a-operate">&ndash;%&gt;
-                &lt;%&ndash;<ul>&ndash;%&gt;
-                    &lt;%&ndash;<li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;下载</a></li>&ndash;%&gt;
-                    &lt;%&ndash;<li><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;收藏</a></li>&ndash;%&gt;
-                &lt;%&ndash;</ul>&ndash;%&gt;
-            &lt;%&ndash;</div>&ndash;%&gt;
-            &lt;%&ndash;<div class="line"></div>&ndash;%&gt;
-            &lt;%&ndash;<div class="a-related">&ndash;%&gt;
-                &lt;%&ndash;<ul>&ndash;%&gt;
-                    &lt;%&ndash;<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>&ndash;%&gt;
-                    &lt;%&ndash;<c:forEach items="${relationalresources}" var="re">&ndash;%&gt;
-                        &lt;%&ndash;<li><a href="#"><i class="fa fa-link"></i>&nbsp;&nbsp;&nbsp;${re.title}</a></li>&ndash;%&gt;
-                    &lt;%&ndash;</c:forEach>&ndash;%&gt;
-                    &lt;%&ndash;<li><a href="#"><i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;标签</a></li>&ndash;%&gt;
-                &lt;%&ndash;</ul>&ndash;%&gt;
-            &lt;%&ndash;</div>&ndash;%&gt;
-        &lt;%&ndash;</div>&ndash;%&gt;
-    </div>
-    <div class="next-btn"></div>
-
-
-    &lt;%&ndash;<jsp:include page="common/pagination.jsp"/>&ndash;%&gt;
-
-
-    <!--<div class="clearfix"></div>-->
-</div>
-<!--文件弹窗点击事件，静态DOM-->
-<script>
-    $(function(){
-        $(document).on("click",".body-floor .file-name span",function(event){
-            var file_id =  $(this).attr("id");
-            //alert(file_id);
-            event.stopPropagation();
-            $.ajax({
-                url:'${rootPath}/resources/file/'+file_id,
-                type:'get',
-                &lt;%&ndash;data:'merName='+'${val}',&ndash;%&gt;
-                async : false, //默认为true 异步
-                success:function(data){
-                    loadFileInfo(data.file , data.relationfiles);
-                    $(".mask").fadeIn();
-                    $(".file-out").fadeIn();
-                },error:function(){
-
-                    alert("error"+file_id);
-                }
-            });
-
-        })
-
-
-        $(document).on("click",".file-out .a-close",function(event){
-            event.stopPropagation();
-            $(".file-out").fadeOut();
-            $(".mask").fadeOut();
-        });
-
-        $(".mask").on("click",function(event){
-            event.stopPropagation();
-            $(".file-out").fadeOut();
-            $(".mask").fadeOut();
-        })
-    })
-
-    $(function(){
-        $(document).on("click",".a-related ul li",function(event){
-            var file_id =  $(this).attr("id");
-           // alert(file_id);
-           // alert(${val});
-            event.stopPropagation();
-            $.ajax({
-                url:'${rootPath}/resources/file/'+file_id,
-                type:'get',
-                data:'merName='+'${val}',
-                async : false, //默认为true 异步
-                success:function(data){
-                    loadFileInfo(data.file , data.relationfiles);
-                    $(".mask").fadeIn();
-                    $(".file-out").fadeIn();
-                },error:function(){
-                    alert("error");
-                }
-            });
-
-        })
-    })
-
-
-    //begin实现异步添加至常用目录
-    $(function(){
-        $(document).on("click",".a-operate ul li",function(event){
-            var file_id =  $(".a-operate span").attr("id");
-           // alert(file_id);
-
-         //   event.stopPropagation();
-            $.ajax({
-                url:'${rootPath}/collection/addtocollection/'+file_id,
-                type:'get',
-//                data:{},
-                async : false, //默认为true 异步
-                success:function(){
-                //    loadFileInfo(data.file , data.relationfiles);
-                    <c:if test="${collectionflag=='0'}">alert("添加成功！");</c:if>
-                    <c:if test="${collectionflag=='1'}">alert("请不要重复添加！");</c:if>
-                    $(".mask").fadeIn();
-                    $(".file-out").fadeIn();
-                },error:function(){
-                    //alert("error");
-                    <c:if test="${collectionflag=='0'}">alert("添加成功！");</c:if>
-                    <c:if test="${collectionflag=='1'}">alert("请不要重复添加！");</c:if>
-                }
-            });
-          //  alert(${val});
-
-        })
-    })
-
-    //end实现异步添加至常用目录
-
-
-    function loadFileInfo(file,relationfiles){
-        var file_body = $("#file-info");
-        file_body.empty();
-        //alert("loadFileInfo ing!");
-
-        //转换时间戳
-        var date = new Date(file.createTime);
-        var Y = date.getFullYear() + '-';
-        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-        var D = date.getDate() + ' ';
-        var h = date.getHours() + ':';
-        var m = date.getMinutes() + ':';
-        var s = date.getSeconds();
-        var createDate = Y+M+D+h+m+s;
-
-        var obj = "<div class='content'><div class='file'><div class='file-thumbnails'>"
-                + "<div class='file-name'> <img alt='' class='file-name' src='/erudition/assets/images/test.jpg'/></div><div class='file-class'>"
-                + file.type+"</div></div><div class='file-size'><button class='download'>查看文件("
-                + file.size+")</button></div></div></div><div class='attribute'>"
-                + "<div class='a-info'><div class='a-first'><div class='file-from'>所属文件夹:&nbsp;&nbsp;"
-                + file.categoryName+"</div><div class='a-close'>×</div><div class='clearfix'></div>"
-                + "</div><div class='file-name'>"+file.title+"</div><div class='a-third'>"
-                + "<div class='file-uptime'><i class='fa fa-clock-o'></i>上传时间:&nbsp;&nbsp;"+createDate
-                + "</div><div class='file-people'><i class='fa fa-user'></i>上传人:&nbsp;&nbsp;"+file.creater
-                + "</div></div></div><div class='line'></div><div class='a-operate'><ul>"
-                + "<li><a href='/erudition/admin/file/download/"+file.id+"'><i class='fa fa-download'></i>&nbsp;&nbsp;下载</a></li>"
-                + "<li><a href='#'><span id='"+file.id+"'><i class='fa fa-star'></i>&nbsp;&nbsp;添加至常用目录</a></li>"
-                + "</ul></div><div class='line'></div><div class='a-related'><ul>"
-                + "<li><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;关联内容</a></li>";
-
-        for(var i=0 ; i < relationfiles.length ; i++){
-            var re = relationfiles[i].title;
-            console.log('re= '+re);
-            obj = obj + "<li id='"+relationfiles[i].id+"'><a href='#'><i class='fa fa-link'></i>&nbsp;&nbsp;&nbsp;"+
-                    relationfiles[i].title+"</a></li>";
-            console.log(obj);
-        }
-
-        obj = obj + "</ul></div></div>";
-
-        file_body.append(obj);
-
-    }
-
-</script>
---%>
+<%--<script src="${assetsPath}/js/require.js" charset="utf-8"></script>--%>
 <!--完整的弹窗-->
-<script src="${assetsPath}/js/file_show.js" charset="gb2312"></script>
+<script src="${assetsPath}/js/popwinAll.js" charset="utf-8"></script>
+<script src="${assetsPath}/js/file_show.js" charset="utf-8"></script>
 <script>
     $(function () {
         var fileout=new FileOut();
@@ -505,7 +314,6 @@ pageEncoding="UTF-8"%>
 <%--根据三级目录显示文件--%>
 <script>
     $(function(){
-
         $("#demo-list li").click(function(){
                     var third_cate_id = $(this).attr("value");
                     if(third_cate_id != null){
@@ -522,25 +330,16 @@ pageEncoding="UTF-8"%>
                         $(".body-floor").remove();
                         $(".line").remove();
                         iCheckready();
-
-
                         $.getJSON(url , function(data){
                             $.each(data.list,function(i, file){
                                 //转换时间戳
-                                var date = new Date(file.createTime);
-                                var Y = date.getFullYear() + '-';
-                                var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-                                var D = date.getDate() + ' ';
-                                var h = date.getHours() + ':';
-                                var m = date.getMinutes() + ':';
-                                var s = date.getSeconds();
-                                var createDate = Y+M+D+h+m+s;
-
-                                 var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
+                                var createDate = turnDate(file.createTime);
+                                var size1 = turnSize(file.size);
+                                var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
                                         "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
                                         "<div class='flex-1 file-image'><i class='iconfont icon-"+file.type+"'></i></div>"+
                                         "<div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>"+file.title+"</a></span></div></div>"+
-                                        "<div class='flex-3 file-size'><span>"+file.size+"</span></div>"+
+                                        "<div class='flex-3 file-size'><span>"+size1+"</span></div>"+
                                         "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"
                                         +createDate+"</div></div><div class='line'></div>";
 
@@ -556,6 +355,39 @@ pageEncoding="UTF-8"%>
         )
 
     })
+
+
+    function turnDate(createTime){
+        var date = new Date(createTime);
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        var D = date.getDate() + ' ';
+        var h = date.getHours() + ':';
+        var m = date.getMinutes() + ':';
+        var s = date.getSeconds();
+        var createDate = Y+M+D+h+m+s;
+        return createDate;
+    }
+
+
+    function turnSize(size){
+        //var turnedSize;
+        var cnt=0 , unit="";
+        while(size>=1024){
+            size = size / 1024;
+            cnt++;
+        }
+        switch (cnt){
+            case 0:unit="B";break;
+            case 1:unit="KB";break;
+            case 2:unit="MB";break;
+            case 3:unit="GB";break;
+            case 4:unit="TB";break;
+            default : break;
+        }
+        var size1 = parseFloat(size).toFixed(2)+unit;
+        return size1;
+    }
 
 
 </script>
