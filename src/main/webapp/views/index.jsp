@@ -285,15 +285,15 @@ pageEncoding="UTF-8"%>
 <!--file-watch二次弹窗-->
 
 <%--begin尝试文档在线预览--%>
-<script id="file-watch-template" type="text/html" charset="utf-8">
+<%--<script id="file-watch-template" type="text/html" charset="utf-8">
     <div class="file-watch" style="display: block;">
         <div class="close-circle">×</div>
         <iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='${assetsPath}/file/text/3.pdf' ></iframe>
     </div>
-</script>
+</script>--%>
 <%--end尝试文档在线预览--%>
 
-<script>
+<%--<script>
     //点开file-watch
     $(document).on("click",".file-out .file-size",function(event){
         event.stopPropagation();
@@ -308,7 +308,7 @@ pageEncoding="UTF-8"%>
             $(this).remove();
         });
     });
-</script>
+</script>--%>
 
 
 <%--根据三级目录显示文件--%>
