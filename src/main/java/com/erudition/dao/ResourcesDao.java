@@ -52,12 +52,10 @@ public class ResourcesDao extends BaseDao {
     }
 
 
-    public String saveFiles(String cate1, String cate2, String cate3, MultipartFile file, UserEntity user) {
+    public String saveFiles(String cate1, String cate2, String cate3, String keywords , MultipartFile file, UserEntity user) {
         FilesEntity fileEntity = new FilesEntity();
 
         fileEntity.setTitle(file.getOriginalFilename());
-        System.out.println("file.getOriginalFilename()"+file.getOriginalFilename());
-        //System.out.println("123345667" + file.getOriginalFilename());
         fileEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
         fileEntity.setSize(exchangeSize(file.getSize()));
         fileEntity.setCreater(user.getUserName());
@@ -66,16 +64,20 @@ public class ResourcesDao extends BaseDao {
 
         fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
                 categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
-                category.getCategoryName() + file.getOriginalFilename());
+                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords);
+
         fileEntity.setType(category.getCategoryName());
 
         fileEntity.setCategoryId(category.getId());
         fileEntity.setCategoryName(category.getCategoryName());
-        System.out.println("uploadDao in ......");
 
-        //TODO:暂定视频
-        String url = MultipartFileUtils.saveFile(file, "/usr/local/erudition/video");
+        String saveLocalUrl = categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() + "/" +
+                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() + "/" +
+                category.getCategoryName();
+        String url = MultipartFileUtils.saveFile(file, "/usr/local/erudition/"+saveLocalUrl);
         fileEntity.setUrl(url);
+
+
         save(fileEntity);
 
 

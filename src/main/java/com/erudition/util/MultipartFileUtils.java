@@ -44,6 +44,9 @@ public class MultipartFileUtils {
         }
         return multipartUrl;
     }
+
+
+
     public static String updateFile(MultipartFile multipartFile, String path){
         removeFile(path);
         int lastIndex = path.lastIndexOf("/");

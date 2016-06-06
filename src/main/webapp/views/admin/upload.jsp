@@ -109,7 +109,7 @@
                         </div>
                         <input type="submit" class="btn btn-success btn-course" value="上传" />--%>
 
-                        <label>上传视频：</label>
+                        <%--<label>上传文件：</label>--%>
                         <div class="form-group inputFile input-file">
                             <br/>
                             <a href="javascript:;" class="file-scan">
@@ -117,7 +117,8 @@
                             </a>
                             <label class="showFileName">未选择文件</label>
                         </div>
-                        <p class="help-block pull-left">支持MP4格式</p>
+                        <%--<p class="help-block pull-left">支持MP4格式</p>--%>
+                        <input type="text" name="keywords" value="请输入文件关键字,空格隔开，如:会议摘要 全体大会"/>
                         <input type="submit" class="btn btn-primary btn-course pull-right" value="上传" id="progress" />
                         <div class="clearfix"></div>
 
@@ -144,16 +145,18 @@
     //监听文件浏览
     $(".file-scan").on("change","input[type='file']",function(){
         var filePath=$(this).val();
-        if(filePath.indexOf("mp4")!=-1 || filePath.indexOf("doc")!=-1){    //这里只是检测图片字符串位置
+        //if(filePath.indexOf("mp4")!=-1 || filePath.indexOf("doc")!=-1){    //这里只是检测图片字符串位置
             $(".fileerrorTip").html("").hide();
             var arr=filePath.split('\\');
             var fileName=arr[arr.length-1];
-            $(".showFileName").html(fileName);
-        }else{
-            $(".showFileName").html("您上传文件类型有误！");
-//                            $(".fileerrorTip").html("您未上传文件，或者您上传文件类型有误！").show();
-            return false
-        }
+//            $(".showFileName").html(fileName);
+        $(".showFileName").html(filePath);
+
+//        }else{
+//            $(".showFileName").html("您上传文件类型有误！");
+////                            $(".fileerrorTip").html("您未上传文件，或者您上传文件类型有误！").show();
+//            return false
+//        }
     })
 
     //进度条动画
