@@ -66,6 +66,9 @@ public class ResourcesDao extends BaseDao {
                 categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
                 category.getCategoryName() + file.getOriginalFilename() + "#"+keywords);
 
+
+        //
+
         fileEntity.setType(category.getCategoryName());
 
         fileEntity.setCategoryId(category.getId());
