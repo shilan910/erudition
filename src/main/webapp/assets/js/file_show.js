@@ -2,6 +2,7 @@
  * Created by Administrator on 2016/6/2.
  */
 //对象级别的插件开发----------必须在页面刷新时重新执行
+
 ;(function($){
     var FileOut=function(){
         //引入依赖的js
