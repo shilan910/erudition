@@ -153,7 +153,7 @@ pageEncoding="UTF-8"%>
                     <div class='body-floor flex-row'><div class='flex-3 flex-row'>
                         <div class='flex-1 checkbox'><input type='checkbox'/></div>
                         <div class='flex-1 file-image'><i class="iconfont icon-${files.type}"></i></div>
-                        <div class='file-name flex-4'><span><a href='#'>${files.title}</a></span></div></div>
+                        <div class='file-name flex-4'><span id=${files.id}><a href='#'>${files.title}</a></span></div></div>
                         <div class='flex-3 file-size'><span>${files.size}</span></div>
                         <div class='flex-3 file-creator'>${files.creater}</div>
                         <div class='flex-3 file-time'>${files.createTime}</div>
@@ -187,7 +187,7 @@ pageEncoding="UTF-8"%>
 
 <!--文件弹窗-->
 
-<div class="file-out">
+<%--<div class="file-out">
     <div class="pre-btn"></div>
     <!--<div class="clearfix"></div>-->
     <div class="file-body" id="file-info">
@@ -195,12 +195,12 @@ pageEncoding="UTF-8"%>
     </div>
     <div class="next-btn"></div>
     <!--<div class="clearfix"></div>-->
-</div>
+</div>--%>
 
 
 
 <%--根据三级目录显示文件--%>
-<script>
+<%--<script>
     $(function(){
 
         $("#demo-list li").click(function(){
@@ -243,10 +243,17 @@ pageEncoding="UTF-8"%>
     })
 
 
+</script>--%>
+
+
+<!--完整的弹窗-->
+<script src="${assetsPath}/js/popwinAll.js" charset="utf-8"></script>
+<script src="${assetsPath}/js/file_show.js" charset="utf-8"></script>
+<script>
+    $(function () {
+        var fileout=new FileOut();
+    })
 </script>
-
-
-
 
 
 <%--左侧导航基础模板--%>
@@ -319,7 +326,7 @@ pageEncoding="UTF-8"%>
 
 
 <!--文件弹窗点击事件，静态DOM-->
-<script>
+<%--<script>
     $(function(){
         $(document).on("click",".body-floor .file-name span",function(event){
             event.stopPropagation();
@@ -387,6 +394,6 @@ pageEncoding="UTF-8"%>
             $(".mask").fadeOut();
         })
     })
-</script>
+</script>--%>
 </body>
 </html>
