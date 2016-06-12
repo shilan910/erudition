@@ -104,30 +104,46 @@
 
                         <div class="form-group inputFile input-file">
                             <br/>
-                            <a href="javascript:;" class="file-scan">
-                                <input type="file" id="inputFile" name="files" value="浏览" multiple />选择文件
-                            </a>
-                            <label class="showFileName">未选择文件</label>
+                            <%--<a href="javascript:;" class="file-scan">--%>
+                                <%--<input type="file" id="inputFile" name="files" value="浏览" multiple />选择文件--%>
+                            <%--</a>--%>
+                            <%--<label class="showFileName">未选择文件</label>--%>
+
+                            <form>
+                                <!--<div id="queue"></div>-->
+                                <div class="pull-left">
+                                    <input id="file_upload" name="file_upload" type="file" >
+                                </div>
+                                <div class="pull-right file_upload_button">
+                                    <p><a href="javascript:$('#file_upload').uploadify('upload','*')">上传</a></p>
+                                </div>
+                                <!--<div class="clearfix"></div>-->
+                                <div id="keywords" style="display: none">
+                                    <label >请输入文件关键字,空格隔开，如:会议摘要 全体大会(可选)</label>
+                                    <input type="text" name="keywords" placeholder="关键词..."/>
+                                </div>
+
+                            </form>
                         </div>
 
                         <%--小郑，请修改下面两行的具体样式--%>
-                        <label >请输入文件关键字,空格隔开，如:会议摘要 全体大会(可选)</label>
-                        <input type="text" name="keywords"/>
+                        <%--<label >请输入文件关键字,空格隔开，如:会议摘要 全体大会(可选)</label>--%>
+                        <%--<input type="text" name="keywords"/>--%>
 
 
 
-                        <input type="submit" class="btn btn-primary btn-course pull-right" value="上传" id="progress" />
-                        <div class="clearfix"></div>
+                        <%--<input type="submit" class="btn btn-primary btn-course pull-right" value="上传" id="progress" />--%>
+                        <%--<div class="clearfix"></div>--%>
 
 
                     </form>
 
-                    <div class="progress">
-                        <div id="progress-bar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                            <!--<span class="sr-only">20% 完成</span>-->
-                            <span>20% Complete</span>
-                        </div>
-                    </div>
+                    <%--<div class="progress">--%>
+                        <%--<div id="progress-bar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">--%>
+                            <%--<!--<span class="sr-only">20% 完成</span>-->--%>
+                            <%--<span>20% Complete</span>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
 
 
             </div>
@@ -138,7 +154,29 @@
 
 </div>
 <!--文件上传相关-->
+<script src="${assetsPath}/js/uploadify/jquery.uploadify.js"></script>
 <script>
+    //uploadify插件
+    $(function() {
+        var num=0;
+        $('#file_upload').uploadify({
+            'auto'     : false,
+            'swf'      : '${assetsPath}/js/uploadify/uploadify.swf',
+            'uploader' : '${assetsPath}/js/uploadify/uploadify.php',
+            'multi': true,
+            'buttonText':'选择文件',
+            'onSelect' : function(file) {
+                if(num==0){
+                    $("#keywords").show(300);
+                    num++;
+                }
+            },
+            'onQueueComplete' : function(queueData) {
+                $("#keywords").hide(300);
+                num=0;
+            }
+        });
+    });
     //监听文件浏览
     $(".file-scan").on("change","input[type='file']",function(){
         var filePath=$(this).val();
