@@ -120,7 +120,7 @@
                                 <!--<div class="clearfix"></div>-->
                                 <div id="keywords" style="display: none">
                                     <label >请输入文件关键字,空格隔开，如:会议摘要 全体大会(可选)</label>
-                                    <input type="text" name="keywords" placeholder="关键词..."/>
+                                    <input type="text" name="keywords" placeholder="关键词..." id="keywordsInput" class="tags"/>
                                 </div>
 
                             </form>
@@ -153,6 +153,13 @@
 
 
 </div>
+<script src="${assetsPath}/js/jquery.tagsinput.js"></script>
+<script>
+    $('#keywordsInput').tagsInput({
+        width:'auto',
+        defaultText:'添加标签'
+    });
+</script>
 <!--文件上传相关-->
 <script src="${assetsPath}/js/uploadify/jquery.uploadify.js"></script>
 <script>
