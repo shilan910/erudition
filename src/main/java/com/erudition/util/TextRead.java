@@ -15,17 +15,33 @@ public class TextRead {
         public String getTextFromWord(String filePath){
             String result = null;
             File file = new File(filePath);
+            File tempFile = null;
             try{
                 FileInputStream fis = new FileInputStream(file);
                 WordExtractor wordExtractor = new WordExtractor(fis);
                 result = wordExtractor.getText();
-                System.out.println(result);
+//                System.out.println(result);
             }catch(FileNotFoundException e){
                 e.printStackTrace();
             }catch(IOException e){
                 e.printStackTrace();
-            };
-            return result;
+            }
+
+            try {
+                tempFile =new File(filePath+".txt");
+//                if(!tempFile.exists()){
+//                    tempFile.mkdirs();
+//                }
+                byte[] buffer = result.getBytes();
+                FileOutputStream fStream = new FileOutputStream(filePath+".txt");
+                fStream.write(buffer);
+//            System.out.println(buffer);
+                fStream.close();
+            } catch (IOException e) {
+               // multipartUrl = "";
+                e.printStackTrace();
+            }
+            return tempFile.getPath();
         }
 
 

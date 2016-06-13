@@ -98,7 +98,7 @@
         </div>
         <div  class="alldom">
             <ul id="divall">
-                <c:if test="${cateLayer!=3}">
+                <c:if test="${cateLayer!=3}">                                       <%--全都写在了一个页面当中，难改--%>
                 <c:forEach var="cate" items="${adminCates}">
                     <li ondblclick="openFile(${cate.id})" data-id=${cate.id}>
                         <form action="${rootPath}/admin/filecollect/changename" method="post">
@@ -113,8 +113,9 @@
                     </li>
                 </c:forEach>
                 </c:if>
+
                 <c:if test="${cateLayer==3}">
-                    <div class="contents flex-8">
+                    <%--<div class="contents flex-8">--%>
                         <div class="header-all">
                             <div class="file-body" id="file-list">
 
@@ -141,7 +142,7 @@
                                                 <i class="iconfont icon-${files.type}"></i>
                                             </div>
                                             <div class='file-name flex-4'>
-                                                <span><a href='#'>${files.title}</a></span>
+                                                <span id="${files.id}"><a href='#'>${files.title}</a></span>
                                             </div>
                                         </div>
                                         <div class='flex-3 file-size'>
@@ -156,10 +157,26 @@
                             </div>
                         </div>
 
-                    </div>
+                    <%--</div>--%>
 
                 </c:if>
             </ul>
+            <c:if test="${cateLayer==3}">
+                <div class="clearfix"></div>
+                <nav>
+                    <ul class="pagination pull-right">
+                        <li><a href="#">上一页</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#">下一页</a>
+                        </li>
+                    </ul>
+                </nav>
+            </c:if>
         </div>
 
         <div style=" clear:both;"></div>
@@ -293,5 +310,14 @@
 </script>
 
 <script src="${assetsPath}/js/file-view.js" charset="utf-8"></script>
+
+<%--完整弹出插件--%>
+<script src="${assetsPath}/js/popwinAll.js" charset="utf-8"></script>
+<script src="${assetsPath}/js/file_show.js" charset="utf-8"></script>
+<script>
+    $(function () {
+        var fileout=new FileOut();
+    })
+</script>
 </body>
 </html>

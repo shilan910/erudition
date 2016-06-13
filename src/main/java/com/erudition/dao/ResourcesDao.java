@@ -6,12 +6,15 @@ import com.erudition.bean.UserEntity;
 import com.erudition.page.Page;
 import com.erudition.page.PageHandler;
 import com.erudition.util.MultipartFileUtils;
+import com.erudition.util.ProduceThumb;
+import com.erudition.util.nlpir.WordFrequency;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -52,7 +55,7 @@ public class ResourcesDao extends BaseDao {
     }
 
 
-    public String saveFiles(String cate1, String cate2, String cate3, String keywords ,String originalName, MultipartFile file, UserEntity user) {
+    public String saveFiles(String cate1, String cate2, String cate3, String keywords ,String originalName, MultipartFile file, UserEntity user){
         FilesEntity fileEntity = new FilesEntity();
 
         fileEntity.setTitle(originalName);
@@ -62,9 +65,7 @@ public class ResourcesDao extends BaseDao {
 
         CategoryEntity category = categoryDao.getById(Integer.valueOf(cate3));
 
-        fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
-                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
-                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords);
+
 
 
         //设置文件类型
@@ -78,6 +79,34 @@ public class ResourcesDao extends BaseDao {
                 categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() + "/" + category.getCategoryName();
         String url = MultipartFileUtils.saveFile(file, "/usr/local/erudition/"+saveLocalUrl , type);
         fileEntity.setUrl(url);
+
+
+        //提取关键字
+        String[] words = new String[100];
+        String thumbPath = null;
+        System.out.println("type : "+type);
+        if(type.equals("docx") || type.equals("doc") || type.equals("txt")){
+            WordFrequency wordFrequency = new WordFrequency();
+            words = wordFrequency.wordFreByWord(url,5);
+            System.out.println("提取关键字");
+        }else if(type.equals("wmv")){
+            thumbPath = new ProduceThumb().processVideoThumb(url);
+        }
+        else if(type.equals("png") || type.equals("jpg")){
+            try {
+                thumbPath = new ProduceThumb().processPictureThumb(url);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+        fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
+                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
+                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords+" "+words);
+
+        fileEntity.setThumb(thumbPath);
 
 
         save(fileEntity);
