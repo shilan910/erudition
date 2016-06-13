@@ -2,6 +2,7 @@
  * Created by Administrator on 2016/6/2.
  */
 //对象级别的插件开发----------必须在页面刷新时重新执行
+
 ;(function($){
     var FileOut=function(){
         //引入依赖的js
@@ -118,7 +119,7 @@
             var s = date.getSeconds();
             var createDate = Y+M+D+h+m+s;
             //转换文件大小
-            var fileSize=file.size;
+            var fileSize=self.turnSize(file.size);
 
             console.log("file.type="+file.type);
             console.log("file.size="+file.size);
@@ -207,6 +208,24 @@
             self.HangRelateEvent();
             //为查看绑定事件
             self.HangWatchfile();
+        },
+        turnSize:function(size){
+            //var turnedSize;
+            var cnt=0 , unit="";
+            while(size>=1024){
+                size = size / 1024;
+                cnt++;
+            }
+            switch (cnt){
+                case 0:unit="B";break;
+                case 1:unit="KB";break;
+                case 2:unit="MB";break;
+                case 3:unit="GB";break;
+                case 4:unit="TB";break;
+                default : break;
+            }
+            var size1 = parseFloat(size).toFixed(2)+unit;
+            return size1;
         },
         CollectToCommon:function(){
             var self=this;

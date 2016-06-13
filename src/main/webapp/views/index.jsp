@@ -172,81 +172,20 @@ pageEncoding="UTF-8"%>
                     </div>
                     <div class='line'></div>
                 </c:forEach>
+                <nav>
+                    <ul class="pagination pull-right">
+                        <li><a href="#">上一页</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#">下一页</a>
+                        </li>
+                    </ul>
+                </nav>
 
-
-
-                <%--<div class="body-floor flex-row">--%>
-                    <%--<div class="flex-3 flex-row">--%>
-                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
-                        <%--<!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->--%>
-                        <%--<div class="flex-1 file-image"><i class="iconfont icon-mp3"></i></div>--%>
-                        <%--<div class="file-name flex-4"><span><a href="#">一号分类内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试</a></span></div>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-size">--%>
-                        <%--<span>1.27MB</span>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-creator">--%>
-                        <%--MR.Z--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-time">--%>
-                        <%--2013.12.06--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="line"></div>--%>
-
-                <%--<div class="body-floor flex-row">--%>
-                    <%--<div class="flex-3 flex-row">--%>
-                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
-                        <%--<div class="flex-1 file-image"><i class="iconfont icon-ppt"></i></div>--%>
-                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-size">--%>
-                        <%--<span>1.27MB</span>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-creator">--%>
-                        <%--MR.Z--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-time">--%>
-                        <%--2013.12.06--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="line"></div>--%>
-
-                <%--<div class="body-floor flex-row">--%>
-                    <%--<div class="flex-3 flex-row">--%>
-                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
-                        <%--<div class="flex-1 file-image"><i class="iconfont icon-word"></i></div>--%>
-                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-size">--%>
-                        <%--<span>1.27MB</span>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-creator">--%>
-                        <%--MR.Z--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-time">--%>
-                        <%--2013.12.06--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="line"></div>--%>
-
-                <%--<div class="body-floor flex-row">--%>
-                    <%--<div class="flex-3 flex-row">--%>
-                        <%--<div class="flex-1 checkbox"><input type="checkbox"/></div>--%>
-                        <%--<div class="flex-1 file-image"><i class="iconfont icon-txt"></i></div>--%>
-                        <%--<div class="file-name flex-4"><span><a href="#">一号分类</a></span></div>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-size">--%>
-                        <%--<span>1.27MB</span>--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-creator">--%>
-                        <%--MR.Z--%>
-                    <%--</div>--%>
-                    <%--<div class="flex-3 file-time">--%>
-                        <%--2013.12.06--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="line"></div>--%>
 
             </div>
         </div>
@@ -347,6 +286,20 @@ pageEncoding="UTF-8"%>
                                 file_list.append(obj);
                                 iCheckready();
                             });
+                            obj=['                <nav>',
+                                        '                    <ul class="pagination pull-right">',
+                                        '                        <li><a href="#">上一页</a></li>',
+                                        '                        <li class="active"><a href="#">1</a></li>',
+                                        '                        <li><a href="#">2</a></li>',
+                                        '                        <li><a href="#">3</a></li>',
+                                        '                        <li><a href="#">4</a></li>',
+                                        '                        <li><a href="#">5</a></li>',
+                                        '                        <li>',
+                                        '                            <a href="#">下一页</a>',
+                                        '                        </li>',
+                                        '                    </ul>',
+                                        '                </nav>'].join("");
+                            $(".line").last().after(obj);
                         });
                     }
 
