@@ -121,7 +121,7 @@ pageEncoding="UTF-8"%>
     </div>
 
 
-    <div class="contents flex-8">
+    <div class="contents flex-8" id="searchResult">
         <div class="header-all">
             <div class="header flex-row">
                 <div class="flex-7 path">
@@ -177,13 +177,74 @@ pageEncoding="UTF-8"%>
                     <div class='line'></div>
                 </c:forEach>
                 </c:if>
-
+                <nav>
+                    <ul class="pagination pull-right">
+                        <li><a href="#">上一页</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#">下一页</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
 
+        </div>
+
+        <div class="footRecommend">
+            <div class="header">
+                <div class="need pull-left">您可能需要</div>
+                <div class="close pull-right">×</div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="body">
+                <ul class="list-inline">
+                    <li>
+                        <div class="icon-el">
+                            <div><i class="iconfont icon-txt"></i></div>
+                            <div class="title">标题长度测试快递费家离得近了导论分解电缆附件电缆附件</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon-el">
+                            <div><i class="iconfont icon-txt"></i></div>
+                            <div class="title">标题长度测试快递费家离得近了导论分解电缆附件电缆附件</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon-el">
+                            <div><i class="iconfont icon-txt"></i></div>
+                            <div class="title">标题长度测试快递费家离得近了导论分解电缆附件电缆附件</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon-el">
+                            <div><i class="iconfont icon-txt"></i></div>
+                            <div class="title">标题长度测试快递费家离得近了导论分解电缆附件电缆附件</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon-el">
+                            <div><i class="iconfont icon-txt"></i></div>
+                            <div class="title">标题长度测试快递费家离得近了导论分解电缆附件电缆附件</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
 </div>
+
+<%--底部的推荐--%>
+<script>
+    $(".footRecommend .close").click(function(){
+        $(".footRecommend").addClass("animated").addClass("slideOutDown");
+    })
+</script>
 
 <!--文件弹窗-->
 
