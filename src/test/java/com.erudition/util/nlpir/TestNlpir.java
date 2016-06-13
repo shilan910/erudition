@@ -37,7 +37,7 @@ public class TestNlpir {
     @Test
     public void testTextRead(){
         TextRead textRead = new TextRead();
-        textRead.getTextFromWord("/home/sl/test/123.doc");
+        System.out.println(textRead.getTextFromWord("/home/sl/test/123.doc"));
     }
 
     @Test

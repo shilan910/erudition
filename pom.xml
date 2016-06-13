@@ -251,11 +251,11 @@
         </dependency>
 
 
-        <!--<dependency>-->
-            <!--<groupId>org.sejda</groupId>-->
-            <!--<artifactId>sejda-icepdf</artifactId>-->
-            <!--<version>1.0.0-BETA</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.sejda</groupId>
+            <artifactId>sejda-icepdf</artifactId>
+            <version>1.0.0-BETA</version>
+        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
