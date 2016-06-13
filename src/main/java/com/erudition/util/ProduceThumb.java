@@ -1,6 +1,6 @@
 package com.erudition.util;
 
-import net.coobird.thumbnailator.Thumbnails;
+//import net.coobird.thumbnailator.Thumbnails;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -20,10 +20,10 @@ public class ProduceThumb {
 
     public static void main(String args[]) throws IOException {
 
-        String path = new ProduceThumb().processPictureThumb("/home/sl/test", "EEE.png", "/home/sl/thumb");
-        if(path != null){
-            System.out.println("get!!!\n"+path);
-        }
+//        String path = new ProduceThumb().processPictureThumb("/home/sl/test", "EEE.png", "/home/sl/thumb");
+//        if(path != null){
+//            System.out.println("get!!!\n"+path);
+//        }
 
     }
 
@@ -65,14 +65,14 @@ public class ProduceThumb {
 
 
 
-    public static String processPictureThumb(String filePath , String filerealname , String picPath) throws IOException {
-
-        String thumbPath = picPath +"/"+ filerealname + ".jpg";
-        Thumbnails.of(filePath+"/"+filerealname)
-                .size(250,252)
-                .toFile(thumbPath);
-        return thumbPath;
-    }
+//    public static String processPictureThumb(String filePath , String filerealname , String picPath) throws IOException {
+//
+//        String thumbPath = picPath +"/"+ filerealname + ".jpg";
+//        Thumbnails.of(filePath+"/"+filerealname)
+//                .size(250,252)
+//                .toFile(thumbPath);
+//        return thumbPath;
+//    }
 
 
 
