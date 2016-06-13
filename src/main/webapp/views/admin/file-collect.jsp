@@ -141,7 +141,7 @@
                                                 <i class="iconfont icon-${files.type}"></i>
                                             </div>
                                             <div class='file-name flex-4'>
-                                                <span><a href='#'>${files.title}</a></span>
+                                                <span id="${files.id}"><a href='#'>${files.title}</a></span>
                                             </div>
                                         </div>
                                         <div class='flex-3 file-size'>
@@ -293,5 +293,14 @@
 </script>
 
 <script src="${assetsPath}/js/file-view.js" charset="utf-8"></script>
+
+<%--完整弹出插件--%>
+<script src="${assetsPath}/js/popwinAll.js" charset="utf-8"></script>
+<script src="${assetsPath}/js/file_show.js" charset="utf-8"></script>
+<script>
+    $(function () {
+        var fileout=new FileOut();
+    })
+</script>
 </body>
 </html>

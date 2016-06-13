@@ -68,6 +68,7 @@ public class ProduceThumb {
 
 
 
+
     public static String processPictureThumb(String filePath) throws IOException {
 
         String fileName = filePath.substring(filePath.lastIndexOf('/')+1,filePath.length());

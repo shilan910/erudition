@@ -84,13 +84,15 @@ public class ResourcesDao extends BaseDao {
         //提取关键字
         String[] words = new String[100];
         String thumbPath = null;
-        if(type=="docx" || type=="doc" || type=="txt"){
+        System.out.println("type : "+type);
+        if(type.equals("docx") || type.equals("doc") || type.equals("txt")){
             WordFrequency wordFrequency = new WordFrequency();
-            words = wordFrequency.wordFre(url,5);
-        }else if(type=="wmv"){
+            words = wordFrequency.wordFreByWord(url,5);
+            System.out.println("提取关键字");
+        }else if(type.equals("wmv")){
             thumbPath = new ProduceThumb().processVideoThumb(url);
         }
-        else if(type=="png" || type=="jpg"){
+        else if(type.equals("png") || type.equals("jpg")){
             try {
                 thumbPath = new ProduceThumb().processPictureThumb(url);
             } catch (IOException e) {
