@@ -60,7 +60,7 @@
 
                 <%--文件上传表单--%>
                 <div class="form-upload">
-                    <form action="/erudition/admin/file/upload" method="post" enctype="multipart/form-data">
+                    <form action="/erudition/admin/file/upload" method="post" enctype="multipart/form-data" id="select_form">
                         <div class="select">
                             <div class="directory flex-row">
                                 <div class="flex-4">
@@ -101,29 +101,47 @@
 
                             </div>
                         </div>
+                        </form>
 
                         <div class="form-group inputFile input-file">
                             <br/>
+
+                            <%--第二种尝试--%>
+                            <%--<input type="file" id="inputFile1" name="files" value="浏览" multiple />选择文件--%>
+                           <%-- <input type="file" name="files" id="demo-fileInput-3" multiple="multiple" multiple>
+                            <div id="keywords" >
+                                <label >请输入文件关键字,空格隔开，如:会议摘要 全体大会(可选)</label>
+                                <input type="text" name="keywords" placeholder="关键词..." id="keywordsInput" class="tags"/>
+                            </div>
+                            <input type="submit" id="file_upload_input_button" value="上传">--%>
+
+
                             <%--<a href="javascript:;" class="file-scan">--%>
                                 <%--<input type="file" id="inputFile" name="files" value="浏览" multiple />选择文件--%>
                             <%--</a>--%>
                             <%--<label class="showFileName">未选择文件</label>--%>
 
-                            <form>
+                            <%--<form>--%>
                                 <!--<div id="queue"></div>-->
                                 <div class="pull-left">
-                                    <input id="file_upload" name="file_upload" type="file" >
+                                    <input id="file_upload" name="files" type="file" multiple />
                                 </div>
-                                <div class="pull-right file_upload_button">
-                                    <p><a href="javascript:$('#file_upload').uploadify('upload','*')">上传</a></p>
-                                </div>
+                                <%--<div class="pull-right file_upload_button">--%>
+                                    <%--&lt;%&ndash;<p><a href="javascript:$('#file_upload').uploadify('upload','*')">上传</a></p>&ndash;%&gt;--%>
+                                    <%--<p><a href="javascript:$('#file_upload').uploadify('upload','*')">上传</a></p>--%>
+                                <%--</div>--%>
                                 <!--<div class="clearfix"></div>-->
-                                <div id="keywords" style="display: none">
+                                <div id="keywords" style="display: none;margin-bottom: 64px;width:100%" >
                                     <label >请输入文件关键字,空格隔开，如:会议摘要 全体大会(可选)</label>
-                                    <input type="text" name="keywords" placeholder="关键词..." id="keywordsInput" class="tags"/>
+                                    <input type="text" name="keywords" placeholder="关键词..." id="keywordsInput" class="tags" value="关键字"/>
                                 </div>
 
-                            </form>
+                            <div class="pull-right file_upload_button" style="margin-top: -44px">
+                                <%--<p><a href="javascript:$('#file_upload').uploadify('upload','*')">上传</a></p>--%>
+                                <p><a href="javascript:$('#file_upload').uploadify('upload','*')">上传</a></p>
+                            </div>
+
+                            <%--</form>--%>
                         </div>
 
                         <%--小郑，请修改下面两行的具体样式--%>
@@ -136,7 +154,7 @@
                         <%--<div class="clearfix"></div>--%>
 
 
-                    </form>
+                    <%--</form>--%>
 
                     <%--<div class="progress">--%>
                         <%--<div id="progress-bar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">--%>
@@ -153,6 +171,12 @@
 
 
 </div>
+<script src="//cdn.bootcss.com/bootstrap/3.3.1/js/bootstrap.js"></script>
+<script src="${assetsPath}/js/upload/jquery.filer.js"></script>
+<script src="${assetsPath}/js/upload/prettify.js"></script>
+<script src="${assetsPath}/js/upload/scripts.js"></script>
+<script src="${assetsPath}/js/upload/custom.js"></script>
+
 <script src="${assetsPath}/js/jquery.tagsinput.js"></script>
 <script>
     $('#keywordsInput').tagsInput({
@@ -166,22 +190,71 @@
     //uploadify插件
     $(function() {
         var num=0;
+//        var keywords=1;
         $('#file_upload').uploadify({
             'auto'     : false,
             'swf'      : '${assetsPath}/js/uploadify/uploadify.swf',
-            'uploader' : '${assetsPath}/js/uploadify/uploadify.php',
+//            'script':"erudition/admin/file/upload",
+            <%--'uploader' : '${assetsPath}/js/uploadify/uploadify.php',--%>
+//            'uploader' : 'erudition/admin/file/upload',
+            'method':"post",
+            'uploader' : 'http://localhost:8080/erudition/admin/file/upload',
             'multi': true,
+            'fileObjName' : 'files',
             'buttonText':'选择文件',
+//            'formData':{'cate1' :cate1 , 'cate2' : "2"},
+//            'scriptData':{'cate1' :cate1 , 'cate2' : "2"},
             'onSelect' : function(file) {
                 if(num==0){
                     $("#keywords").show(300);
                     num++;
                 }
             },
+            'onUploadStart' : function(file) {
+                console.log("谷歌意见"+$("#category-select").find("option:selected").text());
+                var keywords="";
+                $("#keywordsInput_tagsinput").children(".tag").each(function(){
+//                    console.log("最终关键字"+$(this).find("span").text());
+                    keywords= $.trim(keywords+$(this).find("span").text());
+                });
+                console.log("谷歌关键字"+keywords);
+                $('#file_upload').uploadify('settings','formData',{
+                    'cate1': $("#category-select").find("option:selected").val(),
+                    'cate2': $("#second-select-all").find("option:selected").val(),
+                    'cate3': $("#third-select-all").find("option:selected").val(),
+                    'keywords':keywords
+                });
+            },
             'onQueueComplete' : function(queueData) {
-                $("#keywords").hide(300);
+//                $("#keywords").hide(300);
                 num=0;
+            },
+            'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+//                console.log('The file ' + file.name + ' could not be uploaded: ' + errorString);
+//                $("#select_form").submit();
+//                $("#keywords").hide(3000);
+                setTimeout(function(){
+                    $("#keywords").hide(300);
+                    num=0;
+                },3500);
+
+
             }
+//            'onUploadStart' : function(file, errorCode, errorMsg, errorString) {  //这里优先级没有发送的高
+//                console.log("formData")
+//                var formData = { 'cata1': cate1 };
+//                $('#file_upload').uploadify("settings", "formData", formData);
+//                console.log('The file ' + file.name + ' could not be uploaded: ' + errorString);
+//                cate1=$("#category-select").find("option:selected").text();
+//                console.log("发送前最后一次数据捆绑:"+cate1);
+//                $("#select_form").submit();
+//            },
+//            'onSelect' : function(file) {
+////                alert('The file ' + file.name + ' was added to the queue.');
+////                console.log('The file ' + file.name + ' could not be uploaded: ' + errorString);
+//                cate1=$("#category-select").find("option:selected").text();
+//                console.log("发送前最后一次数据捆绑:"+cate1);
+//            }
         });
     });
     //监听文件浏览

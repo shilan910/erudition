@@ -81,32 +81,32 @@ public class ResourcesDao extends BaseDao {
         fileEntity.setUrl(url);
 
 
-        //提取关键字
-        String[] words = new String[100];
-        String thumbPath = null;
-        System.out.println("type : "+type);
-        if(type.equals("docx") || type.equals("doc") || type.equals("txt")){
-            WordFrequency wordFrequency = new WordFrequency();
-            words = wordFrequency.wordFreByWord(url,5);
-            System.out.println("提取关键字");
-        }else if(type.equals("wmv")){
-            thumbPath = new ProduceThumb().processVideoThumb(url);
-        }
-        else if(type.equals("png") || type.equals("jpg")){
-            try {
-                thumbPath = new ProduceThumb().processPictureThumb(url);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        //提取关键字
+//        String[] words = new String[100];
+//        String thumbPath = null;
+//        System.out.println("type : "+type);
+//        if(type.equals("docx") || type.equals("doc") || type.equals("txt")){
+//            WordFrequency wordFrequency = new WordFrequency();
+//            words = wordFrequency.wordFreByWord(url,5);
+//            System.out.println("提取关键字");
+//        }else if(type.equals("wmv")){
+//            thumbPath = new ProduceThumb().processVideoThumb(url);
+//        }
+//        else if(type.equals("png") || type.equals("jpg")){
+//            try {
+//                thumbPath = new ProduceThumb().processPictureThumb(url);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
 
 
         fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
                 categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
-                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords+" "+words);
+                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords);
 
-        fileEntity.setThumb(thumbPath);
+//        fileEntity.setThumb(thumbPath);
 
 
         save(fileEntity);
