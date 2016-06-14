@@ -86,29 +86,7 @@ pageEncoding="UTF-8"%>
 
 
                     <li id="collection" class="" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>
-                            <%--<ul class="submenu" >--%>
-                                <%--<c:forEach items="${categories}" var="firstCate">--%>
-                                    <%--<li><a href="#">${firstCate.name}</a>--%>
-
-                                        <%--<ul class="submenu">--%>
-                                            <%--<c:forEach items="${firstCate.children}" var="secondCate">--%>
-                                                <%--<li><a href="#">${secondCate.name}</a>--%>
-
-                                                    <%--<ul class="submenu">--%>
-                                                        <%--<c:forEach items="${secondCate.children}" var="thirdCate">--%>
-                                                            <%--<li value="${thirdCate.id}"><a href="#">${thirdCate.name}</a></li>--%>
-                                                        <%--</c:forEach>--%>
-                                                    <%--</ul>--%>
-
-                                                <%--</li>--%>
-                                            <%--</c:forEach>--%>
-                                        <%--</ul>--%>
-
-                                    <%--</li>--%>
-                                <%--</c:forEach>--%>
-                            <%--</ul>--%>
-
-                        </li>
+                    </li>
 
                 </ul>
                 <div class="jquery-accordion-menu-footer">
@@ -125,7 +103,7 @@ pageEncoding="UTF-8"%>
         <div class="header-all">
             <div class="header flex-row">
                 <div class="flex-7 path">
-                    根目录
+                    搜索结果
                 </div>
                 <div class="flex-3 search">
                     <%--<div class="input-group">--%>
@@ -196,42 +174,20 @@ pageEncoding="UTF-8"%>
 
         <div class="footRecommend">
             <div class="header">
-                <div class="need pull-left">您可能需要</div>
+                <div class="need pull-left">您还可能需要</div>
                 <div class="close pull-right">×</div>
                 <div class="clearfix"></div>
             </div>
             <div class="body">
                 <ul class="list-inline">
-                    <li>
-                        <div class="icon-el">
-                            <div><i class="iconfont icon-txt"></i></div>
-                            <div class="title">标题长度测试快递费家离得近了导论分解电缆附件电缆附件</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="icon-el">
-                            <div><i class="iconfont icon-txt"></i></div>
-                            <div class="title">标题长度测试快递费家离得近了导论分解电缆附件电缆附件</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="icon-el">
-                            <div><i class="iconfont icon-txt"></i></div>
-                            <div class="title">标题长度测试快递费家离得近了导论分解电缆附件电缆附件</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="icon-el">
-                            <div><i class="iconfont icon-txt"></i></div>
-                            <div class="title">标题长度测试快递费家离得近了导论分解电缆附件电缆附件</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="icon-el">
-                            <div><i class="iconfont icon-txt"></i></div>
-                            <div class="title">标题长度测试快递费家离得近了导论分解电缆附件电缆附件</div>
-                        </div>
-                    </li>
+                    <c:forEach var="relationfile" items="${relationsFiles}" begin="0" end="4">
+                        <li>
+                            <div class="icon-el">
+                                <div><i class="iconfont icon-${relationfile.type}"></i></div>
+                                <div class="title" value=${relationfile.id}>${relationfile.title}</div>
+                            </div>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
         </div>

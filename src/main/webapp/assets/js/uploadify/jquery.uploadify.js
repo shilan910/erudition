@@ -924,10 +924,12 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 				this.queueData.uploadSize = file.size;
 			}
 			if (settings.checkExisting) {
+				//if(false){
 				$.ajax({
 					type    : 'POST',
 					async   : false,
-					url     : settings.checkExisting,
+					//url     : settings.checkExisting,
+					url:"/erudition/admin/file/upload_in",
 					data    : {filename: file.name},
 					success : function(data) {
 						if (data == 1) {

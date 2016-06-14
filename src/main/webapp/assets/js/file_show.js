@@ -52,6 +52,26 @@
             //self.renderData($(this));        //将当前点击传送
         })
 
+        //二次使用
+        $(document).on("click",".footRecommend .title",function(event){
+            var me=$(this);
+
+            event.stopPropagation();
+            //获取当前页面全部对象个数
+            self.allIndex=self.getAllIndex_title();
+            console.log("title当前页面全部个数:"+self.allIndex);
+            //设置页面中的元素index属性
+            self.setIndex_title();
+            //获取当前点击对象的位置
+            self.currentIndex=$(this).attr("index");
+            console.log("title当前点击为第"+self.currentIndex+"个");
+            //获取数据
+            self.getData(self.currentIndex,"index");
+            //渲染数据
+            self.renderDOM();            //因为暗含了顺序，所以可以无所顾忌的使用，哈哈哈哈//静态渲染与动态渲染的时间上有问题？
+            self.carousel();          //绑定轮播事件，但是还没有特殊化,
+        })
+
     };
     FileOut.prototype={
         //根据index获取元素id
@@ -98,10 +118,21 @@
             var self=this;
             return $(self.root).children(self.root_element).length;           //这里动态的子元素个数
         },
+        getAllIndex_title:function(){
+            var self=this;
+            return $(".footRecommend").children(".title").length;
+        },
         setIndex:function(){
             var self=this;
             var num=1;
             $(self.root).children(self.root_element).each(function(){
+                $(this).attr("index",num++);
+            })
+        },
+        setIndex_title:function(){
+            var self=this;
+            var num=1;
+            $(".footRecommend").children(".title").each(function(){
                 $(this).attr("index",num++);
             })
         },

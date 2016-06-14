@@ -49,7 +49,7 @@ public class FileController {
         return "admin/upload";
     }
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "/upload_in", method = RequestMethod.POST)
     public String upload(String cate1, String cate2, String cate3, String keywords ,
                          @RequestParam MultipartFile[] files, HttpSession session) {
 

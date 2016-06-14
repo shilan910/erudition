@@ -24,7 +24,7 @@ public class FilesEntity {
     private String categoryName;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, insertable = true, updatable = true)
     public int getId() {
         return id;
     }
@@ -34,7 +34,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "title")
+    @Column(name = "title", nullable = true, insertable = true, updatable = true, length = 255)
     public String getTitle() {
         return title;
     }
@@ -44,7 +44,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "create_time")
+    @Column(name = "create_time", nullable = true, insertable = true, updatable = true)
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -54,7 +54,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "creater")
+    @Column(name = "creater", nullable = true, insertable = true, updatable = true, length = 255)
     public String getCreater() {
         return creater;
     }
@@ -64,7 +64,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "url")
+    @Column(name = "url", nullable = true, insertable = true, updatable = true, length = 255)
     public String getUrl() {
         return url;
     }
@@ -74,7 +74,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "category_id")
+    @Column(name = "category_id", nullable = true, insertable = true, updatable = true)
     public Integer getCategoryId() {
         return categoryId;
     }
@@ -84,7 +84,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "description")
+    @Column(name = "description", nullable = true, insertable = true, updatable = true, length = 255)
     public String getDescription() {
         return description;
     }
@@ -94,7 +94,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "relations")
+    @Column(name = "relations", nullable = true, insertable = true, updatable = true, length = 255)
     public String getRelations() {
         return relations;
     }
@@ -104,7 +104,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "keywords")
+    @Column(name = "keywords", nullable = true, insertable = true, updatable = true, length = 255)
     public String getKeywords() {
         return keywords;
     }
@@ -114,7 +114,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "type")
+    @Column(name = "type", nullable = true, insertable = true, updatable = true, length = 255)
     public String getType() {
         return type;
     }
@@ -124,7 +124,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "size")
+    @Column(name = "size", nullable = true, insertable = true, updatable = true, length = 255)
     public String getSize() {
         return size;
     }
@@ -134,7 +134,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "thumb")
+    @Column(name = "thumb", nullable = true, insertable = true, updatable = true, length = 255)
     public String getThumb() {
         return thumb;
     }
@@ -144,7 +144,7 @@ public class FilesEntity {
     }
 
     @Basic
-    @Column(name = "category_name")
+    @Column(name = "category_name", nullable = true, insertable = true, updatable = true, length = 255)
     public String getCategoryName() {
         return categoryName;
     }

@@ -60,7 +60,7 @@
 
                 <%--文件上传表单--%>
                 <div class="form-upload">
-                    <form action="/erudition/admin/file/upload" method="post" enctype="multipart/form-data">
+                    <form action="/erudition/admin/file/upload_in" method="post" enctype="multipart/form-data" id="form_upload">
                         <div class="select">
                             <div class="directory flex-row">
                                 <div class="flex-4">
@@ -109,13 +109,15 @@
                             <%--</a>--%>
                             <%--<label class="showFileName">未选择文件</label>--%>
 
-                            <form>
+                            <%--<form>--%>
                                 <!--<div id="queue"></div>-->
                                 <div class="pull-left">
-                                    <input id="file_upload" name="file_upload" type="file" >
+                                    <%--<input id="file_upload" name="files" type="file" multiple/>--%>
+                                    <input id="inputFile" name="files" type="file" multiple/>
+                                    <%--<input id="file_upload1" name="files" type="file" >--%>
                                 </div>
                                 <div class="pull-right file_upload_button">
-                                    <p><a href="javascript:$('#file_upload').uploadify('upload','*')">上传</a></p>
+                                    <p><a href="javascript:$('#file_upload').uploadify('upload','*')" id="submit_upload">上传</a></p>
                                 </div>
                                 <!--<div class="clearfix"></div>-->
                                 <div id="keywords" style="display: none">
@@ -123,7 +125,7 @@
                                     <input type="text" name="keywords" placeholder="关键词..." id="keywordsInput" class="tags"/>
                                 </div>
 
-                            </form>
+                            <%--</form>--%>
                         </div>
 
                         <%--小郑，请修改下面两行的具体样式--%>
@@ -132,7 +134,7 @@
 
 
 
-                        <%--<input type="submit" class="btn btn-primary btn-course pull-right" value="上传" id="progress" />--%>
+                        <input type="submit" class="btn btn-primary btn-course pull-right" value="上传1233" id="progress" />
                         <%--<div class="clearfix"></div>--%>
 
 
@@ -169,9 +171,11 @@
         $('#file_upload').uploadify({
             'auto'     : false,
             'swf'      : '${assetsPath}/js/uploadify/uploadify.swf',
-            'uploader' : '${assetsPath}/js/uploadify/uploadify.php',
+            <%--'uploader' : '${assetsPath}/js/uploadify/uploadify.php',--%>
+            'uploader' : "/erudition/admin/file/upload_in",
             'multi': true,
             'buttonText':'选择文件',
+//            'fileDataName':'file',
             'onSelect' : function(file) {
                 if(num==0){
                     $("#keywords").show(300);
@@ -179,10 +183,21 @@
                 }
             },
             'onQueueComplete' : function(queueData) {
-                $("#keywords").hide(300);
-                num=0;
+//                $("#keywords").hide(300);
+//                num=0;
+//                $("#form_upload").submit();
+//                alert("shangcsg");
+            },
+            'onProgress':function(){
+                $("#form_upload").submit();
             }
         });
+
+//        $("#submit_upload").click(function(){
+//            alert("发送");
+//            $("#form_upload").submit();
+//        })
+
     });
     //监听文件浏览
     $(".file-scan").on("change","input[type='file']",function(){
