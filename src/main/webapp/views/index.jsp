@@ -261,7 +261,7 @@ pageEncoding="UTF-8"%>
 
 <%--根据三级目录显示文件--%>
 <script>
-    /*$(function(){
+   /* $(function(){
         $("#demo-list li").click(function(){
                     var third_cate_id = $(this).attr("value");
                     if(third_cate_id != null){
@@ -418,7 +418,7 @@ pageEncoding="UTF-8"%>
         iCheckready();
     });
     var iCheckready=function(){
-        console.log("")
+        console.log("调用了icheck插件")
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',

@@ -4,6 +4,7 @@ import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CollectionDao;
 import com.erudition.entity.MessageStatus;
+import org.apache.commons.io.monitor.FileEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -61,14 +62,17 @@ public class CollectionController {
        return new MessageStatus(message,status);
     }
 
+    @ResponseBody
     @RequestMapping(value = "/showcollections" , method = RequestMethod.GET)
-    public String showCollections(Model model,HttpSession session){
+    public List<FilesEntity> showCollections(Model model,HttpSession session){
 
-        model.addAttribute("showcollections",collectionDao.getByUid((int)session.getAttribute("userid")));
         session.setAttribute("flagofcollection",1);
         session.setAttribute("cateIsActive",1);
         System.out.println("show collections!");
-        return "index";
+//        model.addAttribute("showcollections",collectionDao.getByUid((int)session.getAttribute("userid")));
+        return  collectionDao.getByUid((int)session.getAttribute("userid"));
+
+//        return "index";
 
     }
 }
