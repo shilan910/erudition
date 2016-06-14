@@ -92,7 +92,8 @@ pageEncoding="UTF-8"%>
                     <c:if test="${cateIsActive==1}">
                         <c:set var="commonCateClass" value="active"/>
                     </c:if>
-                    <li id="collection" class="${commonCateClass}" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>
+                    <%--<li id="collection" class="${commonCateClass}" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>--%>
+                    <li id="collection" class="${commonCateClass}" ><a href="#"><i class="fa fa-glass"></i>常用目录 </a>
                             <%--<ul class="submenu" >--%>
                                 <%--<c:forEach items="${categories}" var="firstCate">--%>
                                     <%--<li><a href="#">${firstCate.name}</a>--%>
@@ -130,18 +131,18 @@ pageEncoding="UTF-8"%>
 
     <div class="contents flex-8">
         <div class="header-all">
-            <div class="header flex-row">
+            <%--<div class="header flex-row">
                 <div class="flex-7 path">
-                    常用目录
+                    根目录
                 </div>
-                <%--<div class="flex-3 search">--%>
-                    <%--<div class="input-group">--%>
-                        <%--<input type="text" class="form-control" placeholder="该目录下搜索...">--%>
-                              <%--<span class="input-group-btn">--%>
-                                <%--<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>--%>
-                              <%--</span>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
+                &lt;%&ndash;<div class="flex-3 search">&ndash;%&gt;
+                    &lt;%&ndash;<div class="input-group">&ndash;%&gt;
+                        &lt;%&ndash;<input type="text" class="form-control" placeholder="该目录下搜索...">&ndash;%&gt;
+                              &lt;%&ndash;<span class="input-group-btn">&ndash;%&gt;
+                                &lt;%&ndash;<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>&ndash;%&gt;
+                              &lt;%&ndash;</span>&ndash;%&gt;
+                    &lt;%&ndash;</div>&ndash;%&gt;
+                &lt;%&ndash;</div>&ndash;%&gt;
             </div>
             <div class="file-body" id="file-list">
                 <div class="first-floor flex-row">
@@ -157,21 +158,22 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="line"></div>
 
-                <c:forEach items="${showcollections}" var="collections">
+                &lt;%&ndash;<c:forEach items="${showcollections}" var="collections">&ndash;%&gt;
                     <div class='body-floor flex-row'>
                         <div class='flex-3 flex-row'>
                             <div class='flex-1 checkbox'>
                                 <input type='checkbox'/>
                             </div>
-                            <div class='flex-1 file-image'><i class='iconfont icon-${collections.type}'></i></div>
-                            <div class='file-name flex-4'><span id='${collections.id}'><a href='#'>${collections.title}</a></span></div>
+                            <div class='flex-1 file-image'><i class='iconfont icon-mp4'></i></div>
+                            <div class='file-name flex-4'><span id='id'><a href='#'>标题</a></span></div>
                         </div>
-                        <div class='flex-3 file-size'><span>${collections.size}</span></div>
-                        <div class='flex-3 file-creator'>${collections.creater}</div>
-                        <div class='flex-3 file-time'>${collections.createTime}</div>
+                        <div class='flex-3 file-size'><span>124kb</span></div>
+                        <div class='flex-3 file-creator'>MR.z</div>
+                        <div class='flex-3 file-time'>2015.025</div>
                     </div>
                     <div class='line'></div>
-                </c:forEach>
+                &lt;%&ndash;</c:forEach>&ndash;%&gt;
+
                 <nav>
                     <ul class="pagination pull-right">
                         <li><a href="#">上一页</a></li>
@@ -187,12 +189,19 @@ pageEncoding="UTF-8"%>
                 </nav>
 
 
-            </div>
+            </div>--%>
         </div>
     </div>
 
 </div>
 
+<%--主页主要js--%>
+<script src="${assetsPath}/js/indexTab.js" charset="utf-8"></script>
+<script>
+    $(function(){
+        var indextab=new indexTab();
+    })
+</script>
 <%--<script src="${assetsPath}/js/require.js" charset="utf-8"></script>--%>
 <!--完整的弹窗-->
 <script src="${assetsPath}/js/popwinAll.js" charset="utf-8"></script>
@@ -224,7 +233,7 @@ pageEncoding="UTF-8"%>
 <!--file-watch二次弹窗-->
 
 <%--begin尝试文档在线预览--%>
-<<script id="file-watch-template" type="text/html" charset="utf-8">
+<script id="file-watch-template" type="text/html" charset="utf-8">
     <div class="file-watch" style="display: block;">
         <div class="close-circle">×</div>
         <iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='${assetsPath}/file/text/3.pdf' ></iframe>
@@ -252,7 +261,7 @@ pageEncoding="UTF-8"%>
 
 <%--根据三级目录显示文件--%>
 <script>
-    $(function(){
+    /*$(function(){
         $("#demo-list li").click(function(){
                     var third_cate_id = $(this).attr("value");
                     if(third_cate_id != null){
@@ -307,7 +316,7 @@ pageEncoding="UTF-8"%>
 
         )
 
-    })
+    })*/
 
 
     function turnDate(createTime){
@@ -409,6 +418,7 @@ pageEncoding="UTF-8"%>
         iCheckready();
     });
     var iCheckready=function(){
+        console.log("")
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
