@@ -270,10 +270,10 @@
             var self=this;
             $(".file-out .file-url").click(function(){
                 var url=self.fileData.url;
-                var dom='<div class="file-watch" style="display: block;">'+
-                    '        <div class="close-circle">×</div>'+
-                    '        <iframe width="738" height="523" class="preview-iframe" scrolling="no" frameborder="0" src="'+url+'" ></iframe>'+
-                    '    </div>';
+                var dom="<div class='file-watch' style='display: block;'>"+
+                    "        <div class='close-circle'>×</div>"+
+                    "        <iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='"+url+"'></iframe>"+
+                    "    </div>";
                 console.log(self.fileData.url);
                 $('body').append(dom);
                 console.log("添加路径");

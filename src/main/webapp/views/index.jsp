@@ -224,12 +224,12 @@ pageEncoding="UTF-8"%>
 <!--file-watch二次弹窗-->
 
 <%--begin尝试文档在线预览--%>
-<<script id="file-watch-template" type="text/html" charset="utf-8">
-    <div class="file-watch" style="display: block;">
-        <div class="close-circle">×</div>
-        <iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='${assetsPath}/file/text/3.pdf' ></iframe>
-    </div>
-</script>
+<%--<script id="file-watch-template" type="text/html" charset="utf-8">--%>
+    <%--<div class="file-watch" style="display: block;">--%>
+        <%--<div class="close-circle">×</div>--%>
+        <%--<iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='${assetsPath}/file/text/test.pdf' ></iframe>--%>
+    <%--</div>--%>
+<%--</script>--%>
 <%--end尝试文档在线预览--%>
 
 <script>
