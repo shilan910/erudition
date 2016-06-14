@@ -15,6 +15,10 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="${assetsPath}/js/jquery-accordion-menu.js"></script>
     <script src="${assetsPath}/js/icheck.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
     <style type="text/css">
         *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
         body{background:#f0f0f0;}
@@ -49,7 +53,7 @@
 
     <jsp:include page="../common/admin_sidebar.jsp" />
 
-    <div class="contents flex-8 file-upload">
+    <div class="contents flex-8" id="rule">
         <div class="header-all">
             <div class="header flex-row">
                 <div class="flex-7 path">
@@ -58,22 +62,107 @@
 
             </div>
 
-            <div>
-                <form>
-                    <lable>当两个文件具有n个相同关键字时，设为关联文件</lable>
-                    <input type="text" value="3"/>
-                    <input type="submit" value="确认" />
+            <div class="file-body">
+                <!--<div>
+                    <form>
+                        <lable>当两个文件具有n个相同关键字时，设为关联文件</lable>
+                        <input type="text" value="3"/>
+                        <input type="submit" value="确认" />
+                    </form>
+                    <form>
+                        <lable>自动删除n天之前的文件</lable>
+                        <input type="text" value="15"/>
+                        <input type="submit" value="确认" />
+                    </form>
+                    <form>
+                        <lable>用户可以添加n（上限）个文件至常用目录</lable>
+                        <input type="text" value="30"/>
+                        <input type="submit" value="确认" />
+                    </form>
+                </div>-->
+                <form action="" class="all-floor">
+                    <div class="row floor">
+                        <div class="col-md-6">
+                            <p>
+                                <label for="amount">设置关联基数</label>
+                                <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                            </p>
+                            <div id="slider-range-max"></div>
+                        </div>
+                        <div class="article col-md-6">
+                            <p class="text-danger">选取参数为关键字基础，当基数越大，所需的关联性越强</p>
+                        </div>
+                    </div>
+
+                    <div class="row floor">
+                        <div class="col-md-6">
+                            <p>
+                                <label for="amount">设置删除期限</label>
+                                <input type="text" id="amount-day" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                            </p>
+                            <div id="slider-range-max-day"></div>
+                        </div>
+                        <div class="article col-md-6">
+                            <p class="text-danger">自动删除设置期限之外的文件，系统会额外保留一部分的临时文件</p>
+                        </div>
+                    </div>
+                    <div class="row floor">
+                        <div class="col-md-6">
+                            <p>
+                                <label for="amount">设置收藏上限</label>
+                                <input type="text" id="amount-collect" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                            </p>
+                            <div id="slider-range-max-collect"></div>
+                        </div>
+                        <div class="article col-md-6">
+                            <p class="text-danger">限制用户从共享目录中收藏到常用目录中的数目</p>
+                        </div>
+                    </div>
+                    <input type="submit" class="zyh-button-grey pull-right" value="提交"/>
+                    <div class="clearfix"></div>
                 </form>
-                <form>
-                    <lable>自动删除n天之前的文件</lable>
-                    <input type="text" value="15"/>
-                    <input type="submit" value="确认" />
-                </form>
-                <form>
-                    <lable>用户可以添加n（上限）个文件至常用目录</lable>
-                    <input type="text" value="30"/>
-                    <input type="submit" value="确认" />
-                </form>
+
+
+
+                <script>
+                    $(function() {
+                        $( "#slider-range-max" ).slider({
+                            range: "max",
+                            min: 1,
+                            max: 10,
+                            value: 2,
+                            slide: function( event, ui ) {
+                                $( "#amount" ).val( ui.value );
+                            }
+                        });
+                        $( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+
+                        $( "#slider-range-max-day" ).slider({
+                            range: "max",
+                            min: 1,
+                            max: 10,
+                            value: 2,
+                            slide: function( event, ui ) {
+                                $( "#amount-day" ).val( ui.value );
+                            }
+                        });
+                        $( "#amount-day" ).val( $( "#slider-range-max-day" ).slider( "value" ) );
+
+                        $( "#slider-range-max-collect" ).slider({
+                            range: "max",
+                            min: 1,
+                            max: 10,
+                            value: 2,
+                            slide: function( event, ui ) {
+                                $( "#amount-collect" ).val( ui.value );
+                            }
+                        });
+                        $( "#amount-collect" ).val( $( "#slider-range-max-collect" ).slider( "value" ) );
+                    });
+                </script>
+
+
+
             </div>
         </div>
     </div>
