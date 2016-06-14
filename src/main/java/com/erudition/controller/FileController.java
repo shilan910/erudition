@@ -50,11 +50,16 @@ public class FileController {
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String upload(String cate1, String cate2, String cate3, String keywords ,
-                         @RequestParam MultipartFile[] files, HttpSession session) {
+    public String upload(String cate1, String cate2, String cate3,
+                         @RequestParam MultipartFile[] files,  String keywords ,HttpSession session) {
 
+        System.out.println("发送了post你好请求");
+        System.out.println("一级目录"+cate1);
+        System.out.println("二级目录"+cate2);
+        System.out.println("三级目录"+cate3);
+        System.out.println("关键字"+keywords);
         for (MultipartFile file : files) {
-
+            System.out.println("进入了文件");
             if (!file.isEmpty()) {
                 System.out.println(file.getOriginalFilename());
                 UserEntity user = (UserEntity) session.getAttribute("loginUser");
