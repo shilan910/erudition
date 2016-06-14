@@ -57,7 +57,7 @@ public class FileController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String upload(String cate1, String cate2, String cate3,
-                         @RequestParam MultipartFile[] files,  String keywords , HttpSession session) {
+                         @RequestParam MultipartFile[] files,  String keywords , String userid,HttpSession session) {
 
         System.out.println("发送了post你好请求");
         System.out.println("一级目录"+cate1);
@@ -69,9 +69,9 @@ public class FileController {
             if (!file.isEmpty()) {
                 System.out.println(file.getOriginalFilename());
 
-                int userid = (int) session.getAttribute("userid");
+                //int userid = (int) session.getAttribute("userid");
                 System.out.println("userid: "+userid);
-                UserEntity user = userDao.getById(userid);
+                UserEntity user = userDao.getById(Integer.valueOf(userid));
 
 
 
