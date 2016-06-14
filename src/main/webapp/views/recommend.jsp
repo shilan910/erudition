@@ -245,6 +245,8 @@
 
 
             </div>
+
+
         </div>
 
         <div class="header-all" id="category-header" style="display: none">
@@ -304,7 +306,7 @@
 
 </div>
 
-<script>
+<%--<script>
     $("#recommend_getwin").click(function(){
         $(this).parent().children().each(function(){
             $(this).removeClass("active");
@@ -323,7 +325,7 @@
             $(".history_win").fadeIn(150);
         });
     })
-</script>
+</script>--%>
 
 <%--<script src="${assetsPath}/js/require.js" charset="utf-8"></script>--%>
 <!--完整的弹窗-->
