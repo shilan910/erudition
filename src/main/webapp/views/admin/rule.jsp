@@ -58,87 +58,30 @@
 
             </div>
 
-                <%--文件上传表单--%>
-                <%--<div class="form-upload">--%>
-                    <%--<form action="/erudition/admin/file/upload" method="post" enctype="multipart/form-data">--%>
-                        <%--<div class="select">--%>
-                            <%--<div class="directory flex-row">--%>
-                                <%--<div class="flex-4">--%>
-                                    <%--<span class="select-span">一级目录</span>--%>
-                                <%--</div>--%>
-                                <%--<div class="flex-6">--%>
-                                    <%--<select class="form-control" id="category-select" name="cate1">--%>
-                                        <%--<option selected value="">请选择</option>--%>
-                                        <%--<c:forEach items="${firstCategorys}" var="category">--%>
-                                            <%--<option value="${category.id}">${category.categoryName}</option>--%>
-                                        <%--</c:forEach>--%>
-                                    <%--</select>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                            <%--<div class="directory flex-row">--%>
-                                <%--<div class="flex-4">--%>
-                                    <%--<span class="select-span">二级目录</span>--%>
-                                <%--</div>--%>
-                                <%--<div class="flex-6">--%>
-                                    <%--<div id="second-select-all">--%>
-                                        <%--<select class="form-control" id="second-category-select" name="cate2">--%>
-                                            <%--<option selected value="">请选择</option>--%>
-                                        <%--</select>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                            <%--<div class="directory flex-row">--%>
-                                <%--<div class="flex-4">--%>
-                                    <%--<span class="select-span">三级目录</span>--%>
-                                <%--</div>--%>
-                                <%--<div class="flex-6">--%>
-                                    <%--<div id="third-select-all">--%>
-                                        <%--<select class="form-control" id="third-category-select" name="cate3">--%>
-                                            <%--<option selected value="">请选择</option>--%>
-                                        <%--</select>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-
-                            <%--</div>--%>
-                        <%--</div>--%>
-
-                        <%--&lt;%&ndash;<div class="form-group inputFile">--%>
-                            <%--<label for="inputFile">上传视频</label>--%>
-                            <%--<input type="file" id="inputFile" name="files" value="" multiple />--%>
-                            <%--<p class="help-block">支持MP4格式</p>--%>
-                        <%--</div>--%>
-                        <%--<input type="submit" class="btn btn-success btn-course" value="上传" />&ndash;%&gt;--%>
-
-                        <%--<label>上传视频：</label>--%>
-                        <%--<div class="form-group inputFile input-file">--%>
-                            <%--<br/>--%>
-                            <%--<a href="javascript:;" class="file-scan">--%>
-                                <%--<input type="file" id="inputFile" name="files" value="浏览" multiple />选择文件--%>
-                            <%--</a>--%>
-                            <%--<label class="showFileName">未选择文件</label>--%>
-                        <%--</div>--%>
-                        <%--<p class="help-block pull-left">支持MP4格式</p>--%>
-                        <%--<input type="submit" class="btn btn-primary btn-course pull-right" value="上传" id="progress" />--%>
-                        <%--<div class="clearfix"></div>--%>
-
-
-                    <%--</form>--%>
-
-                    <%--<div class="progress">--%>
-                        <%--<div id="progress-bar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">--%>
-                            <%--<!--<span class="sr-only">20% 完成</span>-->--%>
-                            <%--<span>20% Complete</span>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-
-
-            <%--</div>--%>
-
+            <div>
+                <form>
+                    <lable>当两个文件具有n个相同关键字时，设为关联文件</lable>
+                    <input type="text" value="3"/>
+                    <input type="submit" value="确认" />
+                </form>
+                <form>
+                    <lable>自动删除n天之前的文件</lable>
+                    <input type="text" value="15"/>
+                    <input type="submit" value="确认" />
+                </form>
+                <form>
+                    <lable>用户可以添加n（上限）个文件至常用目录</lable>
+                    <input type="text" value="30"/>
+                    <input type="submit" value="确认" />
+                </form>
+            </div>
         </div>
     </div>
 
-
 </div>
+
+
+
 <!--文件上传相关-->
 <script>
     //监听文件浏览
