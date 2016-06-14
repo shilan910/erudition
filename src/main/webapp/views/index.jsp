@@ -59,6 +59,7 @@ pageEncoding="UTF-8"%>
 
                 <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
                 <ul id="demo-list">
+                    <li id="home"><a href="#"><i class="fa fa-home"></i>主页 </a></li>
                     <c:set var="shareCateClass" value=""/>
                     <c:if test="${cateIsActive==0}">
                         <c:set var="shareCateClass" value="active"/>
@@ -257,102 +258,6 @@ pageEncoding="UTF-8"%>
             $(this).remove();
         });
     });
-</script>
-
-
-<%--根据三级目录显示文件--%>
-<script>
-   /* $(function(){
-        $("#demo-list li").click(function(){
-                    var third_cate_id = $(this).attr("value");
-                    if(third_cate_id != null){
-                        console.log(third_cate_id);
-                        var file_list = $("#file-list");
-                        var url = "/erudition/resources/"+third_cate_id+"/1";
-
-                        file_list.empty();
-                        var obj0= "<div class='first-floor flex-row'><div class='flex-3'><div>"+
-                                "<input type='checkbox'/><span class='filename'>名称</span></div></div>"+
-                                "<div class='flex-3'>大小</div><div class='flex-3'>创建者</div>"+
-                                "<div class='flex-3'>更新日期</div></div><div class='line'></div>";
-                        file_list.append(obj0);
-                        $(".body-floor").remove();
-                        $(".line").remove();
-                        iCheckready();
-                        $.getJSON(url , function(data){
-                            $.each(data.list,function(i, file){
-                                //转换时间戳
-                                var createDate = turnDate(file.createTime);
-                                var size1 = turnSize(file.size);
-                                var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>"+
-                                        "<div class='flex-1 checkbox'><input type='checkbox'/></div>"+
-                                        "<div class='flex-1 file-image'><i class='iconfont icon-"+file.type+"'></i></div>"+
-                                        "<div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>"+file.title+"</a></span></div></div>"+
-                                        "<div class='flex-3 file-size'><span>"+size1+"</span></div>"+
-                                        "<div class='flex-3 file-creator'>"+file.creater+"</div><div class='flex-3 file-time'>"
-                                        +createDate+"</div></div><div class='line'></div>";
-
-                                console.log(file.title);
-                                file_list.append(obj);
-                                iCheckready();
-                            });
-                            obj=['                <nav>',
-                                        '                    <ul class="pagination pull-right">',
-                                        '                        <li><a href="#">上一页</a></li>',
-                                        '                        <li class="active"><a href="#">1</a></li>',
-                                        '                        <li><a href="#">2</a></li>',
-                                        '                        <li><a href="#">3</a></li>',
-                                        '                        <li><a href="#">4</a></li>',
-                                        '                        <li><a href="#">5</a></li>',
-                                        '                        <li>',
-                                        '                            <a href="#">下一页</a>',
-                                        '                        </li>',
-                                        '                    </ul>',
-                                        '                </nav>'].join("");
-                            $(".line").last().after(obj);
-                        });
-                    }
-
-                }
-
-        )
-
-    })*/
-
-
-    function turnDate(createTime){
-        var date = new Date(createTime);
-        var Y = date.getFullYear() + '-';
-        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-        var D = date.getDate() + ' ';
-        var h = date.getHours() + ':';
-        var m = date.getMinutes() + ':';
-        var s = date.getSeconds();
-        var createDate = Y+M+D+h+m+s;
-        return createDate;
-    }
-
-
-    function turnSize(size){
-        //var turnedSize;
-        var cnt=0 , unit="";
-        while(size>=1024){
-            size = size / 1024;
-            cnt++;
-        }
-        switch (cnt){
-            case 0:unit="B";break;
-            case 1:unit="KB";break;
-            case 2:unit="MB";break;
-            case 3:unit="GB";break;
-            case 4:unit="TB";break;
-            default : break;
-        }
-        var size1 = parseFloat(size).toFixed(2)+unit;
-        return size1;
-    }
-
-
 </script>
 
 

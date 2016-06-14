@@ -134,7 +134,7 @@
                                 <%--</div>--%>
                                 <!--<div class="clearfix"></div>-->
                                 <div id="keywords" style="display: none;margin-bottom: 64px;width:100%" >
-                                    <label >请输入文件关键字,空格隔开，如:会议摘要 全体大会(可选)</label>
+                                    <label >请输入文件关键字</label>
                                     <input type="text" name="keywords" placeholder="关键词..." id="keywordsInput" class="tags" value="关键字"/>
                                 </div>
 
@@ -236,14 +236,14 @@
                 });
             },
             'onQueueComplete' : function(queueData) {
-                popwin.tips("你好","1");
+//                popwin.tips("上传成功","1");
                 num=0;
             },
             'onUploadError' : function(file, errorCode, errorMsg, errorString) {
 //                console.log('The file ' + file.name + ' could not be uploaded: ' + errorString);
 //                $("#select_form").submit();
 //                $("#keywords").hide(3000);
-                popwin.tips("你好","1");
+                popwin.tips("上传成功","1");
                 setTimeout(function(){
                     $("#keywords").hide(300);
                     num=0;
