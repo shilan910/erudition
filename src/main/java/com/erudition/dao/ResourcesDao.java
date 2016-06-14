@@ -2,6 +2,7 @@ package com.erudition.dao;
 
 import com.erudition.bean.CategoryEntity;
 import com.erudition.bean.FilesEntity;
+import com.erudition.bean.LogEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.page.Page;
 import com.erudition.page.PageHandler;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,14 +56,63 @@ public class ResourcesDao extends BaseDao {
                 FilesEntity.class, query);
     }
 
+    public List<FilesEntity> getRelationFileByOne(List<FilesEntity> files){
+
+        List<FilesEntity> relationFiles = new ArrayList<>();
+
+        List<FilesEntity> filesExits = new ArrayList<>();
+
+        for(FilesEntity file : files) {
+            filesExits.add(file);
+        }
+
+            for(FilesEntity file : files){
+
+            String relations = file.getRelations();
+            System.out.println("relations: "+relations);
+            if(relations != null){
+
+                String [] relationsarr = relations.split(",");
+                for(String re:relationsarr){
+                    int re_id = Integer.parseInt(re);
+                    boolean flag = true;
+                    if(re != ""){
+                        for (FilesEntity fileExits : filesExits){
+                            if(fileExits.getId()==re_id) {
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if (!flag)
+                            break;
+                        relationFiles.add(getById(re_id));
+                        filesExits.add(getById(re_id));
+                        System.out.println("re  :"+re);
+                        //break;//只添加一次
+                    }
+                }
+            }
+
+        }
+        if(relationFiles==null)
+            return null;
+
+        return relationFiles;
+    }
+
 
     public String saveFiles(String cate1, String cate2, String cate3, String keywords ,String originalName, MultipartFile file, UserEntity user){
         FilesEntity fileEntity = new FilesEntity();
 
         fileEntity.setTitle(originalName);
         fileEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        System.out.println("222222222");
         fileEntity.setSize(exchangeSize(file.getSize()));
+        System.out.println("3333333: "+user.getUserName());
         fileEntity.setCreater(user.getUserName());
+
+        System.out.println("111111111");
+
 
         CategoryEntity category = categoryDao.getById(Integer.valueOf(cate3));
 
@@ -77,36 +128,42 @@ public class ResourcesDao extends BaseDao {
 
         String saveLocalUrl = categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() + "/" +
                 categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() + "/" + category.getCategoryName();
+
+
+        System.out.println("Dao saveFile start....");
+
         String url = MultipartFileUtils.saveFile(file, "/usr/local/erudition/"+saveLocalUrl , type);
         fileEntity.setUrl(url);
 
+        System.out.println("Dao saveFile done....");
 
-        //提取关键字
-        String[] words = new String[100];
-        String thumbPath = null;
-        System.out.println("type : "+type);
-        if(type.equals("docx") || type.equals("doc") || type.equals("txt")){
-            WordFrequency wordFrequency = new WordFrequency();
-            words = wordFrequency.wordFreByWord(url,5);
-            System.out.println("提取关键字");
-        }else if(type.equals("wmv")){
-            thumbPath = new ProduceThumb().processVideoThumb(url);
-        }
-        else if(type.equals("png") || type.equals("jpg")){
-            try {
-                thumbPath = new ProduceThumb().processPictureThumb(url);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
+//        //提取关键字
+//        String[] words = new String[100];
+//        String thumbPath = null;
+//        System.out.println("type : "+type);
+//        if(type.equals("docx") || type.equals("doc") || type.equals("txt")){
+//            WordFrequency wordFrequency = new WordFrequency();
+//            words = wordFrequency.wordFreByWord(url,5);
+//            System.out.println("提取关键字");
+//        }else if(type.equals("wmv")){
+//            thumbPath = new ProduceThumb().processVideoThumb(url);
+//        }
+//        else if(type.equals("png") || type.equals("jpg")){
+//            try {
+//                thumbPath = new ProduceThumb().processPictureThumb(url);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
 
 
         fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
                 categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
-                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords+" "+words);
+                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords);
 
-        fileEntity.setThumb(thumbPath);
+//        fileEntity.setThumb(thumbPath);
 
 
         save(fileEntity);
@@ -145,8 +202,8 @@ public class ResourcesDao extends BaseDao {
         }
         DecimalFormat df2 = new DecimalFormat("###.00");
         String initsize2 = df2.format(initsize);
-        System.out.println(layer);
-        System.out.println(initsize2);
+        System.out.println("layer:"+layer);
+        System.out.println("initsize2:"+initsize2);
         switch (layer){
             case 1:nowsize = initsize2+"B";break;
             case 2:nowsize = initsize2+"KB";break;
@@ -156,7 +213,16 @@ public class ResourcesDao extends BaseDao {
             case 6:nowsize = initsize2+"PB";break;
             default:nowsize = initsize2+"B";break;
         }
+        System.out.println("nowsize: "+nowsize);
         return nowsize;
+    }
+
+
+    public void addLog(int userId , int fileId){
+        LogEntity log = new LogEntity();
+        log.setFileId(fileId);
+        log.setUserId(userId);
+        save(log);
     }
 
 

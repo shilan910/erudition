@@ -23,6 +23,9 @@
         self.currentIndex;
         self.allIndex;
 
+        //其他参数
+        self.canCarousel=true;
+
         //数据池
         self.fileData;
         self.fileRelations;
@@ -52,6 +55,28 @@
             //self.renderData($(this));        //将当前点击传送
         })
 
+        //搜索后的下方推荐
+        $(document).on("click",".footRecommend .title",function(event){
+            var me=$(this);
+
+            event.stopPropagation();
+            //获取当前页面全部对象个数
+            self.allIndex=self.getAllIndex_title();
+            console.log("title当前页面全部个数:"+self.allIndex);
+            //设置页面中的元素index属性
+            self.setIndex_title();
+            //获取当前点击对象的位置
+            self.currentIndex=$(this).attr("index");
+            console.log("title当前点击为第"+self.currentIndex+"个");
+            //获取数据
+            self.getData_title(self.currentIndex,"index");
+            //不允许轮播
+            self.canCarousel=false;
+            //渲染数据
+            self.renderDOM();            //因为暗含了顺序，所以可以无所顾忌的使用，哈哈哈哈//静态渲染与动态渲染的时间上有问题？
+            //self.carousel();          //绑定轮播事件，但是还没有特殊化,
+        })
+
     };
     FileOut.prototype={
         //根据index获取元素id
@@ -60,11 +85,44 @@
             console.log("发送当前的id"+$(self.root_element).eq(index-1).find(".file-name").find("span").eq(0).attr("id"));
             return $(self.root_element).eq(index-1).find(".file-name").find("span").eq(0).attr("id");
         },
+        getIdByIndex_title:function(index){
+            var self=this;
+            console.log("发送当前的id"+$(".footRecommend .title").eq(index-1).attr("value"));
+            return $(".footRecommend .title").eq(index-1).attr("value");
+        },
         /**
          * 根据配置获取数据(下标或者id)
          * @param index
          * @param opt
          */
+        getData_title:function(enter,opt){
+            var self=this;
+            console.log("开始获取数据");
+            //根据下标获取id
+            //var file_id = me.attr("id");
+            var file_id;
+            if(opt==="index"){
+                file_id=self.getIdByIndex_title(enter);
+            }else if(opt=="id"){
+                file_id=enter;
+            }
+
+            console.log("获取的id为:"+file_id);
+            var file;
+            $.ajax({
+                url:'/erudition/resources/file/'+file_id,                 //${rootPath}失效
+                type:'get',
+                async : false, //默认为true 异步
+                success:function(data){
+                    self.fileData=data.file;
+                    self.fileRelations=data.relationfiles;        //获取关联文件
+                    console.log("获取的关联文件为:"+data.relationfiles);
+                },error:function(){
+                    alert("error"+file_id);
+                    return "error";
+                }
+            });
+        },
         getData:function(enter,opt){
             var self=this;
             console.log("开始获取数据");
@@ -98,10 +156,23 @@
             var self=this;
             return $(self.root).children(self.root_element).length;           //这里动态的子元素个数
         },
+        getAllIndex_title:function(){
+            var self=this;
+            console.log("进入getAllIndex_title")
+            //console.log($(".footRecommend").text())
+            return $(".footRecommend .title").length;
+        },
         setIndex:function(){
             var self=this;
             var num=1;
             $(self.root).children(self.root_element).each(function(){
+                $(this).attr("index",num++);
+            })
+        },
+        setIndex_title:function(){
+            var self=this;
+            var num=1;
+            $(".footRecommend .title").each(function(){
                 $(this).attr("index",num++);
             })
         },
@@ -208,6 +279,13 @@
             self.HangRelateEvent();
             //为查看绑定事件
             self.HangWatchfile();
+            //判断要不要轮播
+            if(self.canCarousel==false){
+                $(self.pre_btn).removeClass("pre-bg");
+                $(self.next_btn).css({      //>>>>>>>>>>>>>>>>>>>>>>>>这里有瑕疵
+                    "display":"none"
+                })
+            }
         },
         turnSize:function(size){
             //var turnedSize;

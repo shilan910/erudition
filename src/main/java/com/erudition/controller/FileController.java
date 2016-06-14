@@ -5,6 +5,7 @@ import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CategoryDao;
 import com.erudition.dao.ResourcesDao;
+import com.erudition.dao.UserDao;
 import com.erudition.util.nlpir.WordFrequency;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,10 @@ public class FileController {
     @Qualifier("categoryDao")
     CategoryDao categoryDao;
 
+    @Autowired
+    @Qualifier("userDao")
+    private UserDao userDao;
+
 
     @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String upload(HttpSession session, Model model) {
@@ -49,15 +54,27 @@ public class FileController {
         return "admin/upload";
     }
 
+
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String upload(String cate1, String cate2, String cate3, String keywords ,
-                         @RequestParam MultipartFile[] files, HttpSession session) {
+    public String upload(String cate1, String cate2, String cate3,
+                         @RequestParam MultipartFile[] files,  String keywords , String userid,HttpSession session) {
 
+        System.out.println("发送了post你好请求");
+        System.out.println("一级目录"+cate1);
+        System.out.println("二级目录"+cate2);
+        System.out.println("三级目录"+cate3);
+        System.out.println("关键字"+keywords);
         for (MultipartFile file : files) {
-
+            System.out.println("进入了文件");
             if (!file.isEmpty()) {
                 System.out.println(file.getOriginalFilename());
-                UserEntity user = (UserEntity) session.getAttribute("loginUser");
+
+                //int userid = (int) session.getAttribute("userid");
+                System.out.println("userid: "+userid);
+                UserEntity user = userDao.getById(Integer.valueOf(userid));
+
+
+
                 String originalName = file.getOriginalFilename();
 
                 String name = resourcesDao.saveFiles(cate1, cate2, cate3, keywords, originalName,file, user);

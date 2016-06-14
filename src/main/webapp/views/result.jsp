@@ -86,29 +86,7 @@ pageEncoding="UTF-8"%>
 
 
                     <li id="collection" class="" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>
-                            <%--<ul class="submenu" >--%>
-                                <%--<c:forEach items="${categories}" var="firstCate">--%>
-                                    <%--<li><a href="#">${firstCate.name}</a>--%>
-
-                                        <%--<ul class="submenu">--%>
-                                            <%--<c:forEach items="${firstCate.children}" var="secondCate">--%>
-                                                <%--<li><a href="#">${secondCate.name}</a>--%>
-
-                                                    <%--<ul class="submenu">--%>
-                                                        <%--<c:forEach items="${secondCate.children}" var="thirdCate">--%>
-                                                            <%--<li value="${thirdCate.id}"><a href="#">${thirdCate.name}</a></li>--%>
-                                                        <%--</c:forEach>--%>
-                                                    <%--</ul>--%>
-
-                                                <%--</li>--%>
-                                            <%--</c:forEach>--%>
-                                        <%--</ul>--%>
-
-                                    <%--</li>--%>
-                                <%--</c:forEach>--%>
-                            <%--</ul>--%>
-
-                        </li>
+                    </li>
 
                 </ul>
                 <div class="jquery-accordion-menu-footer">
@@ -121,11 +99,11 @@ pageEncoding="UTF-8"%>
     </div>
 
 
-    <div class="contents flex-8">
+    <div class="contents flex-8" id="searchResult">
         <div class="header-all">
             <div class="header flex-row">
                 <div class="flex-7 path">
-                    根目录
+                    搜索结果
                 </div>
                 <div class="flex-3 search">
                     <%--<div class="input-group">--%>
@@ -177,13 +155,52 @@ pageEncoding="UTF-8"%>
                     <div class='line'></div>
                 </c:forEach>
                 </c:if>
-
+                <nav>
+                    <ul class="pagination pull-right">
+                        <li><a href="#">上一页</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#">下一页</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
 
+        </div>
+
+        <div class="footRecommend animated slideInUp">
+            <div class="header">
+                <div class="need pull-left">您还可能需要</div>
+                <div class="close pull-right">×</div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="body">
+                <ul class="list-inline">
+                    <c:forEach var="relationfile" items="${relationsFiles}" begin="0" end="4">
+                        <li>
+                            <div class="icon-el">
+                                <div><i class="iconfont icon-${relationfile.type}"></i></div>
+                                <div class="title" style="text-align: left" value=${relationfile.id}>${relationfile.title}</div>
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
         </div>
     </div>
 
 </div>
+
+<%--底部的推荐--%>
+<script>
+    $(".footRecommend .close").click(function(){
+        $(".footRecommend").addClass("animated").addClass("slideOutDown");
+    })
+</script>
 
 <!--文件弹窗-->
 

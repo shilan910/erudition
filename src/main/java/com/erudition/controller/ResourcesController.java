@@ -1,6 +1,7 @@
 package com.erudition.controller;
 
 import com.erudition.bean.FilesEntity;
+import com.erudition.bean.UserEntity;
 import com.erudition.dao.ResourcesDao;
 import com.erudition.entity.File;
 import com.erudition.page.Page;
@@ -44,6 +45,11 @@ public class ResourcesController {
     @RequestMapping(value = "/file/{fileid}" , method = RequestMethod.GET)
     public File getRelations(HttpSession httpSession,
                                           @PathVariable("fileid") int fileId,Model model){
+
+        //当前文件添加进log表
+        UserEntity user = (UserEntity) httpSession.getAttribute("loginUser");
+        resourcesDao.addLog(user.getId(),fileId);
+
 
         File file = new File();
 
