@@ -70,7 +70,7 @@
                 <div class="jquery-accordion-menu-header" id="form"></div>
                 <!--//里面的form是动态添加的-->
                 <ul id="demo-list">
-                    <li class="active"><a href="#"><i class="fa fa-home"></i>主页 </a>
+                    <li class="active" id="home"><a href="#"><i class="fa fa-home"></i>主页 </a>
                     <c:set var="shareCateClass" value=""/>
                     <c:if test="${cateIsActive==0}">
                         <c:set var="shareCateClass" value="active"/>
@@ -143,7 +143,7 @@
 
 
     <div class="contents flex-8" id="recommend">
-        <div class="header-all">
+        <div class="header-all" id="recommend-header">
             <div class="header flex-row">
                 <ul class="list-inline">
                     <li class="header-list active" id="recommend_getwin">推荐</li>
@@ -246,7 +246,8 @@
 
             </div>
         </div>
-        <%--<div class="header-all">
+
+        <div class="header-all" id="category-header" style="display: none">
             <div class="header flex-row">
                 <div class="flex-7 path">
                     常用目录
@@ -298,7 +299,7 @@
 
 
             </div>
-        </div>--%>
+        </div>
     </div>
 
 </div>
@@ -382,11 +383,21 @@
 
 
 <%--根据三级目录显示文件--%>
+<%--侧边栏效果--%>
 <script>
     $(function () {
+
         $("#demo-list li").click(function () {
+//                    //隐藏推荐内容
+//                    $("#recommend-header").hide();
+//                    $("#category-header").show();
+
                     var third_cate_id = $(this).attr("value");
                     if (third_cate_id != null) {
+                        //隐藏推荐内容
+                        $("#recommend-header").hide();
+                        $("#category-header").show();
+
                         console.log(third_cate_id);
                         var file_list = $("#file-list");
                         var url = "/erudition/resources/" + third_cate_id + "/1";
@@ -437,6 +448,11 @@
                 }
         )
 
+        $("#home").click(function(){
+            alert($("#recommend-header").html())
+            $("#recommend-header").show();
+            $("#category-header").hide();
+        })
     })
 
 

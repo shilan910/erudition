@@ -172,7 +172,7 @@ pageEncoding="UTF-8"%>
 
         </div>
 
-        <div class="footRecommend">
+        <div class="footRecommend animated slideInUp">
             <div class="header">
                 <div class="need pull-left">您还可能需要</div>
                 <div class="close pull-right">×</div>
@@ -184,7 +184,7 @@ pageEncoding="UTF-8"%>
                         <li>
                             <div class="icon-el">
                                 <div><i class="iconfont icon-${relationfile.type}"></i></div>
-                                <div class="title" value=${relationfile.id}>${relationfile.title}</div>
+                                <div class="title" style="text-align: left" value=${relationfile.id}>${relationfile.title}</div>
                             </div>
                         </li>
                     </c:forEach>

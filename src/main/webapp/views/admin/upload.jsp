@@ -220,11 +220,14 @@
                     keywords= $.trim(keywords+$(this).find("span").text());
                 });
                 console.log("谷歌关键字"+keywords);
+                var id = '<%=session.getAttribute("userid")%>';
+                console.log("获取的sessionId"+id);
                 $('#file_upload').uploadify('settings','formData',{
                     'cate1': $("#category-select").find("option:selected").val(),
                     'cate2': $("#second-select-all").find("option:selected").val(),
                     'cate3': $("#third-select-all").find("option:selected").val(),
-                    'keywords':keywords
+                    'keywords':keywords,
+                    'userid':id
                 });
             },
             'onQueueComplete' : function(queueData) {
