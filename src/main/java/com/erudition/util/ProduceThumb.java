@@ -1,5 +1,7 @@
 package com.erudition.util;
 
+//import net.coobird.thumbnailator.Thumbnails;
+
 import net.coobird.thumbnailator.Thumbnails;
 
 import javax.imageio.IIOImage;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ProduceThumb {
 
     public static void main(String args[]) throws IOException {
+
 
         String path = new ProduceThumb().processVideoThumb("/home/sl/test/数据/学习资源推荐系统演示视频.wmv");
         if(path != null){

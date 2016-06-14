@@ -196,6 +196,10 @@
             console.log("file.size="+file.size);
 
 
+
+            var filename = file.title;
+            filename = filename.substring(0,filename.lastIndexOf('.'));
+            filename+=".png";
             var strDom1=['<div class="file-out" style="display: none;" >',
                 '        <div class="pre-btn pre-bg"></div>',
                 '        <!--<div class="clearfix"></div>-->',
@@ -203,7 +207,7 @@
                 '            <div class="content">',
                 '                <div class="file">',
                 '                    <div class="file-thumbnails">',
-                '                        <div class="file-name"><img src="/erudition/assets/images/courses1.jpg" alt=""/></div>',
+                '                        <div class="file-name"><img src="/erudition/assets/images/'+filename+'" alt=""/></div>',
                 '                        <div class="file-class">'+file.type+'</div>',
                 '                    </div>',
                 '                    <div class="file-size">',
@@ -347,11 +351,33 @@
         HangWatchfile:function(){
             var self=this;
             $(".file-out .file-url").click(function(){
-                var url=self.fileData.url;
-                var dom='<div class="file-watch" style="display: block;">'+
-                    '        <div class="close-circle">×</div>'+
-                    '        <iframe width="738" height="523" class="preview-iframe" scrolling="no" frameborder="0" src="'+url+'" ></iframe>'+
-                    '    </div>';
+                var title=self.fileData.title;
+                var url = title.substring(0,title.lastIndexOf('.'));
+                var type = title.substring(title.lastIndexOf('.')+1);
+                if(type=="mp4"){
+                    var dom = "<div class='file-watch' style='display: block;'>"+
+                       " <div class='close-circle'>×</div>"+
+                    "<div class='video'>"+
+                    "    <video id='really-cool-video' class='video-js vjs-default-skin'  controls preload='auto' poster='really-cool-video-poster.jpg' data-setup='{}'>"+
+                    "    <source src='http://7xpl2y.com1.z0.glb.clouddn.com/asdf.mp4' type='video/mp4'>"+
+                    "    <source src='really-cool-video.webm' type='video/webm'>"+
+                    "    <p class='vjs-no-js'>"+
+                    "    To view this video please enable JavaScript, and consider upgrading to a web browser that"+
+                    "    <a href='http://videojs.com/html5-video-support/' target='_blank'>supports HTML5 video</a>"+
+                    "</p>"+
+                    "</video>"+
+                    "</div>"+
+                    "</div>";
+                }
+                else{
+                    url = "/erudition/assets/file/text/"+url+".pdf";
+                    var dom="<div class='file-watch' style='display: block;'>"+
+                        "        <div class='close-circle'>×</div>"+
+                        "        <iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='"+url+"'></iframe>"+
+                        "    </div>";
+                }
+
+
                 console.log(self.fileData.url);
                 $('body').append(dom);
                 console.log("添加路径");

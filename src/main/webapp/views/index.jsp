@@ -215,31 +215,32 @@ pageEncoding="UTF-8"%>
 <!--fiel-watch窗口模板-->
 <!--@依赖于文件弹窗-->
 <%--<script id="file-watch-template" type="text/html" charset="utf-8">--%>
-    <%--<div class="file-watch" style="display: block;">--%>
-        <%--<div class="close-circle">×</div>--%>
-        <%--<div class="video">--%>
-            <%--<video id="really-cool-video" class="video-js vjs-default-skin" controls--%>
-                   <%--preload="auto" poster="really-cool-video-poster.jpg"--%>
-                   <%--data-setup='{}'>--%>
-                <%--<source src="http://7xpl2y.com1.z0.glb.clouddn.com/asdf.mp4" type="video/mp4">--%>
-                <%--<source src="really-cool-video.webm" type="video/webm">--%>
-                <%--<p class="vjs-no-js">--%>
-                    <%--To view this video please enable JavaScript, and consider upgrading to a web browser--%>
-                    <%--that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>--%>
-                <%--</p>--%>
-            <%--</video>--%>
-        <%--</div>--%>
-    <%--</div>--%>
+    <div class="file-watch" style="display: block;">
+        <div class="close-circle">×</div>
+        <div class="video">
+            <video id="really-cool-video" class="video-js vjs-default-skin" controls
+                   preload="auto" poster="really-cool-video-poster.jpg"
+                   data-setup='{}'>
+                <source src="http://7xpl2y.com1.z0.glb.clouddn.com/asdf.mp4" type="video/mp4">
+                <source src="really-cool-video.webm" type="video/webm">
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a web browser
+                    that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+        </div>
+    </div>
 <%--</script>--%>
 <!--file-watch二次弹窗-->
 
 <%--begin尝试文档在线预览--%>
-<script id="file-watch-template" type="text/html" charset="utf-8">
-    <div class="file-watch" style="display: block;">
-        <div class="close-circle">×</div>
-        <iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='${assetsPath}/file/text/3.pdf' ></iframe>
-    </div>
-</script>
+<%--<script id="file-watch-template" type="text/html" charset="utf-8">--%>
+    <%--<div class="file-watch" style="display: block;">--%>
+        <%--<div class="close-circle">×</div>--%>
+        <%--<iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='${assetsPath}/file/text/test.pdf' ></iframe>--%>
+    <%--</div>--%>
+<%--</script>--%>
+
 <%--end尝试文档在线预览--%>
 
 <script>
