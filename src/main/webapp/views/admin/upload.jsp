@@ -60,11 +60,8 @@
 
                 <%--文件上传表单--%>
                 <div class="form-upload">
-<<<<<<< HEAD
-                    <form action="/erudition/admin/file/upload_in" method="post" enctype="multipart/form-data" id="form_upload">
-=======
-                    <form action="/erudition/admin/file/upload" method="post" enctype="multipart/form-data" id="select_form">
->>>>>>> a2dd727f68857b2b99014ac8249a3f0323e65906
+
+                    <%--<form action="/erudition/admin/file/upload" method="post" enctype="multipart/form-data" id="select_form">--%>
                         <div class="select">
                             <div class="directory flex-row">
                                 <div class="flex-4">
@@ -128,16 +125,8 @@
                             <%--<form>--%>
                                 <!--<div id="queue"></div>-->
                                 <div class="pull-left">
-<<<<<<< HEAD
-                                    <%--<input id="file_upload" name="files" type="file" multiple/>--%>
-                                    <input id="inputFile" name="files" type="file" multiple/>
-                                    <%--<input id="file_upload1" name="files" type="file" >--%>
-                                </div>
-                                <div class="pull-right file_upload_button">
-                                    <p><a href="javascript:$('#file_upload').uploadify('upload','*')" id="submit_upload">上传</a></p>
-=======
+
                                     <input id="file_upload" name="files" type="file" multiple />
->>>>>>> a2dd727f68857b2b99014ac8249a3f0323e65906
                                 </div>
                                 <%--<div class="pull-right file_upload_button">--%>
                                     <%--&lt;%&ndash;<p><a href="javascript:$('#file_upload').uploadify('upload','*')">上传</a></p>&ndash;%&gt;--%>
@@ -149,14 +138,12 @@
                                     <input type="text" name="keywords" placeholder="关键词..." id="keywordsInput" class="tags" value="关键字"/>
                                 </div>
 
-<<<<<<< HEAD
-=======
+
                             <div class="pull-right file_upload_button" style="margin-top: -44px">
                                 <%--<p><a href="javascript:$('#file_upload').uploadify('upload','*')">上传</a></p>--%>
                                 <p><a href="javascript:$('#file_upload').uploadify('upload','*')">上传</a></p>
                             </div>
 
->>>>>>> a2dd727f68857b2b99014ac8249a3f0323e65906
                             <%--</form>--%>
                         </div>
 
@@ -166,7 +153,7 @@
 
 
 
-                        <input type="submit" class="btn btn-primary btn-course pull-right" value="上传1233" id="progress" />
+                        <%--<input type="submit" class="btn btn-primary btn-course pull-right" value="上传1233" id="progress" />--%>
                         <%--<div class="clearfix"></div>--%>
 
 
