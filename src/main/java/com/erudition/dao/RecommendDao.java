@@ -21,7 +21,7 @@ public class RecommendDao extends BaseDao{
 
     public List<FilesEntity> getRecentFiles(int userid){
 
-        String hql = "select fileId from LogEntity as log where userId=? distinct";
+        String hql = "select distinct fileId from LogEntity as log where log.userId=?";
         org.hibernate.Query query = query(hql);
         query.setInteger(0,userid);
         List<Integer> fileIds = query.list();
@@ -29,6 +29,15 @@ public class RecommendDao extends BaseDao{
         for(int fid : fileIds){
             recentFiles.add(resourcesDao.getById(fid));
         }
+
+
+        if(recentFiles==null){
+            for(int i=1 ; i<=50 ; i++){
+                if(resourcesDao.getById(i)!=null)
+                    recentFiles.add(resourcesDao.getById(i));
+            }
+        }
+
 
         return recentFiles;
     }

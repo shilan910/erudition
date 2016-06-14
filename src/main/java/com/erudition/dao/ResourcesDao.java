@@ -2,6 +2,7 @@ package com.erudition.dao;
 
 import com.erudition.bean.CategoryEntity;
 import com.erudition.bean.FilesEntity;
+import com.erudition.bean.LogEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.page.Page;
 import com.erudition.page.PageHandler;
@@ -93,6 +94,8 @@ public class ResourcesDao extends BaseDao {
             }
 
         }
+        if(relationFiles==null)
+            return null;
 
         return relationFiles;
     }
@@ -103,8 +106,13 @@ public class ResourcesDao extends BaseDao {
 
         fileEntity.setTitle(originalName);
         fileEntity.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        System.out.println("222222222");
         fileEntity.setSize(exchangeSize(file.getSize()));
+        System.out.println("3333333: "+user.getUserName());
         fileEntity.setCreater(user.getUserName());
+
+        System.out.println("111111111");
+
 
         CategoryEntity category = categoryDao.getById(Integer.valueOf(cate3));
 
@@ -120,8 +128,14 @@ public class ResourcesDao extends BaseDao {
 
         String saveLocalUrl = categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() + "/" +
                 categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() + "/" + category.getCategoryName();
+
+
+        System.out.println("Dao saveFile start....");
+
         String url = MultipartFileUtils.saveFile(file, "/usr/local/erudition/"+saveLocalUrl , type);
         fileEntity.setUrl(url);
+
+        System.out.println("Dao saveFile done....");
 
 
 //        //提取关键字
@@ -188,8 +202,8 @@ public class ResourcesDao extends BaseDao {
         }
         DecimalFormat df2 = new DecimalFormat("###.00");
         String initsize2 = df2.format(initsize);
-        System.out.println(layer);
-        System.out.println(initsize2);
+        System.out.println("layer:"+layer);
+        System.out.println("initsize2:"+initsize2);
         switch (layer){
             case 1:nowsize = initsize2+"B";break;
             case 2:nowsize = initsize2+"KB";break;
@@ -199,7 +213,16 @@ public class ResourcesDao extends BaseDao {
             case 6:nowsize = initsize2+"PB";break;
             default:nowsize = initsize2+"B";break;
         }
+        System.out.println("nowsize: "+nowsize);
         return nowsize;
+    }
+
+
+    public void addLog(int userId , int fileId){
+        LogEntity log = new LogEntity();
+        log.setFileId(fileId);
+        log.setUserId(userId);
+        save(log);
     }
 
 

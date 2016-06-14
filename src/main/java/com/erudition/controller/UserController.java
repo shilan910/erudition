@@ -73,6 +73,7 @@ public class UserController {
                 status = 1;
                 usernmaemessage = "用户登陆成功";
                 session.setAttribute("loginUser", user);
+                session.setAttribute("userid",user.getId());
                 System.out.println("message1 : " + usernmaemessage);
                 request.getSession().setAttribute("username", username);      //session中设置值
 
