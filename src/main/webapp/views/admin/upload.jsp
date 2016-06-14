@@ -187,6 +187,11 @@
         defaultText:'添加标签'
     });
 </script>
+<%--文件弹窗插件--%>
+<script src="${assetsPath}/js/popwinAll.js"></script>
+<script>
+    var popwin=new Popwin();
+</script>
 <!--文件上传相关-->
 <script src="${assetsPath}/js/uploadify/jquery.uploadify.js"></script>
 <script>
@@ -231,14 +236,14 @@
                 });
             },
             'onQueueComplete' : function(queueData) {
-//                $("#keywords").hide(300);
-
+                popwin.tips("你好","1");
                 num=0;
             },
             'onUploadError' : function(file, errorCode, errorMsg, errorString) {
 //                console.log('The file ' + file.name + ' could not be uploaded: ' + errorString);
 //                $("#select_form").submit();
 //                $("#keywords").hide(3000);
+                popwin.tips("你好","1");
                 setTimeout(function(){
                     $("#keywords").hide(300);
                     num=0;
@@ -449,5 +454,6 @@
     }
 </script>--%>
 <script src="${assetsPath}/js/select/selectordie.js"></script>
+
 </body>
 </html>
