@@ -5,6 +5,7 @@ import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CategoryDao;
 import com.erudition.dao.ResourcesDao;
+import com.erudition.dao.UserDao;
 import com.erudition.util.nlpir.WordFrequency;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,10 @@ public class FileController {
     @Qualifier("categoryDao")
     CategoryDao categoryDao;
 
+    @Autowired
+    @Qualifier("userDao")
+    private UserDao userDao;
+
 
     @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String upload(HttpSession session, Model model) {
@@ -52,7 +57,7 @@ public class FileController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String upload(String cate1, String cate2, String cate3,
-                         @RequestParam MultipartFile[] files,  String keywords ,HttpSession session) {
+                         @RequestParam MultipartFile[] files,  String keywords , HttpSession session) {
 
         System.out.println("发送了post你好请求");
         System.out.println("一级目录"+cate1);
@@ -63,7 +68,13 @@ public class FileController {
             System.out.println("进入了文件");
             if (!file.isEmpty()) {
                 System.out.println(file.getOriginalFilename());
-                UserEntity user = (UserEntity) session.getAttribute("loginUser");
+
+                int userid = (int) session.getAttribute("userid");
+                System.out.println("userid: "+userid);
+                UserEntity user = userDao.getById(userid);
+
+
+
                 String originalName = file.getOriginalFilename();
 
                 String name = resourcesDao.saveFiles(cate1, cate2, cate3, keywords, originalName,file, user);

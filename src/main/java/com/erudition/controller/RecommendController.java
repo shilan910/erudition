@@ -24,13 +24,7 @@ public class RecommendController {
     @Qualifier("categoryDao")
     CategoryDao categoryDao;
 
-    @Autowired
-    @Qualifier("resourcesDao")
-    ResourcesDao resourcesDao;
 
-    @Autowired
-    @Qualifier("recommendDao")
-    RecommendDao recommendDao;
 
     @RequestMapping(value = "/recommend", method = RequestMethod.GET)
     public String index(HttpSession httpSession){
@@ -38,12 +32,6 @@ public class RecommendController {
 
         System.out.println("RecommendController");
 
-        UserEntity user = (UserEntity) httpSession.getAttribute("loginUser");
-
-        List<FilesEntity> recentFiles = recommendDao.getRecentFiles(user.getId());
-        httpSession.setAttribute("recentFiles",recentFiles);
-
-        httpSession.setAttribute("recommendFiles",resourcesDao.getRelationFileByOne(recentFiles));
 
         String username = (String)httpSession.getAttribute("username");
         if(username==null) return "login";
