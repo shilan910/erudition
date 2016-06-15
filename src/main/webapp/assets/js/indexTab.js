@@ -204,6 +204,8 @@
             return size1;
         },
         RecommendRederDom:function(){
+            var self=this;
+            file=self.getDataFilesAddlist()
             var str=['<div class="header flex-row home">',
                 '                <ul class="list-inline">',
                 '                    <li class="header-list active" id="recommend_getwin">推荐</li>',
@@ -290,6 +292,7 @@
                 '                    </div>',
                 '                    <div class="line"></div>',
                 '                </c:forEach>',
+                file,
                 '            </div>'].join("");
             $(".main .header-all").append(str);
             //绑定点击事件

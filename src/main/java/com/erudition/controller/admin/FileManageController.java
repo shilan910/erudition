@@ -106,7 +106,6 @@ public class FileManageController {
         List<FilesEntity> files = resourcesDao.getResourcesByKeyword(1,7,key).getList();
 
 
-
         httpSession.setAttribute("relationsFiles",resourcesDao.getRelationFileByOne(files));
         httpSession.setAttribute("searchresult",files);
         httpSession.setAttribute("flagofcollection",0);

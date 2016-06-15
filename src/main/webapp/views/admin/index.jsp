@@ -53,7 +53,7 @@ pageEncoding="UTF-8"%>
         <div class="header-all">
             <div class="header flex-row">
                 <div class="flex-7 path">
-                    根目录
+                    欢迎来到管理界面！
                 </div>
                 <div class="flex-3 search">
                     <%--<div class="input-group">--%>

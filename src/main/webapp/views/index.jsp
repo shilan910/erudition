@@ -50,6 +50,7 @@ pageEncoding="UTF-8"%>
 
 <div class="main flex-row">
     <div class="flex-2">
+
         <div class="nav">
             <div id="jquery-accordion-menu" class="jquery-accordion-menu white">
                 <div id="user-image">
@@ -214,7 +215,7 @@ pageEncoding="UTF-8"%>
 </script>
 <!--fiel-watch窗口模板-->
 <!--@依赖于文件弹窗-->
-<%--<script id="file-watch-template" type="text/html" charset="utf-8">--%>
+<script id="file-watch-template" type="text/html" charset="utf-8">
     <div class="file-watch" style="display: block;">
         <div class="close-circle">×</div>
         <div class="video">
@@ -230,7 +231,7 @@ pageEncoding="UTF-8"%>
             </video>
         </div>
     </div>
-<%--</script>--%>
+</script>
 <!--file-watch二次弹窗-->
 
 <%--begin尝试文档在线预览--%>
