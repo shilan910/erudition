@@ -65,7 +65,7 @@ pageEncoding="UTF-8"%>
                     <c:if test="${cateIsActive==0}">
                         <c:set var="shareCateClass" value="active"/>
                     </c:if>
-                    <li class="${shareCateClass}" ><a href="#"><i class="fa fa-home"></i>共享目录 </a>
+                    <li class="${shareCateClass}" ><a href="#"><i class="fa fa-share-alt"></i>共享目录 </a>
                         <ul class="submenu" id="first-cates">
                             <c:forEach items="${categories}" var="firstCate">
                                 <li><a href="#">${firstCate.name}</a>

@@ -47,6 +47,7 @@
             //获取数据
             self.getData(self.currentIndex,"index");
             //渲染数据
+            console.log("jinrulerenderDOM")
             self.renderDOM();            //因为暗含了顺序，所以可以无所顾忌的使用，哈哈哈哈//静态渲染与动态渲染的时间上有问题？
             self.carousel();          //绑定轮播事件，但是还没有特殊化,
 
@@ -190,21 +191,27 @@
             var s = date.getSeconds();
             var createDate = Y+M+D+h+m+s;
             //转换文件大小
-            var fileSize=self.turnSize(file.size);
+            //var fileSize=self.turnSize(file.size);
+            var fileSize = file.size;
 
             console.log("file.type="+file.type);
             console.log("file.size="+file.size);
+            console.log("file.title=");
 
 
 
-            var filename = file.title;
-            filename = filename.substring(0,filename.lastIndexOf('.'));
+            var filename0 = file.title;
+            var filename = filename0.substring(0,filename0.lastIndexOf('.'));
             //alert(filename);
-            if(filename=="云计算设计报告")filename = "yun";
+            console.log("zuizhongd :"+filename)
+            if(filename=="设计报告v2.0")filename = "yun";
             else if(filename=="关系数据库语言")filename = "guanxi";
-            else if(filename=="答辩")filename = "dabian";
-            else if(filename=="统计")filename = "tongji";
+            else if(filename=="决赛答辩")filename = "dabian";
+            else if(filename=="参赛统计")filename = "tongji";
             else if(filename=="设计报告")filename = "sheji";
+            else if(filename=="云计算设计报告")filename = "yunsheji";
+
+            //if(file.type=="doc")file.type="word";
             filename+=".png";
             //alert(filename);
             var strDom1=['<div class="file-out" style="display: none;" >',
@@ -361,10 +368,10 @@
                 var title=self.fileData.title;
                 var url = title.substring(0,title.lastIndexOf('.'));
                // alert(url);
-                if(url=="云计算设计报告")url = "yun";
+                if(url=="设计报告v2.0")url = "yun";
                 else if(url=="关系数据库语言")url = "guanxi";
-                else if(url=="答辩")url = "dabian";
-                else if(url=="统计")url = "tongji";
+                else if(url=="决赛答辩")url = "dabian";
+                else if(url=="参赛统计")url = "tongji";
                 else if(url=="设计报告")url = "sheji";
                 var type = title.substring(title.lastIndexOf('.')+1);
                // alert(type);

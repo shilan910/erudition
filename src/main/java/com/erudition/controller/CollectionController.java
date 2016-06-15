@@ -70,7 +70,8 @@ public class CollectionController {
         session.setAttribute("cateIsActive",1);
         System.out.println("show collections!");
 //        model.addAttribute("showcollections",collectionDao.getByUid((int)session.getAttribute("userid")));
-        return  collectionDao.getByUid((int)session.getAttribute("userid"));
+        UserEntity user = (UserEntity) session.getAttribute("loginUser");
+        return  collectionDao.getByUid(user.getId());
 
 //        return "index";
 
