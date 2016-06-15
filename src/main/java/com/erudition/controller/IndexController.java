@@ -42,16 +42,17 @@ public class IndexController {
     public String index(HttpSession httpSession){
         httpSession.setAttribute("categories", categoryDao.getCategorys());
 
-        System.out.println("IndexController");
-
-
         String username = (String)httpSession.getAttribute("username");
+        System.out.println("IndexController : "+username);
+
         if(username==null) return "login";
 
         UserEntity user = (UserEntity) httpSession.getAttribute("loginUser");
-        int userid = (int) httpSession.getAttribute("userid");
+//        int userid = (int) httpSession.getAttribute("userid");
 
-            List<FilesEntity> recentFiles = recommendDao.getRecentFiles(userid);
+        int userid = user.getId();
+
+        List<FilesEntity> recentFiles = recommendDao.getRecentFiles(userid);
             httpSession.setAttribute("recentFiles",recentFiles);
 
             List<FilesEntity> recommendFiles = new ArrayList<>();

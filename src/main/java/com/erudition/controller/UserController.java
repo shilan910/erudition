@@ -125,6 +125,9 @@ public class UserController {
                 UserEntity testuser = userDao.getByName(username);
                 if(testuser==null){
                     userDao.save(username, password);
+                    httpSession.setAttribute("loginUser",userDao.getByName(username));
+                    System.out.println("UserController : "+username);
+                    httpSession.setAttribute("username",username);
                     return "redirect:/index";
                 } else{
                     reusernmaemessage = "已经存在的用户名！";
@@ -137,6 +140,7 @@ public class UserController {
         httpSession.setAttribute("reusernmaemessage",reusernmaemessage);
         httpSession.setAttribute("repasswordmessage",repasswordmessage);
         httpSession.setAttribute("recodemessage",recodemessage);
+        System.out.println("UserController : "+username);
         httpSession.setAttribute("username",username);
 
         System.out.println("reusernmaemessage:" + reusernmaemessage);
@@ -144,6 +148,7 @@ public class UserController {
         System.out.println("recodemessage:" + recodemessage);
 
         return "redirect:/user/changetoregist";
+//        return "redirect:/index";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
