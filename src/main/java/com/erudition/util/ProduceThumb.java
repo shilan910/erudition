@@ -22,11 +22,11 @@ public class ProduceThumb {
 
     public static void main(String args[]) throws IOException {
 
-
-        String path = new ProduceThumb().processVideoThumb("/home/sl/test/数据/学习资源推荐系统演示视频.wmv");
-        if(path != null){
-            System.out.println("get!!!\n"+path);
-        }
+//
+//        String path = new ProduceThumb().processVideoThumb("/home/sl/test/数据/学习资源推荐系统演示视频.wmv");
+//        if(path != null){
+//            System.out.println("get!!!\n"+path);
+//        }
 
     }
 
