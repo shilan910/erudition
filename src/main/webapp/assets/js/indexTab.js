@@ -43,7 +43,8 @@
             $.getJSON(url , function(data){
                 console.log("data"+data);
                 $.each(data.list,function(i, file){
-                    var size=self.turnSize(file.size);
+                    //var size=self.turnSize(file.size);
+                    //console.log("AddList获取的数据"+file);
                     var time=self.turnDate(file.createTime);
                     filestr=['                    <div class="body-floor flex-row">',
                             '                        <div class="flex-3 flex-row">',
@@ -53,7 +54,7 @@
                             '                            <div class="flex-1 file-image"><i class="iconfont icon-'+file.type+'"></i></div>',
                             '                            <div class="file-name flex-4"><span id="'+file.id+'"><a href="#">'+file.title+'</a></span></div>',
                             '                        </div>',
-                            '                        <div class="flex-3 file-size"><span>'+size+'</span></div>',
+                            '                        <div class="flex-3 file-size"><span>'+file.size+'</span></div>',
                             '                        <div class="flex-3 file-creator">'+file.creater+'</div>',
                             '                        <div class="flex-3 file-time">'+time+'</div>',
                             '                    </div>',
@@ -72,7 +73,7 @@
             $.getJSON(url , function(data){
                 console.log("data"+data);
                 $.each(data,function(i, file){
-                    var size=self.turnSize(file.size);
+                    //var size=self.turnSize(file.size);
                     var time=self.turnDate(file.createTime);
                     filestr=['                    <div class="body-floor flex-row">',
                             '                        <div class="flex-3 flex-row">',
@@ -82,7 +83,7 @@
                             '                            <div class="flex-1 file-image"><i class="iconfont icon-'+file.type+'"></i></div>',
                             '                            <div class="file-name flex-4"><span id="'+file.id+'"><a href="#">'+file.title+'</a></span></div>',
                             '                        </div>',
-                            '                        <div class="flex-3 file-size"><span>'+size+'</span></div>',
+                            '                        <div class="flex-3 file-size"><span>'+file.size+'</span></div>',
                             '                        <div class="flex-3 file-creator">'+file.creater+'</div>',
                             '                        <div class="flex-3 file-time">'+time+'</div>',
                             '                    </div>',
