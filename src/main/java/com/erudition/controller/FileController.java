@@ -80,8 +80,8 @@ public class FileController {
                 String name = resourcesDao.saveFiles(cate1, cate2, cate3, keywords, originalName,file, user);
 
                 //开始设置关联
-                List<FilesEntity> allFilesInDatabase = (List<FilesEntity>) session.getAttribute("allfiles");
-                setRelation(originalName, allFilesInDatabase, name);
+//                List<FilesEntity> allFilesInDatabase = (List<FilesEntity>) session.getAttribute("allfiles");
+//                setRelation(originalName, allFilesInDatabase, name);
             }
 
         }
