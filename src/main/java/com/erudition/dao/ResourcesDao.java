@@ -76,7 +76,7 @@ public class ResourcesDao extends BaseDao {
                 for(String re:relationsarr){
                     int re_id = Integer.parseInt(re);
                     boolean flag = true;
-                    if(re != ""){
+                    if(re != null){
                         for (FilesEntity fileExits : filesExits){
                             if(fileExits.getId()==re_id) {
                                 flag = false;

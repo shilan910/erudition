@@ -74,12 +74,17 @@ public class IndexController {
     @ResponseBody
     @RequestMapping(value = "/recommend",method = RequestMethod.GET)
     public List<FilesEntity> recommend(HttpSession httpSession){
-
+        System.out.println("开始获取推荐数据");
         UserEntity user = (UserEntity) httpSession.getAttribute("loginUser");
 
         List<FilesEntity> recentFiles = recommendDao.getRecentFiles(user.getId());
 
-        return resourcesDao.getRelationFileByOne(recentFiles);
+        List<FilesEntity> files = resourcesDao.getRelationFileByOne(recentFiles);
+        for (FilesEntity file : files){
+            System.out.println("recommendFileId: "+file.getId());
+        }
+
+        return files;
 
     }
 
