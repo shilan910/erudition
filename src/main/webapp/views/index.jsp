@@ -65,7 +65,7 @@ pageEncoding="UTF-8"%>
                     <c:if test="${cateIsActive==0}">
                         <c:set var="shareCateClass" value="active"/>
                     </c:if>
-                    <li class="${shareCateClass}" ><a href="#"><i class="fa fa-home"></i>共享目录 </a>
+                    <li class="${shareCateClass}" ><a href="#"><i class="fa fa-share-alt"></i>共享目录 </a>
                         <ul class="submenu" id="first-cates">
                             <c:forEach items="${categories}" var="firstCate">
                                 <li><a href="#">${firstCate.name}</a>
@@ -119,7 +119,7 @@ pageEncoding="UTF-8"%>
                                 <%--</c:forEach>--%>
                             <%--</ul>--%>
 
-                        </li>
+                    </li>
 
                 </ul>
                 <div class="jquery-accordion-menu-footer">
@@ -134,6 +134,120 @@ pageEncoding="UTF-8"%>
 
     <div class="contents flex-8">
         <div class="header-all">
+            <div class="header flex-row" id="home_header">
+                <ul class="list-inline">
+                    <li class="header-list active" id="recommend_getwin">推荐</li>
+                    <li class="header-list" id="history_getwin">最近浏览</li>
+                </ul>
+            </div>
+            <div class="file-body recommend_win" style="display: block">
+                <!--<input type="checkbox"/>-->
+
+                <div class="first-floor flex-row">
+                    <div class="flex-3">
+                        <div>
+                            <input type="checkbox"/>
+                            <span class="filename">名称</span>
+                        </div>
+                    </div>
+                    <div class="flex-3">
+                        大小
+                    </div>
+                    <div class="flex-3">
+                        创建者
+                    </div>
+                    <div class="flex-3">
+                        更新日期
+                    </div>
+                </div>
+               <%-- <script>
+                    $(function(){
+                        $("#collection").click(function(){
+                            console.log("点击了collection")
+                        })
+                    })
+
+                </script>--%>
+                <div class="line"></div>
+
+                <c:forEach var="recommendfile" items="${recommendFiles}">
+                    <div class="body-floor flex-row">
+                        <div class="flex-3 flex-row">
+                            <div class="flex-1 checkbox"><input type="checkbox"/></div>
+                            <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->
+                            <div class="flex-1 file-image"><i class="iconfont icon-${recommendfile.type}"></i></div>
+                            <div class="file-name flex-4"><span><a href="#">${recommendfile.title}</a></span></div>
+                        </div>
+                        <div class="flex-3 file-size">
+                            <span>${recommendfile.size}</span>
+                        </div>
+                        <div class="flex-3 file-creator">
+                                ${recommendfile.creater}
+                        </div>
+                        <div class="flex-3 file-time">
+                                ${recommendfile.createTime}
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </c:forEach>
+
+
+
+            </div>
+
+            <%--<script>--%>
+                <%--$("#collection").click(function(){--%>
+                    <%--console.log("点击了collection")--%>
+                <%--})--%>
+            <%--</script>--%>
+
+            <%--<div class="file-body history_win" style="display: none">
+                <!--<input type="checkbox"/>-->
+
+                <div class="first-floor flex-row">
+                    <div class="flex-3">
+                        <div>
+                            <input type="checkbox"/>
+                            <span class="filename">名称</span>
+                        </div>
+                    </div>
+                    <div class="flex-3">
+                        大小
+                    </div>
+                    <div class="flex-3">
+                        创建者
+                    </div>
+                    <div class="flex-3">
+                        更新日期
+                    </div>
+                </div>
+                <div class="line"></div>
+
+                <c:forEach var="recentfile" items="${recentFiles}" begin="0" end="8">
+                    <div class="body-floor flex-row">
+                        <div class="flex-3 flex-row">
+                            <div class="flex-1 checkbox"><input type="checkbox"/></div>
+                            <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->
+                            <div class="flex-1 file-image"><i class="iconfont icon-${recentfile.type}"></i></div>
+                            <div class="file-name flex-4"><span><a href="#">${recentfile.title}</a></span></div>
+                        </div>
+                        <div class="flex-3 file-size">
+                            <span>${recentfile.size}</span>
+                        </div>
+                        <div class="flex-3 file-creator">
+                                ${recentfile.creater}
+                        </div>
+                        <div class="flex-3 file-time">
+                                ${recentfile.createrTime}
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </c:forEach>
+
+
+
+
+            </div>--%>
             <%--<div class="header flex-row">
                 <div class="flex-7 path">
                     根目录

@@ -6,8 +6,9 @@
 ;(function($){
     var indexTab=function(){
         var self=this;
+        self.pageNum=0;
 
-        console.log("调用indexTab")
+        console.log("调用indexTab");
         //主页推荐
         $("#home").click(function(){
             $(".header-all").empty();
@@ -25,6 +26,12 @@
             }
         })
         //常用目录
+        //$(document).on("click","#collection",function(event){
+        //    //初始化
+        //    $(".contents .header-all").empty();
+        //    console.log("开始渲染常用目录")
+        //    self.CollectionRederDom();
+        //})
         $("#collection").click(function () {
             //初始化
             $(".contents .header-all").empty();
@@ -38,13 +45,15 @@
         getDataFilesAddlist:function(url){
             var self=this;
             console.log("开始获取共享目录数据");
-            var filestr=""
+            var filestr="";
+            self.pageNum=0;
             $.ajaxSetup({async: false});
             $.getJSON(url , function(data){
                 console.log("data"+data);
                 $.each(data.list,function(i, file){
-                    //var size=self.turnSize(file.size);
-                    //console.log("AddList获取的数据"+file);
+
+                    self.pageNum++;
+                    var size=self.turnSize(file.size);
                     var time=self.turnDate(file.createTime);
                     filestr=['                    <div class="body-floor flex-row">',
                             '                        <div class="flex-3 flex-row">',
@@ -99,6 +108,8 @@
             console.log("发送的id为"+third_cate_id);
             //var third_cate_id;
             var filestr=self.getDataFilesAddlist("/erudition/resources/"+third_cate_id+"/1");
+
+            //if(self.pageNum)
             var str=['<div class="header flex-row">',
                 '                <div class="flex-7 path">',
                     catelog,
@@ -118,19 +129,19 @@
                 '                </div>',
                 '                <div class="line"></div>',
                 filestr,
-                '                <nav>',
-                '                    <ul class="pagination pull-right">',
-                '                        <li><a href="#">上一页</a></li>',
-                '                        <li class="active"><a href="#">1</a></li>',
-                '                        <li><a href="#">2</a></li>',
-                '                        <li><a href="#">3</a></li>',
-                '                        <li><a href="#">4</a></li>',
-                '                        <li><a href="#">5</a></li>',
-                '                        <li>',
-                '                            <a href="#">下一页</a>',
-                '                        </li>',
-                '                    </ul>',
-                '                </nav>',
+                //'                <nav>',
+                //'                    <ul class="pagination pull-right">',
+                //'                        <li><a href="#">上一页</a></li>',
+                //'                        <li class="active"><a href="#">1</a></li>',
+                //'                        <li><a href="#">2</a></li>',
+                //'                        <li><a href="#">3</a></li>',
+                //'                        <li><a href="#">4</a></li>',
+                //'                        <li><a href="#">5</a></li>',
+                //'                        <li>',
+                //'                            <a href="#">下一页</a>',
+                //'                        </li>',
+                //'                    </ul>',
+                //'                </nav>',
                 '            </div>'].join("");
             $(".main .header-all").append(str);
             iCheckready();
@@ -158,19 +169,19 @@
                 '                </div>',
                 '                <div class="line"></div>',
                 filestr,
-                '                <nav>',
-                '                    <ul class="pagination pull-right">',
-                '                        <li><a href="#">上一页</a></li>',
-                '                        <li class="active"><a href="#">1</a></li>',
-                '                        <li><a href="#">2</a></li>',
-                '                        <li><a href="#">3</a></li>',
-                '                        <li><a href="#">4</a></li>',
-                '                        <li><a href="#">5</a></li>',
-                '                        <li>',
-                '                            <a href="#">下一页</a>',
-                '                        </li>',
-                '                    </ul>',
-                '                </nav>',
+                //'                <nav>',
+                //'                    <ul class="pagination pull-right">',
+                //'                        <li><a href="#">上一页</a></li>',
+                //'                        <li class="active"><a href="#">1</a></li>',
+                //'                        <li><a href="#">2</a></li>',
+                //'                        <li><a href="#">3</a></li>',
+                //'                        <li><a href="#">4</a></li>',
+                //'                        <li><a href="#">5</a></li>',
+                //'                        <li>',
+                //'                            <a href="#">下一页</a>',
+                //'                        </li>',
+                //'                    </ul>',
+                //'                </nav>',
                 '            </div>'].join("");
             $(".main .header-all").append(str);
             iCheckready();
