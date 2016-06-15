@@ -3,14 +3,14 @@ package com.erudition.bean;
 import javax.persistence.*;
 
 /**
- * Created by sl on 16-6-14.
+ * Created by sl on 16-6-15.
  */
 @Entity
 @Table(name = "eru_log", schema = "", catalog = "db_erudition")
 public class LogEntity {
     private int id;
-    private int userId;
-    private int fileId;
+    private Integer fileId;
+    private Integer userId;
 
     @Id
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
@@ -23,23 +23,23 @@ public class LogEntity {
     }
 
     @Basic
-    @Column(name = "user_id", nullable = false, insertable = true, updatable = true)
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    @Basic
-    @Column(name = "file_id", nullable = false, insertable = true, updatable = true)
-    public int getFileId() {
+    @Column(name = "file_id", nullable = true, insertable = true, updatable = true)
+    public Integer getFileId() {
         return fileId;
     }
 
-    public void setFileId(int fileId) {
+    public void setFileId(Integer fileId) {
         this.fileId = fileId;
+    }
+
+    @Basic
+    @Column(name = "user_id", nullable = true, insertable = true, updatable = true)
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -50,8 +50,8 @@ public class LogEntity {
         LogEntity logEntity = (LogEntity) o;
 
         if (id != logEntity.id) return false;
-        if (userId != logEntity.userId) return false;
-        if (fileId != logEntity.fileId) return false;
+        if (fileId != null ? !fileId.equals(logEntity.fileId) : logEntity.fileId != null) return false;
+        if (userId != null ? !userId.equals(logEntity.userId) : logEntity.userId != null) return false;
 
         return true;
     }
@@ -59,8 +59,8 @@ public class LogEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + userId;
-        result = 31 * result + fileId;
+        result = 31 * result + (fileId != null ? fileId.hashCode() : 0);
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
         return result;
     }
 }

@@ -3,7 +3,7 @@ package com.erudition.bean;
 import javax.persistence.*;
 
 /**
- * Created by tsj on 16-5-27.
+ * Created by sl on 16-6-15.
  */
 @Entity
 @Table(name = "eru_collection", schema = "", catalog = "db_erudition")
@@ -13,7 +13,7 @@ public class CollectionEntity {
     private Integer fileId;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, insertable = true, updatable = true)
     public int getId() {
         return id;
     }
@@ -23,7 +23,7 @@ public class CollectionEntity {
     }
 
     @Basic
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = true, insertable = true, updatable = true)
     public Integer getUserId() {
         return userId;
     }
@@ -33,7 +33,7 @@ public class CollectionEntity {
     }
 
     @Basic
-    @Column(name = "file_id")
+    @Column(name = "file_id", nullable = true, insertable = true, updatable = true)
     public Integer getFileId() {
         return fileId;
     }
