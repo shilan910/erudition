@@ -66,7 +66,7 @@ public class ResourcesDao extends BaseDao {
             filesExits.add(file);
         }
 
-            for(FilesEntity file : files){
+        for(FilesEntity file : files){
 
             String relations = file.getRelations();
             System.out.println("relations: "+relations);
@@ -94,8 +94,18 @@ public class ResourcesDao extends BaseDao {
             }
 
         }
-        if(relationFiles==null)
-            return null;
+        if(relationFiles.size()==0){
+            relationFiles.add(getById(7));
+            relationFiles.add(getById(8));
+
+            relationFiles.add(getById(30));
+
+            relationFiles.add(getById(22));
+            relationFiles.add(getById(14));
+            System.out.println("111111111111123121111111111111");
+
+
+        }
 
         return relationFiles;
     }

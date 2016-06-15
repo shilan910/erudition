@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,14 +50,26 @@ public class IndexController {
 
         UserEntity user = (UserEntity) httpSession.getAttribute("loginUser");
         int userid = (int) httpSession.getAttribute("userid");
-//
-//        if(recommendDao.getRecentFiles(userid)!=null){
-//            List<FilesEntity> recentFiles = recommendDao.getRecentFiles(userid);
-//            httpSession.setAttribute("recentFiles",recentFiles);
-//
-//            if(resourcesDao.getRelationFileByOne(recentFiles)!=null)
-//                httpSession.setAttribute("recommendFiles",resourcesDao.getRelationFileByOne(recentFiles));
-//        }
+
+            List<FilesEntity> recentFiles = recommendDao.getRecentFiles(userid);
+            httpSession.setAttribute("recentFiles",recentFiles);
+
+            List<FilesEntity> recommendFiles = new ArrayList<>();
+            recommendFiles = resourcesDao.getRelationFileByOne(recentFiles);
+            if(recommendFiles.size()==0){
+                recommendFiles.add(resourcesDao.getById(7));
+                recommendFiles.add(resourcesDao.getById(8));
+
+                recommendFiles.add(resourcesDao.getById(9));
+
+                recommendFiles.add(resourcesDao.getById(13));
+                recommendFiles.add(resourcesDao.getById(14));
+            }else{
+                for (FilesEntity file : recommendFiles){
+                    System.out.println("1234567890: "+file.getId());
+                }
+            }
+            httpSession.setAttribute("recommendFiles",recommendFiles);
         return "index";
     }
 
