@@ -3,7 +3,7 @@ package com.erudition.bean;
 import javax.persistence.*;
 
 /**
- * Created by tsj on 16-4-28.
+ * Created by sl on 16-6-15.
  */
 @Entity
 @Table(name = "eru_category", schema = "", catalog = "db_erudition")
@@ -15,7 +15,7 @@ public class CategoryEntity {
     private Integer category3Id;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, insertable = true, updatable = true)
     public int getId() {
         return id;
     }
@@ -25,7 +25,7 @@ public class CategoryEntity {
     }
 
     @Basic
-    @Column(name = "category_name")
+    @Column(name = "category_name", nullable = true, insertable = true, updatable = true, length = 255)
     public String getCategoryName() {
         return categoryName;
     }
@@ -35,7 +35,7 @@ public class CategoryEntity {
     }
 
     @Basic
-    @Column(name = "category_1_id")
+    @Column(name = "category_1_id", nullable = true, insertable = true, updatable = true)
     public Integer getCategory1Id() {
         return category1Id;
     }
@@ -45,7 +45,7 @@ public class CategoryEntity {
     }
 
     @Basic
-    @Column(name = "category_2_id")
+    @Column(name = "category_2_id", nullable = true, insertable = true, updatable = true)
     public Integer getCategory2Id() {
         return category2Id;
     }
@@ -55,7 +55,7 @@ public class CategoryEntity {
     }
 
     @Basic
-    @Column(name = "category_3_id")
+    @Column(name = "category_3_id", nullable = true, insertable = true, updatable = true)
     public Integer getCategory3Id() {
         return category3Id;
     }

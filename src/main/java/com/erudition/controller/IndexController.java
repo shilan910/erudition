@@ -49,14 +49,14 @@ public class IndexController {
 
         UserEntity user = (UserEntity) httpSession.getAttribute("loginUser");
         int userid = (int) httpSession.getAttribute("userid");
-
-        if(recommendDao.getRecentFiles(userid)!=null){
-            List<FilesEntity> recentFiles = recommendDao.getRecentFiles(userid);
-            httpSession.setAttribute("recentFiles",recentFiles);
-
-            if(resourcesDao.getRelationFileByOne(recentFiles)!=null)
-                httpSession.setAttribute("recommendFiles",resourcesDao.getRelationFileByOne(recentFiles));
-        }
+//
+//        if(recommendDao.getRecentFiles(userid)!=null){
+//            List<FilesEntity> recentFiles = recommendDao.getRecentFiles(userid);
+//            httpSession.setAttribute("recentFiles",recentFiles);
+//
+//            if(resourcesDao.getRelationFileByOne(recentFiles)!=null)
+//                httpSession.setAttribute("recommendFiles",resourcesDao.getRelationFileByOne(recentFiles));
+//        }
         return "index";
     }
 
