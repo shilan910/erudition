@@ -18,6 +18,7 @@ public class RulesController {
         session.setAttribute("rule_relation",3);
         session.setAttribute("rule_delete",7);
         session.setAttribute("rule_collection",30);
+        session.setAttribute("adminSidebarActive",2);
         return "admin/rule";
     }
 
@@ -28,7 +29,7 @@ public class RulesController {
         session.setAttribute("rule_relation",rule_relation);
         session.setAttribute("rule_delete",rule_delete);
         session.setAttribute("rule_collection",rule_collection);
-
+        session.setAttribute("adminSidebarActive",2);
         return "admin/rule";
     }
 

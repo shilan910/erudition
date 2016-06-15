@@ -26,15 +26,15 @@ public class RecommendController {
 
 
 
-    @RequestMapping(value = "/recommend", method = RequestMethod.GET)
-    public String index(HttpSession httpSession){
-        httpSession.setAttribute("categories", categoryDao.getCategorys());
-
-        System.out.println("RecommendController");
-
-
-        String username = (String)httpSession.getAttribute("username");
-        if(username==null) return "login";
-        return "recommend";
-    }
+//    @RequestMapping(value = "/recommend", method = RequestMethod.GET)
+//    public String index(HttpSession httpSession){
+//        httpSession.setAttribute("categories", categoryDao.getCategorys());
+//
+//        System.out.println("RecommendController");
+//
+//
+//        String username = (String)httpSession.getAttribute("username");
+//        if(username==null) return "login";
+//        return "recommend";
+//    }
 }

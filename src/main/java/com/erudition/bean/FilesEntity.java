@@ -2,6 +2,9 @@ package com.erudition.bean;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * Created by tsj on 16-5-30.
