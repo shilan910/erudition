@@ -80,7 +80,7 @@
                         <input type="submit" value="确认" />
                     </form>
                 </div>-->
-                <form action="${rootPath}/admin/file/rules" method="post" class="all-floor">
+                <form action="${rootPath}/admin/file/rules" method="post" class="all-floor" id="rule-form">
                     <div class="row floor">
                         <div class="col-md-6">
                             <p>
@@ -124,7 +124,23 @@
 
 
 
+
                 <script>
+                    $("#rule-form").submit(function(event) {
+                        var relation=$("#amount").val();
+                        var deleteDay=$("#amount-day").val();
+                        var collection=$("#amount-collect").val();
+
+                        var form = $( this ),
+                                url = form.attr( 'action' );
+                        var posting = $.post( "${rootPath}/admin/file/rules", {
+                            rule_relation: relation,
+                            rule_delete:deleteDay,
+                            rule_collection:collection
+                        } );
+                        return false;
+                    });
+
                     $(function() {
                         var rule_relation = <%=session.getAttribute("rule_relation") %>;
                         var rule_delete = <%=session.getAttribute("rule_delete") %>;
@@ -163,6 +179,7 @@
                         });
                         $( "#amount-collect" ).val( $( "#slider-range-max-collect" ).slider( "value" ) );
                     });
+
                 </script>
 
 

@@ -6,8 +6,9 @@
 ;(function($){
     var indexTab=function(){
         var self=this;
+        self.pageNum=0;
 
-        console.log("调用indexTab")
+        console.log("调用indexTab");
         //主页推荐
         $("#home").click(function(){
             $(".header-all").empty();
@@ -25,6 +26,12 @@
             }
         })
         //常用目录
+        //$(document).on("click","#collection",function(event){
+        //    //初始化
+        //    $(".contents .header-all").empty();
+        //    console.log("开始渲染常用目录")
+        //    self.CollectionRederDom();
+        //})
         $("#collection").click(function () {
             //初始化
             $(".contents .header-all").empty();
@@ -38,11 +45,14 @@
         getDataFilesAddlist:function(url){
             var self=this;
             console.log("开始获取共享目录数据");
-            var filestr=""
+            var filestr="";
+            self.pageNum=0;
             $.ajaxSetup({async: false});
             $.getJSON(url , function(data){
                 console.log("data"+data);
                 $.each(data.list,function(i, file){
+
+                    self.pageNum++;
                     var size=self.turnSize(file.size);
                     var time=self.turnDate(file.createTime);
                     filestr=['                    <div class="body-floor flex-row">',
@@ -53,7 +63,7 @@
                             '                            <div class="flex-1 file-image"><i class="iconfont icon-'+file.type+'"></i></div>',
                             '                            <div class="file-name flex-4"><span id="'+file.id+'"><a href="#">'+file.title+'</a></span></div>',
                             '                        </div>',
-                            '                        <div class="flex-3 file-size"><span>'+size+'</span></div>',
+                            '                        <div class="flex-3 file-size"><span>'+file.size+'</span></div>',
                             '                        <div class="flex-3 file-creator">'+file.creater+'</div>',
                             '                        <div class="flex-3 file-time">'+time+'</div>',
                             '                    </div>',
@@ -72,7 +82,7 @@
             $.getJSON(url , function(data){
                 console.log("data"+data);
                 $.each(data,function(i, file){
-                    var size=self.turnSize(file.size);
+                    //var size=self.turnSize(file.size);
                     var time=self.turnDate(file.createTime);
                     filestr=['                    <div class="body-floor flex-row">',
                             '                        <div class="flex-3 flex-row">',
@@ -82,7 +92,7 @@
                             '                            <div class="flex-1 file-image"><i class="iconfont icon-'+file.type+'"></i></div>',
                             '                            <div class="file-name flex-4"><span id="'+file.id+'"><a href="#">'+file.title+'</a></span></div>',
                             '                        </div>',
-                            '                        <div class="flex-3 file-size"><span>'+size+'</span></div>',
+                            '                        <div class="flex-3 file-size"><span>'+file.size+'</span></div>',
                             '                        <div class="flex-3 file-creator">'+file.creater+'</div>',
                             '                        <div class="flex-3 file-time">'+time+'</div>',
                             '                    </div>',
@@ -98,6 +108,8 @@
             console.log("发送的id为"+third_cate_id);
             //var third_cate_id;
             var filestr=self.getDataFilesAddlist("/erudition/resources/"+third_cate_id+"/1");
+
+            //if(self.pageNum)
             var str=['<div class="header flex-row">',
                 '                <div class="flex-7 path">',
                     catelog,
@@ -117,19 +129,19 @@
                 '                </div>',
                 '                <div class="line"></div>',
                 filestr,
-                '                <nav>',
-                '                    <ul class="pagination pull-right">',
-                '                        <li><a href="#">上一页</a></li>',
-                '                        <li class="active"><a href="#">1</a></li>',
-                '                        <li><a href="#">2</a></li>',
-                '                        <li><a href="#">3</a></li>',
-                '                        <li><a href="#">4</a></li>',
-                '                        <li><a href="#">5</a></li>',
-                '                        <li>',
-                '                            <a href="#">下一页</a>',
-                '                        </li>',
-                '                    </ul>',
-                '                </nav>',
+                //'                <nav>',
+                //'                    <ul class="pagination pull-right">',
+                //'                        <li><a href="#">上一页</a></li>',
+                //'                        <li class="active"><a href="#">1</a></li>',
+                //'                        <li><a href="#">2</a></li>',
+                //'                        <li><a href="#">3</a></li>',
+                //'                        <li><a href="#">4</a></li>',
+                //'                        <li><a href="#">5</a></li>',
+                //'                        <li>',
+                //'                            <a href="#">下一页</a>',
+                //'                        </li>',
+                //'                    </ul>',
+                //'                </nav>',
                 '            </div>'].join("");
             $(".main .header-all").append(str);
             iCheckready();
@@ -157,19 +169,19 @@
                 '                </div>',
                 '                <div class="line"></div>',
                 filestr,
-                '                <nav>',
-                '                    <ul class="pagination pull-right">',
-                '                        <li><a href="#">上一页</a></li>',
-                '                        <li class="active"><a href="#">1</a></li>',
-                '                        <li><a href="#">2</a></li>',
-                '                        <li><a href="#">3</a></li>',
-                '                        <li><a href="#">4</a></li>',
-                '                        <li><a href="#">5</a></li>',
-                '                        <li>',
-                '                            <a href="#">下一页</a>',
-                '                        </li>',
-                '                    </ul>',
-                '                </nav>',
+                //'                <nav>',
+                //'                    <ul class="pagination pull-right">',
+                //'                        <li><a href="#">上一页</a></li>',
+                //'                        <li class="active"><a href="#">1</a></li>',
+                //'                        <li><a href="#">2</a></li>',
+                //'                        <li><a href="#">3</a></li>',
+                //'                        <li><a href="#">4</a></li>',
+                //'                        <li><a href="#">5</a></li>',
+                //'                        <li>',
+                //'                            <a href="#">下一页</a>',
+                //'                        </li>',
+                //'                    </ul>',
+                //'                </nav>',
                 '            </div>'].join("");
             $(".main .header-all").append(str);
             iCheckready();
@@ -205,16 +217,18 @@
         },
         RecommendRederDom:function(){
             var self=this;
-            file=self.getDataFilesAddlist()
-            var str=['<div class="header flex-row home">',
+            var recentFile=self.getDataFilesNolist("/erudition/recent");
+            var recommendFile=self.getDataFilesNolist("/erudition/recommend");
+            //console.log("获取的数据为"+recentFile);
+            var str=['<div class="header flex-row home" id="home_header">',
                 '                <ul class="list-inline">',
                 '                    <li class="header-list active" id="recommend_getwin">推荐</li>',
                 '                    <li class="header-list" id="history_getwin">最近浏览</li>',
                 '                </ul>',
                 '            </div>',
-                '            <!--<div class="line"></div>-->',
+                //'            <!--<div class="line"></div>-->',
                 '            <div class="file-body recommend_win" style="display: block">',
-                '                <!--<input type="checkbox"/>-->',
+                //'                <!--<input type="checkbox"/>-->',
                 '                <div class="first-floor flex-row">',
                 '                    <div class="flex-3">',
                 '                        <div>',
@@ -233,27 +247,28 @@
                 '                    </div>',
                 '                </div>',
                 '                <div class="line"></div>',
-                '                    <div class="body-floor flex-row">',
-                '                        <div class="flex-3 flex-row">',
-                '                            <div class="flex-1 checkbox"><input type="checkbox"/></div>',
-                '                            <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->',
-                '                            <div class="flex-1 file-image"><i class="iconfont icon-${recommendfile.type}"></i></div>',
-                '                            <div class="file-name flex-4"><span><a href="#">${recommendfile.title}</a></span></div>',
-                '                        </div>',
-                '                        <div class="flex-3 file-size">',
-                '                            <span>${recommendfile.size}</span>',
-                '                        </div>',
-                '                        <div class="flex-3 file-creator">',
-                '                                ${recommendfile.creater}',
-                '                        </div>',
-                '                        <div class="flex-3 file-time">',
-                '                                ${recommendfile.createrTime}',
-                '                        </div>',
-                '                    </div>',
-                '                    <div class="line"></div>',
+                recommendFile,
+                //'                    <div class="body-floor flex-row">',
+                //'                        <div class="flex-3 flex-row">',
+                //'                            <div class="flex-1 checkbox"><input type="checkbox"/></div>',
+                ////'                            <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->',
+                //'                            <div class="flex-1 file-image"><i class="iconfont icon-${recommendfile.type}"></i></div>',
+                //'                            <div class="file-name flex-4"><span><a href="#">${recommendfile.title}</a></span></div>',
+                //'                        </div>',
+                //'                        <div class="flex-3 file-size">',
+                //'                            <span>${recommendfile.size}</span>',
+                //'                        </div>',
+                //'                        <div class="flex-3 file-creator">',
+                //'                                ${recommendfile.creater}',
+                //'                        </div>',
+                //'                        <div class="flex-3 file-time">',
+                //'                                ${recommendfile.createrTime}',
+                //'                        </div>',
+                //'                    </div>',
+                //'                    <div class="line"></div>',
                 '            </div>',
                 '            <div class="file-body history_win" style="display: none">',
-                '                <!--<input type="checkbox"/>-->',
+                //'                <!--<input type="checkbox"/>-->',
                 '                <div class="first-floor flex-row">',
                 '                    <div class="flex-3">',
                 '                        <div>',
@@ -272,31 +287,32 @@
                 '                    </div>',
                 '                </div>',
                 '                <div class="line"></div>',
-                '                <c:forEach var="recentfile" items="${recentFiles}" begin="0" end="8">',
-                '                    <div class="body-floor flex-row">',
-                '                        <div class="flex-3 flex-row">',
-                '                            <div class="flex-1 checkbox"><input type="checkbox"/></div>',
-                '                            <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->',
-                '                            <div class="flex-1 file-image"><i class="iconfont icon-${recentfile.type}"></i></div>',
-                '                            <div class="file-name flex-4"><span><a href="#">${recentfile.title}</a></span></div>',
-                '                        </div>',
-                '                        <div class="flex-3 file-size">',
-                '                            <span>${recentfile.size}</span>',
-                '                        </div>',
-                '                        <div class="flex-3 file-creator">',
-                '                            ${recentfile.creater}',
-                '                        </div>',
-                '                        <div class="flex-3 file-time">',
-                '                            ${recentfile.createrTime}',
-                '                        </div>',
-                '                    </div>',
-                '                    <div class="line"></div>',
-                '                </c:forEach>',
-                file,
+                //'                <c:forEach var="recentfile" items="${recentFiles}" begin="0" end="8">',
+                //'                    <div class="body-floor flex-row">',
+                //'                        <div class="flex-3 flex-row">',
+                //'                            <div class="flex-1 checkbox"><input type="checkbox"/></div>',
+                //'                            <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->',
+                //'                            <div class="flex-1 file-image"><i class="iconfont icon-${recentfile.type}"></i></div>',
+                //'                            <div class="file-name flex-4"><span><a href="#">${recentfile.title}</a></span></div>',
+                //'                        </div>',
+                //'                        <div class="flex-3 file-size">',
+                //'                            <span>${recentfile.size}</span>',
+                //'                        </div>',
+                //'                        <div class="flex-3 file-creator">',
+                //'                            ${recentfile.creater}',
+                //'                        </div>',
+                //'                        <div class="flex-3 file-time">',
+                //'                            ${recentfile.createrTime}',
+                //'                        </div>',
+                //'                    </div>',
+                //'                    <div class="line"></div>',
+                //'                </c:forEach>',
+                recentFile,
                 '            </div>'].join("");
             $(".main .header-all").append(str);
             //绑定点击事件
             $("#recommend_getwin").click(function(){
+                var recentFile=self.getDataFilesNolist("/erudition/recommend");
                 $(this).parent().children().each(function(){
                     $(this).removeClass("active");
                 })
@@ -306,6 +322,7 @@
                 });
             })
             $("#history_getwin").click(function(){
+                var recentFile=self.getDataFilesNolist("/erudition/recent");
                 $(this).parent().children().each(function(){
                     $(this).removeClass("active");
                 })
@@ -313,8 +330,11 @@
                 $(".recommend_win").fadeOut(150,function(){
                     $(".history_win").fadeIn(150);
                 });
-            })
+            });
             iCheckready();
+        },
+        RecentRederDom:function(){
+
         }
     };
     window["indexTab"]=indexTab;

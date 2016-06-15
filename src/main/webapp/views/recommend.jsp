@@ -188,7 +188,7 @@
                                 ${recommendfile.creater}
                         </div>
                         <div class="flex-3 file-time">
-                                ${recommendfile.createrTime}
+                                ${recommendfile.createTime}
                         </div>
                     </div>
                     <div class="line"></div>
@@ -305,6 +305,12 @@
     </div>
 
 </div>
+
+<script>
+    $("#collection").click(function(){
+        console.log("点击了collection")
+    })
+</script>
 
 <%--<script>
     $("#recommend_getwin").click(function(){

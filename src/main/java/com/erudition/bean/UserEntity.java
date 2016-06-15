@@ -3,7 +3,7 @@ package com.erudition.bean;
 import javax.persistence.*;
 
 /**
- * Created by tsj on 16-5-11.
+ * Created by sl on 16-6-15.
  */
 @Entity
 @Table(name = "eru_user", schema = "", catalog = "db_erudition")
@@ -19,7 +19,7 @@ public class UserEntity {
     private String authority;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, insertable = true, updatable = true)
     public int getId() {
         return id;
     }
@@ -29,7 +29,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "user_name")
+    @Column(name = "user_name", nullable = true, insertable = true, updatable = true, length = 255)
     public String getUserName() {
         return userName;
     }
@@ -39,7 +39,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "email")
+    @Column(name = "email", nullable = true, insertable = true, updatable = true, length = 255)
     public String getEmail() {
         return email;
     }
@@ -49,7 +49,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "telephone")
+    @Column(name = "telephone", nullable = true, insertable = true, updatable = true, length = 255)
     public String getTelephone() {
         return telephone;
     }
@@ -59,7 +59,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "password")
+    @Column(name = "password", nullable = true, insertable = true, updatable = true, length = 255)
     public String getPassword() {
         return password;
     }
@@ -69,7 +69,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "img_url")
+    @Column(name = "img_url", nullable = true, insertable = true, updatable = true, length = 255)
     public String getImgUrl() {
         return imgUrl;
     }
@@ -79,7 +79,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "arr_collection")
+    @Column(name = "arr_collection", nullable = true, insertable = true, updatable = true, length = 255)
     public String getArrCollection() {
         return arrCollection;
     }
@@ -89,7 +89,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "arr_log")
+    @Column(name = "arr_log", nullable = true, insertable = true, updatable = true, length = 255)
     public String getArrLog() {
         return arrLog;
     }
@@ -99,7 +99,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "authority")
+    @Column(name = "authority", nullable = true, insertable = true, updatable = true, length = 255)
     public String getAuthority() {
         return authority;
     }
