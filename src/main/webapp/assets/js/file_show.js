@@ -199,7 +199,14 @@
 
             var filename = file.title;
             filename = filename.substring(0,filename.lastIndexOf('.'));
+            //alert(filename);
+            if(filename=="云计算设计报告")filename = "yun";
+            else if(filename=="关系数据库语言")filename = "guanxi";
+            else if(filename=="答辩")filename = "dabian";
+            else if(filename=="统计")filename = "tongji";
+            else if(filename=="设计报告")filename = "sheji";
             filename+=".png";
+            //alert(filename);
             var strDom1=['<div class="file-out" style="display: none;" >',
                 '        <div class="pre-btn pre-bg"></div>',
                 '        <!--<div class="clearfix"></div>-->',
@@ -353,7 +360,14 @@
             $(".file-out .file-url").click(function(){
                 var title=self.fileData.title;
                 var url = title.substring(0,title.lastIndexOf('.'));
+               // alert(url);
+                if(url=="云计算设计报告")url = "yun";
+                else if(url=="关系数据库语言")url = "guanxi";
+                else if(url=="答辩")url = "dabian";
+                else if(url=="统计")url = "tongji";
+                else if(url=="设计报告")url = "sheji";
                 var type = title.substring(title.lastIndexOf('.')+1);
+               // alert(type);
                 if(type=="mp4"){
                     var dom = "<div class='file-watch' style='display: block;'>"+
                        " <div class='close-circle'>×</div>"+
