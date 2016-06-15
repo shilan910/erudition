@@ -10,11 +10,13 @@ pageEncoding="UTF-8"%>
 
     <link rel="stylesheet" href="${assetsPath}/css/app.min.css"/>
     <link rel="stylesheet" href="//cdn.bootcss.com/iCheck/1.0.1/skins/square/blue.css"/>
+    <link href="//vjs.zencdn.net/5.8/video-js.min.css" rel="stylesheet">
 
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="${assetsPath}/js/jquery-accordion-menu.js"></script>
     <script src="${assetsPath}/js/icheck.js"></script>
+    <script src="${assetsPath}/js/template.js"></script>
     <style type="text/css">
         *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
         body{background:#f0f0f0;}
@@ -58,8 +60,12 @@ pageEncoding="UTF-8"%>
 
                 <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
                 <ul id="demo-list">
-
-                    <li class="active" ><a href="#"><i class="fa fa-home"></i>共享目录 </a>
+                    <li id="home"><a href="#"><i class="fa fa-home"></i>主页 </a></li>
+                    <c:set var="shareCateClass" value=""/>
+                    <c:if test="${cateIsActive==0}">
+                        <c:set var="shareCateClass" value="active"/>
+                    </c:if>
+                    <li class="${shareCateClass}" ><a href="#"><i class="fa fa-home"></i>共享目录 </a>
                         <ul class="submenu" id="first-cates">
                             <c:forEach items="${categories}" var="firstCate">
                                 <li><a href="#">${firstCate.name}</a>
@@ -84,8 +90,34 @@ pageEncoding="UTF-8"%>
 
                     </li>
 
+                    <c:set var="commonCateClass" value=""/>
+                    <c:if test="${cateIsActive==1}">
+                        <c:set var="commonCateClass" value="active"/>
+                    </c:if>
+                    <%--<li id="collection" class="${commonCateClass}" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>--%>
+                    <li id="collection" class="${commonCateClass}" ><a href="#"><i class="fa fa-glass"></i>常用目录 </a>
+                        <%--<ul class="submenu" >--%>
+                        <%--<c:forEach items="${categories}" var="firstCate">--%>
+                        <%--<li><a href="#">${firstCate.name}</a>--%>
 
-                    <li id="collection" class="" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>
+                        <%--<ul class="submenu">--%>
+                        <%--<c:forEach items="${firstCate.children}" var="secondCate">--%>
+                        <%--<li><a href="#">${secondCate.name}</a>--%>
+
+                        <%--<ul class="submenu">--%>
+                        <%--<c:forEach items="${secondCate.children}" var="thirdCate">--%>
+                        <%--<li value="${thirdCate.id}"><a href="#">${thirdCate.name}</a></li>--%>
+                        <%--</c:forEach>--%>
+                        <%--</ul>--%>
+
+                        <%--</li>--%>
+                        <%--</c:forEach>--%>
+                        <%--</ul>--%>
+
+                        <%--</li>--%>
+                        <%--</c:forEach>--%>
+                        <%--</ul>--%>
+
                     </li>
 
                 </ul>
@@ -94,6 +126,52 @@ pageEncoding="UTF-8"%>
                 </div>
             </div>
         </div>
+
+        <%--<div class="nav">--%>
+            <%--<div id="jquery-accordion-menu" class="jquery-accordion-menu white">--%>
+                <%--<div id="user-image">--%>
+                    <%--<a href=""><img src="${assetsPath}/images/user.jpg" alt="" class="img-circle"/></a>--%>
+                    <%--<div class="user-name">${username}</div>--%>
+                <%--</div>--%>
+
+                <%--<div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->--%>
+                <%--<ul id="demo-list">--%>
+
+                    <%--<li class="active" ><a href="#"><i class="fa fa-home"></i>共享目录 </a>--%>
+                        <%--<ul class="submenu" id="first-cates">--%>
+                            <%--<c:forEach items="${categories}" var="firstCate">--%>
+                                <%--<li><a href="#">${firstCate.name}</a>--%>
+
+                                    <%--<ul class="submenu">--%>
+                                        <%--<c:forEach items="${firstCate.children}" var="secondCate">--%>
+                                            <%--<li><a href="#">${secondCate.name}</a>--%>
+
+                                                <%--<ul class="submenu">--%>
+                                                    <%--<c:forEach items="${secondCate.children}" var="thirdCate">--%>
+                                                        <%--<li value="${thirdCate.id}"><a href="#">${thirdCate.name}</a></li>--%>
+                                                    <%--</c:forEach>--%>
+                                                <%--</ul>--%>
+
+                                            <%--</li>--%>
+                                        <%--</c:forEach>--%>
+                                    <%--</ul>--%>
+
+                                <%--</li>--%>
+                            <%--</c:forEach>--%>
+                        <%--</ul>--%>
+
+                    <%--</li>--%>
+
+
+                    <%--<li id="collection" class="" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>--%>
+                    <%--</li>--%>
+
+                <%--</ul>--%>
+                <%--<div class="jquery-accordion-menu-footer">--%>
+                    <%--Footer--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
 
         <div class="clearfix"></div>
     </div>

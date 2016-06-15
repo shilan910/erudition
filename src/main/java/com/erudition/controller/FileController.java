@@ -102,11 +102,6 @@ public class FileController {
         return new ResponseEntity(FileUtils.readFileToByteArray(fileReal), headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/rules", method = RequestMethod.GET)
-    public String rules(HttpSession session){
-        session.setAttribute("adminSidebarActive", 2);
-        return "admin/rule";
-    }
 
     /**
      * @param name setRelation方法中的name参数
