@@ -205,7 +205,8 @@
         },
         RecommendRederDom:function(){
             var self=this;
-            file=self.getDataFilesAddlist()
+            file=self.getDataFilesNolist("/erudition/recent");
+            console.log("最近浏览得到的为"+file);
             var str=['<div class="header flex-row home">',
                 '                <ul class="list-inline">',
                 '                    <li class="header-list active" id="recommend_getwin">推荐</li>',
