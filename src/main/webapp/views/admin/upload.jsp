@@ -236,7 +236,7 @@
                 });
             },
             'onQueueComplete' : function(queueData) {
-//                popwin.tips("上传成功","1");
+                popwin.tips("上传成功","1");
                 num=0;
             },
             'onUploadError' : function(file, errorCode, errorMsg, errorString) {

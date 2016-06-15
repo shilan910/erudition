@@ -80,12 +80,12 @@
                         <input type="submit" value="确认" />
                     </form>
                 </div>-->
-                <form action="" class="all-floor">
+                <form action="${rootPath}/admin/file/rules" method="post" class="all-floor">
                     <div class="row floor">
                         <div class="col-md-6">
                             <p>
                                 <label for="amount">设置关联基数</label>
-                                <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                <input type="text" name="rule_relation" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                             </p>
                             <div id="slider-range-max"></div>
                         </div>
@@ -98,7 +98,7 @@
                         <div class="col-md-6">
                             <p>
                                 <label for="amount">设置删除期限</label>
-                                <input type="text" id="amount-day" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                <input type="text" name="rule_delete" id="amount-day" readonly style="border:0; color:#f6931f; font-weight:bold;">
                             </p>
                             <div id="slider-range-max-day"></div>
                         </div>
@@ -110,7 +110,7 @@
                         <div class="col-md-6">
                             <p>
                                 <label for="amount">设置收藏上限</label>
-                                <input type="text" id="amount-collect" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                                <input type="text" name="rule_collection" id="amount-collect" readonly style="border:0; color:#f6931f; font-weight:bold;">
                             </p>
                             <div id="slider-range-max-collect"></div>
                         </div>
@@ -118,7 +118,7 @@
                             <p class="text-danger">限制用户从共享目录中收藏到常用目录中的数目</p>
                         </div>
                     </div>
-                    <input type="submit" class="zyh-button-grey pull-right" value="提交"/>
+                    <input type="submit" id="rule-submit" class="zyh-button-grey pull-right" value="提交"/>
                     <div class="clearfix"></div>
                 </form>
 
@@ -126,11 +126,15 @@
 
                 <script>
                     $(function() {
+                        var rule_relation = <%=session.getAttribute("rule_relation") %>;
+                        var rule_delete = <%=session.getAttribute("rule_delete") %>;
+                        var rule_collection = <%=session.getAttribute("rule_collection") %>;
+
                         $( "#slider-range-max" ).slider({
                             range: "max",
                             min: 1,
                             max: 10,
-                            value: 2,
+                            value: rule_relation,
                             slide: function( event, ui ) {
                                 $( "#amount" ).val( ui.value );
                             }
@@ -140,8 +144,8 @@
                         $( "#slider-range-max-day" ).slider({
                             range: "max",
                             min: 1,
-                            max: 10,
-                            value: 2,
+                            max: 21,
+                            value: rule_delete,
                             slide: function( event, ui ) {
                                 $( "#amount-day" ).val( ui.value );
                             }
@@ -151,8 +155,8 @@
                         $( "#slider-range-max-collect" ).slider({
                             range: "max",
                             min: 1,
-                            max: 10,
-                            value: 2,
+                            max: 100,
+                            value: rule_collection,
                             slide: function( event, ui ) {
                                 $( "#amount-collect" ).val( ui.value );
                             }
@@ -169,7 +173,14 @@
 
 </div>
 
-
+<%--文件弹窗插件--%>
+<script src="${assetsPath}/js/popwinAll.js"></script>
+<script>
+    var popwin=new Popwin();
+    $("#rule-submit").click(function(){
+        popwin.tips("设置成功","1");
+    })
+</script>
 
 <!--文件上传相关-->
 <script>
