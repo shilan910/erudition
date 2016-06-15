@@ -60,7 +60,7 @@ pageEncoding="UTF-8"%>
 
                 <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
                 <ul id="demo-list">
-                    <li id="home"><a href="#"><i class="fa fa-home"></i>主页 </a></li>
+                    <li id="home" class="active"><a href="#"><i class="fa fa-home"></i>主页 </a></li>
                     <c:set var="shareCateClass" value=""/>
                     <c:if test="${cateIsActive==0}">
                         <c:set var="shareCateClass" value="active"/>
@@ -95,7 +95,8 @@ pageEncoding="UTF-8"%>
                         <c:set var="commonCateClass" value="active"/>
                     </c:if>
                     <%--<li id="collection" class="${commonCateClass}" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>--%>
-                    <li id="collection" class="${commonCateClass}" ><a href="#"><i class="fa fa-glass"></i>常用目录 </a>
+                    <%--<li id="collection" class="${commonCateClass}" ><a href="#"><i class="fa fa-glass"></i>常用目录 </a>--%>
+                    <li id="collection" class="" ><a href="#"><i class="fa fa-glass"></i>常用目录 </a>
                             <%--<ul class="submenu" >--%>
                                 <%--<c:forEach items="${categories}" var="firstCate">--%>
                                     <%--<li><a href="#">${firstCate.name}</a>--%>
