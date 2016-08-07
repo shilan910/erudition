@@ -369,7 +369,7 @@
                 var type = title.substring(title.lastIndexOf('.')+1);
                // alert(type);
                 if(type=="mp4"){
-                    var dom = "<div class='file-watch' style='display: block;'>"+
+                    var dom = "<div class='file-watch' style='display: none;'>"+
                        " <div class='close-circle'>×</div>"+
                     "<div class='video'>"+
                     "    <video id='really-cool-video' class='video-js vjs-default-skin'  controls preload='auto' poster='really-cool-video-poster.jpg' data-setup='{}'>"+
@@ -385,7 +385,7 @@
                 }
                 else{
                     url = "/erudition/assets/file/text/"+url+".pdf";
-                    var dom="<div class='file-watch' style='display: block;'>"+
+                    var dom="<div class='file-watch' style='display: none;'>"+
                         "        <div class='close-circle'>×</div>"+
                         "        <iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='"+url+"'></iframe>"+
                         "    </div>";
@@ -394,6 +394,13 @@
 
                 console.log(self.fileData.url);
                 $('body').append(dom);
+                $(".file-watch").fadeIn(400);
+
+                $(".close-circle").click(function(){
+                    $(".file-watch").fadeOut(200,function(){
+                        $(".file-watch").remove();
+                    });
+                })
                 console.log("添加路径");
             })
 

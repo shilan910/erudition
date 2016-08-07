@@ -94,32 +94,7 @@ pageEncoding="UTF-8"%>
                     <c:if test="${cateIsActive==1}">
                         <c:set var="commonCateClass" value="active"/>
                     </c:if>
-                    <%--<li id="collection" class="${commonCateClass}" ><a href="${rootPath}/collection/showcollections"><i class="fa fa-glass"></i>常用目录 </a>--%>
-                    <%--<li id="collection" class="${commonCateClass}" ><a href="#"><i class="fa fa-glass"></i>常用目录 </a>--%>
-                    <li id="collection" class="" ><a href="#"><i class="fa fa-glass"></i>常用目录 </a>
-                            <%--<ul class="submenu" >--%>
-                                <%--<c:forEach items="${categories}" var="firstCate">--%>
-                                    <%--<li><a href="#">${firstCate.name}</a>--%>
-
-                                        <%--<ul class="submenu">--%>
-                                            <%--<c:forEach items="${firstCate.children}" var="secondCate">--%>
-                                                <%--<li><a href="#">${secondCate.name}</a>--%>
-
-                                                    <%--<ul class="submenu">--%>
-                                                        <%--<c:forEach items="${secondCate.children}" var="thirdCate">--%>
-                                                            <%--<li value="${thirdCate.id}"><a href="#">${thirdCate.name}</a></li>--%>
-                                                        <%--</c:forEach>--%>
-                                                    <%--</ul>--%>
-
-                                                <%--</li>--%>
-                                            <%--</c:forEach>--%>
-                                        <%--</ul>--%>
-
-                                    <%--</li>--%>
-                                <%--</c:forEach>--%>
-                            <%--</ul>--%>
-
-                    </li>
+                    <li id="collection" class="" ><a href="#"><i class="fa fa-glass"></i>常用目录 </a></li>
 
                 </ul>
                 <div class="jquery-accordion-menu-footer">
@@ -141,8 +116,6 @@ pageEncoding="UTF-8"%>
                 </ul>
             </div>
             <div class="file-body recommend_win" style="display: block">
-                <!--<input type="checkbox"/>-->
-
                 <div class="first-floor flex-row">
                     <div class="flex-3">
                         <div>
@@ -160,14 +133,6 @@ pageEncoding="UTF-8"%>
                         更新日期
                     </div>
                 </div>
-               <%-- <script>
-                    $(function(){
-                        $("#collection").click(function(){
-                            console.log("点击了collection")
-                        })
-                    })
-
-                </script>--%>
                 <div class="line"></div>
 
                 <c:forEach var="recommendfile" items="${recommendFiles}">
@@ -176,7 +141,7 @@ pageEncoding="UTF-8"%>
                             <div class="flex-1 checkbox"><input type="checkbox"/></div>
                             <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->
                             <div class="flex-1 file-image"><i class="iconfont icon-${recommendfile.type}"></i></div>
-                            <div class="file-name flex-4"><span><a href="#">${recommendfile.title}</a></span></div>
+                            <div class="file-name flex-4"><span id="${recommendfile.id}"><a href="#">${recommendfile.title}</a></span></div>
                         </div>
                         <div class="flex-3 file-size">
                             <span>${recommendfile.size}</span>
@@ -195,101 +160,7 @@ pageEncoding="UTF-8"%>
 
             </div>
 
-            <%--<script>--%>
-                <%--$("#collection").click(function(){--%>
-                    <%--console.log("点击了collection")--%>
-                <%--})--%>
-            <%--</script>--%>
-
-            <%--<div class="file-body history_win" style="display: none">
-                <!--<input type="checkbox"/>-->
-
-                <div class="first-floor flex-row">
-                    <div class="flex-3">
-                        <div>
-                            <input type="checkbox"/>
-                            <span class="filename">名称</span>
-                        </div>
-                    </div>
-                    <div class="flex-3">
-                        大小
-                    </div>
-                    <div class="flex-3">
-                        创建者
-                    </div>
-                    <div class="flex-3">
-                        更新日期
-                    </div>
-                </div>
-                <div class="line"></div>
-
-                <c:forEach var="recentfile" items="${recentFiles}" begin="0" end="8">
-                    <div class="body-floor flex-row">
-                        <div class="flex-3 flex-row">
-                            <div class="flex-1 checkbox"><input type="checkbox"/></div>
-                            <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->
-                            <div class="flex-1 file-image"><i class="iconfont icon-${recentfile.type}"></i></div>
-                            <div class="file-name flex-4"><span><a href="#">${recentfile.title}</a></span></div>
-                        </div>
-                        <div class="flex-3 file-size">
-                            <span>${recentfile.size}</span>
-                        </div>
-                        <div class="flex-3 file-creator">
-                                ${recentfile.creater}
-                        </div>
-                        <div class="flex-3 file-time">
-                                ${recentfile.createrTime}
-                        </div>
-                    </div>
-                    <div class="line"></div>
-                </c:forEach>
-
-
-
-
-            </div>--%>
-            <%--<div class="header flex-row">
-                <div class="flex-7 path">
-                    根目录
-                </div>
-                &lt;%&ndash;<div class="flex-3 search">&ndash;%&gt;
-                    &lt;%&ndash;<div class="input-group">&ndash;%&gt;
-                        &lt;%&ndash;<input type="text" class="form-control" placeholder="该目录下搜索...">&ndash;%&gt;
-                              &lt;%&ndash;<span class="input-group-btn">&ndash;%&gt;
-                                &lt;%&ndash;<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>&ndash;%&gt;
-                              &lt;%&ndash;</span>&ndash;%&gt;
-                    &lt;%&ndash;</div>&ndash;%&gt;
-                &lt;%&ndash;</div>&ndash;%&gt;
-            </div>
-            <div class="file-body" id="file-list">
-                <div class="first-floor flex-row">
-                    <div class="flex-3">
-                        <div>
-                            <input type="checkbox"/>
-                            <span class="filename">名称</span>
-                        </div>
-                    </div>
-                    <div class="flex-3">大小</div>
-                    <div class="flex-3">创建者</div>
-                    <div class="flex-3">更新日期</div>
-                </div>
-                <div class="line"></div>
-
-                &lt;%&ndash;<c:forEach items="${showcollections}" var="collections">&ndash;%&gt;
-                    <div class='body-floor flex-row'>
-                        <div class='flex-3 flex-row'>
-                            <div class='flex-1 checkbox'>
-                                <input type='checkbox'/>
-                            </div>
-                            <div class='flex-1 file-image'><i class='iconfont icon-mp4'></i></div>
-                            <div class='file-name flex-4'><span id='id'><a href='#'>标题</a></span></div>
-                        </div>
-                        <div class='flex-3 file-size'><span>124kb</span></div>
-                        <div class='flex-3 file-creator'>MR.z</div>
-                        <div class='flex-3 file-time'>2015.025</div>
-                    </div>
-                    <div class='line'></div>
-                &lt;%&ndash;</c:forEach>&ndash;%&gt;
+            <%--
 
                 <nav>
                     <ul class="pagination pull-right">
@@ -307,7 +178,15 @@ pageEncoding="UTF-8"%>
 
 
             </div>--%>
+
+            <%--<div>--%>
+                <%--<c:if test="${page!=null}">--%>
+                    <%--<jsp:include page="./common/pagination.jsp"/>--%>
+                <%--</c:if>--%>
+            <%--</div>--%>
+
         </div>
+
     </div>
 
 </div>
@@ -328,38 +207,9 @@ pageEncoding="UTF-8"%>
         var fileout=new FileOut();
     })
 </script>
-<!--fiel-watch窗口模板-->
-<!--@依赖于文件弹窗-->
-<%--<script id="file-watch-template" type="text/html" charset="utf-8">--%>
-    <%--<div class="file-watch" style="display: block;">--%>
-        <%--<div class="close-circle">×</div>--%>
-        <%--<div class="video">--%>
-            <%--<video id="really-cool-video" class="video-js vjs-default-skin" controls--%>
-                   <%--preload="auto" poster="really-cool-video-poster.jpg"--%>
-                   <%--data-setup='{}'>--%>
-                <%--<source src="http://7xpl2y.com1.z0.glb.clouddn.com/asdf.mp4" type="video/mp4">--%>
-                <%--<source src="really-cool-video.webm" type="video/webm">--%>
-                <%--<p class="vjs-no-js">--%>
-                    <%--To view this video please enable JavaScript, and consider upgrading to a web browser--%>
-                    <%--that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>--%>
-                <%--</p>--%>
-            <%--</video>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</script>--%>
-<!--file-watch二次弹窗-->
 
-<%--begin尝试文档在线预览--%>
-<%--<script id="file-watch-template" type="text/html" charset="utf-8">--%>
-    <%--<div class="file-watch" style="display: block;">--%>
-        <%--<div class="close-circle">×</div>--%>
-        <%--<iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='${assetsPath}/file/text/test.pdf' ></iframe>--%>
-    <%--</div>--%>
-<%--</script>--%>
 
-<%--end尝试文档在线预览--%>
-
-<script>
+<%--<script>
     //点开file-watch
     $(document).on("click",".file-out .file-size",function(event){
         event.stopPropagation();
@@ -374,7 +224,7 @@ pageEncoding="UTF-8"%>
             $(this).remove();
         });
     });
-</script>
+</script>--%>
 
 
 

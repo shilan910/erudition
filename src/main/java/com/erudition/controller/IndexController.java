@@ -8,6 +8,7 @@ import com.erudition.dao.ResourcesDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,7 +40,7 @@ public class IndexController {
     RecommendDao recommendDao;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(HttpSession httpSession){
+    public String index(HttpSession httpSession , Model model){
         httpSession.setAttribute("categories", categoryDao.getCategorys());
 
         String username = (String)httpSession.getAttribute("username");
@@ -71,6 +72,7 @@ public class IndexController {
                 }
             }
             httpSession.setAttribute("recommendFiles",recommendFiles);
+//            model.addAttribute("page",1);
         return "index";
     }
 
