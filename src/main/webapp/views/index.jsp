@@ -315,5 +315,32 @@ pageEncoding="UTF-8"%>
         });
     });
 </script>
+
+<%--分页模板--%>
+<script type="text/html" id="Tpage">
+    <nav>
+            <ul class="pagination pull-right">
+                {{if page.hasPre}}
+                    <li><a href="拼接?page/{{currentPage-1}}">上一页</a></li>
+                {{else}}
+                    <li class="disabled"><a href="#">上一页</a></li>
+                {{/if}}
+
+                {{if currentPage!=1}}
+                    <li><a href="?page=1">1</a></li>
+                {{/if}}
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                            <a href="#">下一页</a>
+                    </li>
+            </ul>
+    </nav>
+
+</script>
+
 </body>
 </html>

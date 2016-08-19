@@ -109,6 +109,10 @@
             //var third_cate_id;
             var filestr=self.getDataFilesAddlist("/erudition/resources/"+third_cate_id+"/1");
 
+            //处理分页
+            var data={};
+            var pageHtml=template("Tpage",data);
+
             //if(self.pageNum)
             var str=['<div class="header flex-row">',
                 '                <div class="flex-7 path">',
@@ -129,6 +133,7 @@
                 '                </div>',
                 '                <div class="line"></div>',
                 filestr,
+
                 //'                <nav>',
                 //'                    <ul class="pagination pull-right">',
                 //'                        <li><a href="#">上一页</a></li>',
@@ -142,7 +147,9 @@
                 //'                        </li>',
                 //'                    </ul>',
                 //'                </nav>',
+                pageHtml,
                 '            </div>'].join("");
+
             $(".main .header-all").append(str);
             iCheckready();
         },
