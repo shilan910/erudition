@@ -233,19 +233,19 @@ pageEncoding="UTF-8"%>
                     <div class='line'></div>
                 </c:forEach>
                 </c:if>
-                <nav>
-                    <ul class="pagination pull-right">
-                        <li><a href="#">上一页</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#">下一页</a>
-                        </li>
-                    </ul>
-                </nav>
+                <%--<nav>--%>
+                    <%--<ul class="pagination pull-right">--%>
+                        <%--<li><a href="#">上一页</a></li>--%>
+                        <%--<li class="active"><a href="#">1</a></li>--%>
+                        <%--<li><a href="#">2</a></li>--%>
+                        <%--<li><a href="#">3</a></li>--%>
+                        <%--<li><a href="#">4</a></li>--%>
+                        <%--<li><a href="#">5</a></li>--%>
+                        <%--<li>--%>
+                            <%--<a href="#">下一页</a>--%>
+                        <%--</li>--%>
+                    <%--</ul>--%>
+                <%--</nav>--%>
             </div>
 
         </div>
@@ -405,7 +405,13 @@ pageEncoding="UTF-8"%>
 
     })(jQuery);
 </script>
-
+<%--主页主要js--%>
+<script src="${assetsPath}/js/indexTab.js" charset="utf-8"></script>
+<script>
+    $(function(){
+        var indextab=new indexTab();
+    })
+</script>
 
 <!--icheck    radio不能正常使用-->
 <script>

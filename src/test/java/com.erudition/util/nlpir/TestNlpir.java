@@ -27,7 +27,7 @@ public class TestNlpir {
     @Test
     public void test1(){
         WordFrequency wordFrequency = new WordFrequency();
-        String[] words = wordFrequency.wordFre("/home/sl/test/123.doc",10);
+        String[] words = wordFrequency.wordFre("/home/sl/test/wordfreq.txt",10);
         for(String word : words){
             System.out.println(word);
         }

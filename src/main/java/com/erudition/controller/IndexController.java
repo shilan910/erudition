@@ -8,11 +8,13 @@ import com.erudition.dao.ResourcesDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,25 +40,39 @@ public class IndexController {
     RecommendDao recommendDao;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(HttpSession httpSession){
+    public String index(HttpSession httpSession , Model model){
         httpSession.setAttribute("categories", categoryDao.getCategorys());
 
-        System.out.println("IndexController");
-
-
         String username = (String)httpSession.getAttribute("username");
+        System.out.println("IndexController : "+username);
+
         if(username==null) return "login";
 
         UserEntity user = (UserEntity) httpSession.getAttribute("loginUser");
-        int userid = (int) httpSession.getAttribute("userid");
-//
-//        if(recommendDao.getRecentFiles(userid)!=null){
-//            List<FilesEntity> recentFiles = recommendDao.getRecentFiles(userid);
-//            httpSession.setAttribute("recentFiles",recentFiles);
-//
-//            if(resourcesDao.getRelationFileByOne(recentFiles)!=null)
-//                httpSession.setAttribute("recommendFiles",resourcesDao.getRelationFileByOne(recentFiles));
-//        }
+//        int userid = (int) httpSession.getAttribute("userid");
+
+        int userid = user.getId();
+
+        List<FilesEntity> recentFiles = recommendDao.getRecentFiles(userid);
+            httpSession.setAttribute("recentFiles",recentFiles);
+
+            List<FilesEntity> recommendFiles = new ArrayList<>();
+            recommendFiles = resourcesDao.getRelationFileByOne(recentFiles);
+            if(recommendFiles.size()==0){
+                recommendFiles.add(resourcesDao.getById(7));
+                recommendFiles.add(resourcesDao.getById(8));
+
+                recommendFiles.add(resourcesDao.getById(9));
+
+                recommendFiles.add(resourcesDao.getById(13));
+                recommendFiles.add(resourcesDao.getById(14));
+            }else{
+                for (FilesEntity file : recommendFiles){
+                    System.out.println("1234567890: "+file.getId());
+                }
+            }
+            httpSession.setAttribute("recommendFiles",recommendFiles);
+//            model.addAttribute("page",1);
         return "index";
     }
 

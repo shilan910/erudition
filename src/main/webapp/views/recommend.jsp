@@ -188,7 +188,7 @@
                                 ${recommendfile.creater}
                         </div>
                         <div class="flex-3 file-time">
-                                ${recommendfile.createrTime}
+                                ${recommendfile.createTime}
                         </div>
                     </div>
                     <div class="line"></div>
