@@ -107,7 +107,7 @@
             var catelog="共享目录";
             console.log("发送的id为"+third_cate_id);
             //var third_cate_id;
-            var filestr=self.getDataFilesAddlist("/erudition/resources/"+third_cate_id+"/1");
+            var filestr=self.getDataFilesAddlist("/erudition/resources/"+third_cate_id);
 
             //if(self.pageNum)
             var str=['<div class="header flex-row">',

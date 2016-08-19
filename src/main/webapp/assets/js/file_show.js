@@ -180,7 +180,7 @@
             var self=this;
             var file=self.fileData;
             var fileRelations=self.fileRelations;
-            //转换时间戳
+            //转换时间戳createTime
             var date = new Date(file.createTime);
             var Y = date.getFullYear() + '-';
             var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
