@@ -81,8 +81,8 @@ public class FileController {
 
                 
                 //开始设置关联
-//                List<FilesEntity> allFilesInDatabase = (List<FilesEntity>) session.getAttribute("allfiles");
-//                setRelation(originalName, allFilesInDatabase, name);
+                List<FilesEntity> allFilesInDatabase = (List<FilesEntity>) session.getAttribute("allfiles");
+                setRelation(originalName, allFilesInDatabase, name);
             }
 
         }
