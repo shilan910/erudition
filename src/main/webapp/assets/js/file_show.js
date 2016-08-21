@@ -328,7 +328,7 @@
             $(".a-operate .collect").click(function(event){
                 var file_id =self.getIdByIndex(self.currentIndex);
                 $.ajax({
-                    url:'/erudition/collection/addtocollection/'+file_id,            //axaj失败
+                    url:'/erudition/collection/addtocollection/'+file_id,            //ajax失败
                     type:'get',
                     async:false, //默认为true 异步
                     success:function(data){

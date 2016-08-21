@@ -6,6 +6,7 @@ import com.erudition.bean.UserEntity;
 import com.erudition.dao.CollectionDao;
 import com.erudition.dao.ResourcesDao;
 import com.erudition.dao.UserDao;
+import com.erudition.util.GlobalVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -74,6 +75,11 @@ public class UserController {
                 usernmaemessage = "用户登陆成功";
                 session.setAttribute("loginUser", user);
                 session.setAttribute("userid",user.getId());
+                session.setAttribute("rule_relation", GlobalVariable.getInstance().getByKey("rule_relation"));
+                session.setAttribute("rule_delete", GlobalVariable.getInstance().getByKey("rule_delete"));
+                session.setAttribute("rule_collection", GlobalVariable.getInstance().getByKey("rule_collection"));
+                session.setAttribute("adminSidebarActive", GlobalVariable.getInstance().getByKey("adminSidebarActive"));
+
                 System.out.println("message1 : " + usernmaemessage);
                 request.getSession().setAttribute("username", username);      //session中设置值
 
