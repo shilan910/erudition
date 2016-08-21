@@ -3,6 +3,10 @@
  */
 //对象级别的插件开发----------必须在页面刷新时重新执行
 
+$(function(){
+    var fileout=new FileOut();
+})
+
 ;(function($){
     var FileOut=function(){
         //引入依赖的js
@@ -10,7 +14,6 @@
         //new_element.setAttribute("type","text/javascript");
         //new_element.setAttribute("src","popwinAll.js");// 在这里引入了a.js
         //document.body.appendChild(new_element);
-
         var self=this;
         //抽取基础DOM主要围绕字符串来使用
         self.pre_btn='.file-out .pre-btn';
@@ -384,8 +387,32 @@
                     "</div>";
                 }
                 else if(type=="mp3"){
+                    console.log("点击了mp3")
                     var data={};
                     var html=template("Tmp3",data);
+                    console.log(html);
+                    $("body").prepend(html);
+                    $("#mp3").fadeIn(200);
+                    var mp3 = new APlayer({
+                        element: document.getElementById('mp3-player'),
+                        narrow: false,
+                        autoplay: false,
+                        showlrc: false,
+                        music: {
+                            title: 'Sugar',
+                            author: 'Maroon 5',
+                            url: '/erudition/assets/file/mp3/Sugar.mp3',
+                            pic: '/erudition/assets/file/mp3/Maroon5.jpg'
+                        }
+                    });
+                    mp3.init();
+                    $("#mp3 .close").click(function(){
+                        $(this).parent().fadeOut(200,function(){
+                            mp3.pause();
+                            $(this).remove();
+                        });
+                    })
+
                 }
                 else{
                     url = "/erudition/assets/file/text/"+url+".pdf";

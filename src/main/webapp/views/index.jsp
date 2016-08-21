@@ -18,6 +18,8 @@ pageEncoding="UTF-8"%>
     <script src="${assetsPath}/js/icheck.js"></script>
     <%--<script src="${assetsPath}/js/template.js"></script>--%>
     <script src="${assetsPath}/js/template-native.js"></script>
+
+    <script src="${assetsPath}/js/APlayer.js"></script>
     <style type="text/css">
         *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
         body{background:#f0f0f0;}
@@ -203,11 +205,11 @@ pageEncoding="UTF-8"%>
 <!--完整的弹窗-->
 <script src="${assetsPath}/js/popwinAll.js" charset="utf-8"></script>
 <script src="${assetsPath}/js/file_show.js" charset="utf-8"></script>
-<script>
-    $(function () {
-        var fileout=new FileOut();
-    })
-</script>
+<%--<script>--%>
+    <%--$(function () {--%>
+        <%--var fileout=new FileOut();--%>
+    <%--})--%>
+<%--</script>--%>
 
 
 <%--<script>
@@ -373,8 +375,11 @@ pageEncoding="UTF-8"%>
 </script>
 
 <%--mp3模板--%>
-<script type="text/html" id="Tmpc">
-
+<script type="text/html" id="Tmp3" style="display:none">
+    <div id="mp3">
+        <div id="mp3-player" class="aplayer"></div>
+        <div class="close">×</div>
+    </div>
 </script>
 </body>
 </html>
