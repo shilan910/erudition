@@ -14,6 +14,7 @@
             <c:when test="${page.hasPre}"><li><a href="?page=${currentPage-1}">上一页</a></li></c:when>
             <c:otherwise><li class="disabled"><a href="#">上一页</a></li></c:otherwise>
         </c:choose>
+
         <c:if test="${currentPage != 1}" >
             <li><a href="?page=1">1</a></li>
         </c:if>
