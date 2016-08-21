@@ -1,6 +1,8 @@
 package com.erudition.util;
 
 import java.io.*;
+import java.util.List;
+
 import org.apache.poi.hwpf.extractor.WordExtractor;
 
 /**
@@ -43,6 +45,11 @@ public class TextRead {
             }
             return tempFile.getPath();
         }
+
+
+//        public List<String> getStringListFromWord(){
+//
+//        }
 
 
 
