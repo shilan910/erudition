@@ -1,5 +1,6 @@
 package com.erudition.controller.admin;
 
+import com.erudition.util.GlobalVariable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +27,10 @@ public class RulesController {
     public String rules(HttpSession session , String rule_relation ,
                         String rule_delete , String rule_collection){
 
+        GlobalVariable.getInstance().insert("rule_relation",rule_relation);
+        GlobalVariable.getInstance().insert("rule_delete",rule_delete);
+        GlobalVariable.getInstance().insert("rule_collection",rule_collection);
+        GlobalVariable.getInstance().insert("adminSidebarActive","2");
         session.setAttribute("rule_relation",rule_relation);
         session.setAttribute("rule_delete",rule_delete);
         session.setAttribute("rule_collection",rule_collection);

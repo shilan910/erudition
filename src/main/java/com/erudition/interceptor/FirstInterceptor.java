@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class FirstInterceptor extends HandlerInterceptorAdapter {
 
-    GlobalVariable globalVar = new GlobalVariable();
+    GlobalVariable globalVar = GlobalVariable.getInstance();
 
     @Override
     public boolean preHandle(HttpServletRequest request , HttpServletResponse response ,

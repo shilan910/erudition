@@ -116,6 +116,7 @@
             <version>${spring.version}</version>
         </dependency>
         <!-- Hibernate -->
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -257,12 +258,12 @@
             <version>0.4.8</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.sejda</groupId>
             <artifactId>sejda-icepdf</artifactId>
             <version>1.0.0-BETA</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.slf41j</groupId>

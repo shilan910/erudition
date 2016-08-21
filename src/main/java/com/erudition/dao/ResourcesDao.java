@@ -86,7 +86,7 @@ public class ResourcesDao extends BaseDao {
                             }
                         }
                         if (!flag)
-                            break;
+                            continue;
                         relationFiles.add(getById(re_id));
                         filesExits.add(getById(re_id));
                         System.out.println("re  :"+re);
