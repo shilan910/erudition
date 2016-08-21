@@ -265,7 +265,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
+            <groupId>org.slf41j</groupId>
             <artifactId>slf4j-nop</artifactId>
             <version>1.6.1</version>
         </dependency>
