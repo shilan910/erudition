@@ -1,16 +1,11 @@
-package com.erudition.util.ansj;
+package com.erudition.util;
 
-import com.erudition.util.TextRead;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by sl on 16-8-21.
@@ -21,24 +16,17 @@ import java.util.List;
         @ContextConfiguration(name = "parent", locations = "classpath*:conf/spring.xml"),
         @ContextConfiguration(name = "child", locations = "classpath*:conf/springmvc.xml")
 })
-public class WordAnalyzerTest {
+public class TextReadTest {
 
-        @Test
-        public void testCount(){
-                WordAnalyzer wordAnalyzer = new WordAnalyzer();
+    @Test
+    public void testGetStringFromWord(){
+        TextRead textRead = new TextRead();
+//        String res = textRead.getStringFromWord("/usr/local/erudition/测试/123/321/F81EFC269CA3F55BF41B69FD1D9A1D58.docx");
+        String res = textRead.getStringFromWord("/home/sl/8E0AEA8A15473A935853BF83237EF5EE.doc");
+//        3F55BF41B69
 
-                TextRead textRead = new TextRead();
-
-                String words = textRead.getStringFromWord("/home/sl/test1.doc");
-
-                try {
-                        String word1 = wordAnalyzer.count(words,5);
-
-                } catch (IOException e) {
-                        e.printStackTrace();
-                }
-
-        }
+        System.out.println(res);
+    }
 
 
 }

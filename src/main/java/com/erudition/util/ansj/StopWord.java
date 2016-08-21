@@ -15,7 +15,7 @@ public class StopWord {
 	public static Set<String> getStopWord(){
 		Set<String> set=new HashSet<String>();
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("stopword.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("/home/sl/stopword.txt"));
 			String temp=null;
 			while (( temp = reader.readLine()) != null) {
 				temp = temp.trim();

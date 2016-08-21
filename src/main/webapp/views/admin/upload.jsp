@@ -221,8 +221,9 @@
                 console.log("谷歌意见"+$("#category-select").find("option:selected").text());
                 var keywords="";
                 $("#keywordsInput_tagsinput").children(".tag").each(function(){
-//                    console.log("最终关键字"+$(this).find("span").text());
-                    keywords= $.trim(keywords+$(this).find("span").text());
+
+                    keywords = $.trim(keywords+" "+$(this).find("span").text());
+                    console.log("最终关键字"+keywords);
                 });
                 console.log("谷歌关键字"+keywords);
                 var id = '<%=session.getAttribute("userid")%>';

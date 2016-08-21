@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.List;
 
 import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 /**
  * Created by sl on 16-6-3.
@@ -47,9 +49,30 @@ public class TextRead {
         }
 
 
-//        public List<String> getStringListFromWord(){
+        public String getStringFromWord(String filePath) {
+            String result = null;
+            File file = new File(filePath);
+
+            try{
+//                InputStream is = new FileInputStream(filePath);
+//                XWPFDocument doc = new XWPFDocument(is);
+//                XWPFWordExtractor extractor = new XWPFWordExtractor(doc);
 //
-//        }
+                FileInputStream fis = new FileInputStream(file);
+                WordExtractor wordExtractor = new WordExtractor(fis);
+                result = wordExtractor.getText();
+////                System.out.println(result);
+//                result = extractor.getText();
+
+            }catch(FileNotFoundException e){
+                e.printStackTrace();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+
+            return result;
+
+        }
 
 
 

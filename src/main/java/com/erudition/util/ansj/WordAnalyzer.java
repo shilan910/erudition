@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class WordAnalyzer {
 
-    public List<String> count(List<String> words , int topNum) throws IOException {
+    public String count(String words , int topNum) throws IOException {
 
         Map<String,Integer> wordCount = new HashMap<String, Integer>();
 
@@ -22,23 +22,19 @@ public class WordAnalyzer {
 
         Set<String> stopWords = StopWord.getStopWord();
 
-        for(String word : words){
-            List<Term> result = ToAnalysis.parse(word);
 
-            for (Term term : result) {
-                String name = term.getName();
-                if (!stopWords.contains(name) && !name.equals(" ")) {
+        List<Term> result = ToAnalysis.parse(words);
 
-                    if (!wordCount.containsKey(name)) {
-                        wordCount.put(name, 1);
-                    } else {
-                        int it_count = wordCount.get(name);
-                        wordCount.remove(name);
-                        wordCount.put(name, it_count + 1);
-                    }
-
+        for (Term term : result) {
+            String name = term.getName();
+            if (!stopWords.contains(name) && !name.equals(" ") && name!=null && !name.equals("") && !name.equals("\n")) {
+                if (!wordCount.containsKey(name)) {
+                    wordCount.put(name, 1);
+                } else {
+                    int it_count = wordCount.get(name);
+                    wordCount.remove(name);
+                    wordCount.put(name, it_count + 1);
                 }
-
             }
         }
 
@@ -63,16 +59,25 @@ public class WordAnalyzer {
         });
 
 
-        List<String> result = new ArrayList<String>();
+//        List<String> resultKey = new ArrayList<String>();
+        String resultKey = "";
+        int maxn = temp.size()>topNum?topNum:temp.size();
 
-        for (int i=0; i<temp.size(); i++) {
-            String outString = temp.get(i).getKey()+"  "+
-                    String.format("%.6f", temp.get(i).getValue()/sum);
-            result.add(outString);
+//        for (int i=0; i<maxn; i++) {
+//            String outString = temp.get(i).getKey()+"  "+
+//                    String.format("%.6f", temp.get(i).getValue()/sum);
+//            resultKey.add(outString);
+//        }
+
+        for (int i=0; i<maxn; i++) {
+            resultKey += temp.get(i).getKey();
+            resultKey += " ";
+            System.out.println(temp.get(i).getKey()+"  "+
+                    String.format("%.6f", temp.get(i).getValue()/sum));
         }
 
         System.out.println("统计结束！共统计词语"+temp.size()+"个（无重复词语）！");
-        return result;
+        return resultKey;
 
     }
 
@@ -82,7 +87,7 @@ public class WordAnalyzer {
 
     private void loadAnsjDic() {
         for (int i = 0; i < Dictionary.dictionary.length; i++) {
-            System.out.println(Dictionary.dictionary[i]);
+//            System.out.println(Dictionary.dictionary[i]);
             UserDefineLibrary.insertWord(Dictionary.dictionary[i], "userDefine",1000);
         }
     }

@@ -8,6 +8,8 @@ import com.erudition.page.Page;
 import com.erudition.page.PageHandler;
 import com.erudition.util.MultipartFileUtils;
 import com.erudition.util.ProduceThumb;
+import com.erudition.util.TextRead;
+import com.erudition.util.ansj.WordAnalyzer;
 import com.erudition.util.nlpir.WordFrequency;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,34 +148,32 @@ public class ResourcesDao extends BaseDao {
         System.out.println("Dao saveFile done....");
 
 
-//        //提取关键字
-//        String[] words = new String[100];
-//        String thumbPath = null;
-//        System.out.println("type : "+type);
-//        if(type.equals("docx") || type.equals("doc") || type.equals("txt")){
-//            WordFrequency wordFrequency = new WordFrequency();
-//            words = wordFrequency.wordFreByWord(url,5);
-//            System.out.println("提取关键字");
-//        }else if(type.equals("wmv")){
-//            thumbPath = new ProduceThumb().processVideoThumb(url);
-//        }
-//        else if(type.equals("png") || type.equals("jpg")){
-//            try {
-//                thumbPath = new ProduceThumb().processPictureThumb(url);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-
-
-        String keywordsToSave = categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
+        //提取关键字
+        String[] words = new String[100];
+        if(type.equals("doc") || type.equals("docx")){
+            TextRead textRead = new TextRead();
+            String content = textRead.getStringFromWord(url);
+            WordAnalyzer wordAnalyzer = new WordAnalyzer();
+            String keywordsFromAnalyzer = "";
+            try {
+                keywordsFromAnalyzer = wordAnalyzer.count(content,5);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
                 categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
-                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords;
-        if(originalName.equals("云计算设计报告.docx")){
-            keywordsToSave += " 旅游 比价 综合设计";
+                category.getCategoryName() + file.getOriginalFilename() + "#"+keywordsFromAnalyzer+" "+keywords);
         }
-        fileEntity.setKeywords(keywordsToSave);
+
+
+//
+//        String keywordsToSave = categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
+//                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
+//                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords;
+//        if(originalName.equals("云计算设计报告.docx")){
+//            keywordsToSave += " 旅游 比价 综合设计";
+//        }
+//        fileEntity.setKeywords(keywordsToSave);
 
 //        fileEntity.setThumb(thumbPath);
 
