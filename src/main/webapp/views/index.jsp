@@ -16,7 +16,8 @@ pageEncoding="UTF-8"%>
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="${assetsPath}/js/jquery-accordion-menu.js"></script>
     <script src="${assetsPath}/js/icheck.js"></script>
-    <script src="${assetsPath}/js/template.js"></script>
+    <%--<script src="${assetsPath}/js/template.js"></script>--%>
+    <script src="${assetsPath}/js/template-native.js"></script>
     <style type="text/css">
         *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
         body{background:#f0f0f0;}
@@ -315,5 +316,61 @@ pageEncoding="UTF-8"%>
         });
     });
 </script>
+
+<%--分页模板--%>
+<script type="text/html" id="Tpage">
+    <nav>
+            <ul class="pagination pull-right">
+                <$if(hasPre){$>
+                <li><a page="<$=currentPage-1$>">上一页</a></li>
+                <$}else{ $>
+                <li class="disabled"><a href="#">上一页</a></li>
+                <$}$>
+
+                <$if(currentPage!=1){$>
+                <li><a page="1">1</a></li>
+                <%--<$}else{$>--%>
+                <%--<li><a page="1" class="active">1</a></li>--%>
+                <$}$>
+                <%--curentPage之前--%>
+                <$if(currentPage<=5){$>
+                <$for (var i=2 ; i<=(currentPage-1);i++){$>
+                <%--<li><a href="<$=root$>?page=<$=i$>"><$=i$></a></li>--%>
+                <li><a page="<$=i$>"><$=i$></a></li>
+                <$}$>
+                <$}else{$>
+                <li class="disabled"><a href="#">...</a></li>
+                <$for (var i=(currentPage-2) ; i<=(currentPage-1);i++){$>
+                <li><a page="<$=i$>"><$=i$></a></li>
+                <$}$>
+                <$}$>
+
+                <li class="active"><a page="<$=currentPage$>"><$=currentPage$></a></li>
+
+                <%--currentPage之后--%>
+                <$if((currentPage >= totalPageCount - 4 || totalPageCount - 4 <= 0)){$>
+                <$for (var i=(currentPage+1) ; i<=(totalPageCount);i++){$>
+                <li><a page="<$=i$>"><$=i$></a></li>
+                <$}$>
+                <$}else{$>
+                <$for (var i=(currentPage+1) ; i<=(currentPage+2);i++){$>
+                <li><a page="<$=i$>"><$=i$></a></li>
+                <$}$>
+                <li class="disabled"><a href="#">...</a></li>
+                <li><a page="<$=i$>"><$=totalPageCount$></a></li>      <%--//还需要绑定点击事件我擦--%>
+                <$}$>
+
+                <$if(hasNext){$>
+                <li><a page="<$=nextPage$>" >下一页</a></li>
+                <$}else{$>
+                <li class="disabled"><a href="#">下一页</a></li>
+                <$}$>
+
+
+            </ul>
+    </nav>
+
+</script>
+
 </body>
 </html>

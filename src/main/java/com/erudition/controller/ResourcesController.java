@@ -32,9 +32,9 @@ public class ResourcesController {
     @RequestMapping(value = "/{tid}" , method = RequestMethod.GET)
     public Page<FilesEntity> getResourcesByPage(HttpSession session, String page, Model model,
                                                 @PathVariable("tid") int ThirdId){
-        int pageNum = page == null ? 1 : Integer.valueOf(page);
+        int pageNum = page == null ? 1 : Integer.valueOf(page);     //第一次访问为空就为第一页！
 
-        Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,10,ThirdId);
+        Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,1,ThirdId);
         model.addAttribute("resources",resources);
         System.out.println("before");
         session.setAttribute("flagofcollection",0);
