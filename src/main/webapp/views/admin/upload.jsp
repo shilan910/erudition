@@ -236,6 +236,10 @@
                 });
             },
             'onQueueComplete' : function(queueData) {
+                setTimeout(function(){
+                    $("#keywords").hide(300);
+                },4000)
+//                $("#keywords").hide(300);
                 popwin.tips("上传成功","1");
                 num=0;
             },

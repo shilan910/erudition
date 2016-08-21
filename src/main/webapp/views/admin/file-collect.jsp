@@ -139,7 +139,10 @@
                                                 <input type='checkbox'/>
                                             </div>
                                             <div class='flex-1 file-image'>
-                                                <i class="iconfont icon-${files.type}"></i>
+                                                <c:choose>
+                                                <c:when test="${files.type=='docx'}"><i class="iconfont icon-word"></i></c:when>
+                                                <c:otherwise><i class="iconfont icon-${files.type}"></i></c:otherwise>
+                                                </c:choose>
                                             </div>
                                             <div class='file-name flex-4'>
                                                 <span id="${files.id}"><a href='#'>${files.title}</a></span>
