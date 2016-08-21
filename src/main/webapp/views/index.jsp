@@ -357,7 +357,7 @@ pageEncoding="UTF-8"%>
                 <li><a page="<$=i$>"><$=i$></a></li>
                 <$}$>
                 <li class="disabled"><a href="#">...</a></li>
-                <li><a page="<$=i$>"><$=totalPageCount$></a></li>      <%--//还需要绑定点击事件我擦--%>
+                <li><a page="<$=totalPageCount$>"><$=totalPageCount$></a></li>      <%--//还需要绑定点击事件我擦--%>
                 <$}$>
 
                 <$if(hasNext){$>
@@ -372,5 +372,9 @@ pageEncoding="UTF-8"%>
 
 </script>
 
+<%--mp3模板--%>
+<script type="text/html" id="Tmpc">
+
+</script>
 </body>
 </html>

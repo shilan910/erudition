@@ -25,9 +25,9 @@
           <c:set var="active2" value="active"/>
         </c:if>
 
-        <li class="${active0}"><a href="${rootPath}/admin/filecollect"><i class="fa fa-home"></i>文件管理</a></li>
+        <li class="${active0}"><a href="${rootPath}/admin/filecollect"><i class="fa fa-folder"></i>文件管理</a></li>
 
-        <li class="${active1}"><a href="${rootPath}/admin/file/upload"><i class="fa fa-glass"></i>文件上传</a></li>
+        <li class="${active1}"><a href="${rootPath}/admin/file/upload"><i class="fa fa-cloud-upload"></i>文件上传</a></li>
 
         <li class="${active2}"><a href="${rootPath}/admin/file/rules"><i class="fa fa-suitcase"></i>规则设置</a></li>
 

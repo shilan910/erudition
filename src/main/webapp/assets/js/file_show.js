@@ -383,6 +383,10 @@
                     "</div>"+
                     "</div>";
                 }
+                else if(type=="mp3"){
+                    var data={};
+                    var html=template("Tmp3",data);
+                }
                 else{
                     url = "/erudition/assets/file/text/"+url+".pdf";
                     var dom="<div class='file-watch' style='display: none;'>"+
