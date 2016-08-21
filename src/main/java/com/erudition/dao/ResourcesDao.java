@@ -150,7 +150,8 @@ public class ResourcesDao extends BaseDao {
 
         //提取关键字
         String[] words = new String[100];
-        if(type.equals("doc") || type.equals("docx")){
+
+        if(type.equals("doc")){
             TextRead textRead = new TextRead();
             String content = textRead.getStringFromWord(url);
             WordAnalyzer wordAnalyzer = new WordAnalyzer();
@@ -163,6 +164,11 @@ public class ResourcesDao extends BaseDao {
             fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
                 categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
                 category.getCategoryName() + file.getOriginalFilename() + "#"+keywordsFromAnalyzer+" "+keywords);
+        }else{
+            String keywordsToSave = categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
+                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
+                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords;
+            fileEntity.setKeywords(keywordsToSave);
         }
 
 
