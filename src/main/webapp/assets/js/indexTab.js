@@ -22,7 +22,8 @@
                 $(".header-all").empty();
                 //alert("开始渲染共享目录")
                 var third_cate_id = $(this).attr("value");
-                self.SharerRederDom(third_cate_id);
+                self.third_cate_id=third_cate_id;
+                self.SharerRederDom(third_cate_id,1);     //初始化页码为1
             }
         })
         //常用目录
@@ -42,35 +43,46 @@
 
     };
     indexTab.prototype={
-        getDataFilesAddlist:function(url){
+        getDataFilesAddlist:function(url,page){
             var self=this;
             console.log("开始获取共享目录数据");
             var filestr="";
             self.pageNum=0;
-            $.ajaxSetup({async: false});
-            $.getJSON(url , function(data){
-                console.log("data"+data);
-                $.each(data.list,function(i, file){
 
-                    self.pageNum++;
-                    var size=self.turnSize(file.size);
-                    var time=self.turnDate(file.createTime);
-                    filestr=['                    <div class="body-floor flex-row">',
-                            '                        <div class="flex-3 flex-row">',
-                            '                            <div class="flex-1 checkbox">',
-                            '                                <input type="checkbox"/>',
-                            '                            </div>',
-                            '                            <div class="flex-1 file-image"><i class="iconfont icon-'+file.type+'"></i></div>',
-                            '                            <div class="file-name flex-4"><span id="'+file.id+'"><a href="#">'+file.title+'</a></span></div>',
-                            '                        </div>',
-                            '                        <div class="flex-3 file-size"><span>'+file.size+'</span></div>',
-                            '                        <div class="flex-3 file-creator">'+file.creater+'</div>',
-                            '                        <div class="flex-3 file-time">'+time+'</div>',
-                            '                    </div>',
-                            '                    <div class="line"></div>'].join("")+filestr;
-                })
+            $.ajax({                   //修改成ajax
+                url:url,
+                type:'GET',
+                data:{page:page},
+                async: false,
+                success:function(data){
+                    console.log("data"+data);
+                    //获取控制信息
+                    self.pageNow=data.pageNow;
+                    self.totalPageCount=data.totalPageCount;
+                    self.hasPre=data.hasPre;
+                    self.hasNext=data.hasNext;
+                    $.each(data.list,function(i, file){
+
+                        self.pageNum++;
+                        var size=self.turnSize(file.size);
+                        var time=self.turnDate(file.createTime);
+                        filestr=['                    <div class="body-floor flex-row">',
+                                '                        <div class="flex-3 flex-row">',
+                                '                            <div class="flex-1 checkbox">',
+                                '                                <input type="checkbox"/>',
+                                '                            </div>',
+                                '                            <div class="flex-1 file-image"><i class="iconfont icon-'+file.type+'"></i></div>',
+                                '                            <div class="file-name flex-4"><span id="'+file.id+'"><a href="#">'+file.title+'</a></span></div>',
+                                '                        </div>',
+                                '                        <div class="flex-3 file-size"><span>'+file.size+'</span></div>',
+                                '                        <div class="flex-3 file-creator">'+file.creater+'</div>',
+                                '                        <div class="flex-3 file-time">'+time+'</div>',
+                                '                    </div>',
+                                '                    <div class="line"></div>'].join("")+filestr;
+                    })
+                }
             })
-            //console.log("获取的最终的string"+filestr);
+
             return filestr;
         },
         getDataFilesNolist:function(url){
@@ -102,12 +114,26 @@
             //console.log("获取的最终的string"+filestr);
             return filestr;
         },
-        SharerRederDom:function(third_cate_id){
+        SharerRederDom:function(third_cate_id,page){
             var self=this;
             var catelog="共享目录";
             console.log("发送的id为"+third_cate_id);
             //var third_cate_id;
-            var filestr=self.getDataFilesAddlist("/erudition/resources/"+third_cate_id+"/1");
+            var filestr=self.getDataFilesAddlist("/erudition/resources/"+third_cate_id,page);
+
+            template.config("openTag", "<$");
+            template.config("closeTag", "$>");
+
+            //处理分页
+            var data={
+                root:"/erudition/resources/"+third_cate_id,
+                currentPage:self.pageNow,
+                nextPage:self.pageNow+1,
+                hasPre:self.hasPre,
+                hasNext:self.hasNext,
+                totalPageCount:self.totalPageCount
+            };
+            var pageHtml=template("Tpage",data);
 
             //if(self.pageNum)
             var str=['<div class="header flex-row">',
@@ -129,6 +155,7 @@
                 '                </div>',
                 '                <div class="line"></div>',
                 filestr,
+
                 //'                <nav>',
                 //'                    <ul class="pagination pull-right">',
                 //'                        <li><a href="#">上一页</a></li>',
@@ -142,14 +169,44 @@
                 //'                        </li>',
                 //'                    </ul>',
                 //'                </nav>',
+                pageHtml,
                 '            </div>'].join("");
+
             $(".main .header-all").append(str);
             iCheckready();
+            self.HangSharePage();
+        },
+        HangSharePage:function(){
+            var self=this;
+            $(".pagination li a").click(function(){
+                if(!$(this).parent().hasClass("disabled")){
+                    console.log("没有disabled");
+                    var page=$(this).attr("page");
+                    console.log("点击了页码"+page);
+                    $(".contents .header-all").empty();
+                    self.SharerRederDom(self.third_cate_id,page);
+                }
+
+            })
         },
         CollectionRederDom:function(){
             var self=this;
             var catelog="常用目录";
             var filestr=self.getDataFilesNolist("/erudition/collection/showcollections");
+
+            //处理分页
+            //template.config("openTag", "<$");
+            //template.config("closeTag", "$>");
+            //var data={
+            //    root:"/erudition/resources/"+third_cate_id,
+            //    currentPage:self.pageNow,
+            //    nextPage:self.pageNow+1,
+            //    hasPre:self.hasPre,
+            //    hasNext:self.hasNext,
+            //    totalPageCount:self.totalPageCount
+            //};
+            //var pageHtml=template("Tpage",data);
+
             var str=['<div class="header flex-row">',
                 '                <div class="flex-7 path">',
                     catelog,

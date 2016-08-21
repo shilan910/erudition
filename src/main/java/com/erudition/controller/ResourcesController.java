@@ -24,19 +24,24 @@ import java.util.List;
 @Controller
 @RequestMapping("/resources")
 public class ResourcesController {
+
     @Autowired
     @Qualifier("resourcesDao")
     ResourcesDao resourcesDao;
 
     @ResponseBody
-    @RequestMapping(value = "/{tid}/{pageNum}" , method = RequestMethod.GET)
-    public Page<FilesEntity> getResourcesByPage(HttpSession session,Model model,@PathVariable("tid") int ThirdId,@PathVariable ("pageNum") int pageNum){
+    @RequestMapping(value = "/{tid}" , method = RequestMethod.GET)
+    public Page<FilesEntity> getResourcesByPage(HttpSession session , @PathVariable("tid") int ThirdId ,
+                                                String page, Model model){
+        int pageNum = page == null ? 1 : Integer.valueOf(page);     //第一次访问为空就为第一页！
 
-        Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,7,ThirdId);
+        Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,1,ThirdId);
         model.addAttribute("resources",resources);
         System.out.println("before");
         session.setAttribute("flagofcollection",0);
         session.removeAttribute("showcollections");
+        model.addAttribute("page", resources);
+        model.addAttribute("currentPage", pageNum);
         System.out.println("after");
         return resources;
     }

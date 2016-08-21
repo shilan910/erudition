@@ -205,7 +205,7 @@ pageEncoding="UTF-8"%>
                     <div class="flex-3">更新日期</div>
                 </div>
                 <div class="line"></div>
-                <c:forEach var="files" items="${searchresult}">
+                <c:forEach var="files" items="${searchresult.list}">
                     <div class='body-floor flex-row'><div class='flex-3 flex-row'>
                         <div class='flex-1 checkbox'><input type='checkbox'/></div>
                         <div class='flex-1 file-image'><i class="iconfont icon-${files.type}"></i></div>
