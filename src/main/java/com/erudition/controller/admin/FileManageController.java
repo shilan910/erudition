@@ -6,6 +6,7 @@ import com.erudition.bean.UserEntity;
 import com.erudition.dao.CategoryDao;
 import com.erudition.dao.ResourcesDao;
 import com.erudition.dao.UserDao;
+import com.erudition.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -101,12 +102,15 @@ public class FileManageController {
     }
 
     @RequestMapping(value = "/search" , method = RequestMethod.POST)
-    public String search(HttpSession httpSession,Model model,String key){
+    public String search(HttpSession httpSession,Model model,String key,String page){
+
+        int pageNum = page == null ? 1 : Integer.valueOf(page);
+
         UserEntity user = (UserEntity)httpSession.getAttribute("loginUser");
-        List<FilesEntity> files = resourcesDao.getResourcesByKeyword(1,7,key).getList();
+        Page<FilesEntity> files = resourcesDao.getResourcesByKeyword(pageNum, 2, key);
 
 
-        httpSession.setAttribute("relationsFiles",resourcesDao.getRelationFileByOne(files));
+        httpSession.setAttribute("relationsFiles",resourcesDao.getRelationFileByOne(files.getList()));
         httpSession.setAttribute("searchresult",files);
         httpSession.setAttribute("flagofcollection",0);
         if(user.getAuthority().equals("1")){
