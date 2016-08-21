@@ -24,14 +24,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/resources")
 public class ResourcesController {
+
     @Autowired
     @Qualifier("resourcesDao")
     ResourcesDao resourcesDao;
 
     @ResponseBody
     @RequestMapping(value = "/{tid}" , method = RequestMethod.GET)
-    public Page<FilesEntity> getResourcesByPage(HttpSession session, String page, Model model,
-                                                @PathVariable("tid") int ThirdId){
+    public Page<FilesEntity> getResourcesByPage(HttpSession session , @PathVariable("tid") int ThirdId ,
+                                                String page, Model model){
         int pageNum = page == null ? 1 : Integer.valueOf(page);     //第一次访问为空就为第一页！
 
         Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,1,ThirdId);

@@ -12,10 +12,14 @@ public class WordFrequency {
         nlpir.Instance.NLPIR_Init(nlpir.getSystemFolder(),nlpir.getCharsetType() ,nlpir.getSystemCharset());
         String nativeBytes = null;
 
-        nativeBytes = nlpir.Instance.NLPIR_GetFileKeyWords(filePath,keyNum,false);
+        System.out.println("word1234567890");
+        nativeBytes = nlpir.Instance.NLPIR_GetKeyWords(filePath,keyNum,false);
+
+//        nativeBytes = nlpir.Instance.NLPIR_GetFileKeyWords(filePath,keyNum,false);
         System.out.println("result : " + nativeBytes);
 
         String[] keywords = nativeBytes.split("#");
+        System.out.println("word22222222");
 
         String result = null;
         for(String keyword : keywords){

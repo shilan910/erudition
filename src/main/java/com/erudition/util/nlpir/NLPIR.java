@@ -16,6 +16,13 @@ public class NLPIR {
         systemCharset = "UTF-8";  //默认字符集
         charsetType = 1;
 
+
+        String argu = "/home/sl/tools/NLPIR/Data";
+
+
+        //Instance.NLPIR_Init(argu, charsetType, "0");
+
+
         Instance = (CLibrary) Native.loadLibrary(
                 "/home/sl/tools/NLPIR/lib/linux64/libNLPIR.so", CLibrary.class);  //ICTCLAS的so文件地址
     }
