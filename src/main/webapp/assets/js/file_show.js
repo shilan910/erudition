@@ -227,7 +227,9 @@ $(function(){
                 '            <div class="content">',
                 '                <div class="file">',
                 '                    <div class="file-thumbnails">',
-                '                        <div class="file-name"><img src="/erudition/assets/images/'+filename+'" alt=""/></div>',
+                //'                        <div class="file-name"><img src="/erudition/assets/images/'+filename+'" alt=""/></div>',
+                '                        <div class="file-name"><i class="iconfont icon-'+file.type+'"></i></div>',
+
                 '                        <div class="file-class">'+file.type+'</div>',
                 '                    </div>',
                 '                    <div class="file-size">',
@@ -246,7 +248,7 @@ $(function(){
                 '                    <div class="file-name">'+file.title+'</div>',
                 //'                    <div class="collected">收藏量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>',
                 '                    <div class="a-third">',
-                '                        <div class="file-uptime"><i class="fa fa-clock-o"></i>'+createDate+'</div>',
+                '                        <div class="file-uptime"><i class="fa fa-clock-o"></i>&nbsp;'+createDate+'</div>',
                 '                        <div class="file-people"><i class="fa fa-user"></i>上传人-'+file.creater+'</div>',
                 '                    </div>',
                 '                </div>',
@@ -281,6 +283,11 @@ $(function(){
             var strDom=strDom1+strDom2;
             //插入到body中
             $("body").append(strDom);           //这里怎么记录当前的这个弹窗呢？
+
+            //改变图标大小
+            var img_class=".file-name .icon-"+file.type;
+            $(img_class).attr('style', 'font-size: 60px !important');
+
             self.currentPopwin=$(".file-out");       //记录当前弹窗
             //显示并加入遮罩层
             $(".mask").fadeIn();
