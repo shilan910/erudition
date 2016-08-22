@@ -29,7 +29,7 @@
 
         <li class="${active1}"><a href="${rootPath}/admin/file/upload"><i class="fa fa-cloud-upload"></i>文件上传</a></li>
 
-        <li class="${active2}"><a href="${rootPath}/admin/file/statistics"><i class="fa fa-suitcase"></i>统计分析</a></li>
+        <li class=""><a href="${rootPath}/admin/file/statistics"><i class="fa fa-bar-chart"></i>统计分析</a></li>
 
         <li class="${active2}"><a href="${rootPath}/admin/file/rules"><i class="fa fa-suitcase"></i>规则设置</a></li>
 
