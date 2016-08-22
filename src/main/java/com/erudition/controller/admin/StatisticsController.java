@@ -20,8 +20,9 @@ public class StatisticsController {
     }
 
 
-    @RequestMapping(value = "/statistics", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String test(HttpSession session){
+        session.setAttribute("adminSidebarActive",3);
         return "admin/statistics";
     }
 
