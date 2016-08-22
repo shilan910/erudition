@@ -66,7 +66,8 @@ public class ResourcesDao extends BaseDao {
         List<FilesEntity> filesExits = new ArrayList<>();
 
         for(FilesEntity file : files) {
-            filesExits.add(file);
+            if(file != null)
+                filesExits.add(file);
         }
 
         for(FilesEntity file : files){
@@ -77,11 +78,16 @@ public class ResourcesDao extends BaseDao {
 
                 String [] relationsarr = relations.split(",");
                 for(String re:relationsarr){
-                    int re_id = Integer.parseInt(re);
+
                     boolean flag = true;
-                    if(re != null){
+                    if(re != null && !re.equals("")){
+                        int re_id = Integer.valueOf(re);
+
                         for (FilesEntity fileExits : filesExits){
-                            if(fileExits.getId()==re_id) {
+                            System.out.println("zqhtest:re_id: "+re_id);
+                            System.out.println(filesExits.size());
+                            System.out.println("zqhtest: "+fileExits.getId());
+                            if(fileExits.getId() == re_id) {
                                 flag = false;
                                 break;
                             }
@@ -98,18 +104,21 @@ public class ResourcesDao extends BaseDao {
 
         }
         if(relationFiles.size()==0){
-            relationFiles.add(getById(7));
-            relationFiles.add(getById(8));
+            relationFiles.add(getById(142));
+            relationFiles.add(getById(148));
 
-            relationFiles.add(getById(30));
+            relationFiles.add(getById(157));
 
-            relationFiles.add(getById(22));
-            relationFiles.add(getById(14));
+            relationFiles.add(getById(162));
+            relationFiles.add(getById(170));
             System.out.println("111111111111123121111111111111");
 
 
         }
-
+        System.out.println("大小大小大小:::::::"+relationFiles.size());
+        for(FilesEntity f:relationFiles){
+            System.out.println("文件！！"+f.getTitle());
+        }
         return relationFiles;
     }
 

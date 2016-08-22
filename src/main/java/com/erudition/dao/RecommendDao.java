@@ -26,10 +26,11 @@ public class RecommendDao extends BaseDao{
         query.setInteger(0,userid);
         List<Integer> fileIds = query.list();
         List<FilesEntity> recentFiles = new ArrayList<>();
-        for(int fid : fileIds){
-            recentFiles.add(resourcesDao.getById(fid));
+        if(!fileIds.isEmpty()){
+            for(int fid : fileIds){
+                recentFiles.add(resourcesDao.getById(fid));
+            }
         }
-
 
         if(recentFiles==null){
             for(int i=1 ; i<=50 ; i++){
