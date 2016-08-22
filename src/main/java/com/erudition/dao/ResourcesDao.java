@@ -76,22 +76,25 @@ public class ResourcesDao extends BaseDao {
 
                 String [] relationsarr = relations.split(",");
                 for(String re:relationsarr){
-                    int re_id = Integer.parseInt(re);
-                    boolean flag = true;
-                    if(re != null){
-                        for (FilesEntity fileExits : filesExits){
-                            if(fileExits.getId()==re_id) {
-                                flag = false;
-                                break;
+                    if(!re.equals("") && re!=null){
+                        int re_id = Integer.parseInt(re);
+                        boolean flag = true;
+                        if(re != null){
+                            for (FilesEntity fileExits : filesExits){
+                                if(fileExits.getId()==re_id) {
+                                    flag = false;
+                                    break;
+                                }
                             }
+                            if (!flag)
+                                continue;
+                            relationFiles.add(getById(re_id));
+                            filesExits.add(getById(re_id));
+                            System.out.println("re  :"+re);
+                            //break;//只添加一次
                         }
-                        if (!flag)
-                            continue;
-                        relationFiles.add(getById(re_id));
-                        filesExits.add(getById(re_id));
-                        System.out.println("re  :"+re);
-                        //break;//只添加一次
                     }
+
                 }
             }
 
@@ -198,6 +201,12 @@ public class ResourcesDao extends BaseDao {
         String hql = "from FilesEntity as files where files.title=?";
         Query query = query(hql);
         query.setString(0, title);
+        return query.list();
+    }
+
+    public List<FilesEntity> getAllFiles(){
+        String hql = "from FilesEntity as files";
+        Query query = query(hql);
         return query.list();
     }
 

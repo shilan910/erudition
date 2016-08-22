@@ -57,20 +57,23 @@ public class IndexController {
             httpSession.setAttribute("recentFiles",recentFiles);
 
             List<FilesEntity> recommendFiles = new ArrayList<>();
-            recommendFiles = resourcesDao.getRelationFileByOne(recentFiles);
-            if(recommendFiles.size()==0){
-                recommendFiles.add(resourcesDao.getById(7));
-                recommendFiles.add(resourcesDao.getById(8));
+            if(!recentFiles.isEmpty()){
+                recommendFiles = resourcesDao.getRelationFileByOne(recentFiles);
+                if(recommendFiles.size()==0){
+                    recommendFiles.add(resourcesDao.getById(7));
+                    recommendFiles.add(resourcesDao.getById(8));
 
-                recommendFiles.add(resourcesDao.getById(9));
+                    recommendFiles.add(resourcesDao.getById(9));
 
-                recommendFiles.add(resourcesDao.getById(13));
-                recommendFiles.add(resourcesDao.getById(14));
-            }else{
-                for (FilesEntity file : recommendFiles){
-                    System.out.println("1234567890: "+file.getId());
+                    recommendFiles.add(resourcesDao.getById(13));
+                    recommendFiles.add(resourcesDao.getById(14));
+                }else{
+                    for (FilesEntity file : recommendFiles){
+                        System.out.println("1234567890: "+file.getId());
+                    }
                 }
             }
+
             httpSession.setAttribute("recommendFiles",recommendFiles);
 //            model.addAttribute("page",1);
         return "index";
@@ -94,11 +97,14 @@ public class IndexController {
         UserEntity user = (UserEntity) httpSession.getAttribute("loginUser");
 
         List<FilesEntity> recentFiles = recommendDao.getRecentFiles(user.getId());
-
-        List<FilesEntity> files = resourcesDao.getRelationFileByOne(recentFiles);
-        for (FilesEntity file : files){
-            System.out.println("recommendFileId: "+file.getId());
+        List<FilesEntity> files = new ArrayList<FilesEntity>();
+        if(!recentFiles.isEmpty()){
+            files = resourcesDao.getRelationFileByOne(recentFiles);
+            for (FilesEntity file : files){
+                System.out.println("recommendFileId: "+file.getId());
+            }
         }
+
 
         return files;
 

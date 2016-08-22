@@ -2,11 +2,9 @@ package com.erudition.controller;
 
 import com.erudition.bean.CollectionEntity;
 import com.erudition.bean.FilesEntity;
+import com.erudition.bean.LogEntity;
 import com.erudition.bean.UserEntity;
-import com.erudition.dao.CollectionDao;
-import com.erudition.dao.ConfigDao;
-import com.erudition.dao.ResourcesDao;
-import com.erudition.dao.UserDao;
+import com.erudition.dao.*;
 import com.erudition.util.GlobalVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +31,10 @@ public class UserController {
     @Autowired
     @Qualifier("userDao")
     private UserDao userDao;
+
+    @Autowired
+    @Qualifier("logDao")
+    private LogDao logDao;
 
     @Autowired
     @Qualifier("configDao")
@@ -100,7 +107,7 @@ public class UserController {
                 // redirectAttributes.addAttribute("loginMsg",message);
 
 
-
+                deleteTimeOut();
                 System.out.println("message : " + usernmaemessage);
                 if(user.getAuthority().equals("1"))return "redirect:/admin/index";
                 return "redirect:/index";
@@ -167,5 +174,97 @@ public class UserController {
         httpSession.invalidate();
         return "redirect:/index";
     }
+
+
+    public void deleteTimeOut(){
+        List<FilesEntity> files = resourcesDao.getAllFiles();
+        List<FilesEntity> filesToDelete = new ArrayList<>();
+
+        for(FilesEntity f:files){
+            String originaltime = f.getCreateTime().toString();
+            System.out.println("originaltime:   "+originaltime);
+            Date date=new Date();
+            DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currenttime=format.format(date);
+            int real_delete = daysBetween(originaltime,currenttime);
+            int rule_delete = Integer.parseInt(configDao.getByKey("rule_delete"));
+
+            System.out.println("zqh:test:fileid="+f.getId());
+
+
+            if (real_delete > rule_delete ){
+                if(f.getRelations()==null){
+                    resourcesDao.delete(f);
+                }else{
+                    String[] relations = f.getRelations().split(",");
+
+                    for(String relation : relations){
+                        if(!relation.equals("") && relation!=null){
+                            FilesEntity fileRela = resourcesDao.getById(Integer.valueOf(relation));
+                            String[] res=null;
+                            String newRes = "";
+                            String fileRela_rela = fileRela.getRelations();
+
+                            System.out.println("zqh:test:relation="+relation);
+
+                            System.out.println("zqh:test:fileRela_rela="+fileRela_rela);
+
+                            if(fileRela_rela.indexOf(",")!=-1){
+                                res = fileRela_rela.split(",");
+                                for(String re : res){
+                                    System.out.println("zqh:test:re="+re);
+
+                                    if(Integer.valueOf(re)!=f.getId()){
+                                        if(!newRes.equals("")){
+                                            newRes += ",";
+                                        }
+                                        newRes += re;
+                                    }
+                                }
+                            }else if(!fileRela_rela.equals("") && Integer.valueOf(fileRela.getRelations())!=f.getId()){
+                                newRes = fileRela.getRelations();
+                            }
+
+                            System.out.println("zqh:test:newRes="+newRes);
+
+                            fileRela.setRelations(newRes);
+                            resourcesDao.update(fileRela);
+                        }
+                    }
+
+                    resourcesDao.delete(f);
+                }
+
+                filesToDelete.add(f);
+
+                logDao.deteleLogByFileId(f.getId());
+
+                collectionDao.deleteByFid(f.getId());
+            }
+        }
+
+
+        System.out.println("删除超期文件！！！！！！！！！！！");
+    }
+
+
+    public static int daysBetween(String smdate,String bdate){
+        long between_days = 0;
+       try{
+           SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+           Calendar cal = Calendar.getInstance();
+           cal.setTime(sdf.parse(smdate));
+           long time1 = cal.getTimeInMillis();
+           cal.setTime(sdf.parse(bdate));
+           long time2 = cal.getTimeInMillis();
+           between_days=(time2-time1)/(1000*3600*24);
+
+
+       }catch (Exception e){
+           System.out.println(e.getStackTrace());
+       }
+        return Integer.parseInt(String.valueOf(between_days));
+    }
+
 
 }

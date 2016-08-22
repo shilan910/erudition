@@ -109,8 +109,10 @@ public class FileManageController {
         UserEntity user = (UserEntity)httpSession.getAttribute("loginUser");
         Page<FilesEntity> files = resourcesDao.getResourcesByKeyword(pageNum, 2, key);
 
+        if(!files.getList().isEmpty()){
+            httpSession.setAttribute("relationsFiles",resourcesDao.getRelationFileByOne(files.getList()));
+        }
 
-        httpSession.setAttribute("relationsFiles",resourcesDao.getRelationFileByOne(files.getList()));
         httpSession.setAttribute("searchresult",files);
         httpSession.setAttribute("flagofcollection",0);
         if(user.getAuthority().equals("1")){
