@@ -16,7 +16,9 @@ pageEncoding="UTF-8"%>
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="${assetsPath}/js/jquery-accordion-menu.js"></script>
     <script src="${assetsPath}/js/icheck.js"></script>
-    <script src="${assetsPath}/js/template.js"></script>
+    <script src="${assetsPath}/js/template-native.js"></script>
+
+    <script src="${assetsPath}/js/result.js"></script>
     <style type="text/css">
         *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
         body{background:#f0f0f0;}
@@ -205,7 +207,7 @@ pageEncoding="UTF-8"%>
                     <div class="flex-3">更新日期</div>
                 </div>
                 <div class="line"></div>
-                <c:forEach var="files" items="${searchresult.list}">
+                <c:forEach var="files" items="${page.list}">
                     <div class='body-floor flex-row'><div class='flex-3 flex-row'>
                         <div class='flex-1 checkbox'><input type='checkbox'/></div>
                         <div class='flex-1 file-image'><i class="iconfont icon-${files.type}"></i></div>
@@ -216,23 +218,33 @@ pageEncoding="UTF-8"%>
                     </div>
                     <div class='line'></div>
                 </c:forEach>
-                <c:if test="${flagofcollection==1}">
-                <c:forEach items="${showcollections}" var="collections">
-                    <div class='body-floor flex-row'>
-                        <div class='flex-3 flex-row'>
-                            <div class='flex-1 checkbox'>
-                                <input type='checkbox'/>
-                            </div>
-                            <div class='flex-1 file-image'><i class="iconfont icon-${collections.type}"></i></div>
-                            <div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>${collections.title}</a></span></div>
-                        </div>
-                        <div class='flex-3 file-size'><span>${collections.size}</span></div>
-                        <div class='flex-3 file-creator'>${collections.creater}</div>
-                        <div class='flex-3 file-time'>${collections.createTime}</div>
-                    </div>
-                    <div class='line'></div>
-                </c:forEach>
-                </c:if>
+
+                <%--<script>--%>
+                    <%--var pageNow=${page.pageNow};--%>
+                    <%--var totalPageCount=${page.totalPageCount};--%>
+                    <%--var hasPre=${page.hasPre};--%>
+                    <%--var hasNext=${page.hasNext};--%>
+                    <%--var searchResult1=new searchResult(pageNow,hasPre,hasNext,totalPageCount);--%>
+                <%--</script>--%>
+
+
+                <%--<c:if test="${flagofcollection==1}">--%>
+                    <%--<c:forEach items="${showcollections}" var="collections">--%>
+                        <%--<div class='body-floor flex-row'>--%>
+                            <%--<div class='flex-3 flex-row'>--%>
+                                <%--<div class='flex-1 checkbox'>--%>
+                                    <%--<input type='checkbox'/>--%>
+                                <%--</div>--%>
+                                <%--<div class='flex-1 file-image'><i class="iconfont icon-${collections.type}"></i></div>--%>
+                                <%--<div class='file-name flex-4'><span id='"+file.id+"'><a href='#'>${collections.title}</a></span></div>--%>
+                            <%--</div>--%>
+                            <%--<div class='flex-3 file-size'><span>${collections.size}</span></div>--%>
+                            <%--<div class='flex-3 file-creator'>${collections.creater}</div>--%>
+                            <%--<div class='flex-3 file-time'>${collections.createTime}</div>--%>
+                        <%--</div>--%>
+                        <%--<div class='line'></div>--%>
+                    <%--</c:forEach>--%>
+                <%--</c:if>--%>
                 <%--<nav>--%>
                     <%--<ul class="pagination pull-right">--%>
                         <%--<li><a href="#">上一页</a></li>--%>
@@ -246,6 +258,8 @@ pageEncoding="UTF-8"%>
                         <%--</li>--%>
                     <%--</ul>--%>
                 <%--</nav>--%>
+
+
             </div>
 
         </div>
@@ -405,13 +419,13 @@ pageEncoding="UTF-8"%>
 
     })(jQuery);
 </script>
-<%--主页主要js--%>
-<script src="${assetsPath}/js/indexTab.js" charset="utf-8"></script>
-<script>
-    $(function(){
-        var indextab=new indexTab();
-    })
-</script>
+<%--&lt;%&ndash;主页主要js&ndash;%&gt;--%>
+<%--<script src="${assetsPath}/js/indexTab.js" charset="utf-8"></script>--%>
+<%--<script>--%>
+    <%--$(function(){--%>
+        <%--var indextab=new indexTab();--%>
+    <%--})--%>
+<%--</script>--%>
 
 <!--icheck    radio不能正常使用-->
 <script>
@@ -496,5 +510,70 @@ pageEncoding="UTF-8"%>
         })
     })
 </script>--%>
+
+<%--分页模板--%>
+<script type="text/html" id="Tpage">
+    <nav>
+        <ul class="pagination pull-right">
+            <$if(hasPre){$>
+            <li><a page="<$=currentPage-1$>">上一页</a></li>
+            <$}else{ $>
+            <li class="disabled"><a href="#">上一页</a></li>
+            <$}$>
+
+            <$if(currentPage!=1){$>
+            <li><a page="1">1</a></li>
+            <%--<$}else{$>--%>
+            <%--<li><a page="1" class="active">1</a></li>--%>
+            <$}$>
+            <%--curentPage之前--%>
+            <$if(currentPage<=5){$>
+            <$for (var i=2 ; i<=(currentPage-1);i++){$>
+            <%--<li><a href="<$=root$>?page=<$=i$>"><$=i$></a></li>--%>
+            <li><a page="<$=i$>"><$=i$></a></li>
+            <$}$>
+            <$}else{$>
+            <li class="disabled"><a href="#">...</a></li>
+            <$for (var i=(currentPage-2) ; i<=(currentPage-1);i++){$>
+            <li><a page="<$=i$>"><$=i$></a></li>
+            <$}$>
+            <$}$>
+
+            <li class="active"><a page="<$=currentPage$>"><$=currentPage$></a></li>
+
+            <%--currentPage之后--%>
+            <$if((currentPage >= totalPageCount - 4 || totalPageCount - 4 <= 0)){$>
+            <$for (var i=(currentPage+1) ; i<=(totalPageCount);i++){$>
+            <li><a page="<$=i$>"><$=i$></a></li>
+            <$}$>
+            <$}else{$>
+            <$for (var i=(currentPage+1) ; i<=(currentPage+2);i++){$>
+            <li><a page="<$=i$>"><$=i$></a></li>
+            <$}$>
+            <li class="disabled"><a href="#">...</a></li>
+            <li><a page="<$=totalPageCount$>"><$=totalPageCount$></a></li>      <%--//还需要绑定点击事件我擦--%>
+            <$}$>
+
+            <$if(hasNext){$>
+            <li><a page="<$=nextPage$>" >下一页</a></li>
+            <$}else{$>
+            <li class="disabled"><a href="#">下一页</a></li>
+            <$}$>
+
+
+        </ul>
+    </nav>
+
+</script>
+
+<script>
+    var pageNow=${page.pageNow};
+    var totalPageCount=${page.totalPageCount};
+    var hasPre=${page.hasPre};
+    var hasNext=${page.hasNext};
+    var key="${key}";
+    var searchResult1=new searchResult(pageNow,hasPre,hasNext,totalPageCount,key);
+</script>
+
 </body>
 </html>
