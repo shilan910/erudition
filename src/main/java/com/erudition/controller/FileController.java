@@ -79,10 +79,10 @@ public class FileController {
 
                 String name = resourcesDao.saveFiles(cate1, cate2, cate3, keywords, originalName,file, user);
 
-                
+
                 //开始设置关联
-//                List<FilesEntity> allFilesInDatabase = (List<FilesEntity>) session.getAttribute("allfiles");
-//                setRelation(originalName, allFilesInDatabase, name);
+                List<FilesEntity> allFilesInDatabase = (List<FilesEntity>) session.getAttribute("allfiles");
+                setRelation(originalName, allFilesInDatabase, name);
             }
 
         }
@@ -110,14 +110,15 @@ public class FileController {
      */
     private String[] calculateKeywords(String name) {
         //获取关键字们
-        WordFrequency wordFrequency = new WordFrequency();
-        String[] words = wordFrequency.wordFre("/usr/local/erudition/video/" + name, 5);
-        System.out.println("begin得到关键字！！！");
-        for (String word : words) {
-            System.out.println(word);
-        }
-        System.out.println("end得到关键字！！！");
-        return words;
+//        WordFrequency wordFrequency = new WordFrequency();
+//        String[] words = wordFrequency.wordFre("/usr/local/erudition/video/" + name, 5);
+//        System.out.println("begin得到关键字！！！");
+//        for (String word : words) {
+//            System.out.println(word);
+//        }
+//        System.out.println("end得到关键字！！！");
+//        return words;
+        return resourcesDao.getKeyWords();
     }
 
     /**

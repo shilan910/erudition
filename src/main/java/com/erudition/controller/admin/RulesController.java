@@ -1,6 +1,9 @@
 package com.erudition.controller.admin;
 
+import com.erudition.dao.ConfigDao;
 import com.erudition.util.GlobalVariable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +16,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/admin/file")
 public class RulesController {
+
+    @Autowired
+    @Qualifier("configDao")
+    private ConfigDao configDao;
 
     @RequestMapping(value = "/rules", method = RequestMethod.GET)
     public String rules(HttpSession session){
@@ -27,10 +34,17 @@ public class RulesController {
     public String rules(HttpSession session , String rule_relation ,
                         String rule_delete , String rule_collection){
 
-        GlobalVariable.getInstance().insert("rule_relation",rule_relation);
-        GlobalVariable.getInstance().insert("rule_delete",rule_delete);
-        GlobalVariable.getInstance().insert("rule_collection",rule_collection);
-        GlobalVariable.getInstance().insert("adminSidebarActive","2");
+//        GlobalVariable.getInstance().insert("rule_relation",rule_relation);
+//        GlobalVariable.getInstance().insert("rule_delete",rule_delete);
+//        GlobalVariable.getInstance().insert("rule_collection",rule_collection);
+//        GlobalVariable.getInstance().insert("adminSidebarActive","2");
+
+        configDao.updateValue("rule_relation",rule_relation);
+        configDao.updateValue("rule_delete", rule_delete);
+        configDao.updateValue("rule_collection",rule_collection);
+        configDao.updateValue("adminSidebarActive","2");
+
+
         session.setAttribute("rule_relation",rule_relation);
         session.setAttribute("rule_delete",rule_delete);
         session.setAttribute("rule_collection",rule_collection);

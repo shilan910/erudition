@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>Erudition</title>
 </head>
 <link rel="stylesheet" href="${assetsPath}/css/app.min.css"/>
 
@@ -67,160 +67,11 @@
 
 <body>
 <div class="mask"></div>
-<!--<div class="popwin_tips">-->
-<!--<div>这里是消息</div>-->
-<!--</div>-->
 
-<header>
-  <div class="container-fluid">
-
-    <div class="row">
-      <div class="col-md-4 logo">
-        Erudition
-      </div>
-      <div class="col-md-4 search">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="搜索内容...">
-                              <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">搜索</button>
-                              </span>
-        </div><!-- /input-group -->
-      </div>
-      <div class="col-md-4 button-group">
-        <span class="login"><a href="javascript:void(0)" onclick="openLogin()">登录</a></span>
-        <span class="registe"><a href="javascript:void(0)" onclick="openRegister()">注册</a></span>
-      </div>
-
-
-      <div id="modal">
-        <!--弹出式登录框-->
-        <div class="modal-dialog" id="login">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" onclick="closeLogin()">x</button>
-              <h1 class="text-center text-primary">登录</h1>
-            </div>
-            <div class="modal-body center-block">
-              <form action="" class="form center-block">
-                <div class="input-group">
-                  <!--<label for="examInputEmail1">邮箱:</label>-->
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                  <input type="text" class="form-control input-lg" id="examInputEmail1" name="username"
-                         placeholder="请输入您的用户名"/>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                  <input type="password" class="form-control input-lg" id="examInputPassword1" name="password"
-                         placeholder="请输入您的密码"/>
-                </div>
-
-                <div class="form-group">
-                  <input type="submit" class="btn btn-primary btn-lg btn-block" value="登录" id="login-in">
-                  <span><a href="javascript:void(0)" style="text-align: left">找回密码</a></span>
-                  <span><a href="javascript:void(0)" class="pull-right re-register">注册</a></span>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-            </div>
-          </div>
-        </div>
-        <!--注册框-->
-        <div class="modal-dialog" id="register">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" onclick="closeRegister()">x</button>
-              <h1 class="text-center text-primary">注册</h1>
-            </div>
-            <div class="modal-body center-block">
-              <form action="" class="form center-block">
-                <div class="input-group">
-                  <!--<label for="examInputEmail1">邮箱:</label>-->
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                  <input type="email" class="form-control input-lg" id="username"
-                         placeholder="请输入您的用户名"/>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                  <input type="password" class="form-control input-lg" id="password1"
-                         placeholder="请输入您的密码"/>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                  <input type="password" class="form-control input-lg" id="password2"
-                         placeholder="确认密码"/>
-                </div>
-                <div class="input-group">
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                  <input type="password" class="form-control input-lg" id="password2"
-                         placeholder="邮箱"/>
-                </div>
-
-                <div class="form-group">
-                  <button class="btn btn-primary btn-lg btn-block">注册</button>
-                  <span><a href="javascript:void(0)" style="text-align: left">找回密码</a></span>
-                  <span><a href="javascript:void(0)" class="pull-right re-login">登录</a></span>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-
-            </div>
-          </div>
-        </div>
-        <!--遮罩层-->
-        <div class="modal-dialog-mask"></div>
-      </div>
-
-
-    </div>
-  </div>
-
-</header>
+<jsp:include page="../common/header.jsp" />
 
 <div class="main flex-row">
-  <div class="flex-2">
-    <div class="nav">
-      <div id="jquery-accordion-menu" class="jquery-accordion-menu white">
-        <div id="user-image">
-          <a href=""><img src="${assetsPath}/images/user.jpg" alt="" class="img-circle"/></a>
-          <div class="user-name">当前用户</div>
-        </div>
-
-        <div class="jquery-accordion-menu-header" id="form"></div>                 <!--//里面的form是动态添加的-->
-        <ul id="demo-list" class="nav-list">
-
-          <li><a href="#"><i class="fa fa-home"></i>主页 </a></li>
-          <li><a href="#"><i class="fa fa-glass"></i>共享目录 </a></li>
-          <li><a href="#"><i class="fa fa-file-image-o"></i>个人收藏 </a><span class="jquery-accordion-menu-label">
-                12 </span></li>
-          <li><a href="#"><i class="fa fa-cog"></i>服务 </a>
-            <ul class="submenu">
-              <li><a href="#">Web Design </a></li>
-              <li><a href="#">Hosting </a></li>
-              <li><a href="#">Design </a>
-                <ul class="submenu">
-                  <li><a href="#">Graphics </a></li>
-                  <li><a href="#">Vectors </a></li>
-                  <li><a href="#">Photoshop </a></li>
-                  <li><a href="#">Fonts </a></li>
-                </ul>
-              </li>
-              <li><a href="#">Consulting </a></li>
-            </ul>
-          </li>
-          <li class="active"><a href="#"><i class="fa fa-home"></i>统计分析 </a></li>
-
-        </ul>
-        <div class="jquery-accordion-menu-footer">
-          Footer
-        </div>
-      </div>
-    </div>
-
-    <div class="clearfix"></div>
-  </div>
-
+  <jsp:include page="../common/admin_sidebar.jsp" />
 
   <div class="contents flex-8" id="statistics">
     <div class="header-all">

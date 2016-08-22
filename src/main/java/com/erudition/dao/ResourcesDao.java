@@ -29,6 +29,7 @@ import java.util.List;
 @Repository("resourcesDao")
 public class ResourcesDao extends BaseDao {
 
+    public String keyWords[] = new String[100];
 
     @Autowired
     @Qualifier("categoryDao")
@@ -150,6 +151,7 @@ public class ResourcesDao extends BaseDao {
 
         //提取关键字
         String[] words = new String[100];
+        String keyWordsTosave = "";
 
         if(type.equals("doc")){
             TextRead textRead = new TextRead();
@@ -161,27 +163,19 @@ public class ResourcesDao extends BaseDao {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
-                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
-                category.getCategoryName() + file.getOriginalFilename() + "#"+keywordsFromAnalyzer+" "+keywords);
+            keyWordsTosave = keywordsFromAnalyzer+" "+keywords;
+
         }else{
-            String keywordsToSave = categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
-                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
-                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords;
-            fileEntity.setKeywords(keywordsToSave);
+            keyWordsTosave = keywords;
         }
 
+        fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
+                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
+                category.getCategoryName() + file.getOriginalFilename() + "#"+keyWordsTosave);
 
-//
-//        String keywordsToSave = categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
-//                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
-//                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords;
-//        if(originalName.equals("云计算设计报告.docx")){
-//            keywordsToSave += " 旅游 比价 综合设计";
-//        }
-//        fileEntity.setKeywords(keywordsToSave);
 
-//        fileEntity.setThumb(thumbPath);
+        String keyWords[] = keyWordsTosave.split(" ");
+
 
 
         save(fileEntity);
@@ -243,5 +237,8 @@ public class ResourcesDao extends BaseDao {
         save(log);
     }
 
+    public String[] getKeyWords(){
+        return keyWords;
+    }
 
 }
