@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -101,20 +102,33 @@ public class FileManageController {
         return "redirect:/admin/filecollect/category/"+cateid;
     }
 
+//    @ResponseBody
     @RequestMapping(value = "/search" , method = RequestMethod.POST)
     public String search(HttpSession httpSession,Model model,String key,String page){
 
         int pageNum = page == null ? 1 : Integer.valueOf(page);
 
         UserEntity user = (UserEntity)httpSession.getAttribute("loginUser");
-        Page<FilesEntity> files = resourcesDao.getResourcesByKeyword(pageNum, 2, key);
+        Page<FilesEntity> files = resourcesDao.getResourcesByKeyword(pageNum, 5, key);
 
         if(!files.getList().isEmpty()){
             httpSession.setAttribute("relationsFiles",resourcesDao.getRelationFileByOne(files.getList()));
         }
 
-        httpSession.setAttribute("searchresult",files);
+
+        httpSession.setAttribute("page",files);
         httpSession.setAttribute("flagofcollection",0);
+        httpSession.setAttribute("key",key);
+
+
+        System.out.println("pageNumdfdfd:"+pageNum);
+        System.out.println("page.totalPageCount:"+files.getTotalPageCount());
+
+        System.out.println("key:"+key);
+        System.out.println("page:"+page);
+
+        httpSession.setAttribute("currentPage", pageNum);
+
         if(user.getAuthority().equals("1")){
             System.out.println("你是管理员！");
             return "admin/file_result";

@@ -375,11 +375,16 @@ pageEncoding="UTF-8"%>
 </script>
 
 <%--mp3模板--%>
-<script type="text/html" id="Tmp3" style="display:none">
-    <div id="mp3">
+<script type="text/html" id="Tmp3">
+    <div id="mp3" style="display:none">
         <div id="mp3-player" class="aplayer"></div>
         <div class="close">×</div>
     </div>
+</script>
+
+<%--推荐和近期浏览模板,通用的模板--%>
+<script type="text/html" id="Tfile">
+
 </script>
 </body>
 </html>

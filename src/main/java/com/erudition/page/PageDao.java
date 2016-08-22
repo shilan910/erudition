@@ -19,10 +19,21 @@ public class PageDao extends BaseDao {
     public <T> Criteria getCriteria(Class<T> c) {
         return getSession().createCriteria(c);
     }
-    public <T> long getTotalRowCount(Class<T> c) {
-        return (long) getCriteria(c).setProjection(Projections.rowCount())
-                .uniqueResult();
+//    public <T> long getTotalRowCount(Class<T> c) {
+//        return (long) getCriteria(c).setProjection(Projections.rowCount())
+//                .uniqueResult();
+//    }
+
+
+    public <T> long getTotalRowCount(Class<T> c , Query query) {
+        List<T> list = query.list();
+        return list.size();
     }
+
+
+
+
+
     public <T> List<T> getPageList(int pageSize, int pageNow, Class<T> c){
         Criteria criteria = getCriteria(c);
         criteria.setFirstResult((pageNow-1)*pageSize);

@@ -4,6 +4,7 @@ import com.erudition.bean.CategoryEntity;
 import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CategoryDao;
+import com.erudition.dao.ConfigDao;
 import com.erudition.dao.ResourcesDao;
 import com.erudition.dao.UserDao;
 import com.erudition.util.nlpir.WordFrequency;
@@ -35,6 +36,10 @@ public class FileController {
     @Autowired
     @Qualifier("resourcesDao")
     ResourcesDao resourcesDao;
+
+    @Autowired
+    @Qualifier("configDao")
+    ConfigDao configDao;
 
     @Autowired
     @Qualifier("categoryDao")
@@ -79,9 +84,9 @@ public class FileController {
 
                 String name = resourcesDao.saveFiles(cate1, cate2, cate3, keywords, originalName,file, user);
 
-                
+
                 //开始设置关联
-                List<FilesEntity> allFilesInDatabase = (List<FilesEntity>) session.getAttribute("allfiles");
+                List<FilesEntity> allFilesInDatabase = resourcesDao.getAllFiles();
                 setRelation(originalName, allFilesInDatabase, name);
             }
 
@@ -110,14 +115,7 @@ public class FileController {
      */
     private String[] calculateKeywords(String name) {
         //获取关键字们
-        WordFrequency wordFrequency = new WordFrequency();
-        String[] words = wordFrequency.wordFre("/usr/local/erudition/video/" + name, 5);
-        System.out.println("begin得到关键字！！！");
-        for (String word : words) {
-            System.out.println(word);
-        }
-        System.out.println("end得到关键字！！！");
-        return words;
+        return resourcesDao.getKeyWords();
     }
 
     /**
@@ -173,9 +171,17 @@ public class FileController {
         String suffixName = originalName.substring(originalName.lastIndexOf(".") + 1);
         //目前只针对txt类型文件进行关键字计算
         //因为涉及到从session域中取数据，因此这部分逻辑必须在contoller中实现
-        if (suffixName.equals("txt")) {
+        System.out.println("文件类型：-----------》"+suffixName);
+      //  if (suffixName.equals("txt")) {
             System.out.println(originalName);
             String[] words = calculateKeywords(name);
+            System.out.println("关键词:--------->");
+            for(String w:words){
+                System.out.println(w);
+            }
+            System.out.println("1213223423423412414134324234234143234123413");
+            System.out.println("filessize:--------->"+files.toString());
+
             for (FilesEntity f : files) {
                 int count = 0;
                 String key = f.getKeywords();
@@ -184,10 +190,18 @@ public class FileController {
                         count++;
                     }
                 }
-                //目前先用具体数字来表示，但当用户设定后应该使用一个全局变量来保存
-                if (count >= 3) {
-                    relations.add(f.getId());
+                System.out.println("count:---------->"+count);
+                //从数据库中取出管理员设定的阈值:rule_relation
+                int rule_relation = Integer.parseInt(configDao.getByKey("rule_relation"));
+                if (count >= rule_relation) {
+                    System.out.println("具有关联关系！！！！！！！");
+                    if(f.getId()!=resourcesDao.getMaxId()){
+                        relations.add(f.getId());
+                        System.out.println("添加成功！！！！！！");
+                    }
+
                 }
+                System.out.println("filename:     "+f.getTitle());
             }
             //认为此时已经得到了所有有关联的文件的id，于是开始设置新文件的relations字段
             if (!relations.isEmpty()) {
@@ -195,6 +209,7 @@ public class FileController {
                 for(int i:relations){
                     System.out.println("relations:"+i);
                 }
+                System.out.println("开始设置新文件的relations字段!!!!");
                 setNewFileRelation(originalName, relations);
             }
             //此时没有与新文件有关联的文件，但也应该设置新文件的relations字段为词频统计结果
@@ -209,7 +224,7 @@ public class FileController {
                     resourcesDao.update(f);
                 }
             }
-        }
+       // }
     }
 
 

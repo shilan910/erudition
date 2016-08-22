@@ -3,6 +3,20 @@
  */
 //对象级别的插件开发----------必须在页面刷新时重新执行
 
+//$(function(){
+//    $(document).ready(function(){
+//        iCheckready();
+//    });
+//    var iCheckready=function(){
+//        console.log("调用了icheck插件")
+//        $('input').iCheck({
+//            checkboxClass: 'icheckbox_square-blue',
+//            radioClass: 'iradio_square-blue',
+//            increaseArea: '20%' // optional
+//        });
+//    };
+//})
+
 ;(function($){
     var indexTab=function(){
         var self=this;
@@ -38,6 +52,14 @@
             $(".contents .header-all").empty();
             console.log("开始渲染常用目录")
             self.CollectionRederDom();
+        })
+
+        //推荐和浏览记录
+        $(document).on("click","#recommend_getwin",function(){
+            self.RecommendRederDom();
+        })
+        $(document).on("click","#history_getwin",function(){
+            self.RecentRederDom("1");
         })
 
 
@@ -85,11 +107,44 @@
 
             return filestr;
         },
-        getDataFilesNolist:function(url){
+        getDataFilesNolist:function(url,page){
             var self=this;
-            console.log("开始获取共享目录数据");
-            //var url="/erudition/collection/showcollections";
-            var filestr=""
+            var filestr="";
+            //$.ajax({
+            //    url:url,
+            //    type:"GET",
+            //    data:{page:page},
+            //    async:false,
+            //    success:(function(data){
+            //        //获取控制信息
+            //        self.pageNow=data.pageNow;
+            //        self.totalPageCount=data.totalPageCount;
+            //        self.hasPre=data.hasPre;
+            //        self.hasNext=data.hasNext;
+            //        $.each(data.list,function(i, file){
+            //            //var size=self.turnSize(file.size);
+            //
+            //            var time=self.turnDate(file.createTime);
+            //            filestr=['                    <div class="body-floor flex-row">',
+            //                    '                        <div class="flex-3 flex-row">',
+            //                    '                            <div class="flex-1 checkbox">',
+            //                    '                                <input type="checkbox"/>',
+            //                    '                            </div>',
+            //                    '                            <div class="flex-1 file-image"><i class="iconfont icon-'+file.type+'"></i></div>',
+            //                    '                            <div class="file-name flex-4"><span id="'+file.id+'"><a href="#">'+file.title+'</a></span></div>',
+            //                    '                        </div>',
+            //                    '                        <div class="flex-3 file-size"><span>'+file.size+'</span></div>',
+            //                    '                        <div class="flex-3 file-creator">'+file.creater+'</div>',
+            //                    '                        <div class="flex-3 file-time">'+time+'</div>',
+            //                    '                    </div>',
+            //                    '                    <div class="line"></div>'].join("")+filestr;
+            //        })
+            //    })
+            //
+            //})
+
+
+
             $.ajaxSetup({async: false});
             $.getJSON(url , function(data){
                 console.log("data"+data);
@@ -111,7 +166,7 @@
                             '                    <div class="line"></div>'].join("")+filestr;
                 })
             })
-            //console.log("获取的最终的string"+filestr);
+            console.log("获取的最终的string"+filestr);
             return filestr;
         },
         SharerRederDom:function(third_cate_id,page){
@@ -258,19 +313,18 @@
             var size1 = parseFloat(size).toFixed(2)+unit;
             return size1;
         },
-        RecommendRederDom:function(){
+        RecommendRederDom:function(){                 //包括推荐和近期浏览
             var self=this;
-            var recentFile=self.getDataFilesNolist("/erudition/recent");
             var recommendFile=self.getDataFilesNolist("/erudition/recommend");
-            //console.log("获取的数据为"+recentFile);
+            $(".main .header-all").empty();
+
             var str=['<div class="header flex-row home" id="home_header">',
                 '                <ul class="list-inline">',
                 '                    <li class="header-list active" id="recommend_getwin">推荐</li>',
                 '                    <li class="header-list" id="history_getwin">最近浏览</li>',
                 '                </ul>',
                 '            </div>',
-                //'            <!--<div class="line"></div>-->',
-                '            <div class="file-body recommend_win" style="display: block">',
+                '            <div class="file-body recommend_win" style="display: none">',
                 //'                <!--<input type="checkbox"/>-->',
                 '                <div class="first-floor flex-row">',
                 '                    <div class="flex-3">',
@@ -291,27 +345,39 @@
                 '                </div>',
                 '                <div class="line"></div>',
                 recommendFile,
-                //'                    <div class="body-floor flex-row">',
-                //'                        <div class="flex-3 flex-row">',
-                //'                            <div class="flex-1 checkbox"><input type="checkbox"/></div>',
-                ////'                            <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->',
-                //'                            <div class="flex-1 file-image"><i class="iconfont icon-${recommendfile.type}"></i></div>',
-                //'                            <div class="file-name flex-4"><span><a href="#">${recommendfile.title}</a></span></div>',
-                //'                        </div>',
-                //'                        <div class="flex-3 file-size">',
-                //'                            <span>${recommendfile.size}</span>',
-                //'                        </div>',
-                //'                        <div class="flex-3 file-creator">',
-                //'                                ${recommendfile.creater}',
-                //'                        </div>',
-                //'                        <div class="flex-3 file-time">',
-                //'                                ${recommendfile.createrTime}',
-                //'                        </div>',
-                //'                    </div>',
-                //'                    <div class="line"></div>',
+                '            </div>'].join("");
+            $(".main .header-all").append(str);
+            $(".recommend_win").fadeIn(200);
+            iCheckready();
+        },
+        RecentRederDom:function(page){
+            var self=this;
+            //var recentFile=self.getDataFilesNolist("/erudition/recent",page);
+            var recentFile=self.getDataFilesAddlist("/erudition/recent",page);
+            //console.log("recentFIle:"+recentFile);
+
+            template.config("openTag", "<$");
+            template.config("closeTag", "$>");
+
+            //处理分页
+            var pageData={
+                root:"/erudition/recent",
+                currentPage:self.pageNow,
+                nextPage:self.pageNow+1,
+                hasPre:self.hasPre,
+                hasNext:self.hasNext,
+                totalPageCount:self.totalPageCount
+            };
+            var pageHtml=template("Tpage",pageData);
+
+            $(".main .header-all").empty();
+            var str=['<div class="header flex-row home" id="home_header">',
+                '                <ul class="list-inline">',
+                '                    <li class="header-list" id="recommend_getwin">推荐</li>',
+                '                    <li class="header-list active" id="history_getwin">最近浏览</li>',
+                '                </ul>',
                 '            </div>',
                 '            <div class="file-body history_win" style="display: none">',
-                //'                <!--<input type="checkbox"/>-->',
                 '                <div class="first-floor flex-row">',
                 '                    <div class="flex-3">',
                 '                        <div>',
@@ -330,55 +396,27 @@
                 '                    </div>',
                 '                </div>',
                 '                <div class="line"></div>',
-                //'                <c:forEach var="recentfile" items="${recentFiles}" begin="0" end="8">',
-                //'                    <div class="body-floor flex-row">',
-                //'                        <div class="flex-3 flex-row">',
-                //'                            <div class="flex-1 checkbox"><input type="checkbox"/></div>',
-                //'                            <!--<div class="flex-1 file-image"><i class="fa fa-folder-o fa-3x"></i></div>-->',
-                //'                            <div class="flex-1 file-image"><i class="iconfont icon-${recentfile.type}"></i></div>',
-                //'                            <div class="file-name flex-4"><span><a href="#">${recentfile.title}</a></span></div>',
-                //'                        </div>',
-                //'                        <div class="flex-3 file-size">',
-                //'                            <span>${recentfile.size}</span>',
-                //'                        </div>',
-                //'                        <div class="flex-3 file-creator">',
-                //'                            ${recentfile.creater}',
-                //'                        </div>',
-                //'                        <div class="flex-3 file-time">',
-                //'                            ${recentfile.createrTime}',
-                //'                        </div>',
-                //'                    </div>',
-                //'                    <div class="line"></div>',
-                //'                </c:forEach>',
                 recentFile,
+                pageHtml,
                 '            </div>'].join("");
             $(".main .header-all").append(str);
-            //绑定点击事件
-            $("#recommend_getwin").click(function(){
-                var recentFile=self.getDataFilesNolist("/erudition/recommend");
-                $(this).parent().children().each(function(){
-                    $(this).removeClass("active");
-                })
-                $(this).addClass("active");
-                $(".history_win").fadeOut(150,function(){
-                    $(".recommend_win").fadeIn(150);
-                });
-            })
-            $("#history_getwin").click(function(){
-                var recentFile=self.getDataFilesNolist("/erudition/recent");
-                $(this).parent().children().each(function(){
-                    $(this).removeClass("active");
-                })
-                $(this).addClass("active");
-                $(".recommend_win").fadeOut(150,function(){
-                    $(".history_win").fadeIn(150);
-                });
-            });
+            $(".history_win").fadeIn(200);
             iCheckready();
+            self.HangRecentPage();
         },
-        RecentRederDom:function(){
+        HangRecentPage:function(){
+            var self=this;
+            $(".pagination li a").click(function(){
+                if(!$(this).parent().hasClass("disabled")){
+                    console.log("没有disabled");
+                    var page=$(this).attr("page");
+                    console.log("点击了页码"+page);
+                    $(".contents .header-all").empty();
+                    self.RecentRederDom(page);
+                }
 
-        }
+            })
+        },
     };
     window["indexTab"]=indexTab;
 })(jQuery)

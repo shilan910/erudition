@@ -29,6 +29,7 @@ import java.util.List;
 @Repository("resourcesDao")
 public class ResourcesDao extends BaseDao {
 
+    public String keyWords[] = new String[100];
 
     @Autowired
     @Qualifier("categoryDao")
@@ -65,7 +66,8 @@ public class ResourcesDao extends BaseDao {
         List<FilesEntity> filesExits = new ArrayList<>();
 
         for(FilesEntity file : files) {
-            filesExits.add(file);
+            if(file != null)
+                filesExits.add(file);
         }
 
         for(FilesEntity file : files){
@@ -76,15 +78,18 @@ public class ResourcesDao extends BaseDao {
 
                 String [] relationsarr = relations.split(",");
                 for(String re:relationsarr){
-                    if(!re.equals("") && re!=null){
-                        int re_id = Integer.parseInt(re);
-                        boolean flag = true;
-                        if(re != null){
-                            for (FilesEntity fileExits : filesExits){
-                                if(fileExits.getId()==re_id) {
-                                    flag = false;
-                                    break;
-                                }
+
+                    boolean flag = true;
+                    if(re != null && !re.equals("")){
+                        int re_id = Integer.valueOf(re);
+
+                        for (FilesEntity fileExits : filesExits){
+                            System.out.println("zqhtest:re_id: "+re_id);
+                            System.out.println(filesExits.size());
+                            System.out.println("zqhtest: "+fileExits.getId());
+                            if(fileExits.getId() == re_id) {
+                                flag = false;
+                                break;
                             }
                             if (!flag)
                                 continue;
@@ -100,18 +105,21 @@ public class ResourcesDao extends BaseDao {
 
         }
         if(relationFiles.size()==0){
-            relationFiles.add(getById(7));
-            relationFiles.add(getById(8));
+            relationFiles.add(getById(142));
+            relationFiles.add(getById(148));
 
-            relationFiles.add(getById(30));
+            relationFiles.add(getById(157));
 
-            relationFiles.add(getById(22));
-            relationFiles.add(getById(14));
+            relationFiles.add(getById(162));
+            relationFiles.add(getById(170));
             System.out.println("111111111111123121111111111111");
 
 
         }
-
+        System.out.println("大小大小大小:::::::"+relationFiles.size());
+        for(FilesEntity f:relationFiles){
+            System.out.println("文件！！"+f.getTitle());
+        }
         return relationFiles;
     }
 
@@ -153,6 +161,7 @@ public class ResourcesDao extends BaseDao {
 
         //提取关键字
         String[] words = new String[100];
+        String keyWordsTosave = "";
 
         if(type.equals("doc")){
             TextRead textRead = new TextRead();
@@ -164,27 +173,21 @@ public class ResourcesDao extends BaseDao {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
-                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
-                category.getCategoryName() + file.getOriginalFilename() + "#"+keywordsFromAnalyzer+" "+keywords);
+            keyWordsTosave = keywordsFromAnalyzer+" "+keywords;
+
         }else{
-            String keywordsToSave = categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
-                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
-                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords;
-            fileEntity.setKeywords(keywordsToSave);
+            keyWordsTosave = keywords;
         }
 
+        fileEntity.setKeywords(categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
+                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
+                category.getCategoryName() + file.getOriginalFilename() + "#"+keyWordsTosave);
 
-//
-//        String keywordsToSave = categoryDao.getById(Integer.valueOf(cate1)).getCategoryName() +
-//                categoryDao.getById(Integer.valueOf(cate2)).getCategoryName() +
-//                category.getCategoryName() + file.getOriginalFilename() + "#"+keywords;
-//        if(originalName.equals("云计算设计报告.docx")){
-//            keywordsToSave += " 旅游 比价 综合设计";
-//        }
-//        fileEntity.setKeywords(keywordsToSave);
 
-//        fileEntity.setThumb(thumbPath);
+        keyWords = keyWordsTosave.split(" ");
+
+        System.out.println("dao关键词:-------->"+keywords);
+
 
 
         save(fileEntity);
@@ -208,6 +211,13 @@ public class ResourcesDao extends BaseDao {
         String hql = "from FilesEntity as files";
         Query query = query(hql);
         return query.list();
+    }
+
+    public int getMaxId(){
+        String hql = "select max(files.id) from FilesEntity as files";
+        Query query = query(hql);
+        int maxid = (int)query.uniqueResult();
+        return maxid;
     }
 
 
@@ -252,5 +262,8 @@ public class ResourcesDao extends BaseDao {
         save(log);
     }
 
+    public String[] getKeyWords(){
+        return keyWords;
+    }
 
 }

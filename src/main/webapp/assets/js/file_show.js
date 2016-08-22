@@ -33,6 +33,9 @@ $(function(){
         self.fileData;
         self.fileRelations;
 
+        //mp3
+        self.havemp3=0;
+
         console.log("调用插件");
 
         $(document).on("click",".body-floor .file-name span",function(event){         //这里的前提是有整体对象    这尼玛没法进行return了
@@ -224,7 +227,9 @@ $(function(){
                 '            <div class="content">',
                 '                <div class="file">',
                 '                    <div class="file-thumbnails">',
-                '                        <div class="file-name"><img src="/erudition/assets/images/'+filename+'" alt=""/></div>',
+                //'                        <div class="file-name"><img src="/erudition/assets/images/'+filename+'" alt=""/></div>',
+                '                        <div class="file-name"><i class="iconfont icon-'+file.type+'"></i></div>',
+
                 '                        <div class="file-class">'+file.type+'</div>',
                 '                    </div>',
                 '                    <div class="file-size">',
@@ -243,7 +248,7 @@ $(function(){
                 '                    <div class="file-name">'+file.title+'</div>',
                 //'                    <div class="collected">收藏量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2333</div>',
                 '                    <div class="a-third">',
-                '                        <div class="file-uptime"><i class="fa fa-clock-o"></i>'+createDate+'</div>',
+                '                        <div class="file-uptime"><i class="fa fa-clock-o"></i>&nbsp;'+createDate+'</div>',
                 '                        <div class="file-people"><i class="fa fa-user"></i>上传人-'+file.creater+'</div>',
                 '                    </div>',
                 '                </div>',
@@ -278,6 +283,11 @@ $(function(){
             var strDom=strDom1+strDom2;
             //插入到body中
             $("body").append(strDom);           //这里怎么记录当前的这个弹窗呢？
+
+            //改变图标大小
+            var img_class=".file-name .icon-"+file.type;
+            $(img_class).attr('style', 'font-size: 60px !important');
+
             self.currentPopwin=$(".file-out");       //记录当前弹窗
             //显示并加入遮罩层
             $(".mask").fadeIn();
@@ -376,6 +386,8 @@ $(function(){
                 else if(url=="决赛答辩")url = "dabian";
                 else if(url=="参赛统计")url = "tongji";
                 else if(url=="设计报告")url = "sheji";
+                else if(url=="多媒体与web课程设计(2016)")url = "web";
+
                 var type = title.substring(title.lastIndexOf('.')+1);
                // alert(type);
                 if(type=="mp4"){
@@ -394,13 +406,19 @@ $(function(){
                     "</div>";
                 }
                 else if(type=="mp3"){
+                    //if(self.havemp3==1){
+                    //    self.mp3.pause();
+                    //    $("#mp3").remove();
+                    //}
+
+
                     console.log("点击了mp3")
                     var data={};
                     var html=template("Tmp3",data);
                     console.log(html);
                     $("body").prepend(html);
                     $("#mp3").fadeIn(200);
-                    var mp3 = new APlayer({
+                    self.mp3 = new APlayer({
                         element: document.getElementById('mp3-player'),
                         narrow: false,
                         autoplay: false,
@@ -409,14 +427,16 @@ $(function(){
                             title: 'Sugar',
                             author: 'Maroon 5',
                             url: '/erudition/assets/file/mp3/Sugar.mp3',
-                            pic: '/erudition/assets/file/mp3/Maroon5.jpg'
+                            pic: '/erudition/assets/file/mp3/music.jpg'
                         }
                     });
-                    mp3.init();
+                    self.mp3.init();
+                    self.havemp3=1;
                     $("#mp3 .close").click(function(){
                         $(this).parent().fadeOut(200,function(){
-                            mp3.pause();
+                            self.mp3.pause();
                             $(this).remove();
+                            self.havemp3=0;
                         });
                     })
 
