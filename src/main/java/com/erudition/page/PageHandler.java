@@ -29,21 +29,21 @@ public class PageHandler<T> {
      *            　类
      * @return
      */
-    public Page<T> getPage(int pageNow, int pageSize, Class<T> c) {
-        Page<T> page = initPage(pageNow, pageSize, c);
-        if (page == null) {
-            Page<T> emptyPage = new Page<T>();
-            emptyPage.setPageNow(1);
-            emptyPage.setTotalPageCount(0);
-            return emptyPage;
-        } else {
-            int pagesize = (int) page.getPageNow();
-            List<T> list = pageDao.getPageList(pageSize, pagesize, c);
-            page.setList(list);
-            return page;
-        }
-
-    }
+//    public Page<T> getPage(int pageNow, int pageSize, Class<T> c) {
+//        Page<T> page = initPage(pageNow, pageSize, c);
+//        if (page == null) {
+//            Page<T> emptyPage = new Page<T>();
+//            emptyPage.setPageNow(1);
+//            emptyPage.setTotalPageCount(0);
+//            return emptyPage;
+//        } else {
+//            int pagesize = (int) page.getPageNow();
+//            List<T> list = pageDao.getPageList(pageSize, pagesize, c);
+//            page.setList(list);
+//            return page;
+//        }
+//
+//    }
 
     /**
      * 获取分页page，自定义排序
@@ -59,16 +59,16 @@ public class PageHandler<T> {
      * @return
      */
     public Page<T> getPage(int pageNow, int pageSize, Class<T> c, Query query) {
-        Page<T> page = initPage(pageNow, pageSize, c);
+        Page<T> page = initPage(pageNow, pageSize, c , query);
         if (page == null)
             return null;
         List<T> list = pageDao.getPageList(pageSize, pageNow, query);
 
         //zqh:以下为更新Page总数，解决总数不是当前页面总数的BUG
-        List<T> list1 = pageDao.getPageList(3000000,1,query);
-        long nowPageTotalCount = list1.size()/pageSize + 1;
-        page.setTotalPageCount(nowPageTotalCount);
-        //zqh:结束
+//        List<T> list1 = pageDao.getPageList(3000000,1,query);
+//        long nowPageTotalCount = list1.size()/pageSize + 1;
+//        page.setTotalPageCount(nowPageTotalCount);
+//        zqh:结束
         page.setList(list);
         return page;
     }
@@ -84,9 +84,9 @@ public class PageHandler<T> {
      *            　类
      * @return
      */
-    public Page<T> initPage(int pageNow, int pageSize, Class<T> c) {
+    public Page<T> initPage(int pageNow, int pageSize, Class<T> c , Query query) {
         // 获取全部数据数
-        long totalRowCount = pageDao.getTotalRowCount(c);
+        long totalRowCount = pageDao.getTotalRowCount(c,query);
         if (totalRowCount == 0)
             return null;
         if (pageSize == 0)
@@ -95,6 +95,7 @@ public class PageHandler<T> {
 		 * 计算页码数
 		 */
         long temp = totalRowCount / pageSize;
+        System.out.println("zqhtest:  "+totalRowCount);
         long totalPageCount = (totalRowCount % pageSize) == 0 ? temp : temp + 1;
         if (pageNow > totalPageCount) {
             pageNow = 1;

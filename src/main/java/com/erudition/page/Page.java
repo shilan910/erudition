@@ -43,7 +43,7 @@ public class Page<T> {
         return totalPageCount;
     }
     public void setTotalPageCount(long totalPageCount) {
-        this.totalPageCount = totalPageCount-1;
+        this.totalPageCount = totalPageCount;
         if (pageNow < totalPageCount) {
             setHasNext(true);
         } else {
