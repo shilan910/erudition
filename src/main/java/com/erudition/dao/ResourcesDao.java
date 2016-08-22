@@ -91,14 +91,15 @@ public class ResourcesDao extends BaseDao {
                                 flag = false;
                                 break;
                             }
+                            if (!flag)
+                                continue;
+                            relationFiles.add(getById(re_id));
+                            filesExits.add(getById(re_id));
+                            System.out.println("re  :"+re);
+                            //break;//只添加一次
                         }
-                        if (!flag)
-                            continue;
-                        relationFiles.add(getById(re_id));
-                        filesExits.add(getById(re_id));
-                        System.out.println("re  :"+re);
-                        //break;//只添加一次
                     }
+
                 }
             }
 
@@ -206,7 +207,7 @@ public class ResourcesDao extends BaseDao {
         return query.list();
     }
 
-    public List<FilesEntity> getAllFiles() {
+    public List<FilesEntity> getAllFiles(){
         String hql = "from FilesEntity as files";
         Query query = query(hql);
         return query.list();

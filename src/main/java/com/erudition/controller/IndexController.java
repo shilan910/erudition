@@ -58,6 +58,7 @@ public class IndexController {
             httpSession.setAttribute("recentFiles",recentFiles);
 
             List<FilesEntity> recommendFiles = new ArrayList<>();
+
             recommendFiles = resourcesDao.getRelationFileByOne(recentFiles);
             if(recommendFiles.size()==0){
                 recommendFiles.add(resourcesDao.getById(142));
@@ -72,6 +73,7 @@ public class IndexController {
                     System.out.println("1234567890: "+file.getId());
                 }
             }
+
             httpSession.setAttribute("recommendFiles",recommendFiles);
 //            model.addAttribute("page",1);
         return "index";
@@ -94,12 +96,23 @@ public class IndexController {
         System.out.println("开始获取推荐数据");
         UserEntity user = (UserEntity) httpSession.getAttribute("loginUser");
 
+//<<<<<<< HEAD
+//        List<FilesEntity> recentFiles = recommendDao.getRecentFiles(user.getId());
+//        List<FilesEntity> files = new ArrayList<FilesEntity>();
+//        if(!recentFiles.isEmpty()){
+//            files = resourcesDao.getRelationFileByOne(recentFiles);
+//            for (FilesEntity file : files){
+//                System.out.println("recommendFileId: "+file.getId());
+//            }
+//=======
         List<FilesEntity> recentFiles = recommendDao.getRecentFilesById(user.getId());
 
         List<FilesEntity> files = resourcesDao.getRelationFileByOne(recentFiles);
         for (FilesEntity file : files){
             System.out.println("recommendFileId: "+file.getId());
+//>>>>>>> zqh/master
         }
+
 
         return files;
 

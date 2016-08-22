@@ -3,53 +3,43 @@ package com.erudition.bean;
 import javax.persistence.*;
 
 /**
- * Created by tsj on 16-8-21.
+ * Created by tsj on 16-8-23.
  */
 @Entity
 @Table(name = "eru_config", schema = "", catalog = "db_erudition")
 public class ConfigEntity {
-    private int configid;
-    private String key;
-    private String value;
-
-    public ConfigEntity(){
-
-    }
-
-    public ConfigEntity(int configid, String key, String value) {
-        this.configid = configid;
-        this.key = key;
-        this.value = value;
-    }
+    private int configId;
+    private String configKey;
+    private String configValue;
 
     @Id
-    @Column(name = "configid")
-    public int getConfigid() {
-        return configid;
+    @Column(name = "config_id")
+    public int getConfigId() {
+        return configId;
     }
 
-    public void setConfigid(int configid) {
-        this.configid = configid;
-    }
-
-    @Basic
-    @Column(name = "key")
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
+    public void setConfigId(int configId) {
+        this.configId = configId;
     }
 
     @Basic
-    @Column(name = "value")
-    public String getValue() {
-        return value;
+    @Column(name = "config_key")
+    public String getConfigKey() {
+        return configKey;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setConfigKey(String configKey) {
+        this.configKey = configKey;
+    }
+
+    @Basic
+    @Column(name = "config_value")
+    public String getConfigValue() {
+        return configValue;
+    }
+
+    public void setConfigValue(String configValue) {
+        this.configValue = configValue;
     }
 
     @Override
@@ -59,18 +49,18 @@ public class ConfigEntity {
 
         ConfigEntity that = (ConfigEntity) o;
 
-        if (configid != that.configid) return false;
-        if (key != null ? !key.equals(that.key) : that.key != null) return false;
-        if (value != null ? !value.equals(that.value) : that.value != null) return false;
+        if (configId != that.configId) return false;
+        if (configKey != null ? !configKey.equals(that.configKey) : that.configKey != null) return false;
+        if (configValue != null ? !configValue.equals(that.configValue) : that.configValue != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = configid;
-        result = 31 * result + (key != null ? key.hashCode() : 0);
-        result = 31 * result + (value != null ? value.hashCode() : 0);
+        int result = configId;
+        result = 31 * result + (configKey != null ? configKey.hashCode() : 0);
+        result = 31 * result + (configValue != null ? configValue.hashCode() : 0);
         return result;
     }
 }
