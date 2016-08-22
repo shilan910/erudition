@@ -5,6 +5,7 @@ import com.erudition.bean.UserEntity;
 import com.erudition.dao.CategoryDao;
 import com.erudition.dao.RecommendDao;
 import com.erudition.dao.ResourcesDao;
+import com.erudition.page.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -53,7 +54,7 @@ public class IndexController {
 
         int userid = user.getId();
 
-        List<FilesEntity> recentFiles = recommendDao.getRecentFiles(userid);
+        List<FilesEntity> recentFiles = recommendDao.getRecentFilesById(userid);
             httpSession.setAttribute("recentFiles",recentFiles);
 
             List<FilesEntity> recommendFiles = new ArrayList<>();
@@ -78,12 +79,12 @@ public class IndexController {
 
     @ResponseBody
     @RequestMapping(value = "/recent",method = RequestMethod.GET)
-    public List<FilesEntity> recent(HttpSession httpSession){
+    public Page<FilesEntity> recent(HttpSession httpSession , String page){
+        int pageNow = page == null ? 1 : Integer.valueOf(page);     //第一次访问为空就为第一页！
 
         UserEntity user = (UserEntity) httpSession.getAttribute("loginUser");
 
-        List<FilesEntity> recentFiles = recommendDao.getRecentFiles(user.getId());
-       return recentFiles;
+       return recommendDao.getRecentFiles(user.getId(),5,pageNow);
 
     }
 
@@ -93,7 +94,7 @@ public class IndexController {
         System.out.println("开始获取推荐数据");
         UserEntity user = (UserEntity) httpSession.getAttribute("loginUser");
 
-        List<FilesEntity> recentFiles = recommendDao.getRecentFiles(user.getId());
+        List<FilesEntity> recentFiles = recommendDao.getRecentFilesById(user.getId());
 
         List<FilesEntity> files = resourcesDao.getRelationFileByOne(recentFiles);
         for (FilesEntity file : files){

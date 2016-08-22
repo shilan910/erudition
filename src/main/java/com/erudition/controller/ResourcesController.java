@@ -35,8 +35,8 @@ public class ResourcesController {
                                                 String page, Model model){
         int pageNum = page == null ? 1 : Integer.valueOf(page);     //第一次访问为空就为第一页！
 
-        Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,1,ThirdId);
-        model.addAttribute("resources",resources);
+        Page<FilesEntity> resources  = resourcesDao.getResourcesByPage(pageNum,5,ThirdId);
+//        model.addAttribute("resources",resources);
         System.out.println("before");
         session.setAttribute("flagofcollection",0);
         session.removeAttribute("showcollections");
