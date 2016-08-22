@@ -386,6 +386,8 @@ $(function(){
                 else if(url=="决赛答辩")url = "dabian";
                 else if(url=="参赛统计")url = "tongji";
                 else if(url=="设计报告")url = "sheji";
+                else if(url=="多媒体与web课程设计(2016)")url = "web";
+
                 var type = title.substring(title.lastIndexOf('.')+1);
                // alert(type);
                 if(type=="mp4"){

@@ -109,7 +109,7 @@ public class FileManageController {
         int pageNum = page == null ? 1 : Integer.valueOf(page);
 
         UserEntity user = (UserEntity)httpSession.getAttribute("loginUser");
-        Page<FilesEntity> files = resourcesDao.getResourcesByKeyword(pageNum, 2, key);
+        Page<FilesEntity> files = resourcesDao.getResourcesByKeyword(pageNum, 5, key);
 
 
         httpSession.setAttribute("relationsFiles",resourcesDao.getRelationFileByOne(files.getList()));

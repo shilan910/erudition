@@ -60,13 +60,13 @@ public class IndexController {
             List<FilesEntity> recommendFiles = new ArrayList<>();
             recommendFiles = resourcesDao.getRelationFileByOne(recentFiles);
             if(recommendFiles.size()==0){
-                recommendFiles.add(resourcesDao.getById(7));
-                recommendFiles.add(resourcesDao.getById(8));
+                recommendFiles.add(resourcesDao.getById(142));
+                recommendFiles.add(resourcesDao.getById(148));
 
-                recommendFiles.add(resourcesDao.getById(9));
+                recommendFiles.add(resourcesDao.getById(157));
 
-                recommendFiles.add(resourcesDao.getById(13));
-                recommendFiles.add(resourcesDao.getById(14));
+                recommendFiles.add(resourcesDao.getById(162));
+                recommendFiles.add(resourcesDao.getById(170));
             }else{
                 for (FilesEntity file : recommendFiles){
                     System.out.println("1234567890: "+file.getId());
