@@ -174,7 +174,9 @@ public class ResourcesDao extends BaseDao {
                 category.getCategoryName() + file.getOriginalFilename() + "#"+keyWordsTosave);
 
 
-        String keyWords[] = keyWordsTosave.split(" ");
+        keyWords = keyWordsTosave.split(" ");
+
+        System.out.println("dao关键词:-------->"+keywords);
 
 
 
@@ -193,6 +195,19 @@ public class ResourcesDao extends BaseDao {
         Query query = query(hql);
         query.setString(0, title);
         return query.list();
+    }
+
+    public List<FilesEntity> getAllFiles() {
+        String hql = "from FilesEntity as files";
+        Query query = query(hql);
+        return query.list();
+    }
+
+    public int getMaxId(){
+        String hql = "select max(files.id) from FilesEntity as files";
+        Query query = query(hql);
+        int maxid = (int)query.uniqueResult();
+        return maxid;
     }
 
 
