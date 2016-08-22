@@ -575,5 +575,27 @@ pageEncoding="UTF-8"%>
     var searchResult1=new searchResult(pageNow,hasPre,hasNext,totalPageCount,key);
 </script>
 
+
+<!--icheck    radio不能正常使用-->
+<script>
+    $(document).ready(function(){
+        iCheckready();
+    });
+    var iCheckready=function(){
+        console.log("调用了icheck插件")
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    };
+</script>
+<%--主页主要js--%>
+<script src="${assetsPath}/js/indexTab.js" charset="utf-8"></script>
+<script>
+    $(function(){
+        var indextab=new indexTab();
+    })
+</script>
 </body>
 </html>
