@@ -4,6 +4,7 @@ import com.erudition.bean.CollectionEntity;
 import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CollectionDao;
+import com.erudition.dao.ConfigDao;
 import com.erudition.dao.ResourcesDao;
 import com.erudition.dao.UserDao;
 import com.erudition.util.GlobalVariable;
@@ -27,6 +28,10 @@ public class UserController {
     @Autowired
     @Qualifier("userDao")
     private UserDao userDao;
+
+    @Autowired
+    @Qualifier("configDao")
+    private ConfigDao configDao;
 
     @Autowired
     @Qualifier("collectionDao")
@@ -75,10 +80,10 @@ public class UserController {
                 usernmaemessage = "用户登陆成功";
                 session.setAttribute("loginUser", user);
                 session.setAttribute("userid",user.getId());
-                session.setAttribute("rule_relation", GlobalVariable.getInstance().getByKey("rule_relation"));
-                session.setAttribute("rule_delete", GlobalVariable.getInstance().getByKey("rule_delete"));
-                session.setAttribute("rule_collection", GlobalVariable.getInstance().getByKey("rule_collection"));
-                session.setAttribute("adminSidebarActive", GlobalVariable.getInstance().getByKey("adminSidebarActive"));
+                session.setAttribute("rule_relation",configDao.getByKey("rule_relation"));
+                session.setAttribute("rule_delete", configDao.getByKey("rule_delete"));
+                session.setAttribute("rule_collection", configDao.getByKey("rule_collection"));
+                session.setAttribute("adminSidebarActive", configDao.getByKey("adminSidebarActive"));
 
                 System.out.println("message1 : " + usernmaemessage);
                 request.getSession().setAttribute("username", username);      //session中设置值

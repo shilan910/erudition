@@ -33,6 +33,9 @@ $(function(){
         self.fileData;
         self.fileRelations;
 
+        //mp3
+        self.havemp3=0;
+
         console.log("调用插件");
 
         $(document).on("click",".body-floor .file-name span",function(event){         //这里的前提是有整体对象    这尼玛没法进行return了
@@ -394,13 +397,19 @@ $(function(){
                     "</div>";
                 }
                 else if(type=="mp3"){
+                    //if(self.havemp3==1){
+                    //    self.mp3.pause();
+                    //    $("#mp3").remove();
+                    //}
+
+
                     console.log("点击了mp3")
                     var data={};
                     var html=template("Tmp3",data);
                     console.log(html);
                     $("body").prepend(html);
                     $("#mp3").fadeIn(200);
-                    var mp3 = new APlayer({
+                    self.mp3 = new APlayer({
                         element: document.getElementById('mp3-player'),
                         narrow: false,
                         autoplay: false,
@@ -409,14 +418,16 @@ $(function(){
                             title: 'Sugar',
                             author: 'Maroon 5',
                             url: '/erudition/assets/file/mp3/Sugar.mp3',
-                            pic: '/erudition/assets/file/mp3/Maroon5.jpg'
+                            pic: '/erudition/assets/file/mp3/music.jpg'
                         }
                     });
-                    mp3.init();
+                    self.mp3.init();
+                    self.havemp3=1;
                     $("#mp3 .close").click(function(){
                         $(this).parent().fadeOut(200,function(){
-                            mp3.pause();
+                            self.mp3.pause();
                             $(this).remove();
+                            self.havemp3=0;
                         });
                     })
 
