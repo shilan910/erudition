@@ -83,6 +83,9 @@ public class ResourcesDao extends BaseDao {
                     if(re != null && !re.equals("")){
                         int re_id = Integer.valueOf(re);
 
+
+                        //TODO:如果此时迭代的对象发生改变，比如插入了新数据，或者有数据被删除。
+                        //先统计Id，然后去重处理，最后合成
                         for (FilesEntity fileExits : filesExits){
                             System.out.println("zqhtest:re_id: "+re_id);
                             System.out.println(filesExits.size());
