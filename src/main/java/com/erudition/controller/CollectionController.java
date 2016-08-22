@@ -4,7 +4,9 @@ import com.erudition.bean.CollectionEntity;
 import com.erudition.bean.FilesEntity;
 import com.erudition.bean.UserEntity;
 import com.erudition.dao.CollectionDao;
+import com.erudition.dao.ConfigDao;
 import com.erudition.entity.MessageStatus;
+import com.erudition.util.GlobalVariable;
 import org.apache.commons.io.monitor.FileEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,19 +32,27 @@ public class CollectionController {
     @Qualifier("collectionDao")
     CollectionDao collectionDao;
 
-    @RequestMapping(value = "/addtocollection/{fid}" , method = RequestMethod.GET)
+    @Autowired
+    @Qualifier("configDao")
+    ConfigDao configDao;
+
     @ResponseBody
+    @RequestMapping(value = "/addtocollection/{fid}" , method = RequestMethod.GET)
     public MessageStatus addtoCollection(Model model,HttpSession session,@PathVariable("fid") int fid){
 
         boolean flag=false;
         String message="";
         int status=0;
+        System.out.println("fid :----------->"+fid);
         UserEntity user = (UserEntity)session.getAttribute("loginUser");
         List<FilesEntity> collections = collectionDao.getByUid(user.getId());
-        int rule_collection = Integer.parseInt((String)session.getAttribute("rule_collection"));
+//        int rule_collection = Integer.parseInt((String)session.getAttribute("rule_collection"));
+//        int rule_collection = Integer.parseInt(GlobalVariable.getInstance().getByKey("rule_collection"));
+        int rule_collection = Integer.parseInt(configDao.getByKey("rule_collection"));
         int real_collection = collections.size();
         if(real_collection>=rule_collection){
             message = "收藏量已达上限！";
+            System.out.println("ifififififififififif");
         }else{
             System.out.println("begin check file!!!");
             for(FilesEntity file:collections){
@@ -76,7 +86,10 @@ public class CollectionController {
         System.out.println("show collections!");
 //        model.addAttribute("showcollections",collectionDao.getByUid((int)session.getAttribute("userid")));
         UserEntity user = (UserEntity) session.getAttribute("loginUser");
-        int collectionsum = Integer.parseInt((String)session.getAttribute("rule_collection"));
+//        int collectionsum = Integer.parseInt((String)session.getAttribute("rule_collection"));
+//        int collectionsum = Integer.parseInt(GlobalVariable.getInstance().getByKey("rule_collection"));
+//        int collectionsum = Integer.parseInt(configDao.getByKey("rule_collection"));
+        int collectionsum = Integer.parseInt(configDao.getByKey("rule_collection"));
         List<FilesEntity> collections = collectionDao.getByUid(user.getId());
         List<FilesEntity> result = new ArrayList<FilesEntity>();
         int realsum = collections.size();
