@@ -441,12 +441,15 @@ $(function(){
                     })
 
                 }
-                else{
+                else if(type=="txt"||type=="pdf"||type=="doc"||type=="docx"||type=="ppt"||type=="pptx"||type=="xls"||type=="xlsx"){
                     url = "/erudition/assets/file/text/"+url+".pdf";
                     var dom="<div class='file-watch' style='display: none;'>"+
                         "        <div class='close-circle'>×</div>"+
                         "        <iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='"+url+"'></iframe>"+
                         "    </div>";
+                }
+                else if(type="jpg"||type=="jpeg"||type=="gif"||type=="png"){
+                    alert("进入了图片的缩略图，还木有写");
                 }
 
 
