@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -188,7 +189,9 @@
                                 ${recommendfile.creater}
                         </div>
                         <div class="flex-3 file-time">
-                                ${recommendfile.createTime}
+                            <fmt:formatDate type = "both" pattern="yyyy-mm-dd HH:mm:ss"
+                                            value ="${recommendfile.createTime}" />
+
                         </div>
                     </div>
                     <div class="line"></div>
@@ -235,7 +238,8 @@
                             ${recentfile.creater}
                         </div>
                         <div class="flex-3 file-time">
-                            ${recentfile.createrTime}
+                            <fmt:formatDate type = "both" pattern="yyyy-mm-dd HH:mm:ss"
+                                            value ="${recommendfile.createTime}" />
                         </div>
                     </div>
                     <div class="line"></div>
@@ -281,7 +285,8 @@
                         </div>
                         <div class='flex-3 file-size'><span>${collections.size}</span></div>
                         <div class='flex-3 file-creator'>${collections.creater}</div>
-                        <div class='flex-3 file-time'>${collections.createTime}</div>
+                        <div class='flex-3 file-time'><fmt:formatDate type = "both" pattern="yyyy-mm-dd HH:mm:ss"
+                                                                      value ="${recommendfile.createTime}" /></div>
                     </div>
                     <div class='line'></div>
                 </c:forEach>
@@ -312,28 +317,6 @@
     })
 </script>
 
-<%--<script>
-    $("#recommend_getwin").click(function(){
-        $(this).parent().children().each(function(){
-            $(this).removeClass("active");
-        })
-        $(this).addClass("active");
-        $(".history_win").fadeOut(150,function(){
-            $(".recommend_win").fadeIn(150);
-        });
-    })
-    $("#history_getwin").click(function(){
-        $(this).parent().children().each(function(){
-            $(this).removeClass("active");
-        })
-        $(this).addClass("active");
-        $(".recommend_win").fadeOut(150,function(){
-            $(".history_win").fadeIn(150);
-        });
-    })
-</script>--%>
-
-<%--<script src="${assetsPath}/js/require.js" charset="utf-8"></script>--%>
 <!--完整的弹窗-->
 <script src="${assetsPath}/js/popwinAll.js" charset="utf-8"></script>
 <script src="${assetsPath}/js/file_show.js" charset="utf-8"></script>
@@ -342,52 +325,6 @@
         var fileout = new FileOut();
     })
 </script>
-<!--fiel-watch窗口模板-->
-<!--@依赖于文件弹窗-->
-<%--<script id="file-watch-template" type="text/html" charset="utf-8">--%>
-<%--<div class="file-watch" style="display: block;">--%>
-<%--<div class="close-circle">×</div>--%>
-<%--<div class="video">--%>
-<%--<video id="really-cool-video" class="video-js vjs-default-skin" controls--%>
-<%--preload="auto" poster="really-cool-video-poster.jpg"--%>
-<%--data-setup='{}'>--%>
-<%--<source src="http://7xpl2y.com1.z0.glb.clouddn.com/asdf.mp4" type="video/mp4">--%>
-<%--<source src="really-cool-video.webm" type="video/webm">--%>
-<%--<p class="vjs-no-js">--%>
-<%--To view this video please enable JavaScript, and consider upgrading to a web browser--%>
-<%--that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>--%>
-<%--</p>--%>
-<%--</video>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</script>--%>
-<!--file-watch二次弹窗-->
-
-<%--begin尝试文档在线预览--%>
-<%--<script id="file-watch-template" type="text/html" charset="utf-8">
-    <div class="file-watch" style="display: block;">
-        <div class="close-circle">×</div>
-        <iframe width='738' height='523' class='preview-iframe' scrolling='no' frameborder='0' src='${assetsPath}/file/text/3.pdf' ></iframe>
-    </div>
-</script>--%>
-<%--end尝试文档在线预览--%>
-
-<%--<script>
-    //点开file-watch
-    $(document).on("click",".file-out .file-size",function(event){
-        event.stopPropagation();
-        var html=template('file-watch-template');
-        $("body").prepend(html);
-        $(".file-watch").fadeIn(200);
-    });
-    //关闭file-watch
-    $(document).on("click",".file-watch .close-circle",function(event){
-        event.stopPropagation();
-        $(".file-watch").fadeOut(200,function(){
-            $(this).remove();
-        });
-    });
-</script>--%>
 
 
 <%--根据三级目录显示文件--%>
@@ -422,7 +359,9 @@
                         $.getJSON(url, function (data) {
                             $.each(data.list, function (i, file) {
                                 //转换时间戳
+
                                 var createDate = turnDate(file.createTime);
+
                                 var size1 = turnSize(file.size);
                                 var obj = "<div class='body-floor flex-row'><div class='flex-3 flex-row'>" +
                                         "<div class='flex-1 checkbox'><input type='checkbox'/></div>" +
@@ -468,11 +407,12 @@
         var date = new Date(createTime);
         var Y = date.getFullYear() + '-';
         var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-        var D = date.getDate() + ' ';
-        var h = date.getHours() + ':';
+        var D = (date.getDay()<10?'0'+(date.getDay()):date.getDay()) + ' ';
+        var h = (date.getHours()<10?'0'+(date.getHours()):date.getHours()) + ':';
         var m = date.getMinutes() + ':';
         var s = date.getSeconds();
         var createDate = Y + M + D + h + m + s;
+        alert("test: "+createDate);
         return createDate;
     }
 

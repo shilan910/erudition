@@ -34,11 +34,6 @@ public class RulesController {
     public String rules(HttpSession session , String rule_relation ,
                         String rule_delete , String rule_collection){
 
-//        GlobalVariable.getInstance().insert("rule_relation",rule_relation);
-//        GlobalVariable.getInstance().insert("rule_delete",rule_delete);
-//        GlobalVariable.getInstance().insert("rule_collection",rule_collection);
-//        GlobalVariable.getInstance().insert("adminSidebarActive","2");
-
         configDao.updateValue("rule_relation",rule_relation);
         configDao.updateValue("rule_delete", rule_delete);
         configDao.updateValue("rule_collection",rule_collection);

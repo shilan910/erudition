@@ -46,6 +46,7 @@ public class FilesEntity {
     @Basic
     @Column(name = "create_time", nullable = true, insertable = true, updatable = true)
     public Timestamp getCreateTime() {
+
         return createTime;
     }
 

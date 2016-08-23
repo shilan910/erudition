@@ -21,7 +21,9 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tsj on 16-5-3.
@@ -65,9 +67,15 @@ public class ResourcesDao extends BaseDao {
 
         List<FilesEntity> filesExits = new ArrayList<>();
 
+        Map<Integer,Integer> quchong = new HashMap<>();
+
+//        List<Integer> exitedFilesId = new ArrayList<>();
+
         for(FilesEntity file : files) {
-            if(file != null)
-                filesExits.add(file);
+            if(file != null){
+                //filesExits.add(file);
+                quchong.put(file.getId(),1);
+            }
         }
 
         for(FilesEntity file : files){
@@ -83,27 +91,18 @@ public class ResourcesDao extends BaseDao {
                     if(re != null && !re.equals("")){
                         int re_id = Integer.valueOf(re);
 
-
-                        //TODO:如果此时迭代的对象发生改变，比如插入了新数据，或者有数据被删除。
-                        //先统计Id，然后去重处理，最后合成
-                        for (FilesEntity fileExits : filesExits){
-                            System.out.println("zqhtest:re_id: "+re_id);
-                            System.out.println(filesExits.size());
-                            System.out.println("zqhtest: "+fileExits.getId());
-                            if(fileExits.getId() == re_id) {
-                                flag = false;
-                                break;
-                            }
-                            if (!flag)
-                                continue;
+                        if(!quchong.containsKey(re_id)){
                             relationFiles.add(getById(re_id));
-                            filesExits.add(getById(re_id));
-                            System.out.println("re  :"+re);
-                            //break;//只添加一次
+                            quchong.put(re_id,1);
                         }
+
                     }
 
                 }
+            }
+
+            if(relationFiles.size()>=6){
+                break;
             }
 
         }
