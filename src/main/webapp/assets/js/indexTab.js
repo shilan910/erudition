@@ -235,19 +235,6 @@
             var catelog="常用目录";
             var filestr=self.getDataFilesNolist("/erudition/collection/showcollections");
 
-            //处理分页
-            //template.config("openTag", "<$");
-            //template.config("closeTag", "$>");
-            //var data={
-            //    root:"/erudition/resources/"+third_cate_id,
-            //    currentPage:self.pageNow,
-            //    nextPage:self.pageNow+1,
-            //    hasPre:self.hasPre,
-            //    hasNext:self.hasNext,
-            //    totalPageCount:self.totalPageCount
-            //};
-            //var pageHtml=template("Tpage",data);
-
             var str=['<div class="header flex-row">',
                 '                <div class="flex-7 path">',
                     catelog,

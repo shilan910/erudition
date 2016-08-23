@@ -143,7 +143,7 @@ public class ResourcesDao extends BaseDao {
 
 
         //设置文件类型
-        String type = originalName.substring(originalName.indexOf('.')+1,originalName.length());
+        String type = originalName.substring(originalName.lastIndexOf('.')+1,originalName.length());
         fileEntity.setType(type);
 
         fileEntity.setCategoryId(category.getId());
