@@ -2,6 +2,7 @@ package com.erudition.dao;
 
 import com.erudition.bean.CollectionEntity;
 import com.erudition.bean.FilesEntity;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -45,6 +46,18 @@ public class CollectionDao extends BaseDao{
             collectionFiles.add(resourcesDao.getById(fileId));
         }
         return collectionFiles;
+    }
+
+
+    public void deleteByFid(int fid){
+        String hql = "from CollectionEntity as c where c.fileId="+fid;
+        Query query = query(hql);
+        List<CollectionEntity> collections = query.list();
+        for (CollectionEntity collection : collections){
+            System.out.println("zqhzqh:  collection.getId()   "+collection.getId());
+            delete(collection);
+        }
+
     }
 
 }

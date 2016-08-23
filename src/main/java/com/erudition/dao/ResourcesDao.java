@@ -83,6 +83,9 @@ public class ResourcesDao extends BaseDao {
                     if(re != null && !re.equals("")){
                         int re_id = Integer.valueOf(re);
 
+
+                        //TODO:如果此时迭代的对象发生改变，比如插入了新数据，或者有数据被删除。
+                        //先统计Id，然后去重处理，最后合成
                         for (FilesEntity fileExits : filesExits){
                             System.out.println("zqhtest:re_id: "+re_id);
                             System.out.println(filesExits.size());
@@ -91,14 +94,15 @@ public class ResourcesDao extends BaseDao {
                                 flag = false;
                                 break;
                             }
+                            if (!flag)
+                                continue;
+                            relationFiles.add(getById(re_id));
+                            filesExits.add(getById(re_id));
+                            System.out.println("re  :"+re);
+                            //break;//只添加一次
                         }
-                        if (!flag)
-                            continue;
-                        relationFiles.add(getById(re_id));
-                        filesExits.add(getById(re_id));
-                        System.out.println("re  :"+re);
-                        //break;//只添加一次
                     }
+
                 }
             }
 
@@ -206,7 +210,7 @@ public class ResourcesDao extends BaseDao {
         return query.list();
     }
 
-    public List<FilesEntity> getAllFiles() {
+    public List<FilesEntity> getAllFiles(){
         String hql = "from FilesEntity as files";
         Query query = query(hql);
         return query.list();

@@ -387,6 +387,17 @@ $(function(){
                 else if(url=="参赛统计")url = "tongji";
                 else if(url=="设计报告")url = "sheji";
                 else if(url=="多媒体与web课程设计(2016)")url = "web";
+                else if(url=="第1章 Web设计基础")url = "webdesign";
+                else if(url=="第2章 Java Web开发与运行环境")url = "javaweb";
+                else if(url=="第3章 HTML与CSS")url = "htmlcss";
+                else if(url=="第4章 客户端动态脚本JavaScript")url = "javascript";
+                else if(url=="第5章 Servlet技术")url = "servlet";
+                else if(url=="第6章 JSP技术")url = "jsp";
+                else if(url=="第7章 JavaBean技术")url = "javabean";
+                else if(url=="第8章 数据库编程")url = "database";
+                else if(url=="第9章 MVC系统设计案例")url = "mvc";
+                else if(url=="第10章 Web2.0开发——Ajax技术")url = "ajax";
+                else if(url=="第11章 SSH框架")url = "ssh";
 
                 var type = title.substring(title.lastIndexOf('.')+1);
                // alert(type);
